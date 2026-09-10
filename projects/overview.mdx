@@ -1,0 +1,55 @@
+---
+title: "Projects: Organize AI Work by Client Engagement"
+sidebarTitle: "Overview"
+description: "Projects are the core unit in ParleHub — each carries an expense code, budget, and shared conversation history scoped to a client engagement."
+---
+
+A project in ParleHub is the container that keeps everything related to a client engagement in one place. Every project has a name, an expense code for billing, a budget ceiling, and a roster of members — and every conversation, file, and AI interaction inside that project belongs to it collectively, not to any individual team member. Think of a project as the single source of truth for all the AI work your team does for a given client.
+
+## Creating a project
+
+<Steps>
+  <Step title="Open the New Project dialog">
+    From the ParleHub sidebar, click **New Project**. The project creation dialog opens.
+  </Step>
+  <Step title="Enter project details">
+    Type a project name, enter the client's **expense code**, and set a **budget** limit. The budget tracks cumulative AI usage costs across all conversations in the project.
+  </Step>
+  <Step title="Add members">
+    Search for colleagues by name or email and add them as members. You can also add members later from the project's **Settings** tab. See [Roles & Permissions](/security/roles-and-permissions) for the difference between project admins and members.
+  </Step>
+  <Step title="Choose allowed models">
+    Select which AI models team members can use inside this project. Restricting models to an approved set helps control costs and keeps outputs consistent for compliance-sensitive engagements.
+  </Step>
+</Steps>
+
+## Project anatomy
+
+Every project is made up of four core components that work together to capture and preserve the full context of an engagement.
+
+<CardGroup cols={2}>
+  <Card title="Expense Code & Budget" icon="receipt" href="/cost/expense-codes">
+    Each project is tagged with a client expense code and a budget cap. AI usage costs roll up to the project, making it straightforward to allocate spend at billing time.
+  </Card>
+  <Card title="Conversations" icon="messages" href="/projects/conversations">
+    All AI threads live inside the project and are visible to every member. New conversations inherit the project's model allowlist and cost tracking automatically.
+  </Card>
+  <Card title="Members" icon="users" href="/security/roles-and-permissions">
+    Only members of a project can see its conversations and files. Project admins can add or remove members and adjust model permissions at any time.
+  </Card>
+  <Card title="File Storage" icon="folder-open" href="/projects/file-tools">
+    Upload PDFs, Word documents, spreadsheets, and PowerPoint files to the project's Files tab. The AI can search and read these files directly as grounded tool calls.
+  </Card>
+</CardGroup>
+
+## Project visibility
+
+Only the members you explicitly add to a project can see its conversations, files, and settings. If you are not a member, the project does not appear in your sidebar — not even the project name.
+
+Org admins can view all projects in the organization for billing and compliance purposes, but they do not automatically join conversations.
+
+On **Enterprise plans**, workspace admins can create *private projects* visible only to a named set of partners or principals, and *shared projects* available to everyone in a practice group or office. This two-tier model lets you handle sensitive matters — M&A work, compensation reviews, regulatory investigations — without mixing them into the standard project list.
+
+<Note>
+  Free plan workspaces are limited to **3 active projects** at a time. Archive a completed engagement to free up a slot, or upgrade to the **Team** or **Enterprise** plan for more projects.
+</Note>

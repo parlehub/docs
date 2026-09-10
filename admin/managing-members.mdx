@@ -1,0 +1,80 @@
+---
+title: "Invite and Manage Members in Your Organization"
+sidebarTitle: "Managing Members"
+description: "Invite team members to your ParleHub organization, assign org roles, remove departing staff, and manage per-user AI spending limits."
+---
+
+Members are the people in your firm who have access to ParleHub. As an org admin, you control who joins the organization, what role they hold, how much they can spend on AI each month, and when their access is revoked. Keeping your member list accurate is especially important in professional services environments where staff turnover and client confidentiality go hand in hand.
+
+## Inviting Members
+
+Send email invitations directly from the Members settings page. Invitees receive a link they must click to accept before their account is activated.
+
+<Steps>
+  <Step title="Open the Members Settings">
+    Navigate to **Settings → Members**. You'll see a list of all current org members and any pending invitations.
+  </Step>
+  <Step title="Click Invite Member">
+    Select **Invite Member** in the top-right corner of the Members page.
+  </Step>
+  <Step title="Enter the Email Address and Select a Role">
+    Type the invitee's work email address, then choose their org role:
+
+    - **Org Admin** — full access to all org settings, all projects, and all usage analytics
+    - **Member** — access only to the projects they are explicitly added to
+
+    You can change a member's role at any time after they join.
+  </Step>
+  <Step title="Send the Invitation">
+    Click **Send Invite**. ParleHub sends a confirmation email to the address you entered. The invitation expires after 72 hours if not accepted. You can resend or revoke pending invitations from the Members list.
+  </Step>
+</Steps>
+
+## SSO-Enabled Organizations
+
+If your organization has configured SSO, members can sign in through your identity provider (such as Microsoft Entra ID or Google Workspace) without needing to accept a separate ParleHub password invite. However, SSO alone does not grant access — you still control who belongs to the org by managing user provisioning in your IdP. Users who authenticate via SSO but have not been provisioned for ParleHub will be denied entry.
+
+## Changing a Member's Role
+
+You can promote a member to org admin or demote an org admin to member at any time.
+
+Navigate to **Settings → Members**, click the member's name, then select a new role from the **Role** dropdown and save. Role changes take effect immediately — the member will see updated permissions on their next action within the workspace.
+
+## Removing a Member
+
+Removing a member revokes their access to the org and all projects instantly.
+
+Navigate to **Settings → Members**, click the member's name, then click **Remove from Org** and confirm. The member can no longer sign in to your ParleHub workspace.
+
+If SSO is configured with automatic deprovisioning, disabling the user's account in your IdP achieves the same result without a manual step in ParleHub.
+
+<Warning>
+  Removing a member from the org does **not** delete their conversations in shared projects. Those threads remain visible to other project members. If the content is sensitive, review shared project threads before or after removing the member.
+</Warning>
+
+## Plan Seat Limits
+
+ParleHub enforces seat limits based on your subscription plan:
+
+| Plan | Seat Limit |
+|------|------------|
+| Free | 3 seats |
+| Team | 10 seats |
+| Enterprise | Unlimited |
+
+If you attempt to invite a member after reaching your plan's seat limit, ParleHub will prompt you to upgrade before the invitation can be sent. Upgrade your plan from **Settings → Billing**.
+
+## Per-User Spending Limits
+
+Org admins can set a monthly AI spending cap for each member. This limit applies across all projects the member participates in, acting as a personal backstop on top of any project budgets.
+
+Navigate to **Settings → Spending Limits → Per-User Limits**. From here you can:
+
+- Set a **default cap** that applies to every member who does not have a custom limit
+- Set an **individual cap** for a specific member by clicking their name and entering a dollar amount
+
+Limits reset on the first of each calendar month. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for a full explanation of how spending layers interact.
+
+<Tip>
+  Use SSO with automatic deprovisioning to ensure offboarded staff lose access the moment their account is disabled in Entra ID or Google Workspace — no manual removal step required in ParleHub.
+</Tip>

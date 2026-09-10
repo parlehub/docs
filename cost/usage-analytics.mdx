@@ -1,0 +1,95 @@
+---
+title: "Usage Analytics: Token Spend Across Projects and People"
+sidebarTitle: "Usage Analytics"
+description: "View and export AI token spend broken down by project, team member, provider, and model across any date range in ParleHub's analytics dashboard."
+---
+
+The ParleHub analytics dashboard gives org admins a complete, real-time picture of AI spend across every project, team member, provider, and model in the organization. Instead of reconciling line items from multiple provider invoices, you get one unified view — drillable by the dimensions that matter for professional services billing. Use it to spot high-spend engagements before they hit a budget ceiling, identify which models your team reaches for most, or pull the monthly export your finance team needs.
+
+## Navigating to Analytics
+
+Open **Analytics** from the main sidebar. By default, the dashboard opens at the org level, showing total spend across all projects and all members for the last 30 days.
+
+<Note>
+  Org-level analytics are visible to org admins. Project members without that role see analytics scoped to their own projects only.
+</Note>
+
+You can also reach analytics from **Org Settings → Usage & Billing → Analytics**.
+
+## Dimensions You Can Slice By
+
+Use the dimension tabs and filters at the top of the dashboard to break spend down along any axis — or combine multiple filters to narrow to a specific subset.
+
+<CardGroup cols={2}>
+  <Card title="Project" icon="folder-open" href="/projects/overview">
+    See which client engagements are consuming the most tokens and cost. Quickly identify projects approaching their budget ceiling before enforcement triggers.
+  </Card>
+  <Card title="Person" icon="user-group" href="/admin/managing-members">
+    See which team members are the heaviest AI users across the org. Useful for understanding adoption patterns and for reviewing individual spend against personal caps.
+  </Card>
+  <Card title="Provider" icon="server" href="/models/connecting-providers">
+    Compare spend across Anthropic, OpenAI, Google Gemini, and Azure OpenAI. Understand where your AI budget is going at the infrastructure level.
+  </Card>
+  <Card title="Model" icon="microchip" href="/models/supported-models">
+    Break spend down by specific model — compare `gpt-4o` vs `claude-3-5-sonnet` vs `gemini-1.5-pro`. Identify whether cost-efficient models could substitute for premium ones on lower-stakes tasks.
+  </Card>
+</CardGroup>
+
+### Date Range
+
+Set the time window using the date range picker in the top-right corner of the dashboard. Available presets:
+
+- Last 7 days
+- Last 30 days
+- Last 90 days
+- Custom range (pick any start and end date)
+
+All charts and totals update instantly when you change the range. Custom ranges can span up to 12 months in a single view.
+
+## Exporting Data
+
+Pull a full CSV export from any analytics view to feed into your billing system, matter management platform, or financial reporting tools.
+
+<Steps>
+  <Step title="Open the Export tab">
+    From the Analytics page, click the **Export** tab.
+  </Step>
+  <Step title="Set filters">
+    Choose a date range. Optionally filter by specific projects, members, or providers to limit the export to what you need.
+  </Step>
+  <Step title="Download">
+    Click **Download CSV**. Exports covering up to 90 days are ready immediately. Longer ranges generate a download link sent to your email within a few minutes.
+  </Step>
+</Steps>
+
+Each row in the export includes:
+
+| Column | Description |
+|---|---|
+| `date` | UTC date of the usage record |
+| `project_name` | Project display name |
+| `expense_code` | Client matter or billing code set on the project |
+| `person` | Name and email of the team member |
+| `provider` | AI provider (e.g. Anthropic, OpenAI) |
+| `model` | Specific model name |
+| `input_tokens` | Tokens in the prompt |
+| `output_tokens` | Tokens in the model response |
+| `cost_usd` | Total cost in US dollars |
+
+<Tip>
+  Export monthly and import by expense code into your practice management system to automate client AI cost recovery without manual reconciliation.
+</Tip>
+
+## One Canonical Ledger
+
+The analytics dashboard and ParleHub's budget enforcement engine read from the same underlying token ledger. The spend number you see in a project's analytics view is the same number that triggers the 80% warning banner and the pre-flight budget block.
+
+There is no lag, no reconciliation gap, and no difference between "reported spend" and "enforced spend." When analytics shows a project at $420 of a $500 budget, enforcement will block at $500 — not at some independently calculated figure.
+
+<Info>
+  Token counts reflect actual billed tokens from the provider response. ParleHub does not mark up, round, or adjust token counts — what the provider reports is what you see and what you are charged for.
+</Info>
+
+<Accordion title="Why a single ledger matters for professional services">
+  In a billable-hours environment, the number on your analytics export needs to match the number on any client invoice or write-off memo. Because ParleHub uses one canonical ledger for both reporting and enforcement, you can export usage data and use it directly in billing workflows — with confidence that the numbers reconcile with the limits your team experienced during the engagement.
+</Accordion>

@@ -1,0 +1,55 @@
+---
+title: "AI Models Supported by ParleHub — All Providers"
+sidebarTitle: "Supported Models"
+description: "ParleHub supports models from Anthropic, OpenAI, Google Gemini, and Azure OpenAI. Compare capabilities and approximate context windows for each."
+---
+
+ParleHub gives your organization access to leading AI models from four providers: Anthropic, OpenAI, Google Gemini, and Azure OpenAI. Each provider brings distinct strengths — from long-context document reasoning to fast, cost-efficient summarization — and you can mix and match models across your projects to fit the nature of each engagement. Org admins control which models are enabled for each project, so you can align model access with budget and use-case requirements.
+
+<Note>
+  Context window figures in the tables below are approximate and based on publicly available provider documentation. Actual limits may vary by model version or provider configuration. Check your provider's documentation for guaranteed limits.
+</Note>
+
+## Anthropic
+
+Anthropic's Claude models excel at nuanced instruction-following, long-document analysis, and professional writing tasks — capabilities that map well to legal drafting, contract review, and detailed client memoranda.
+
+| Model | Best For | Approx. Context Window |
+|---|---|---|
+| Claude 3.5 Sonnet | Complex reasoning, long documents, high-stakes drafting | ~200,000 tokens |
+| Claude 3 Haiku | Fast, cost-efficient responses for simpler tasks | ~200,000 tokens |
+
+## OpenAI
+
+OpenAI's GPT-4o family covers a broad range of workloads, from multimodal analysis to structured data extraction, while o1 is purpose-built for deep reasoning tasks that benefit from extended chain-of-thought processing.
+
+| Model | Best For | Approx. Context Window |
+|---|---|---|
+| GPT-4o | Flagship multimodal model; text, images, and documents | ~128,000 tokens |
+| GPT-4o mini | Faster, lower-cost tasks; high-volume drafting and Q&A | ~128,000 tokens |
+| o1 | Advanced reasoning; complex multi-step analysis | ~128,000 tokens |
+
+## Google Gemini
+
+Google's Gemini 1.5 models offer some of the largest context windows available, making them a strong choice when you need to load entire contracts, transcripts, or lengthy financial disclosures into a single conversation.
+
+| Model | Best For | Approx. Context Window |
+|---|---|---|
+| Gemini 1.5 Pro | Long context, strong reasoning across large document sets | ~1,000,000 tokens |
+| Gemini 1.5 Flash | Fast, cost-efficient responses at scale | ~1,000,000 tokens |
+
+## Azure OpenAI
+
+Azure OpenAI delivers the same OpenAI models hosted within Microsoft's Azure infrastructure. This option suits organizations that have existing Azure agreements, need data residency in specific Azure regions, or operate under compliance frameworks that require processing within a controlled cloud tenant.
+
+| Model | Best For | Approx. Context Window |
+|---|---|---|
+| GPT-4o via Azure | Same capability as OpenAI GPT-4o, running in your Azure tenant | ~128,000 tokens |
+
+<Tip>
+  For document-heavy legal or financial work — such as reviewing lengthy contracts, regulatory filings, or audit workpapers — Claude 3.5 Sonnet and Gemini 1.5 Pro handle long context particularly well and are worth setting as the default for those project types.
+</Tip>
+
+<Note>
+  Model availability may change as providers release new versions or deprecate older ones. ParleHub updates the model list regularly to reflect current provider offerings. Check **Settings → Model Providers** for the live list of models available to your org.
+</Note>

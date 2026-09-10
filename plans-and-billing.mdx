@@ -1,0 +1,92 @@
+---
+title: "ParleHub Plans: Free, Team, and Enterprise Compared"
+sidebarTitle: "Plans & Billing"
+description: "Compare ParleHub's Free, Team, and Enterprise plans — seats, projects, model spend, SSO, and storage integrations included in each tier."
+---
+
+ParleHub offers three plans designed to match where your firm is in its AI adoption journey — from a no-commitment pilot on a single engagement to a fully governed, unlimited-seat deployment with your own storage and identity infrastructure. All plans give you per-project budgets, expense codes, and multi-provider model access. The tiers differ in capacity, SSO, storage integration, and the model spend ceiling.
+
+## Plans at a glance
+
+<CardGroup cols={3}>
+  <Card
+    title="Free"
+    icon="circle-play"
+    href="https://app.parlehub.com"
+  >
+    **$0 / month**
+
+    - 3 seats
+    - 3 projects
+    - $10/mo shared model spend
+    - Per-project budgets and expense codes
+    - Multi-provider support (BYOK)
+    - Email and password or SSO login
+    - Shared project threads and audit log
+  </Card>
+  <Card
+    title="Team"
+    icon="users"
+    href="https://parlehub.com/pricing"
+  >
+    **Flat monthly rate**
+
+    - 10 seats
+    - 10 projects
+    - Uncapped model spend (BYOK)
+    - Everything in Free, plus:
+    - Enterprise SSO (Entra ID & Google Workspace)
+    - Org-wide and personal spend caps
+    - Usage analytics by project, person, and model
+  </Card>
+  <Card
+    title="Enterprise"
+    icon="building-columns"
+    href="https://parlehub.com/pricing"
+  >
+    **Per seat / month**
+
+    - Unlimited seats
+    - Unlimited projects
+    - Uncapped model spend (BYOK)
+    - Everything in Team, plus:
+    - Private projects (visible only to members)
+    - SharePoint & Google Drive storage integration
+    - Dedicated support and onboarding
+  </Card>
+</CardGroup>
+
+## Detailed comparison
+
+| Feature | Free | Team | Enterprise |
+|---|---|---|---|
+| **Seats** | 3 | 10 | Unlimited |
+| **Projects** | 3 | 10 | Unlimited |
+| **Model spend** | $10/mo shared cap | Uncapped (BYOK) | Uncapped (BYOK) |
+| **SSO** | — | Microsoft Entra ID, Google Workspace | Microsoft Entra ID, Google Workspace |
+| **Storage integration** | — | — | SharePoint, Google Drive (your tenant) |
+| **Private projects** | — | — | ✓ |
+| **Tamper-evident audit log** | ✓ | ✓ | ✓ |
+| **Roles** | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member |
+| **Per-project budgets & expense codes** | ✓ | ✓ | ✓ |
+| **Multi-provider model support (BYOK)** | ✓ | ✓ | ✓ |
+| **Pre-flight budget enforcement** | ✓ | ✓ | ✓ |
+| **Dedicated support** | — | — | ✓ |
+
+## Understanding model spend
+
+Model spend is the cost of the AI API calls that ParleHub routes through your connected provider keys. When you send a message in a project conversation, ParleHub calls the model on your behalf using the API key you supplied in **Settings > Model Providers**, records the token counts and cost against the project's budget, and passes the charge on to your provider account.
+
+**Free plan:** Your entire organization shares a $10/mo model spend cap across all projects and seats. Once that cap is reached, new messages are blocked until the following month. This is intentionally enough to run a meaningful pilot on one or two engagements without any financial commitment.
+
+**Team plan:** Model spend is uncapped within ParleHub. You pay your model provider directly through your own API keys (Bring Your Own Key). ParleHub enforces the per-project budgets you set and the org-wide and personal caps you configure, but it does not add a markup or impose a ceiling above those limits.
+
+**Enterprise plan:** Same as Team — uncapped through BYOK, with all the per-project and org-level enforcement tools — plus dedicated support to help you structure budgets, configure storage, and roll out across your firm.
+
+<Note>
+  See the full plan comparison, including current pricing for Team and Enterprise, at [parlehub.com/pricing](https://parlehub.com/pricing).
+</Note>
+
+<Tip>
+  Start with the Free plan on a single active engagement. Connect one model provider, set a budget against a real matter code, and run a few conversations with the team. Once you can see the cost landing on the right client, you'll have a concrete business case for upgrading — and the migration to Team or Enterprise takes minutes.
+</Tip>

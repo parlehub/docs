@@ -1,0 +1,63 @@
+---
+title: "Audit Log: Tamper-Evident Record of Sensitive Actions"
+sidebarTitle: "Audit Log"
+description: "ParleHub's audit log captures sensitive actions in an append-only record enforced at the platform level — so reviewers can see exactly what happened and when."
+---
+
+Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced and that the record proving it has not been manipulated. ParleHub's audit log is designed for exactly that purpose: every sensitive action across your organization is recorded in an append-only log enforced at the core platform level. No user, no administrator, and no ParleHub staff member can edit or delete an existing entry. Reviewers, compliance officers, and auditors can inspect the log with confidence that what they see is a complete and unaltered record of what happened.
+
+## What the Audit Log Captures
+
+The audit log records events across the following categories:
+
+- **Membership events** — user added to or removed from the org; user added to or removed from a project; role changed
+- **File events** — file uploaded to a project; file deleted from a project
+- **Budget events** — project budget set or changed; budget increase requested; budget increase approved or denied
+- **Provider events** — AI model provider connected; provider disconnected; provider credentials updated
+- **SSO events** — SSO enabled or disabled; user authenticated via SSO; SSO-based session invalidation on offboarding
+- **Conversation events** — conversation deleted; conversation exported
+- **Admin actions** — org settings changed; storage provider connected or disconnected; billing plan changed
+
+Each event record includes a timestamp, the actor who performed the action, the target resource (project, file, user, or setting), the outcome (success or failure), and the IP address of the actor.
+
+## Accessing the Audit Log
+
+Only Org Admins can view the audit log.
+
+Navigate to **Settings → Audit Log**. From there you can:
+
+- **Filter by event type** — narrow to a specific category such as file events or SSO events
+- **Filter by user** — see all actions taken by or affecting a specific member
+- **Filter by project** — see all events scoped to a particular project
+- **Filter by date range** — focus on a specific window for an investigation or periodic review
+
+## Append-Only Enforcement
+
+The audit log's integrity guarantee comes from how it is enforced, not just how it is described. Entries are written at the core platform level using an append-only write path. There is no administrative interface, API endpoint, or tool that allows editing or deleting an existing log entry. New events are appended as they occur; nothing is overwritten or back-filled.
+
+This means that even if an Org Admin's account were compromised, an attacker could not use it to scrub activity from the audit log. Any attempt would itself generate an audit event.
+
+<Info>
+  The audit log is not a conversation transcript. It records that a conversation was created, accessed, or deleted — but not its content. To review conversation content, open the conversation thread directly. Messages in a thread are immutable once sent; they cannot be edited or deleted by participants.
+</Info>
+
+## Exporting the Audit Log
+
+Download a full or filtered export of the audit log for use in compliance tooling, legal review, or archival. To export, apply any desired filters and click **Export as CSV**.
+
+The CSV includes the following columns:
+
+| Column | Description |
+|---|---|
+| `timestamp` | ISO 8601 date and time of the event (UTC) |
+| `event_type` | Category and action, e.g. `file.uploaded` or `member.removed` |
+| `actor_id` | User ID of the person who performed the action |
+| `actor_email` | Email address of the actor at the time of the event |
+| `target_type` | Type of resource affected, e.g. `project`, `file`, `user` |
+| `target_id` | Identifier of the affected resource |
+| `ip_address` | IP address from which the action was performed |
+| `outcome` | `success` or `failure` |
+
+<Tip>
+  Export the audit log monthly and archive the CSV in your document management system. Treating audit log exports as a governance artifact — alongside engagement files — gives you a ready-made record if a client or regulator asks for evidence of your AI usage controls.
+</Tip>

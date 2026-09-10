@@ -1,0 +1,71 @@
+---
+title: "Set Up Your ParleHub Organization"
+sidebarTitle: "Organization Setup"
+description: "Configure your ParleHub organization — name, model providers, SSO, storage, and spending caps — to get your whole firm ready for client AI work."
+---
+
+Your organization is the top-level container in ParleHub. Everything your firm does in ParleHub — projects, members, model providers, billing, and spending controls — lives under a single org. As an org admin, you control who belongs to the org, which AI providers are available, how costs are managed, and how the workspace integrates with your firm's identity and storage infrastructure.
+
+## Creating Your Organization
+
+When you sign up for ParleHub for the first time, a setup wizard prompts you to name your organization. The account that completes this step becomes the first org admin automatically. From that point, you can invite additional admins, configure providers, and begin creating projects for your client engagements.
+
+## Key Configuration Steps
+
+Complete these steps after your org is created to get your firm fully operational.
+
+<Steps>
+  <Step title="Name Your Organization">
+    Navigate to **Settings → General** and enter your firm's name. This name appears across the workspace and in any billing communications. You can update it at any time.
+  </Step>
+  <Step title="Connect Model Providers">
+    Navigate to **Settings → Model Providers** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure OpenAI). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
+  </Step>
+  <Step title="Invite Your Team">
+    Navigate to **Settings → Members** and send email invitations to your colleagues. Assign each person a role — org admin or member — at invite time. Invitees must accept the email invite before they can access the workspace.
+  </Step>
+  <Step title="Configure SSO (Optional)">
+    Navigate to **Settings → Security → SSO** to connect your identity provider (such as Microsoft Entra ID or Google Workspace). Once SSO is active, members can sign in through your IdP without managing a separate ParleHub password.
+  </Step>
+  <Step title="Connect Native Storage (Optional — Enterprise Only)">
+    Navigate to **Settings → Storage** to link your firm's own cloud storage bucket. This keeps conversation data and file attachments within your own infrastructure. Native storage is available on the Enterprise plan only.
+  </Step>
+  <Step title="Set Org-Wide Spending Caps">
+    Navigate to **Settings → Spending Limits** and set a monthly dollar ceiling on total AI spend for the entire org. This acts as an outer backstop above all individual project and per-user budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
+  </Step>
+</Steps>
+
+## Settings Reference
+
+Each section of the Settings area controls a distinct part of your organization's configuration.
+
+<CardGroup cols={2}>
+  <Card title="Members" icon="users" href="/admin/managing-members">
+    Invite new members, assign or change roles, set per-user spending limits, and remove departing staff from the org.
+  </Card>
+  <Card title="Model Providers" icon="cpu" href="/models/connecting-providers">
+    Add, configure, and remove AI model provider credentials. Providers added here are available to all projects within the org.
+  </Card>
+  <Card title="Security & SSO" icon="shield" href="/security/sso">
+    Configure SSO and review authentication settings. Enforcing SSO ensures all members sign in through your firm's identity provider.
+  </Card>
+  <Card title="Storage" icon="database" href="/security/storage">
+    Connect your firm's own cloud storage for conversation data and file attachments. Available on the Enterprise plan.
+  </Card>
+  <Card title="Spending Limits" icon="circle-dollar-sign" href="/admin/org-caps">
+    Set a monthly org-wide AI spending cap and per-user limits. These controls stack on top of individual project budgets.
+  </Card>
+  <Card title="Billing" icon="credit-card" href="/plans-and-billing">
+    View your current plan, manage payment methods, and download invoices for your ParleHub subscription.
+  </Card>
+  <Card title="Audit Log" icon="scroll" href="/security/audit-log">
+    Review a timestamped record of administrative actions taken across the org, including membership changes and settings updates.
+  </Card>
+  <Card title="Roles & Permissions" icon="lock" href="/security/roles-and-permissions">
+    Understand what org admins, project admins, and members can see and do across the workspace.
+  </Card>
+</CardGroup>
+
+<Note>
+  Only org admins can access **Settings**. The first user to create the organization is automatically assigned the org admin role.
+</Note>

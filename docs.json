@@ -1,0 +1,93 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "ParleHub",
+  "theme": "luma",
+  "favicon": "https://media.brand.dev/efd30411-6e3e-4827-abf5-72efc19ddd58.png",
+  "colors": {
+    "primary": "#4d8eff",
+    "light": "#87b0fb"
+  },
+  "fonts": {
+    "heading": {
+      "family": "Fraunces"
+    },
+    "body": {
+      "family": "Inter"
+    }
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "navbar": {
+    "primary": {
+      "type": "button",
+      "label": "Start Free",
+      "href": "https://app.parlehub.com"
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "plans-and-billing"
+            ]
+          },
+          {
+            "group": "Projects & Collaboration",
+            "pages": [
+              "projects/overview",
+              "projects/conversations",
+              "projects/shared-context",
+              "projects/file-tools"
+            ]
+          },
+          {
+            "group": "Cost Management",
+            "pages": [
+              "cost/budgets",
+              "cost/expense-codes",
+              "cost/usage-analytics"
+            ]
+          },
+          {
+            "group": "AI Models",
+            "pages": [
+              "models/connecting-providers",
+              "models/supported-models",
+              "models/model-selection"
+            ]
+          },
+          {
+            "group": "Security & Governance",
+            "pages": [
+              "security/overview",
+              "security/sso",
+              "security/storage",
+              "security/audit-log",
+              "security/roles-and-permissions"
+            ]
+          },
+          {
+            "group": "Administration",
+            "pages": [
+              "admin/organization-setup",
+              "admin/managing-members",
+              "admin/org-caps"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "socials": {
+      "website": "https://www.parlehub.com"
+    }
+  }
+}

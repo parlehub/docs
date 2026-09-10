@@ -1,0 +1,75 @@
+---
+title: "Select and Switch AI Models Per Project in ParleHub"
+sidebarTitle: "Model Selection"
+description: "Select a default model for each project, restrict which models members can use, and switch models mid-conversation without losing your thread."
+---
+
+ParleHub gives you precise control over which AI models power each client engagement. You can set a default model that opens automatically when any team member starts a new conversation in a project, curate the shortlist of models available within that project, and — at any point during an active conversation — switch to a different model without losing the thread you have already built. This flexibility lets you balance speed, cost, and capability at each stage of your work.
+
+## Setting a Project Default Model
+
+Each project can have a designated default model. When a member opens a new conversation in that project, the default model is pre-selected so they can start working immediately without choosing a model themselves.
+
+To set or change the default:
+
+<Steps>
+  <Step title="Open Project Settings">
+    Navigate to your project and click **Settings** in the project sidebar.
+  </Step>
+  <Step title="Select a default model">
+    Under the **Models** section, open the **Default Model** dropdown and choose the model you want pre-selected for new conversations.
+  </Step>
+  <Step title="Save your changes">
+    Click **Save**. New conversations started in this project will now open with that model active. Existing conversations are not affected.
+  </Step>
+</Steps>
+
+Members can always override the default for a specific conversation using the model selector in the chat toolbar — the project default simply sets the starting point.
+
+## Curating Allowed Models
+
+Org admins can restrict which models are visible and selectable within any given project. This is useful when you want to steer a team toward cost-efficient models for routine work, enforce a specific provider for compliance reasons, or simply reduce decision fatigue by showing only the most relevant options.
+
+<Steps>
+  <Step title="Open Project Settings">
+    Navigate to the project and click **Settings**.
+  </Step>
+  <Step title="Go to the Models tab">
+    Select the **Models** tab within Project Settings.
+  </Step>
+  <Step title="Disable models not needed for this project">
+    Uncheck any models you want to hide from project members. Unchecked models remain enabled at the org level — they are simply not surfaced in this specific project.
+  </Step>
+  <Step title="Save">
+    Click **Save**. The updated model list takes effect immediately for all members of the project.
+  </Step>
+</Steps>
+
+<Note>
+  Only org admins can curate the allowed models for a project. Project admins and members see only the models that have been enabled for their project.
+</Note>
+
+## Switching Models Mid-Conversation
+
+You can switch to a different model at any point in an open conversation — mid-thread, mid-task, or after reviewing an initial response.
+
+To switch models:
+
+1. Open the conversation you are working in.
+2. Locate the **model selector** in the toolbar at the top or bottom of the chat input area.
+3. Click the selector and choose a different model from the list.
+4. Continue typing your next message. The new model picks up from the current conversation context.
+
+All previous messages — both yours and the AI's — remain visible and intact. The new model has access to the same thread history and will reference it when generating responses.
+
+<Info>
+  Switching models does not lose your conversation history. The new model sees the same thread from the beginning, so you can seamlessly continue a complex document review or multi-step analysis after changing models.
+</Info>
+
+<Tip>
+  A productive workflow for billable client work: start with a faster, lower-cost model like Claude 3 Haiku or GPT-4o mini for initial exploration, research, and rough drafting, then switch to Claude 3.5 Sonnet or GPT-4o for the final review and polish pass. This keeps costs down without sacrificing quality on the deliverable.
+</Tip>
+
+<Note>
+  The model used to generate each individual message is recorded in the conversation thread and in your org's usage log. This means you can audit exactly which model produced each response — useful for client billing transparency and for reviewing AI-assisted work product.
+</Note>

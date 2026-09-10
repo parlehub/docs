@@ -1,0 +1,87 @@
+---
+title: "ParleHub: Shared AI Workspace for Client-Billing Firms"
+sidebarTitle: "Introduction"
+description: "Learn what ParleHub is, why it was built for professional services firms, and how it solves AI cost allocation, collaboration, and governance."
+---
+
+ParleHub is a shared AI workspace built for law firms, accounting practices, and consulting teams — any organization where every hour of work belongs to a client engagement. Unlike general-purpose AI tools, ParleHub gives every project its own budget, expense code, and shared conversation thread, so the cost and context of AI-assisted work stays attached to the client that caused it, not lost in a personal account or buried in an undifferentiated provider invoice.
+
+## The core problem
+
+Your team is already using AI on client work. They're doing it on personal accounts, with client documents, under terms nobody reviewed. At month end, a single provider invoice arrives with no client codes attached — and lands in overhead, where practices that barely touch AI quietly subsidize the ones that live on it. You can't say which clients benefited, which files were used, or whose agreement covered the work. That's also the honest answer to the AI section of every client security questionnaire you sign.
+
+ParleHub was built to close that gap: put a client code on every dollar of AI your firm spends, keep the files inside your own tenant, and give you a record you can actually show someone.
+
+## Six pillars of ParleHub
+
+<CardGroup cols={2}>
+  <Card
+    title="Visibility"
+    icon="eye"
+    href="/security/overview"
+  >
+    Access tied to your identity provider, files stored in your own SharePoint or Google Drive tenant, and model calls running under your own API keys — never a personal consumer account.
+  </Card>
+  <Card
+    title="Cost Allocation"
+    icon="coins"
+    href="/cost/budgets"
+  >
+    Every project carries your own expense code, straight through to the export. Spend and token usage break down by project, person, provider, or model over any date range.
+  </Card>
+  <Card
+    title="Control"
+    icon="sliders"
+    href="/cost/budgets"
+  >
+    Pre-flight budget enforcement blocks a send before it exceeds the project budget. An 80% warning fires before the ceiling is hit, and blocked users can request an increase in one click.
+  </Card>
+  <Card
+    title="Shared Context"
+    icon="users"
+    href="/projects/overview"
+  >
+    Shared project threads every team member can see, with real-time presence, keyword and semantic search, and the ability to promote a personal chat into a shared project.
+  </Card>
+  <Card
+    title="Defensible Work"
+    icon="scale-balanced"
+    href="/security/overview"
+  >
+    The full exchange — question, reply, and model — stays in the thread. Real tool calls against the project's own files ground the work in your documents, not in a reply that appeared from nowhere.
+  </Card>
+  <Card
+    title="Governance"
+    icon="shield-halved"
+    href="/security/overview"
+  >
+    Enterprise SSO via Microsoft Entra ID or Google Workspace, files that never leave your tenant, a tamper-evident append-only audit log, and role-based access at the org and project level.
+  </Card>
+</CardGroup>
+
+## How it fits together
+
+A ParleHub **project** maps to a client engagement. It has a name, an expense code you assign, a budget ceiling, and a set of members drawn from your organization. Inside a project, the team runs AI-assisted conversations using whichever models you've connected — Anthropic, OpenAI, Google Gemini, or Azure OpenAI on your own API keys. Every token consumed is recorded against the project's budget in a single canonical ledger that drives both the real-time enforcement and the export report.
+
+Files live in a SharePoint site or Google Drive folder inside your own tenant. ParleHub never copies them to its own storage. When a team member asks the AI to read a contract or query a spreadsheet, the model calls the file through a real tool call and cites what it found — so there's something to review, not just a paragraph that appeared.
+
+Admins control which models are available at the org level, which models each project may use, and who has access to what. When someone leaves the firm, revoking their identity-provider account removes their access from every project they were on.
+
+## What's next
+
+<CardGroup cols={2}>
+  <Card
+    title="Quickstart"
+    icon="rocket"
+    href="/quickstart"
+  >
+    Create your organization, connect a model provider, and run your first AI-assisted conversation in under ten minutes.
+  </Card>
+  <Card
+    title="Plans & Billing"
+    icon="credit-card"
+    href="/plans-and-billing"
+  >
+    Compare Free, Team, and Enterprise plans to find the right tier for your firm's size and governance requirements.
+  </Card>
+</CardGroup>

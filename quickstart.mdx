@@ -1,0 +1,74 @@
+---
+title: "Quickstart: Set Up ParleHub for Your Firm in Minutes"
+sidebarTitle: "Quickstart"
+description: "Create your organization, connect an AI model provider, set up your first project, and run your first AI-assisted conversation in ParleHub."
+---
+
+This guide walks you through everything you need to go from a blank slate to a running AI-assisted project conversation. The whole process takes under ten minutes, and you can do it on the Free plan before committing to anything. Follow the steps below in order.
+
+<Steps>
+  <Step title="Create your account">
+    Go to [app.parlehub.com](https://app.parlehub.com) and sign up with your work email address. If your organization has already configured Single Sign-On through Microsoft Entra ID or Google Workspace, click **Continue with SSO** instead — your admin will have shared the organization slug you need to enter.
+
+    Once you've authenticated, you land on the organization selection screen. If you're the first person from your firm, proceed to the next step to create a new organization.
+  </Step>
+  <Step title="Create your organization">
+    Click **Create organization**, enter your firm's name, and confirm. ParleHub creates a fresh workspace scoped to your domain.
+
+    To bring colleagues in immediately, go to **Settings > Members** and enter their work email addresses. They'll receive an invitation and land in your organization after signing up. You can also share your organization's SSO slug so that anyone who authenticates through your identity provider joins automatically, subject to the role you assign new members by default.
+  </Step>
+  <Step title="Connect a model provider">
+    Navigate to **Settings > Model Providers**. ParleHub supports four providers on your own API keys — choose at least one to start:
+
+    - **Anthropic** — Claude models
+    - **OpenAI** — GPT-4o, o3, and others
+    - **Google Gemini** — Gemini 1.5 Pro and Flash
+    - **Azure OpenAI** — GPT models deployed in your Azure subscription
+
+    Paste your API key into the field for your chosen provider and click **Connect**. ParleHub validates the key and lists the available models. Select a default model for new conversations. You can connect additional providers at any time and configure which models each project may use.
+  </Step>
+  <Step title="Create a project">
+    Click **New Project** from the main navigation. Fill in:
+
+    - **Project name** — typically the engagement name (e.g., *Ashworth M&A*)
+    - **Expense code** — the client or matter code from your billing system (e.g., `ENG-4417`). This code travels through to every export.
+    - **Budget** — the maximum model spend you want to allow on this project. ParleHub blocks new messages once the budget is reached and warns the team at 80%.
+
+    Click **Create project**. The project appears in your project list and is visible to all members you add to it.
+  </Step>
+  <Step title="Start a conversation">
+    Open your new project and click **New Conversation**. Select a model from the dropdown — the list shows only models available on your connected providers. Type your first message and press **Send**.
+
+    Every message, reply, and model label is stored in the shared project thread. Any colleague with access to the project can read the conversation, pick up where you left off, or branch it by editing a message and resending. The project budget tracker updates in real time as tokens are consumed.
+  </Step>
+</Steps>
+
+<Note>
+  On the Free plan, your organization gets $10/mo of model spend shared across up to 3 projects and 3 seats. That's enough to run a real pilot on a single client engagement before deciding whether to upgrade.
+</Note>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card
+    title="Projects"
+    icon="folder"
+    href="/projects/overview"
+  >
+    Learn how to manage project membership, attach files, use semantic search, and promote personal chats to shared threads.
+  </Card>
+  <Card
+    title="Cost Management"
+    icon="coins"
+    href="/cost/budgets"
+  >
+    Set org-wide and per-project budget caps, review spend by client or model, and export cost data to your billing system.
+  </Card>
+  <Card
+    title="Model Providers"
+    icon="robot"
+    href="/models/connecting-providers"
+  >
+    Connect additional providers, manage API keys, and control which models are available at the org and project level.
+  </Card>
+</CardGroup>

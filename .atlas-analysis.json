@@ -1,0 +1,91 @@
+{
+  "projectType": "saas",
+  "projectName": "ParleHub",
+  "projectDescription": "ParleHub is a shared AI workspace for professional services firms that allocates AI spend by client project code, with budget controls, team collaboration, and enterprise-grade governance.",
+  "theme": "luma",
+  "primaryColor": "#4d8eff",
+  "lightColor": "#87b0fb",
+  "darkColor": null,
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "quickstart",
+              "plans-and-billing"
+            ]
+          },
+          {
+            "group": "Projects & Collaboration",
+            "pages": [
+              "projects/overview",
+              "projects/conversations",
+              "projects/shared-context",
+              "projects/file-tools"
+            ]
+          },
+          {
+            "group": "Cost Management",
+            "pages": [
+              "cost/budgets",
+              "cost/expense-codes",
+              "cost/usage-analytics"
+            ]
+          },
+          {
+            "group": "AI Models",
+            "pages": [
+              "models/connecting-providers",
+              "models/supported-models",
+              "models/model-selection"
+            ]
+          },
+          {
+            "group": "Security & Governance",
+            "pages": [
+              "security/overview",
+              "security/sso",
+              "security/storage",
+              "security/audit-log",
+              "security/roles-and-permissions"
+            ]
+          },
+          {
+            "group": "Administration",
+            "pages": [
+              "admin/organization-setup",
+              "admin/managing-members",
+              "admin/org-caps"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Per-project AI budget enforcement with pre-flight spend blocking",
+    "Client expense codes on every project, exportable to billing systems",
+    "Shared project threads with real-time presence and semantic search",
+    "Native file tools: search, read, query spreadsheets, convert documents",
+    "Enterprise SSO via Microsoft Entra ID and Google Workspace",
+    "Files stored in your own SharePoint or Google Drive tenant",
+    "Tamper-evident append-only audit log",
+    "Multi-provider support: Anthropic, OpenAI, Google Gemini, Azure OpenAI",
+    "Role-based access: org admin, project admin, member",
+    "Usage analytics broken down by project, person, provider, or model"
+  ],
+  "publicApiSurface": [
+    "Project budgets (set, monitor, request increase)",
+    "Expense codes per project",
+    "Usage & token analytics export",
+    "Model provider connection (BYOK: bring your own API key)",
+    "SSO configuration (Entra ID, Google Workspace)",
+    "Storage integration (SharePoint, Google Drive)",
+    "Role assignment (org admin, project admin, member)",
+    "Audit log access"
+  ]
+}

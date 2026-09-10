@@ -1,0 +1,72 @@
+---
+title: "File Tools: Work Directly with Your Project Documents"
+sidebarTitle: "File Tools"
+description: "ParleHub's AI can read, search, and query files in your project — PDFs, Word docs, spreadsheets, and PowerPoint — as grounded tool calls."
+---
+
+Rather than asking you to paste excerpts into a chat window, ParleHub gives the AI direct access to the documents stored in your project. When you ask the AI a question that requires reading a contract, scanning a balance sheet, or summarizing a presentation, it reaches into the project's file store, runs the appropriate tool call, and grounds its answer in the actual source material. You get a traceable, auditable response — not a hallucination built from text you copied in manually.
+
+## Supported file types
+
+Upload any of the following file types to a project and the AI can work with them immediately. Conversion to searchable markdown happens automatically in the background — you do not need to pre-process or reformat anything.
+
+| File type | Extensions | What the AI can do |
+|---|---|---|
+| PDF | `.pdf` | Search content, read sections, extract clauses |
+| Word document | `.docx` | Read and summarize, compare drafts |
+| Spreadsheet | `.xlsx`, `.csv` | Query rows and columns, compute summaries |
+| Presentation | `.pptx` | Convert slides to text, summarize decks |
+
+<Note>
+  Scanned PDFs that contain only images are not yet supported for text extraction. Use a PDF that has a text layer, or run the document through OCR before uploading.
+</Note>
+
+## What the AI can do with files
+
+The AI interacts with your project's files through four discrete tool capabilities, each of which runs as a real, auditable tool call — not a background prompt injection.
+
+<CardGroup cols={2}>
+  <Card title="Search Documents" icon="magnifying-glass" href="/projects/file-tools">
+    Ask the AI to find every clause, paragraph, or data point in a file that is relevant to your question. The search runs against the converted markdown, so it covers the full document even if it spans hundreds of pages.
+  </Card>
+  <Card title="Read & Summarize" icon="file-lines" href="/projects/conversations">
+    Direct the AI to read a specific section — a contract clause, an exhibit, a cover memo — and summarize or analyze it. Responses include the source file name and section so you can verify the reference.
+  </Card>
+  <Card title="Query Spreadsheets" icon="table" href="/projects/file-tools">
+    Ask questions against rows and columns in natural language: *"What is the total revenue for Q3?"* or *"Which line items exceed the contingency budget?"* The AI translates your question into a structured query against the spreadsheet data.
+  </Card>
+  <Card title="Convert to Markdown" icon="file-code" href="/projects/file-tools">
+    PowerPoint decks and formatted Word documents are converted to clean, searchable markdown automatically on upload. You can also ask the AI to surface the converted text of a specific file so you can copy and reuse it downstream.
+  </Card>
+</CardGroup>
+
+## How to add files to a project
+
+<Steps>
+  <Step title="Open the project's Files tab">
+    Navigate to your project in the sidebar and click the **Files** tab at the top of the project view.
+  </Step>
+  <Step title="Upload your documents">
+    Drag files into the upload area or click **Upload Files** to browse. You can upload multiple files at once. Supported formats are processed automatically — a status indicator shows when conversion is complete.
+  </Step>
+  <Step title="Confirm the AI can see the files">
+    Once a file shows a green **Ready** badge, it is available for the AI to use in any conversation in the project. Start a conversation and ask the AI a question that references the document to confirm.
+  </Step>
+  <Step title="Enterprise: connect cloud storage">
+    On Enterprise plans, files can be sourced directly from your organization's **SharePoint** or **Google Drive** site. Connect your cloud storage in **Project Settings → Integrations**, and the AI can query those files without requiring a manual upload step.
+  </Step>
+</Steps>
+
+## Grounded answers
+
+Because the AI works by calling file tools — not by consuming a blob of pasted text — every answer it gives is traceable back to a specific source document. Each response that draws from a file includes a citation block showing the file name, the page or section referenced, and the tool call that retrieved it.
+
+This traceability matters in professional services contexts where the answer is only as good as the source. When you take an AI-assisted conclusion into a client deliverable or a legal brief, you need to be able to point to exactly where it came from.
+
+<Warning>
+  No code execution runs near your client data. File tools are read-only operations — the AI can search, read, and query your documents, but it cannot modify, delete, or export them.
+</Warning>
+
+<Tip>
+  After the AI gives you an answer based on a file, ask it to quote the exact text it drew from. For example: *"Show me the verbatim language from the contract that supports that conclusion."* This gives you a defensible reference you can drop directly into a memo or client communication.
+</Tip>

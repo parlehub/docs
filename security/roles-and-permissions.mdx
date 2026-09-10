@@ -1,0 +1,55 @@
+---
+title: "Roles and Permissions in ParleHub"
+sidebarTitle: "Roles & Permissions"
+description: "ParleHub has four roles — Org Admin, Project Admin, Member, and Personal. Learn what each role can do and how to assign roles to team members."
+---
+
+ParleHub uses role-based access at two distinct levels: the organization level and the project level. Org-level roles control who can manage firm-wide settings like SSO, billing, storage, and member rosters. Project-level roles control who can do what inside a specific project. A person can be a Member at the org level but a Project Admin on a particular client engagement — the two levels are independent. This two-tier model lets you give senior staff or engagement leads control over their own projects without granting them access to firm-wide configuration.
+
+## Role Overview
+
+| Role | Scope | Key Permissions |
+|---|---|---|
+| **Org Admin** | Org-wide | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; view all usage and the audit log |
+| **Project Admin** | Per-project | Create and delete conversations; manage project members; set and modify the project budget; set the project expense code; approve or deny budget increase requests from members |
+| **Member** | Per-project | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit |
+| **Personal** | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to |
+
+<Note>
+  On the **Enterprise** plan, private projects are completely hidden from the org project list. Only the members of a private project can see that it exists. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
+</Note>
+
+## Assigning Roles
+
+<Steps>
+  <Step title="Assign or change an org-level role">
+    Go to **Settings → Members**. Find the member in the list and click their name or the role badge next to it. Select the new role from the dropdown. Changes take effect immediately.
+  </Step>
+  <Step title="Assign or change a project-level role">
+    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins and that project's Project Admins can change project roles.
+  </Step>
+  <Step title="Add a new member to a project">
+    From the project's **Members** tab, click **Add Member**, search for the person by name or email, select their project role, and confirm. They immediately gain access to the project's conversations and files.
+  </Step>
+  <Step title="Remove a member from a project">
+    From the project's **Members** tab, click the menu next to the member's name and select **Remove from Project**. They lose access to the project immediately. Their past contributions (messages, uploaded files) remain in the project record.
+  </Step>
+</Steps>
+
+## Project Visibility
+
+Project visibility is strictly enforced — it is not just a UI preference. A member only sees the projects they have been explicitly added to. There is no org-wide project directory that members can browse, and there is no search that surfaces projects a user is not a member of.
+
+This applies even to Org Admins by default: they can see all projects for administrative purposes (billing, audit, member management), but regular members have no equivalent visibility.
+
+On the Enterprise plan, **private projects** take this further — they are excluded from the org project list entirely. Even Org Admins see private projects only in the audit log and billing views, not in the main project directory.
+
+## Budget Increase Requests
+
+ParleHub lets Project Admins set a spending limit (budget cap) on a project to control AI model costs per engagement. When a Member's action is blocked because the project has hit its budget limit, they can submit a budget increase request directly from the conversation interface.
+
+All Project Admins on that project receive the request. Any one of them can approve or deny it from the project's **Budget** tab. Approvals and denials are recorded in the [audit log](/security/audit-log). Once approved, the new budget limit takes effect immediately and the member can continue their work.
+
+<Tip>
+  Use expense codes alongside budget caps to tie AI spend directly to client matter numbers in your billing system. Set an expense code under **Project Settings → Budget** and it will appear in usage exports for easy reconciliation.
+</Tip>

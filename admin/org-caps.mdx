@@ -1,0 +1,68 @@
+---
+title: "Org-Wide and Per-User AI Spending Caps"
+sidebarTitle: "Spending Caps"
+description: "Set a monthly org-wide AI spend ceiling and per-user limits in ParleHub to prevent runaway costs above and beyond per-project budgets."
+---
+
+ParleHub uses a three-layer budget system to give your firm precise control over AI spend. Project budgets are the innermost layer — they constrain spending within a single engagement. Personal caps and the org-wide cap sit above them as outer backstops, catching overruns that individual project budgets might not anticipate. Understanding how these layers interact helps you tune controls that protect the firm without interrupting day-to-day work.
+
+## How the Layers Work
+
+Every AI send in ParleHub passes through up to three budget checks before it is executed. The most restrictive layer wins — if any layer is exhausted, the send is blocked.
+
+1. **Project budget** — blocks a specific send in a specific project when that project's monthly budget is depleted. This is the first and most granular control, scoped to a single client engagement.
+
+2. **Personal cap** — blocks any send by a specific user once they have spent their monthly personal limit across *all* of their projects combined. This prevents a single user from consuming a disproportionate share of the org's AI budget regardless of which projects they are active in.
+
+3. **Org-wide cap** — blocks any send by anyone in the org once total org-level AI spend reaches the monthly ceiling. This is the ultimate backstop: no single project or user can push the org beyond the limit you set.
+
+<Info>
+  Caps apply to model API call costs only — they do not affect your ParleHub subscription fees.
+</Info>
+
+## Setting the Org-Wide Cap
+
+<Steps>
+  <Step title="Open Spending Limits">
+    Navigate to **Settings → Spending Limits**.
+  </Step>
+  <Step title="Enter the Monthly Dollar Cap">
+    Under **Org-Wide Monthly Limit**, enter the maximum dollar amount the entire org may spend on AI model calls in a single calendar month.
+  </Step>
+  <Step title="Save">
+    Click **Save**. The limit is active immediately. The cap resets automatically on the first of each calendar month, regardless of how much of the period has elapsed.
+  </Step>
+</Steps>
+
+## Setting Per-User Caps
+
+Navigate to **Settings → Spending Limits → Per-User Limits**. You have two options:
+
+- **Default cap** — enter a dollar amount in the **Default Limit** field. This applies to every member who does not have a custom limit assigned.
+- **Individual cap** — click a specific member's name in the list and enter a custom monthly limit for that person. Individual limits override the default for that member only.
+
+Both limit types reset on the first of each calendar month alongside the org-wide cap.
+
+## What Happens When a Cap Is Hit
+
+When a send would exceed an active cap, ParleHub blocks the request before it reaches the model provider. The member sees an in-app message explaining which limit was reached.
+
+<Accordion title="Project budget blocked">
+  The project has exhausted its monthly budget. The member sending the message can request a budget increase from the project admin, or the project admin can raise the budget directly in the project's settings.
+</Accordion>
+
+<Accordion title="Personal cap blocked">
+  The member has reached their monthly personal spending limit. Only an org admin can raise the limit. Navigate to **Settings → Spending Limits → Per-User Limits**, select the member, and increase their cap.
+</Accordion>
+
+<Accordion title="Org-wide cap blocked">
+  The entire organization has reached its monthly AI spending ceiling. All sends from all members are blocked until an org admin raises the cap or the month resets. Navigate to **Settings → Spending Limits** and increase the **Org-Wide Monthly Limit**.
+</Accordion>
+
+<Warning>
+  Org-wide and personal caps are checked at send time using cost estimates. If a large response causes the final billed cost to slightly exceed a cap, the overage is small and one-time — the next send will be blocked until the limit is raised or the month resets.
+</Warning>
+
+<Tip>
+  For firms new to AI cost management, start with a conservative org-wide cap equal to roughly twice your first month's expected usage. You can always raise it — and a low ceiling prevents surprise invoices while your team calibrates their workflows.
+</Tip>

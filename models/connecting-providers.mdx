@@ -1,0 +1,58 @@
+---
+title: "Connect AI Model Providers to ParleHub (BYOK)"
+sidebarTitle: "Connecting Providers"
+description: "Add your Anthropic, OpenAI, Gemini, or Azure OpenAI API keys to ParleHub so model calls run under your own provider agreement and budget."
+---
+
+By connecting your own provider API key — a practice known as Bring Your Own Key (BYOK) — every model call ParleHub makes on your behalf runs under your own provider agreement, consumes your own rate limits, and appears on your provider invoice. This keeps your firm's AI usage cleanly separated from any other organization's activity, gives you full visibility into costs, and ensures you remain in control of which models your team can access.
+
+## Connecting a Provider
+
+Only org admins can add or modify provider connections. Before you begin, make sure you have your API key ready from your provider's console.
+
+<Steps>
+  <Step title="Open Model Providers settings">
+    Navigate to **Settings → Model Providers** in your ParleHub org dashboard.
+  </Step>
+  <Step title="Click Connect">
+    Find the provider you want to add and click **Connect** next to its name.
+  </Step>
+  <Step title="Paste your API key">
+    Enter the API key from your provider console into the key field. See the tabs below for where to find your key for each provider.
+  </Step>
+  <Step title="Select models to enable">
+    Choose which specific models from that provider you want to make available to your org. You can always adjust this selection later.
+  </Step>
+  <Step title="Save and validate">
+    Click **Save**. ParleHub immediately validates the key by making a test call to the provider. If validation fails, double-check that the key is correct and has the necessary permissions.
+  </Step>
+</Steps>
+
+### Where to Find Your API Key
+
+<Tabs>
+  <Tab title="Anthropic">
+    Log in to [console.anthropic.com](https://console.anthropic.com) and go to **API Keys** in the left sidebar. Click **Create Key**, give it a descriptive name (e.g., `parlehub-prod`), and copy the key before closing the dialog — Anthropic only shows the full key once.
+  </Tab>
+  <Tab title="OpenAI">
+    Log in to [platform.openai.com](https://platform.openai.com) and navigate to **API Keys** under your account menu. Click **Create new secret key**, optionally assign it to a project, and copy the value immediately — OpenAI does not display it again after creation.
+  </Tab>
+  <Tab title="Google Gemini">
+    Open [console.cloud.google.com](https://console.cloud.google.com) and select the Google Cloud project you want to bill against. Enable the **Generative Language API** (or Vertex AI API, depending on your setup), then go to **APIs & Services → Credentials** to create or copy an API key.
+  </Tab>
+  <Tab title="Azure OpenAI">
+    In the [Azure portal](https://portal.azure.com), navigate to your Azure OpenAI resource. Under **Resource Management**, select **Keys and Endpoint**. Copy either **KEY 1** or **KEY 2** — both are valid. You will also need your **Endpoint URL** and **Deployment name**, which ParleHub prompts you to enter alongside the key.
+  </Tab>
+</Tabs>
+
+## What Happens to Your Key
+
+After you save a provider connection, ParleHub stores your API key encrypted at the org level. The key is never displayed again in the UI — only a masked placeholder appears in settings to confirm a key has been saved. The key is used solely to forward API requests on your behalf; it is not shared with other organizations or used for any other purpose.
+
+<Warning>
+  Only org admins can add or remove provider connections. Project admins and members cannot view, copy, or modify API keys in any part of the interface.
+</Warning>
+
+<Note>
+  You can connect multiple providers at the same time. Once connected, all enabled models across all your providers become available for org admins to assign to individual projects — and project members can then choose from whichever models have been enabled for their project.
+</Note>
