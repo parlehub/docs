@@ -1,8 +1,11 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "ParleHub",
-  "theme": "luma",
-  "favicon": "https://media.brand.dev/efd30411-6e3e-4827-abf5-72efc19ddd58.png",
+  "theme": "mint",
+  "favicon": {
+    "light": "/images/apple-touch-icon.png",
+    "dark": "/images/apple-touch-icon.png"
+  },
   "colors": {
     "primary": "#4d8eff",
     "light": "#87b0fb"
@@ -16,7 +19,7 @@
     }
   },
   "appearance": {
-    "default": "dark"
+    "default": "system"
   },
   "navbar": {
     "primary": {
@@ -89,5 +92,10 @@
     "socials": {
       "website": "https://www.parlehub.com"
     }
+  },
+  "description": "Learn what ParleHub is, why it was built for professional services firms, and how it solves AI cost allocation, collaboration, and governance.",
+  "logo": {
+    "light": "/images/pwa-215x215.png",
+    "dark": "/images/pwa-215x215.png"
   }
 }
