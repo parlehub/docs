@@ -67,6 +67,15 @@
             ]
           },
           {
+            "group": "Tools & Knowledge",
+            "icon": "toolbox",
+            "pages": [
+              "tools/mcp-tools",
+              "knowledge/organization-knowledge",
+              "knowledge/asking-about-your-org"
+            ]
+          },
+          {
             "group": "Security & Governance",
             "pages": [
               "security/overview",
@@ -81,7 +90,9 @@
             "pages": [
               "admin/organization-setup",
               "admin/managing-members",
-              "admin/org-caps"
+              "admin/org-caps",
+              "admin/microsoft-365",
+              "admin/google-workspace"
             ]
           }
         ]

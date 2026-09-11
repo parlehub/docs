@@ -1,63 +1,52 @@
 ---
-title: "Audit Log: Tamper-Evident Record of Sensitive Actions"
+title: "Audit Log: Append-Only Record of Sensitive Actions"
 sidebarTitle: "Audit Log"
-description: "ParleHub's audit log captures sensitive actions in an append-only record enforced at the platform level — so reviewers can see exactly what happened and when."
+description: "ParleHub records sensitive actions in an append-only audit log that rejects ordinary edits and deletions at the database layer."
 ---
 
-Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced and that the record proving it has not been manipulated. ParleHub's audit log is designed for exactly that purpose: every sensitive action across your organization is recorded in an append-only log enforced at the core platform level. No user, no administrator, and no ParleHub staff member can edit or delete an existing entry. Reviewers, compliance officers, and auditors can inspect the log with confidence that what they see is a complete and unaltered record of what happened.
+Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced. ParleHub writes every sensitive action across your organization to an append-only audit log, enforced at two layers so that ordinary application and database writes cannot rewrite history.
 
 ## What the Audit Log Captures
 
-The audit log records events across the following categories:
+Every message (inbound and outbound), configuration change, member change, budget change, context file edit, tool call, and API key rotation is written to the audit log. Broadly:
 
 - **Membership events** — user added to or removed from the org; user added to or removed from a project; role changed
-- **File events** — file uploaded to a project; file deleted from a project
-- **Budget events** — project budget set or changed; budget increase requested; budget increase approved or denied
-- **Provider events** — AI model provider connected; provider disconnected; provider credentials updated
-- **SSO events** — SSO enabled or disabled; user authenticated via SSO; SSO-based session invalidation on offboarding
-- **Conversation events** — conversation deleted; conversation exported
-- **Admin actions** — org settings changed; storage provider connected or disconnected; billing plan changed
+- **File events** — project file written or deleted; project context file (`agent.md`) edited
+- **Budget events** — project budget set or changed; spending caps changed
+- **Provider events** — AI model provider connected, disconnected, or its key rotated
+- **Tool events** — an MCP tool registered, enabled on a project, or called in a conversation
+- **Conversation events** — messages sent and received
+- **Admin actions** — org settings changed; storage provider connected or disconnected
 
-Each event record includes a timestamp, the actor who performed the action, the target resource (project, file, user, or setting), the outcome (success or failure), and the IP address of the actor.
+Each record includes a timestamp, the actor, the target resource (project, file, user, or setting), the org and project it belongs to, and the before/after values where a setting changed.
 
-## Accessing the Audit Log
-
-Only Org Admins can view the audit log.
-
-Navigate to **Settings → Audit Log**. From there you can:
-
-- **Filter by event type** — narrow to a specific category such as file events or SSO events
-- **Filter by user** — see all actions taken by or affecting a specific member
-- **Filter by project** — see all events scoped to a particular project
-- **Filter by date range** — focus on a specific window for an investigation or periodic review
+<Info>
+  **The audit log is not a payload store.** For a tool call it records the tool's name and category, whether it succeeded, failed or was cancelled, how long it took, and the size of the request and response — but never the request and response themselves. A tool's arguments routinely contain your own documents, and because audit rows resist deletion, storing payloads there would put a second copy of your content somewhere ParleHub's own deletion paths cannot reach.
+</Info>
 
 ## Append-Only Enforcement
 
-The audit log's integrity guarantee comes from how it is enforced, not just how it is described. Entries are written at the core platform level using an append-only write path. There is no administrative interface, API endpoint, or tool that allows editing or deleting an existing log entry. New events are appended as they occur; nothing is overwritten or back-filled.
+The guarantee comes from how the log is enforced, not just how it is described. Two independent layers apply:
 
-This means that even if an Org Admin's account were compromised, an attacker could not use it to scrub activity from the audit log. Any attempt would itself generate an audit event.
+1. **The application layer.** The repositories that write audit records expose no update or delete operation at all. There is no code path in ParleHub — no admin screen, no API endpoint, no support tool — that edits or removes an entry.
+2. **The database layer.** An `INSTEAD OF UPDATE, DELETE` trigger on the audit tables rejects both statements regardless of which account issues them. A direct SQL `UPDATE` or `DELETE` against an audit row fails, even from a connection that holds write permission on the table.
 
-<Info>
-  The audit log is not a conversation transcript. It records that a conversation was created, accessed, or deleted — but not its content. To review conversation content, open the conversation thread directly. Messages in a thread are immutable once sent; they cannot be edited or deleted by participants.
-</Info>
+In practice this means a compromised Org Admin account cannot scrub activity from the log: there is no feature that would let it, and the database would reject the write even if there were.
 
-## Exporting the Audit Log
+<Warning>
+  **The honest claim is DML-immutable, not immutable.** The trigger blocks ordinary writes — `UPDATE` and `DELETE` — but it is not tamper-proof against schema changes. A principal holding `ALTER` or `CONTROL` on the database could disable the trigger, drop it, or `TRUNCATE` past it. That is an accepted, deliberately higher bar: altering the record requires a privileged schema change rather than a routine write, and is not something that can happen through the product. We would rather state that precisely than claim the record cannot be changed by anyone under any circumstances.
+</Warning>
 
-Download a full or filtered export of the audit log for use in compliance tooling, legal review, or archival. To export, apply any desired filters and click **Export as CSV**.
+## Reviewing the Log
 
-The CSV includes the following columns:
+<Note>
+  **A customer-facing audit view is on the roadmap and is not available yet.** There is currently no audit screen, export, or API in the ParleHub application for org administrators. Records are being captured today, so nothing is lost in the meantime — but if your engagement depends on retrieving them, raise it with ParleHub support rather than assuming self-service access.
+</Note>
 
-| Column | Description |
-|---|---|
-| `timestamp` | ISO 8601 date and time of the event (UTC) |
-| `event_type` | Category and action, e.g. `file.uploaded` or `member.removed` |
-| `actor_id` | User ID of the person who performed the action |
-| `actor_email` | Email address of the actor at the time of the event |
-| `target_type` | Type of resource affected, e.g. `project`, `file`, `user` |
-| `target_id` | Identifier of the affected resource |
-| `ip_address` | IP address from which the action was performed |
-| `outcome` | `success` or `failure` |
+Planned for a future release:
 
-<Tip>
-  Export the audit log monthly and archive the CSV in your document management system. Treating audit log exports as a governance artifact — alongside engagement files — gives you a ready-made record if a client or regulator asks for evidence of your AI usage controls.
-</Tip>
+- **An org audit view** — filter by event type, user, project, and date range.
+- **CSV export** — download a full or filtered extract for compliance tooling, legal review, or archival.
+- **A SIEM webhook** — stream events to your own security information and event management platform.
+
+If a client or regulator asks for evidence of your AI usage controls before those ship, contact ParleHub support with your organization name and the window you need covered.

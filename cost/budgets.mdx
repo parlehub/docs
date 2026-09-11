@@ -1,90 +1,76 @@
 ---
 title: "Project Budgets: Set Ceilings Before You Hit Them"
 sidebarTitle: "Budgets"
-description: "Set a dollar budget on every ParleHub project. Pre-flight enforcement blocks sends that would exceed the limit — and alerts the team at 80%."
+description: "Set a dollar budget on every ParleHub project. Enforcement blocks new messages once spend reaches the limit — and the bar warns the team at 80%."
 ---
 
-ParleHub enforces budgets before spend happens, not after. Rather than reviewing an invoice at month-end and discovering a project ran over, every project carries a dollar ceiling that ParleHub checks on every message — blocking the send if it would push you past the limit. That means your team can work freely up to the budget, and the guardrail kicks in exactly when it needs to, not when the billing cycle closes.
+ParleHub enforces budgets before spend happens, not after. Rather than reviewing an invoice at month-end and discovering a project ran over, every project carries a dollar ceiling that ParleHub checks before a message is sent. Your team works freely up to the budget, and the guardrail kicks in exactly when it needs to, not when the billing cycle closes.
 
-## Setting a Project Budget
+## The Budget tab
 
-<Steps>
-  <Step title="Open project Settings">
-    Navigate to your project and click the **Settings** tab in the top navigation.
-  </Step>
-  <Step title="Go to the Budget tab">
-    Select the **Budget** tab within project settings.
-  </Step>
-  <Step title="Enter a dollar amount">
-    Type your budget ceiling in the **Budget limit** field. The value is in USD.
-  </Step>
-  <Step title="Save">
-    Click **Save**. The budget becomes active immediately — all subsequent messages are checked against this ceiling.
-  </Step>
-</Steps>
-
-<Tip>
-  Set the budget slightly above your expected engagement cost to avoid mid-project interruptions from conservative pre-flight estimates.
-</Tip>
-
-## How Enforcement Works
-
-Every time a project member sends a message, ParleHub runs a pre-flight cost estimate before the request reaches the model. If the estimated cost would push total project spend past the budget ceiling, the send is blocked and the member sees a clear explanation of why.
-
-At **80% of the budget**, a warning banner appears for all project members. This gives your team — and any admins monitoring the project — time to evaluate spend and decide whether to increase the budget before work stalls.
-
-<Warning>
-  Pre-flight enforcement estimates cost before sending. Actual cost may differ slightly because model response length is unknown in advance, but the estimate is intentionally conservative to protect your budget.
-</Warning>
-
-## Requesting a Budget Increase
-
-When a send is blocked, the member does not need to email an admin or open a support ticket. A **Request increase** button appears directly in the blocked-send dialog. Clicking it routes a budget increase request to every project admin instantly.
-
-Admins review and approve the request from the project's **Budget tab**:
+The **Budget** tab on a project shows what the project has actually spent — computed from real token usage, not an estimate — broken down per conversation, alongside **Spent**, **Budget** and **Remaining** figures.
 
 <Steps>
   <Step title="Open the Budget tab">
-    Go to project **Settings → Budget**. Pending increase requests appear at the top of the page.
+    Navigate to the project and select **Budget**.
   </Step>
-  <Step title="Review the request">
-    See who requested the increase, the current budget, and current spend.
+  <Step title="Enter a figure">
+    Type the ceiling under **Set budget (USD)**.
   </Step>
-  <Step title="Approve or adjust">
-    Enter a new ceiling and click **Approve**. The requester can send immediately — no page refresh needed.
+  <Step title="Save">
+    Select **Save budget**. The budget becomes active immediately.
   </Step>
 </Steps>
 
-## Budget Stacking
+<Note>
+  **Set \$0 for no limit.** Spend is still tracked and still attributed to the project — you simply get no hard stop.
+</Note>
 
-Project budgets do not operate in isolation. ParleHub enforces three stacked layers, each acting as a backstop for the one inside it:
+<Warning>
+  Only **Org Admins** can set a project budget. Project Admins and members can view spend.
+</Warning>
+
+## How enforcement works
+
+The spend bar on the Budget tab turns **amber at 80%** and **red at 100%**.
+
+**When a project hits its budget, new messages in it are blocked** until an Org Admin raises the limit. A member who cannot change the budget themselves gets a **Request limit increase** button, which notifies an admin. The admin raises the figure on the same **Budget** tab; there is no separate approval queue to work through.
+
+<Tip>
+  Set the budget slightly above your expected engagement cost to avoid mid-project interruptions. Raising it later is a one-field change, but it does need an Org Admin to be available.
+</Tip>
+
+## Budget layers
+
+Project budgets do not operate in isolation. Each of these can independently stop a send:
 
 <CardGroup cols={3}>
-  <Card title="Project Budget" icon="folder" href="/cost/expense-codes">
-    The innermost layer. Scoped to a single project. Set by the project creator or any project admin. Stops spend on that engagement before it reaches personal or org limits.
+  <Card title="Project Budget" icon="folder" href="/projects/overview">
+    Scoped to a single project, set by an Org Admin. Stops spend on that engagement.
   </Card>
-  <Card title="Personal Cap" icon="user" href="/admin/managing-members">
-    A per-user spending limit set by the org admin. Applies across all projects that member participates in. Triggers if the member approaches their individual ceiling regardless of project budget headroom.
+
+  <Card title="Personal Budget" icon="user" href="/admin/managing-members">
+    A per-user limit that applies across all the projects a member works in, plus their personal conversations.
   </Card>
+
   <Card title="Org-Wide Cap" icon="building" href="/admin/org-caps">
-    The outermost backstop. Set by the org admin. No single project or member can push total org spend past this ceiling, regardless of individual project or personal cap settings.
+    The outermost backstop. No single project or member can push total org spend past this ceiling.
   </Card>
 </CardGroup>
 
-Any one of these three layers can block a send. A member who has personal cap headroom and project budget headroom can still be blocked if the org-wide cap is reached — and vice versa.
+A member with personal-budget headroom and project-budget headroom can still be blocked by the org-wide cap, and vice versa.
 
-## Billing Modes
+## Where spend comes from
 
-ParleHub supports two billing modes. You choose the mode that matches how your firm wants to handle AI costs.
+Spend is recorded per message in an append-only ledger, attributed to **either** the project (for project conversations) **or** the user (for personal conversations) — never both. That is what makes a per-project figure defensible when you take it to a client.
 
-<Accordion title="Project Budget mode (default)">
-  Each project enforces its own dollar ceiling. Sends that would exceed the project budget are blocked pre-flight. This is the recommended mode for client-facing engagements where costs must stay within a defined scope.
-</Accordion>
+Two kinds of spend are tracked separately and deliberately never added together:
 
-<Accordion title="Platform Consumption mode">
-  The organization absorbs AI costs centrally. Per-project blocking is disabled — members can send freely up to the org-wide cap. Usage is still tracked and attributed per project, so you retain full visibility without hard stops. This mode suits internal knowledge work or exploratory projects where cost containment is less critical than continuity.
-</Accordion>
+- **Your own provider keys** — usage billed to you directly by Anthropic, OpenAI, Google, or whoever holds the account. See [Connecting Providers](/models/connecting-providers).
+- **ParleHub-managed models** — usage drawn from your prepaid credit wallet.
 
-<Info>
-  You can switch billing modes in **Org Settings → Billing**. The change applies to all projects immediately. Existing per-project budgets are preserved and re-activate if you switch back to Project Budget mode.
-</Info>
+A single combined total would mean two different things at once, so ParleHub does not present one. The managed figure is an **estimate**, worked out by applying current settings to past usage; your credit history on the **Usage** screen is the authoritative record.
+
+<Tip>
+  Anyone on a project can ask the assistant _"How much of our budget have we used?"_ mid-conversation and get the figure read from the ledger. See [Asking About Your Org](/knowledge/asking-about-your-org).
+</Tip>

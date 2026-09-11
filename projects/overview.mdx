@@ -1,55 +1,156 @@
 ---
 title: "Projects: Organize AI Work by Client Engagement"
 sidebarTitle: "Overview"
-description: "Projects are the core unit in ParleHub — each carries an expense code, budget, and shared conversation history scoped to a client engagement."
+description: "A project is ParleHub's shared workspace — conversations, files, standing instructions, a budget, and the tools the agent may use, scoped to one engagement."
 ---
 
-A project in ParleHub is the container that keeps everything related to a client engagement in one place. Every project has a name, an expense code for billing, a budget ceiling, and a roster of members — and every conversation, file, and AI interaction inside that project belongs to it collectively, not to any individual team member. Think of a project as the single source of truth for all the AI work your team does for a given client.
+A **project** is the shared workspace in ParleHub. Everything the team does for a piece of work lives inside it: conversations everyone on the project can see and continue, the project's files, a spending budget, standing instructions for the agent, and the tools it is allowed to use.
+
+Creating one takes under a minute. The parts that make it genuinely useful — members, storage, context, budget — are set up afterwards from the project's own tabs.
+
+<Note>
+  **You'll need:** to be an **Org Admin**. Creating projects is Org Admin only; once a project exists, its **Project Admins** run it day to day.
+</Note>
+
+<Tip>
+  **Worth doing first:** connect at least one AI model for your organization — see [Connecting Providers](/models/connecting-providers). A project without any enabled models can be created, but nobody will be able to chat in it.
+</Tip>
 
 ## Creating a project
 
 <Steps>
-  <Step title="Open the New Project dialog">
-    From the ParleHub sidebar, click **New Project**. The project creation dialog opens.
+  <Step title="Open the New project form">
+    Go to **Projects** and select **New project** (top right).
   </Step>
-  <Step title="Enter project details">
-    Type a project name, enter the client's **expense code**, and set a **budget** limit. The budget tracks cumulative AI usage costs across all conversations in the project.
+  <Step title="Name and describe it">
+    - **Name** — required, e.g. `Q3 Research`. Shown on the project card and everywhere the project is referenced.
+    - **Description** — optional; one line on what the project is for.
   </Step>
-  <Step title="Add members">
-    Search for colleagues by name or email and add them as members. You can also add members later from the project's **Settings** tab. See [Roles & Permissions](/security/roles-and-permissions) for the difference between project admins and members.
+  <Step title="Choose visibility">
+    - **Public** — anyone in your organization can open this project. Members are still used to decide who is a Project Admin.
+    - **Restricted** — only people you add as members can open it. Use this for client-confidential or sensitive work.
   </Step>
-  <Step title="Choose allowed models">
-    Select which AI models team members can use inside this project. Restricting models to an approved set helps control costs and keeps outputs consistent for compliance-sensitive engagements.
+  <Step title="Set a budget">
+    The project's spending limit in USD. **Set 0 for no limit** — spend is still tracked. You can change it later.
+  </Step>
+  <Step title="Choose available models">
+    Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected.
+  </Step>
+  <Step title="Choose storage">
+    **ParleHub Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
+  </Step>
+  <Step title="Create the project">
+    You land in the project's workspace, already added as its **Project Admin**.
   </Step>
 </Steps>
 
-## Project anatomy
+<Warning>
+  **Visibility cannot be changed from the project's tabs later — decide it now.** If you are unsure, **Restricted** is the safer choice; you can always add the whole team as members.
+</Warning>
 
-Every project is made up of four core components that work together to capture and preserve the full context of an engagement.
+## The project workspace
+
+The project workspace has one tab per area of setup.
 
 <CardGroup cols={2}>
-  <Card title="Expense Code & Budget" icon="receipt" href="/cost/expense-codes">
-    Each project is tagged with a client expense code and a budget cap. AI usage costs roll up to the project, making it straightforward to allocate spend at billing time.
-  </Card>
   <Card title="Conversations" icon="messages" href="/projects/conversations">
-    All AI threads live inside the project and are visible to every member. New conversations inherit the project's model allowlist and cost tracking automatically.
+    Shared AI threads. Everyone on the project sees them and can pick any of them up.
   </Card>
+
+  <Card title="Files" icon="folder-open" href="/projects/file-tools">
+    The project's file area, which the team and the agent both use.
+  </Card>
+
+  <Card title="Project Details" icon="sliders">
+    Storage configuration and `agent.md`, the project's standing instructions.
+  </Card>
+
   <Card title="Members" icon="users" href="/security/roles-and-permissions">
-    Only members of a project can see its conversations and files. Project admins can add or remove members and adjust model permissions at any time.
+    Who is on the project, and who administers it.
   </Card>
-  <Card title="File Storage" icon="folder-open" href="/projects/file-tools">
-    Upload PDFs, Word documents, spreadsheets, and PowerPoint files to the project's Files tab. The AI can search and read these files directly as grounded tool calls.
+
+  <Card title="Budget" icon="dollar-sign" href="/cost/budgets">
+    Actual spend computed from real token usage, broken down per conversation.
+  </Card>
+
+  <Card title="Tools" icon="plug" href="/tools/mcp-tools">
+    Which of your organization's registered MCP tools this project may use.
   </Card>
 </CardGroup>
 
-## Project visibility
+## Adding members
 
-Only the members you explicitly add to a project can see its conversations, files, and settings. If you are not a member, the project does not appear in your sidebar — not even the project name.
+On a **Restricted** project the member list _is_ the access list. On a **Public** project everyone in the organization can already open it, so this mainly decides who the admins are.
 
-Org admins can view all projects in the organization for billing and compliance purposes, but they do not automatically join conversations.
+<Steps>
+  <Step title="Open the Members tab">
+    Under **Add an org member**, pick the person.
+  </Step>
+  <Step title="Set their access">
+    **Project Admin** — can edit project details, the context file, storage, and membership. **Project Member** — can use the project.
+  </Step>
+  <Step title="Optionally set a project role">
+    Free text describing what they do here, e.g. `Business Analyst`. It is a label for the team, not a permission.
+  </Step>
+  <Step title="Select Add member">
+    Repeat for everyone who needs access.
+  </Step>
+</Steps>
 
-On **Enterprise plans**, workspace admins can create *private projects* visible only to a named set of partners or principals, and *shared projects* available to everyone in a practice group or office. This two-tier model lets you handle sensitive matters — M&A work, compensation reviews, regulatory investigations — without mixing them into the standard project list.
+Change someone's access or role directly in the roster, or **Remove** them. Every project must keep **at least one Project Admin** — removing the last one is refused.
 
 <Note>
-  Free plan workspaces are limited to **3 active projects** at a time. Archive a completed engagement to free up a slot, or upgrade to the **Team** or **Enterprise** plan for more projects.
+  People must already be members of your organization before they can be added to a project. See [Managing Members](/admin/managing-members).
 </Note>
+
+## Pointing the project at storage
+
+Every project has a file area the team and the agent both use. By default that is ParleHub-managed storage, which works immediately. If your organization has connected SharePoint or Google Drive, you can instead root the project in a document library or Shared Drive so files stay in your own tenant.
+
+<Steps>
+  <Step title="Open Project Details → Storage">
+    Choose a provider.
+  </Step>
+  <Step title="ParleHub Cloud Storage">
+    Managed storage, no setup.
+  </Step>
+  <Step title="SharePoint">
+    Paste the **site URL** (e.g. `https://contoso.sharepoint.com/sites/Marketing`) and select **Resolve**, choose a **document library**, and optionally a **folder** within it to root the project at.
+  </Step>
+  <Step title="Google Drive">
+    Paste the URL of the **Shared Drive itself** — its root, not a sub-folder inside it.
+  </Step>
+  <Step title="Save storage">
+    ParleHub checks it can actually reach the location before saving, so a permissions gap is caught now.
+  </Step>
+</Steps>
+
+SharePoint and Google Drive only appear if an Org Admin has enabled them for your organization, and each needs its own tenant-side permission grant first — see [Connect Microsoft 365](/admin/microsoft-365) and [Connect Google Workspace](/admin/google-workspace).
+
+## Project context (`agent.md`)
+
+`agent.md` holds standing instructions for the agent — the equivalent of a project brief, injected at the start of **every conversation in the project**. This is the single highest-leverage thing you can set up on a new project. See [Shared Context](/projects/shared-context).
+
+## Enabling tools
+
+If your organization has registered custom MCP tools, open the **Tools** tab and switch on the ones this project should have. Nothing is enabled by default — a tool is available to a project only once it is toggled on there. See [Custom MCP Tools](/tools/mcp-tools).
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| No **New project** button | You are not an Org Admin | Project creation is Org Admin only — ask one to create it and make you a Project Admin |
+| "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | Archive a project you have finished, or upgrade the plan |
+| "Private (Restricted) projects require the Enterprise plan" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
+| "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Organization Settings → Billing |
+| No **Available models** section on the form | Your organization has not connected any model providers | [Connect a provider key](/models/connecting-providers) first |
+| Nobody can chat in the new project | No models enabled, or you blocked them all here | Re-check the model list on **Project Details**, and the org's enabled models |
+| SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Organization Settings → File storage |
+| Saving storage fails a connectivity check | ParleHub has not been granted access to that site or Shared Drive | Grant access on the provider's side first, then save again |
+| Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
+| Cannot find someone in the add-member list | They are not in your organization yet, are deactivated, or are already on the project | Invite them to the organization first |
+| **Remove** refused on the last admin | Every project needs at least one Project Admin | Promote someone else first, then remove |
+| Messages blocked: "This project is over budget" | Spend reached the budget | An Org Admin raises the budget on the **Budget** tab |
+| Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin or Org Admin to make the change, or to promote you |
+
+Still stuck? Contact ParleHub support with your organization name and the project name.

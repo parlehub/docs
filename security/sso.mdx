@@ -1,75 +1,60 @@
 ---
 title: "Single Sign-On with Entra ID and Google Workspace"
 sidebarTitle: "SSO"
-description: "Connect ParleHub to Microsoft Entra ID or Google Workspace for enterprise SSO — so access provisioning and offboarding happen through your identity provider."
+description: "Connect ParleHub to Microsoft Entra ID or Google Workspace so sign-in is routed through the identity provider your firm already runs."
 ---
 
-For professional services firms, controlling who has access to client-related workspaces is not optional — it is a professional obligation. By connecting ParleHub to your identity provider, you make ParleHub access a direct function of your existing user lifecycle: when you onboard a new associate in Entra ID or Google Workspace, they can sign in immediately; when you offboard a departing employee, their ParleHub session is invalidated and access is removed without any separate step in ParleHub. There is no window where a former employee retains access because someone forgot to deprovision them in a second system.
+For professional services firms, controlling who has access to client-related workspaces is not optional — it is a professional obligation. Connecting ParleHub to your identity provider makes ParleHub access a function of your existing user lifecycle: onboard a new associate in Entra ID or Google Workspace and they can sign in immediately; disable them there and they can no longer authenticate to ParleHub.
 
 <Note>
-  SSO is available on the **Team** and **Enterprise** plans.
+  SSO is available on the **Team** and **Enterprise** plans. If a plan is downgraded below Team, SSO sign-in stops working at the next login and users fall back to email/password.
 </Note>
 
-## Supported Providers
+## Supported providers
 
 ParleHub supports the two identity providers most common in professional services firms:
 
 - **Microsoft Entra ID** (formerly Azure Active Directory) — for firms on Microsoft 365
 - **Google Workspace** — for firms using Google as their identity layer
 
-## Setting Up Entra ID SSO
+<CardGroup cols={2}>
+  <Card title="Set up Entra ID" icon="microsoft" href="/admin/microsoft-365">
+    Full step-by-step guide, including the SharePoint storage setup that reuses the same tenant.
+  </Card>
 
-Before you begin, make sure you have an Azure portal account with permission to register applications in your Entra ID tenant.
+  <Card title="Set up Google Workspace" icon="google" href="/admin/google-workspace">
+    Full step-by-step guide, including per–Shared Drive storage access.
+  </Card>
+</CardGroup>
 
-<Steps>
-  <Step title="Open SSO settings">
-    In ParleHub, go to **Settings → Security → SSO**.
-  </Step>
-  <Step title="Choose Microsoft Entra ID">
-    Select **Microsoft Entra ID** from the list of supported identity providers.
-  </Step>
-  <Step title="Enter your tenant credentials">
-    In the Azure portal, register a new application under **App registrations**, then copy the **Tenant ID**, **Client ID**, and **Client Secret** into the corresponding fields in ParleHub.
-  </Step>
-  <Step title="Test the connection">
-    Click **Test Connection**. ParleHub will attempt an authentication handshake with your tenant. Resolve any errors before proceeding — common issues include incorrect redirect URIs and missing API permissions.
-  </Step>
-  <Step title="Enable SSO for your org">
-    Toggle **Enable SSO**. Optionally, enable **Require SSO** to disable password-based logins entirely and force all sign-ins through Entra ID.
-  </Step>
-</Steps>
+## How the connection is configured
 
-## Setting Up Google Workspace SSO
+SSO is configured by an **Org Admin** under **Org settings → Single sign-on**. What you supply is deliberately minimal:
 
-Before you begin, make sure you have a Google Workspace admin account and access to the Google Cloud Console for your organization.
+| Provider | What you enter | What happens on the provider's side |
+| --- | --- | --- |
+| **Microsoft Entra ID** | **Tenant ID** and your **email domain**, then enable the toggle | A Global Administrator or Cloud Application Administrator grants ParleHub consent to sign your users in |
+| **Google Workspace** | Your **email domain**, then enable the toggle | A Super Administrator marks ParleHub's OAuth Client ID as **Trusted** in the Admin console |
 
-<Steps>
-  <Step title="Open SSO settings">
-    In ParleHub, go to **Settings → Security → SSO**.
-  </Step>
-  <Step title="Choose Google Workspace">
-    Select **Google Workspace** from the list of supported identity providers.
-  </Step>
-  <Step title="Enter your domain and OAuth credentials">
-    In the Google Cloud Console, create an OAuth 2.0 client under **APIs & Services → Credentials**. Copy the **Client ID** and **Client Secret**, then enter your primary **Workspace domain** in ParleHub.
-  </Step>
-  <Step title="Test the connection">
-    Click **Test Connection** and sign in with a Google Workspace account. Confirm the handshake completes without errors before proceeding.
-  </Step>
-  <Step title="Enable SSO for your org">
-    Toggle **Enable SSO**. Optionally enable **Require SSO** to restrict logins to Google Workspace accounts only.
-  </Step>
-</Steps>
+ParleHub does not ask you to register an application and paste back a client secret. You grant consent to the ParleHub application once, and ParleHub holds the connection.
 
-## What Changes After SSO Is Enabled
-
-Once SSO is active, the following behaviors apply across your organization:
-
-- **Sign-in flow.** Users reach the ParleHub login page, click **Continue with Microsoft** or **Continue with Google**, and are redirected to your identity provider's authentication screen. They never set or use a ParleHub-specific password (unless you leave password login enabled alongside SSO).
-- **Provisioning.** New users in your identity provider can sign in to ParleHub immediately. An Org Admin still controls which projects they are added to, but they no longer need a separate ParleHub invitation to authenticate.
-- **Offboarding.** When you disable, suspend, or delete a user in Entra ID or Google Workspace, their active ParleHub session is invalidated and they cannot start a new one. This happens automatically — no action is required in ParleHub.
-- **Audit trail.** SSO sign-in and sign-out events are recorded in the [audit log](/security/audit-log), including the identity provider that authenticated the session.
+## How users are matched
 
 <Warning>
-  Once you enable **Require SSO**, password-based logins are disabled for all members of your organization. Ensure your identity provider connection is tested and working before enabling this option — locking yourself out requires contacting ParleHub support to recover access.
+  **Sign-in is routed by email domain, not by account type.** Anyone whose verified email at the provider is on your configured domain can sign in to your organization. Configure the domain your firm actually controls, and only that domain.
 </Warning>
+
+- On the login page, a user enters their email address. If the domain matches a configured organization, the **Sign in with Microsoft** or **Sign in with Google** button appears.
+- The first time a colleague signs in this way, ParleHub creates their account automatically and places them in your organization — provided the domain matches and you have an available seat.
+- Personal `@gmail.com` addresses cannot sign in to your organization, because `gmail.com` is not your configured domain.
+
+## What changes after SSO is enabled
+
+- **Sign-in flow.** Users authenticate at your identity provider and return to ParleHub. They never set or use a ParleHub-specific password.
+- **Provisioning.** New users in your identity provider can sign in to ParleHub without a separate ParleHub invitation. An Org Admin still controls which projects they are added to.
+- **Offboarding.** When you disable, suspend, or delete a user at the identity provider, they can no longer authenticate to ParleHub. To close out a departing member completely, also deactivate them in ParleHub — see [Managing Members](/admin/managing-members) — which releases their seat and removes their access to project conversations.
+- **Audit trail.** Authentication and org configuration changes are written to the [audit log](/security/audit-log).
+
+<Info>
+  Email and password sign-in remains available alongside SSO. If your firm requires that every sign-in goes through the identity provider, raise it with ParleHub support — enforcing SSO-only authentication is not currently a self-service setting.
+</Info>

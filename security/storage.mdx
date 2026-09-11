@@ -1,72 +1,68 @@
 ---
 title: "Native Storage: Files Stay in Your SharePoint or Drive"
 sidebarTitle: "Storage"
-description: "On Enterprise, ParleHub stores project files in your own SharePoint site or Google Drive, under your tenant's permissions — never in third-party storage."
+description: "On Enterprise, a ParleHub project can be rooted in a SharePoint document library or a Google Shared Drive you already own, granted one location at a time."
 ---
 
-When a lawyer uploads a due diligence document or an accountant attaches a client's financials to a project, that file should not travel to a third-party storage environment your firm has no control over. Most cloud AI tools persist uploaded documents in their own infrastructure — which creates data residency concerns, potential conflicts with client confidentiality agreements, and murky answers on security questionnaires. ParleHub's native storage integration solves this: on the Enterprise plan, every file uploaded to a project is written directly into your own SharePoint site or Google Drive shared drive, inside your tenant, governed by your existing permissions and retention policies.
+When a lawyer uploads a due diligence document or an accountant attaches a client's financials to a project, that file should not travel to a third-party storage environment your firm has no control over. Most cloud AI tools persist uploaded documents in their own infrastructure — which creates data residency concerns, potential conflicts with client confidentiality agreements, and murky answers on security questionnaires.
+
+ParleHub's native storage integration addresses this: on the Enterprise plan, a project can be rooted directly in a SharePoint document library or a Google Shared Drive **inside your own tenant**, governed by your existing permissions and retention policies.
 
 <Note>
-  Native storage integration is available on the **Enterprise** plan. On Free and Team plans, files are stored in ParleHub-managed secure storage that is scoped to your organization.
+  Native storage integration is available on the **Enterprise** plan. Otherwise, projects use **ParleHub Cloud Storage** — managed storage scoped to your organization, which needs no setup.
 </Note>
 
-## How Native Storage Works
+## Least-privilege by design
 
-When you connect native storage, ParleHub provisions a dedicated space in your tenant — a SharePoint site collection or a Google Drive shared drive — and uses it as the backing store for all project files in your org. Uploads, deletions, and reads all pass through your tenant. ParleHub holds only a reference to the file (its location and metadata) and reads the content in transit when a project member uses a file tool in a conversation. The file itself never lives on ParleHub infrastructure.
+ParleHub reaches your files using its **own application identity**, scoped to **only the specific locations you grant** — never your whole tenant. This is the part that matters on a security questionnaire, so it is worth being precise about:
 
-Project folders within the SharePoint site or shared drive are organized by project, and file permissions mirror project membership. If someone is removed from a project, they lose access to that project's folder in your storage environment as well.
+- **ParleHub does not provision anything in your tenant.** You choose an existing site, library, or Shared Drive; ParleHub is granted access to it.
+- **Each location is granted explicitly, one at a time.** Granting one SharePoint site does not grant another. A private or shared Teams channel is its own SharePoint site and needs its own grant.
+- **The agent works when nobody is online.** Because access is held by an application identity rather than a signed-in user's session, a long-running task does not depend on someone keeping a browser tab open.
+- **Deletions land in your recycle bin.** Files deleted through ParleHub go to the SharePoint recycle bin or Drive trash, where your normal retention and recovery rules apply.
 
-## Connecting SharePoint
+<Warning>
+  **The agent can write, not just read.** Project file tools cover listing, reading, writing, and deleting files in the location the project is rooted at. Grant the permission level you actually want: SharePoint sites can be granted read-only, and a Google Shared Drive can add ParleHub as **Viewer** rather than **Content manager**.
+</Warning>
 
-Before you begin, you need a SharePoint administrator account for your Microsoft 365 tenant.
+## Connecting a location
 
-<Steps>
-  <Step title="Open storage settings">
-    In ParleHub, go to **Settings → Storage**.
-  </Step>
-  <Step title="Choose SharePoint">
-    Select **SharePoint** as your native storage provider.
-  </Step>
-  <Step title="Authorize ParleHub in your tenant">
-    Click **Authorize**. You will be redirected to a Microsoft consent screen requesting permission for ParleHub to create and manage a SharePoint site in your tenant. A **SharePoint Administrator** must approve this consent. Once approved, you are redirected back to ParleHub.
-  </Step>
-  <Step title="Save the configuration">
-    Click **Save**. ParleHub provisions a new SharePoint site in your tenant and begins routing all project file storage there immediately.
-  </Step>
-</Steps>
+Storage is set up in two stages: an Org Admin enables the provider once for the organization, then each project is pointed at a specific library or drive.
 
-## Connecting Google Drive
+<CardGroup cols={2}>
+  <Card title="SharePoint" icon="microsoft" href="/admin/microsoft-365">
+    Enable the SharePoint host for your org, grant ParleHub access to each site, then root a project at a document library or folder. Includes Teams channel folders.
+  </Card>
 
-Before you begin, you need a Google Workspace administrator account.
+  <Card title="Google Drive" icon="google" href="/admin/google-workspace">
+    Add ParleHub's service account to each Shared Drive as Viewer or Content manager, then root a project at that drive.
+  </Card>
+</CardGroup>
 
-<Steps>
-  <Step title="Open storage settings">
-    In ParleHub, go to **Settings → Storage**.
-  </Step>
-  <Step title="Choose Google Drive">
-    Select **Google Drive** as your native storage provider.
-  </Step>
-  <Step title="Authorize with a Workspace admin account">
-    Click **Authorize with Google**. Sign in with a Google Workspace administrator account and grant the requested permissions. ParleHub requires access to create and manage a shared drive in your organization.
-  </Step>
-  <Step title="Confirm provisioning">
-    ParleHub creates a new shared drive in your organization's Google Drive. All future project file uploads are stored there, organized by project folder.
-  </Step>
-</Steps>
+ParleHub verifies it can actually list the location before saving the configuration, so a permissions gap surfaces at setup rather than mid-conversation.
 
-## Permissions
+## Permissions and access
 
-File permissions are derived from project membership and enforced in your storage tenant:
+Storage access in ParleHub is **project-scoped, not per-user**. This is an important distinction to get right when answering a client questionnaire:
 
-- **Project members** can read and write files in that project's folder within the SharePoint site or shared drive.
-- **Non-members** — including other members of your ParleHub org who are not in that project — cannot access that project's folder.
-- **Org Admins** have access to the SharePoint site and shared drive as storage administrators, consistent with their org-wide role. This access is reflected in the [audit log](/security/audit-log).
-- **Removed members** have their folder permissions revoked when they are removed from the project in ParleHub.
+- A project is rooted at one location. Everyone who can open that project can use the agent's file tools against it.
+- Who can open the project is controlled in ParleHub by the project's visibility and member list — see [Roles & Permissions](/security/roles-and-permissions).
+- ParleHub's own grant on the site or Shared Drive is what bounds the blast radius on your side. It reaches that location and nothing else in your tenant.
+
+<Warning>
+  ParleHub does not mirror individual users' SharePoint or Drive permissions into a project. If a document library contains material that only some project members should see, root the project somewhere narrower rather than relying on per-file permissions to filter it.
+</Warning>
 
 <Tip>
   Because files live in your SharePoint or Google Drive, your existing data loss prevention (DLP) policies, retention labels, and eDiscovery tooling apply to ParleHub project files automatically — no additional configuration needed.
 </Tip>
 
+## When a location moves or disappears
+
+ParleHub binds to the folder itself, not to its name. Renaming a SharePoint folder or a Teams channel does not break the project.
+
+**Deleting** the folder does. The project's Storage settings will show _"needs reconnecting"_, and an admin re-picks a folder to fix it. ParleHub deliberately will not fall back to another folder that happens to have the old name, because a new folder reusing that name could belong to a different client.
+
 <Info>
-  Disconnecting native storage does not delete your files. All files remain in your SharePoint site or Google Drive shared drive exactly as they were. ParleHub simply stops routing new uploads there until you reconnect or choose a different storage option.
+  Disconnecting storage does not delete your files. Everything remains in your SharePoint site or Shared Drive exactly as it was.
 </Info>

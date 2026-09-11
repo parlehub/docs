@@ -1,0 +1,106 @@
+---
+title: "Ask the Assistant About Your Own ParleHub Setup"
+sidebarTitle: "Asking About Your Org"
+description: "Ask about budgets, models, tools, storage and your firm's policies without leaving the conversation — and know when the answer was actually looked up."
+icon: "circle-question"
+---
+
+This page is for **everyone**. It covers the questions you can ask the assistant about **your own ParleHub setup and your firm's documents** — the things it used to guess at, and now looks up.
+
+There are two halves, and they work differently:
+
+- **Your live setup** — budgets, models, tools, storage, spend. These change by the hour, so the assistant **queries them** the moment you ask.
+- **Your firm's documents** — policies, handbooks, methodology. These are written and change rarely, so the assistant **searches them** and quotes the relevant passage with a citation.
+
+You do not have to know which is which, or switch anything on. Just ask.
+
+## Questions about your setup
+
+Ask these in the conversation where you are already working, rather than leaving to hunt through a settings screen.
+
+### In a project conversation
+
+| Ask something like | What you get |
+| --- | --- |
+| *"How much of our budget have we used?"* | This project's budget, what has been spent and what remains — read from the authoritative ledger. |
+| *"Who's on this project?"* | The project roster with everyone's role. |
+| *"Which models can we use here?"* | The models actually available in this project — and, if one you expected is missing, why. |
+| *"What can you reach from this project?"* | The tools your organization has registered and enabled here, and the file storage this project is connected to. |
+
+### In a personal conversation
+
+| Ask something like | What you get |
+| --- | --- |
+| *"What has the organization spent this month?"* | Your organization's spend for that period. Works for a calendar month, quarter or year. |
+
+Everything from the project list works here too.
+
+## How to tell it looked something up
+
+Above the answer you will see a line naming what the assistant is doing:
+
+> *Checking the project's budget*  
+> *Checking which models are available*  
+> *Checking which tools are available here*  
+> *Looking up your organisation's spend*  
+> *Looking up the project team*
+
+<Warning>
+  **That line is the point.** It is what separates a figure the assistant read a second ago from one it half-remembers from earlier in the conversation. If you asked about your budget and no such line appeared, treat the number with suspicion and ask again in a fresh conversation.
+</Warning>
+
+## Why some questions are only answered in a personal conversation
+
+This is the part that surprises people, so it is worth understanding rather than working around.
+
+**A project conversation is shared.** Everyone in the project sees it, and one answer goes to all of them. So in a project thread the assistant will only tell you things **every member of that project can already see on screen for themselves**.
+
+Your organization's total spend across every client is not one of those things. So if you ask for it in a project thread, the assistant answers the part it can — this project's budget — and declines the rest. It is not being obtuse, and asking again will not help: the figure would land in every member's view and stay in the thread permanently.
+
+**Ask it in your own personal conversation instead**, where the audience is one person.
+
+### Being on your own does not make you an admin
+
+In a personal conversation the assistant still checks your role. If you are not an **Org Admin**, asking about organization-wide spend gets you **your own** usage for that period — never the firm's. That is the same rule the admin screens already apply; the conversation is not a way around it.
+
+### What the spend figures mean
+
+Spend comes back **split by who it is owed to**, and deliberately never added up:
+
+- **Your own provider keys** — usage billed to you directly by Anthropic, OpenAI, Google or whoever holds the account.
+- **ParleHub-managed models** — usage drawn from your prepaid credit.
+
+A single total would mean two different things at once, so you will not be given one. The managed figure is described as an **estimate**: it is worked out by applying today's settings to past usage, so if your access mode or pricing changed mid-period it will not match exactly. **Your credit history is the authoritative record** — see the **Usage** screen for that.
+
+<Note>
+  If your organization has personal workspaces switched off, there is no personal conversation to ask in, so organization-wide spend cannot be reached this way at all. Use the **Usage** screen instead.
+</Note>
+
+## Questions about your firm's documents
+
+If an Org Admin has set up [organization knowledge](/knowledge/organization-knowledge), you can ask about your firm's written policies in the same breath:
+
+> *"What does our expenses policy say about booking flights for a client visit?"*  
+> *"What's our standard notice period in an engagement letter?"*  
+> *"Do we have a policy on using client data for training?"*
+
+You will get the relevant passage, followed by a **citation** — the document name and version, as a link you can click to open the document itself.
+
+Three things worth knowing:
+
+- **The citation is trustworthy by construction.** Its label is resolved from ParleHub's own record of the document, not written by the assistant — so it cannot cite one document and link to another, and it cannot invent one.
+- **Hover the citation** to see the effective date of the version that was quoted.
+- **A retired policy cannot be quoted.** When your firm supersedes a document, the old version comes out of the index — so you will not get a confidently-cited answer from a policy that no longer applies. In an older conversation, a citation to a since-retired document shows as `[document unavailable]` rather than opening.
+
+If nobody has set this up yet, the assistant simply will not have anything to quote. Point your Org Admin at [Set Up Organization Knowledge](/knowledge/organization-knowledge).
+
+## Troubleshooting
+
+| Symptom | What's happening |
+| --- | --- |
+| The assistant answers about your budget with no lookup line, and the number looks wrong | It answered from the conversation's own earlier history rather than looking it up. Start a fresh conversation and ask again. |
+| It will not tell you organization-wide spend in a project thread | Working as intended — see above. Ask in a personal conversation. |
+| It gives you your own usage instead of the organization's | You are not an Org Admin. |
+| It does not seem able to look anything up at all | Some models cannot call tools. Switch the conversation to a model that supports them. |
+| It cannot find a policy you know exists | Check with your Org Admin that the document is published and **Searchable**, and that your project has not opted out of organization knowledge in **Tools & knowledge**. |
+| A spend figure does not match your invoice | The managed figure is an estimate derived from current settings. Use the **Usage** screen and your credit history as the record. |

@@ -1,0 +1,161 @@
+---
+title: "Connect ParleHub to Microsoft 365 (SSO and SharePoint)"
+sidebarTitle: "Connect Microsoft 365"
+description: "Set up Entra ID single sign-on and site-scoped SharePoint storage for your organization, including Teams channel folders."
+icon: "microsoft"
+---
+
+This guide is for an organization's **IT administrator**. It connects ParleHub to your Microsoft 365 tenant in two parts:
+
+1. **Single sign-on (SSO)** — let your team sign in to ParleHub with their corporate Microsoft accounts.
+2. **SharePoint storage** — let project agents read and write files in your SharePoint sites.
+
+Do them in this order. SSO comes first because it establishes the link between ParleHub and your Microsoft tenant that SharePoint then reuses.
+
+<Note>
+  **You'll need:** a Microsoft Entra ID (Azure AD) admin role — **Global Administrator** or **Cloud Application Administrator** — to grant consent, and **SharePoint Administrator** (or site owner) for the storage step. In ParleHub you must be an **Org Admin**.
+</Note>
+
+## Part 1 — Single sign-on with Microsoft Entra ID
+
+Your admin grants the ParleHub application permission to verify your users' identities. After that, anyone in your organization whose email matches your domain can sign in to ParleHub with their Microsoft account — no separate ParleHub password.
+
+<Steps>
+  <Step title="Find your tenant details">
+    In the [Microsoft Entra admin center](https://entra.microsoft.com) → **Overview**, copy your **Tenant ID** and note your primary **domain** (e.g. `contoso.com`).
+  </Step>
+  <Step title="Grant consent to ParleHub">
+    In ParleHub, go to **Org settings → Single sign-on** and click **Connect Microsoft**. You are redirected to Microsoft and asked to consent to ParleHub signing your users in. Approve it on behalf of your organization.
+  </Step>
+  <Step title="Configure the connection in ParleHub">
+    Back in **Org settings → Single sign-on**, enter:
+
+    - **Tenant ID** — from step 1.
+    - **Email domain** — the domain your users sign in with (e.g. `contoso.com`). ParleHub uses this to route matching users into your organization automatically.
+
+    Then toggle **Enable single sign-on** on.
+  </Step>
+  <Step title="Test it">
+    Sign out, then on the ParleHub login page enter a corporate email address. A **Sign in with Microsoft** button appears. Complete the Microsoft prompt — you should land back in ParleHub, signed in.
+  </Step>
+</Steps>
+
+<Info>
+  **New users:** the first time a colleague signs in with Microsoft, ParleHub creates their account automatically and places them in your organization — as long as their email domain matches and you have an available seat.
+</Info>
+
+<Note>
+  Single sign-on requires a **Team plan or higher**. If your plan is downgraded, Microsoft sign-in stops working at the next login and users fall back to email/password.
+</Note>
+
+## Part 2 — SharePoint as project storage
+
+ParleHub accesses files using its **own application identity**, scoped to **only the specific SharePoint sites you grant** — never your whole tenant. The agent can then read and write project files even when no one is actively online. Deleted files go to your **SharePoint recycle bin**, where your normal retention and recovery rules apply.
+
+<Warning>
+  **You'll need the Enterprise plan.** SharePoint storage is available on the **Enterprise** plan only. You must also have completed **Part 1 (single sign-on)** first — SharePoint reuses the Microsoft tenant captured during SSO setup, so there is no tenant to enter here.
+</Warning>
+
+<Steps>
+  <Step title="Enable SharePoint for your organization">
+    Org Admin, once. In ParleHub, go to **Org settings → File storage → SharePoint**, enter your **SharePoint host** (your SharePoint domain, e.g. `contoso.sharepoint.com`), and click **Enable SharePoint**. Until this is done, SharePoint will not appear as an option in any project's storage settings.
+  </Step>
+  <Step title="Pick the SharePoint site">
+    Copy the URL of the site that will hold a project's files, e.g. `https://contoso.sharepoint.com/sites/ClientDelivery`.
+  </Step>
+  <Step title="Grant ParleHub access to that site">
+    Because ParleHub uses least-privilege, site-scoped access, each site must be granted explicitly, once per site, by a **SharePoint Administrator** or **Global Administrator**. See the two methods below.
+  </Step>
+  <Step title="Connect the site to a ParleHub project">
+    Open the project → **Project settings → Storage**, choose **SharePoint**, paste the site URL from step 2, and click **Resolve**. ParleHub resolves the site and lets you pick the **document library**, then **browse its folders** and click into the one you want the project rooted at. Stay at the library itself to use the whole library. Then **Save**.
+  </Step>
+  <Step title="ParleHub verifies the connection">
+    It lists the folder you picked before saving. If it cannot reach the site, or the folder is not there, you see an error naming the problem — the most common cause is that step 3 has not been completed for this exact site yet, and the **Grant ParleHub access** button appears alongside the error so you can fix it there and then.
+  </Step>
+</Steps>
+
+Files the agent creates appear in that SharePoint folder; files your team adds there are visible to the agent's tools.
+
+### Granting a site — the easy way
+
+Skip ahead to step 4 and connect the site. When ParleHub finds it has not been granted access, it offers a **Grant ParleHub access** button:
+
+- If *you* are a SharePoint or Global Administrator, click it, sign in with Microsoft, and confirm. Come back and press **Resolve** again.
+- If you are not, the same button gives you a **link to send to whoever is**. They do not need a ParleHub account. When they have approved it, press **Resolve** again.
+
+<Info>
+  ParleHub uses that administrator's own sign-in to record the permission and then discards it. It never sees a password, and it gains no access beyond the one site being approved.
+</Info>
+
+### Granting a site — the manual way
+
+If the button is not available, or your IT team prefers to script it. You will need **ParleHub's application ID** — your ParleHub contact provides this.
+
+<Tabs>
+  <Tab title="PnP PowerShell">
+    ```powershell
+    Connect-PnPOnline -Url "https://contoso.sharepoint.com/sites/ClientDelivery" -Interactive
+    Grant-PnPAzureADAppSitePermission `
+      -AppId "<ParleHub application ID>" -DisplayName "ParleHub" `
+      -Site "https://contoso.sharepoint.com/sites/ClientDelivery" -Permissions Write
+    ```
+  </Tab>
+  <Tab title="Graph Explorer">
+    Open [Graph Explorer](https://developer.microsoft.com/graph/graph-explorer), sign in as an admin, then:
+
+    1. `GET https://graph.microsoft.com/v1.0/sites/contoso.sharepoint.com:/sites/ClientDelivery` — if prompted, consent to **`Sites.FullControl.All`** on the *Modify permissions* tab, re-run, and copy the site **`id`** from the response.
+    2. `POST https://graph.microsoft.com/v1.0/sites/<site-id>/permissions` with this body. A `201 Created` means it worked:
+
+    ```json
+    {
+      "roles": ["write"],
+      "grantedToIdentities": [
+        { "application": { "id": "<ParleHub application ID>", "displayName": "ParleHub" } }
+      ]
+    }
+    ```
+  </Tab>
+</Tabs>
+
+<Note>
+  **Tenant reuse:** because you set up single sign-on in Part 1, ParleHub already knows your tenant — SharePoint connects to the same Microsoft 365 organization automatically, and never asks you for a tenant ID.
+</Note>
+
+## Using a Microsoft Teams channel
+
+A Teams channel's **Files** tab is just a folder in SharePoint, so pointing a project at a channel is the same flow as above — you just need to know which site the channel lives in. That depends on the channel type:
+
+| Channel type | Where its files live | What to grant |
+| --- | --- | --- |
+| **Standard** | A folder named after the channel, inside the team's own site (`.../sites/TeamName`), in the **Documents** library | Grant the **team's** site once; every standard channel in that team is then reachable |
+| **Private** | Its **own** SharePoint site, typically `.../sites/TeamName-ChannelName` | Grant **that** site separately |
+| **Shared** | Its **own** SharePoint site, same naming | Grant **that** site separately |
+
+To find the right site URL, open the channel in Teams → **Files** tab → **⋯ → Open in SharePoint**. Copy the site URL from your browser's address bar — the part up to and including `/sites/<name>`, without the `/Shared Documents/...` tail.
+
+<Warning>
+  **A private or shared channel needs its own grant.** It is a separate SharePoint site, so granting the parent team's site does *not* cover it. If verification fails for a private channel, this is almost always why.
+</Warning>
+
+<Info>
+  **Renaming the channel is safe.** ParleHub binds to the folder itself, not to its name, so renaming a channel — or moving its folder — does not break the project. **Deleting** the folder does: the project's Storage settings will show *"needs reconnecting"*, and an admin re-picks a folder to fix it. ParleHub deliberately will not fall back to another folder that happens to have the old name, because a new folder reusing that name could belong to a different client.
+</Info>
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| No **Sign in with Microsoft** button | Domain not configured, or SSO disabled | Check the **email domain** and the **Enable** toggle in Org settings → Single sign-on |
+| Microsoft sign-in succeeds but ParleHub rejects it | User's email domain does not match a configured organization, or no seats left | Confirm the domain and your available seats |
+| Microsoft sign-in unavailable | Plan downgraded below Team | Upgrade, or use email/password |
+| **SharePoint** is not offered in a project's storage settings | Not enabled for the org, or plan below Enterprise | Enable it in **Org settings → File storage → SharePoint**; confirm you are on the **Enterprise** plan |
+| "SharePoint site not found — check the site URL" | You pasted a *folder* or *library* URL rather than the site's own address | Paste only the part up to and including `/sites/<name>`. Pick the library and folder in the next steps, using the folder browser |
+| "ParleHub does not have access to this SharePoint site" | The site exists, but has not been granted to ParleHub yet — expected the first time you connect any site | Click **Grant ParleHub access** on the error, or send the link it gives you to a SharePoint/Global Administrator |
+| SharePoint connection fails verification | Site not yet granted to ParleHub | Complete the per-site grant for that exact site |
+| **Grant ParleHub access** says you lack permission | Granting a site needs **SharePoint Administrator** or **Global Administrator** | Forward the approval link to someone who holds it — the link still works and they need no ParleHub account |
+| Microsoft asks a **Global Administrator** to approve ParleHub before granting | The first assisted grant in your tenant needs one-time admin consent for ParleHub's site-access app | Have a Global Administrator complete the sign-in once; afterwards SharePoint Administrators can grant sites themselves |
+| Cannot see expected files | Wrong document library or sub-folder selected | Re-check the library/folder in the project's storage settings |
+| Connection fails for a **private or shared Teams channel** | That channel is its own SharePoint site and has not been granted | Complete the per-site grant against the channel's **own** site, e.g. `.../sites/TeamName-ChannelName` |
+| Project storage says **"needs reconnecting"** | The folder the project pointed at has been deleted, or ParleHub's access to it was removed | Open **Project settings → Storage** and pick the folder again |
+
+Still stuck? Contact ParleHub support with your organization name and the site URL you are connecting.

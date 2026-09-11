@@ -8,9 +8,9 @@ This guide walks you through everything you need to go from a blank slate to a r
 
 <Steps>
   <Step title="Create your account">
-    Go to [app.parlehub.com](https://app.parlehub.com) and sign up with your work email address. If your organization has already configured Single Sign-On through Microsoft Entra ID or Google Workspace, click **Continue with SSO** instead — your admin will have shared the organization slug you need to enter.
+    Go to [app.parlehub.com](https://app.parlehub.com) and sign up with your work email address. If your organization has already configured [single sign-on](/security/sso) through Microsoft Entra ID or Google Workspace, entering your work email is all you need — a **Sign in with Microsoft** or **Sign in with Google** button appears because your email domain matches a configured organization, and your account is created automatically on first sign-in.
 
-    Once you've authenticated, you land on the organization selection screen. If you're the first person from your firm, proceed to the next step to create a new organization.
+    If you're the first person from your firm, proceed to the next step to create a new organization.
   </Step>
   <Step title="Create your organization">
     Click **Create organization**, enter your firm's name, and confirm. ParleHub creates a fresh workspace scoped to your domain.
@@ -21,20 +21,24 @@ This guide walks you through everything you need to go from a blank slate to a r
     Navigate to **Settings > Model Providers**. ParleHub supports four providers on your own API keys — choose at least one to start:
 
     - **Anthropic** — Claude models
-    - **OpenAI** — GPT-4o, o3, and others
-    - **Google Gemini** — Gemini 1.5 Pro and Flash
-    - **Azure OpenAI** — GPT models deployed in your Azure subscription
+    - **OpenAI** — GPT models
+    - **Google Gemini** — via a Google AI Studio key; no Google Cloud project needed
+    - **Azure OpenAI** — models deployed in your Azure subscription (contact ParleHub support to finish this one)
 
-    Paste your API key into the field for your chosen provider and click **Connect**. ParleHub validates the key and lists the available models. Select a default model for new conversations. You can connect additional providers at any time and configure which models each project may use.
+    Paste your API key into the field for your chosen provider and click **Connect**. ParleHub makes a real verification call to the provider before saving, so a bad key fails here rather than at chat time. Then tick the models your team should be able to use and **Set default** on one of them.
+
+    ParleHub also offers **ParleHub Managed** models that need no key of your own, billed from your organization's credit wallet. See [Connecting Providers](/models/connecting-providers) for provider-by-provider detail.
   </Step>
   <Step title="Create a project">
-    Click **New Project** from the main navigation. Fill in:
+    Go to **Projects** and click **New project** (top right). Fill in:
 
-    - **Project name** — typically the engagement name (e.g., *Ashworth M&A*)
-    - **Expense code** — the client or matter code from your billing system (e.g., `ENG-4417`). This code travels through to every export.
-    - **Budget** — the maximum model spend you want to allow on this project. ParleHub blocks new messages once the budget is reached and warns the team at 80%.
+    - **Name** — typically the engagement name (e.g., *Ashworth M&A*)
+    - **Visibility** — **Public** (anyone in your organization can open it) or **Restricted** (members only). This cannot be changed later, so pick **Restricted** if you are unsure.
+    - **Budget (USD)** — the maximum model spend you want to allow on this project. ParleHub blocks new messages once the budget is reached and warns the team at 80%. Set **0** for no limit; spend is still tracked.
+    - **Available models** — every model your org enabled is ticked; untick any you want blocked here.
+    - **Storage** — **ParleHub Cloud Storage** needs no setup and is the default.
 
-    Click **Create project**. The project appears in your project list and is visible to all members you add to it.
+    Click **Create project**. You land in the project workspace as its **Project Admin**.
   </Step>
   <Step title="Start a conversation">
     Open your new project and click **New Conversation**. Select a model from the dropdown — the list shows only models available on your connected providers. Type your first message and press **Send**.
@@ -70,5 +74,14 @@ This guide walks you through everything you need to go from a blank slate to a r
     href="/models/connecting-providers"
   >
     Connect additional providers, manage API keys, and control which models are available at the org and project level.
+  </Card>
+  <Card title="Shared Context" icon="file-pen" href="/projects/shared-context">
+    Write `agent.md` once and have its standing instructions applied to every conversation in the project.
+  </Card>
+  <Card title="Organization Knowledge" icon="books" href="/knowledge/organization-knowledge">
+    Publish your firm's policies so the assistant can quote them with a citation in any conversation.
+  </Card>
+  <Card title="Custom MCP Tools" icon="plug" href="/tools/mcp-tools">
+    Register an MCP server for your org and enable it on the projects that need it.
   </Card>
 </CardGroup>
