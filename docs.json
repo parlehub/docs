@@ -64,6 +64,13 @@
             ]
           },
           {
+            "group": "Tools & Knowledge",
+            "icon": "toolbox",
+            "pages": [
+              "tools/mcp-tools"
+            ]
+          },
+          {
             "group": "Security & Governance",
             "pages": [
               "security/overview",
