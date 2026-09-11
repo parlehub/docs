@@ -67,7 +67,8 @@
             "group": "Tools & Knowledge",
             "icon": "toolbox",
             "pages": [
-              "tools/mcp-tools"
+              "tools/mcp-tools",
+              "knowledge/organization-knowledge"
             ]
           },
           {

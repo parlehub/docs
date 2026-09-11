@@ -1,0 +1,192 @@
+---
+title: "Set Up Organization Knowledge in ParleHub"
+sidebarTitle: "Organization Knowledge"
+description: "Connect a SharePoint or Drive library, or publish policies by hand, so the assistant can quote your firm's documents with a citation in any conversation."
+icon: "books"
+---
+
+**Organization knowledge** is the set of documents that are true for your whole firm — the expenses policy, the security posture, the delivery methodology, the staff handbook. Once they are in place, anyone can ask about them in any conversation and get the relevant clause quoted back **with the document, version and section it came from**.
+
+It is deliberately different from a project's files. A project's files belong to that project; organization knowledge reaches **every** conversation in your organization — shared project threads and personal chats alike.
+
+There are two ways to get documents in, and they are not equal:
+
+<CardGroup cols={2}>
+  <Card title="Connect a library you already maintain" icon="link">
+    Point ParleHub at a SharePoint site or Google Drive folder your firm already edits in. **This is the intended route.** Editing a policy at source is what updates the answers, so there is no second copy to go stale.
+  </Card>
+  <Card title="Publish a document by hand" icon="upload">
+    Upload the file to ParleHub. The fallback for firms with no such library, or for a one-off document that lives nowhere else.
+  </Card>
+</CardGroup>
+
+<Note>
+  **You'll need:** to be an **Org Admin** in ParleHub. To connect a library you also need that provider already switched on for your organization under file storage — see [Connect Microsoft 365](/admin/microsoft-365) or [Connect Google Workspace](/admin/google-workspace).
+</Note>
+
+Everything below happens in **Organization Settings → Knowledge**.
+
+## Before you start — who can see this
+
+<Warning>
+  **Everyone in your organization can ask about anything you put here.** There is one corpus per organization and no per-team subset. That makes it the right place for documents the whole firm is meant to have, and the wrong place for anything confidential to a single team or client.
+</Warning>
+
+## Part 1 — Connect a library you already maintain
+
+You tell ParleHub where your document library lives. ParleHub checks it can read that location, then indexes the documents in it so they can be quoted. It re-checks periodically, so a policy edited at source is reflected in answers without anyone re-uploading anything.
+
+**Connecting does not move or change anything. ParleHub only ever reads.**
+
+<Steps>
+  <Step title="Open the Knowledge tab">
+    Go to **Organization Settings → Knowledge**. **Connected library** is the first card on the page.
+  </Step>
+  <Step title="Choose the provider">
+    **SharePoint** or **Google Drive**. Only providers your organization has already switched on for file storage can be connected; if the card tells you it cannot be bound, that is why.
+  </Step>
+  <Step title="Enter the location">
+    A small piece of JSON identifying the site or folder:
+
+    - SharePoint — `{"tenantId":"…","siteId":"…","rootFolder":"Policies"}`
+    - Google Drive — `{"driveId":"…","rootFolderId":"…"}`
+  </Step>
+  <Step title="Read the trust note">
+    The note above the button is the one thing on this screen worth stopping for — see below.
+  </Step>
+  <Step title="Connect the library">
+    Select **Connect library**. ParleHub verifies it can read the location before saving, so a wrong id or a permissions gap is caught now rather than silently producing an empty corpus.
+  </Step>
+</Steps>
+
+### The trust note — read this one properly
+
+<Warning>
+  **Anyone who can edit files in that location is shaping what the assistant tells your whole organization.**
+</Warning>
+
+This is the real consequence of connecting, and it is why the screen states it before you click rather than burying it in documentation. ParleHub reads whatever is in that folder and can quote it in any conversation in your firm. Before you connect:
+
+- Choose a location whose contributors you would trust to **publish a company policy**.
+- Manage who can write there **in SharePoint or Google Drive**. ParleHub cannot restrict it for you — the permissions on that folder are the control.
+- A general-purpose "Documents" library that everyone can write to is usually the wrong choice. A curated "Policies" folder with a small set of owners is usually the right one.
+
+### Keeping an eye on it
+
+Once connected, the card shows **when the library was last checked**.
+
+If ParleHub stops being able to read it — permissions changed, the site moved, a token expired — the card says so plainly:
+
+> **This library can't be read right now.** … The assistant is still answering from the last successful check, so its answers may be out of date.
+
+That behavior is deliberate: the corpus keeps answering from its last good index rather than going dark, so **nothing looks broken** — which is exactly why the warning has to be somewhere you will see it. You will also get a notification about it if you have those switched on in your profile. Treat it as urgent: every day it stays unresolved is a day the assistant may be quoting a superseded policy.
+
+### Disconnecting
+
+**Disconnect** stops ParleHub checking that library for changes. Documents already indexed from it **stay searchable** — if you want them gone, retire or delete them individually (Part 3).
+
+## Part 2 — Publish a document by hand
+
+Use this when there is no library to point at, or for a document that only exists as a file.
+
+<Steps>
+  <Step title="Open the publish form">
+    In **Organization Settings → Knowledge**, go to **Publish a document**.
+  </Step>
+  <Step title="Name it the way people name it">
+    This is what the assistant **cites**, so make it the name people actually use. "Travel & expenses policy", not "TE-POL-2026-v3-FINAL".
+  </Step>
+  <Step title="Add a description (optional)">
+    A short note on what the document covers.
+  </Step>
+  <Step title="Set Effective from (optional)">
+    When this version starts applying. Leave blank for today. This is a different fact from when you uploaded it, which is why ParleHub tracks it separately from your storage provider's version history.
+  </Step>
+  <Step title="Pick the file and publish">
+    Select **Publish**.
+  </Step>
+</Steps>
+
+### What you can publish
+
+PDF, Word, PowerPoint, Markdown, plain text, CSV, JSON, HTML, XML and YAML. ParleHub extracts the text for you.
+
+<Warning>
+  **Scanned documents with no text layer cannot be indexed.** A photographed or scanned PDF is an image as far as the file is concerned. If you publish one it will end up in the **Can't be indexed** state — that is a statement about the file, not a failure to retry. Run it through OCR first, or publish a text-bearing version.
+</Warning>
+
+## Part 3 — Versions, retiring and removing
+
+### Publishing an update
+
+**Publish again under the same name.** ParleHub creates a new version and retires the previous one automatically. You do not need to remove the old one first — the form tells you it is about to do this when it recognizes the name.
+
+### The states a document can be in
+
+| State | What it means |
+| --- | --- |
+| **Indexing…** | Being prepared for search. Normal for a freshly published document, and it is not answerable yet. |
+| **Searchable · N passages** | Done. It can be quoted, and `N` is roughly how many separately citable chunks it produced. |
+| **Indexing failed — retrying** | A transient problem. ParleHub is retrying; no action needed unless it persists. |
+| **Can't be indexed** | Terminal. No text could be extracted — almost always a scanned document. It will never become searchable as-is. |
+| **Retired — not quotable** | Superseded or retired. Out of the index and out of circulation. |
+
+### Retire vs Remove
+
+Both are on each document in **Published documents**, and they are different:
+
+- **Retire** — the document stops being searchable. Its passages come out of the index, so **it can no longer be quoted by anyone**. The record of it remains. This is what you want for a policy you have rescinded.
+- **Remove** — deletes the document and its index outright, permanently.
+
+**Retiring is real, not cosmetic.** A retired policy is not merely labelled as old or hidden from a list — it genuinely cannot be retrieved. That is the guarantee the whole feature rests on, and it is why an assistant answer can be trusted not to quote something your firm has withdrawn.
+
+<Note>
+  If an old conversation contains a citation to a document that has since been retired, that citation renders as `[document unavailable]` rather than opening anything. The guarantee arrives late, but it arrives.
+</Note>
+
+## Part 4 — Where it applies
+
+### The organization default
+
+The **Available in conversations** switch at the top of the Knowledge page sets the default for your whole organization. When it is on, the agent can quote these documents in every project and personal conversation.
+
+<Info>
+  **One subtlety worth knowing:** turning it off withdraws it everywhere **except projects that opted in for themselves**. If you need it off everywhere, check for projects with their own override.
+</Info>
+
+### Per-project override
+
+A **Project Admin** can opt their own project out — or in — from the project's **Tools & knowledge** panel, whatever the organization default happens to be. The row is called **Organisation knowledge**, and it carries a `Default` badge when the project is simply following the organization setting rather than overriding it.
+
+A project that has opted out gets nothing from the corpus: the assistant is not offered the documents and cannot reach them.
+
+## Part 5 — What people see in a conversation
+
+Nobody needs to switch anything on or know the documents exist. They just ask:
+
+> *"What does our expenses policy say about booking flights for a client visit?"*
+
+The assistant searches the corpus and answers with the relevant passage, followed by a **citation** — the document name and version, as a link. Clicking it opens the document itself.
+
+Two things about citations are worth telling your team, because they are what make the answers usable with a client:
+
+- **The label comes from ParleHub's own record, not from the answer text.** The assistant cannot invent a citation, and a citation cannot drift from what was actually read.
+- **Hovering shows the effective date** of the version that was quoted.
+
+See [Asking About Your Organization](/knowledge/asking-about-your-org) for what your team can ask once this is set up.
+
+## What it costs
+
+**Nothing.** Preparing documents for search does not draw on your project budgets or your prepaid credit — ParleHub absorbs it, however much you publish. The tokens spent answering a question are billed normally, exactly as any other message.
+
+## Troubleshooting
+
+| Symptom | What's happening |
+| --- | --- |
+| A document sits on **Indexing…** | Indexing runs in the background and is not instant. Give a large PDF a few minutes. |
+| **Can't be indexed** | The file has no text layer — almost certainly a scan. OCR it and publish again. |
+| The assistant does not use a document you published | Check its state is **Searchable**, that **Available in conversations** is on, and that the project has not opted out in **Tools & knowledge**. |
+| The assistant quotes an old policy | Check the new version actually published (same name creates a new version and retires the old). If the corpus is source-connected, check the **last checked** time and whether the library is readable. |
+| **This library can't be read right now** | ParleHub has lost access to the connected location. Check the folder still exists and the permissions are intact. Answers continue from the last good index meanwhile. |
+| The **Connected library** card says it cannot be bound | The provider is not switched on for your organization under file storage yet. |
+| A citation shows **[document unavailable]** | The cited document has been retired or removed since that message was written. Working as intended. |
