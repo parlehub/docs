@@ -1,75 +1,60 @@
 ---
-title: "Select and Switch AI Models Per Project in ParleHub"
+title: "Choose Which AI Models a Project Can Use"
 sidebarTitle: "Model Selection"
-description: "Select a default model for each project, restrict which models members can use, and switch models mid-conversation without losing your thread."
+description: "Enable models for your organization, set the org default, and restrict which of them each project may use — then switch models mid-conversation."
 ---
 
-ParleHub gives you precise control over which AI models power each client engagement. You can set a default model that opens automatically when any team member starts a new conversation in a project, curate the shortlist of models available within that project, and — at any point during an active conversation — switch to a different model without losing the thread you have already built. This flexibility lets you balance speed, cost, and capability at each stage of your work.
+Model choice in ParleHub is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
 
-## Setting a Project Default Model
+## Level 1 — The organization's enabled models
 
-Each project can have a designated default model. When a member opens a new conversation in that project, the default model is pre-selected so they can start working immediately without choosing a model themselves.
+Connecting a provider key does not automatically make every model from that provider available. An **Org Admin** ticks the models the firm should be able to use in **Organization Settings → Model providers**, and one of them is the organization's **default model** for new conversations.
 
-To set or change the default:
+The first model you enable becomes the default automatically; use **Set default** next to any enabled model to change it. There is also an **Auto-allow new models** toggle per provider — when the provider releases a new model, it is enabled automatically instead of waiting for an admin to opt in.
+
+Full detail, including what to do when a model appears greyed out: [Connecting Providers](/models/connecting-providers).
+
+## Level 2 — The models a project may use
+
+Every model your organization has enabled is available to a project **by default**. You narrow that list per project to steer a team toward cost-efficient models for routine work, keep an expensive model off a high-volume project, or enforce a specific provider for a compliance-sensitive engagement.
 
 <Steps>
-  <Step title="Open Project Settings">
-    Navigate to your project and click **Settings** in the project sidebar.
+  <Step title="At project creation">
+    The **New project** form shows an **Available models** checklist with every org-enabled model ticked. Untick any you want to **block** for this project. The section only appears if your organization has models connected.
   </Step>
-  <Step title="Select a default model">
-    Under the **Models** section, open the **Default Model** dropdown and choose the model you want pre-selected for new conversations.
-  </Step>
-  <Step title="Save your changes">
-    Click **Save**. New conversations started in this project will now open with that model active. Existing conversations are not affected.
+  <Step title="After creation">
+    Adjust the same list from the project's **Project Details** tab.
   </Step>
 </Steps>
 
-Members can always override the default for a specific conversation using the model selector in the chat toolbar — the project default simply sets the starting point.
-
-## Curating Allowed Models
-
-Org admins can restrict which models are visible and selectable within any given project. This is useful when you want to steer a team toward cost-efficient models for routine work, enforce a specific provider for compliance reasons, or simply reduce decision fatigue by showing only the most relevant options.
-
-<Steps>
-  <Step title="Open Project Settings">
-    Navigate to the project and click **Settings**.
-  </Step>
-  <Step title="Go to the Models tab">
-    Select the **Models** tab within Project Settings.
-  </Step>
-  <Step title="Disable models not needed for this project">
-    Uncheck any models you want to hide from project members. Unchecked models remain enabled at the org level — they are simply not surfaced in this specific project.
-  </Step>
-  <Step title="Save">
-    Click **Save**. The updated model list takes effect immediately for all members of the project.
-  </Step>
-</Steps>
+<Warning>
+  If you untick every model, nobody will be able to chat in the project. If a project's members report they cannot send anything, check this list first, then check the organization's enabled models.
+</Warning>
 
 <Note>
-  Only org admins can curate the allowed models for a project. Project admins and members see only the models that have been enabled for their project.
+  A project restriction can only narrow the organization's list, never widen it. Unticking a model here does not disable it anywhere else.
 </Note>
 
-## Switching Models Mid-Conversation
+## Switching models mid-conversation
 
-You can switch to a different model at any point in an open conversation — mid-thread, mid-task, or after reviewing an initial response.
+You can switch to a different model at any point in an open conversation — mid-thread, mid-task, or after reviewing an initial response. Use the **model selector** in the chat toolbar and carry on typing.
 
-To switch models:
-
-1. Open the conversation you are working in.
-2. Locate the **model selector** in the toolbar at the top or bottom of the chat input area.
-3. Click the selector and choose a different model from the list.
-4. Continue typing your next message. The new model picks up from the current conversation context.
-
-All previous messages — both yours and the AI's — remain visible and intact. The new model has access to the same thread history and will reference it when generating responses.
-
-<Info>
-  Switching models does not lose your conversation history. The new model sees the same thread from the beginning, so you can seamlessly continue a complex document review or multi-step analysis after changing models.
-</Info>
+All previous messages — yours and the assistant's — remain visible and intact, and the new model sees the same thread from the beginning. You can change models partway through a long document review without restarting it.
 
 <Tip>
-  A productive workflow for billable client work: start with a faster, lower-cost model like Claude 3 Haiku or GPT-4o mini for initial exploration, research, and rough drafting, then switch to Claude 3.5 Sonnet or GPT-4o for the final review and polish pass. This keeps costs down without sacrificing quality on the deliverable.
+  A productive pattern for billable work: start on a faster, cheaper model for exploration, research and rough drafting, then switch to your most capable model for the final review and polish pass. This keeps spend down without compromising the deliverable.
 </Tip>
 
 <Note>
-  The model used to generate each individual message is recorded in the conversation thread and in your org's usage log. This means you can audit exactly which model produced each response — useful for client billing transparency and for reviewing AI-assisted work product.
+  **The model used for each message is recorded with that message** and in the token ledger that backs your [budgets](/cost/budgets) and usage reporting. You can see exactly which model produced each response — useful for client billing transparency and for reviewing AI-assisted work product.
 </Note>
+
+## Not every model can use tools
+
+[File tools](/projects/file-tools), [MCP tools](/tools/mcp-tools), and the assistant's ability to look up your own budgets and policies all depend on the model supporting tool calls. The **Available models** list in Organization Settings shows per model whether it supports tools and vision, alongside its context window.
+
+If the assistant seems unable to look anything up or reach a file, the model on that conversation is the first thing to check — switch to one that supports tools.
+
+<Tip>
+  Members of a project can ask _"Which models can we use here?"_ in the conversation itself, and get the list actually available in that project — plus, if one they expected is missing, why. See [Asking About Your Org](/knowledge/asking-about-your-org).
+</Tip>

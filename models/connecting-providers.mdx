@@ -4,55 +4,138 @@ sidebarTitle: "Connecting Providers"
 description: "Add your Anthropic, OpenAI, Gemini, or Azure OpenAI API keys to ParleHub so model calls run under your own provider agreement and budget."
 ---
 
-By connecting your own provider API key — a practice known as Bring Your Own Key (BYOK) — every model call ParleHub makes on your behalf runs under your own provider agreement, consumes your own rate limits, and appears on your provider invoice. This keeps your firm's AI usage cleanly separated from any other organization's activity, gives you full visibility into costs, and ensures you remain in control of which models your team can access.
+ParleHub is model-agnostic: your organization connects its own API key for each AI provider it wants to use, and ParleHub uses that key to run conversations. This is sometimes called **BYOK** ("bring your own key") or **BYOAK** ("bring your own API key").
+
+Using your own key means:
+
+- **You are billed directly by the provider**, at the provider's own rates — ParleHub does not mark up model usage.
+- **Your data stays under your provider account's terms**, not ParleHub's.
+- **Your organization controls which models are available** to your team, and can rotate or remove a key at any time.
+
+<Note>
+  ParleHub also offers **ParleHub Managed** models that need no key of your own — these are billed from your organization's ParleHub credit wallet instead. Managed models do not appear in the setup steps below because there is nothing to connect.
+</Note>
 
 ## Connecting a Provider
 
-Only org admins can add or modify provider connections. Before you begin, make sure you have your API key ready from your provider's console.
+Only **Org Admins** can add, rotate, remove, or test a provider key.
 
 <Steps>
   <Step title="Open Model Providers settings">
-    Navigate to **Settings → Model Providers** in your ParleHub org dashboard.
-  </Step>
-  <Step title="Click Connect">
-    Find the provider you want to add and click **Connect** next to its name.
+    Go to **Organization Settings → Model providers**.
   </Step>
   <Step title="Paste your API key">
-    Enter the API key from your provider console into the key field. See the tabs below for where to find your key for each provider.
+    Find the provider's card and paste your key into the **API key** field. See the tabs below for where to get one, and what to check on the provider's side first.
   </Step>
-  <Step title="Select models to enable">
-    Choose which specific models from that provider you want to make available to your org. You can always adjust this selection later.
-  </Step>
-  <Step title="Save and validate">
-    Click **Save**. ParleHub immediately validates the key by making a test call to the provider. If validation fails, double-check that the key is correct and has the necessary permissions.
+  <Step title="Select Connect">
+    ParleHub makes a small verification call to the provider before saving, so you find out immediately if the key is wrong rather than at chat time.
   </Step>
 </Steps>
 
-### Where to Find Your API Key
+### What the verification call tells you
+
+| Result | What happens |
+| --- | --- |
+| **Key accepted** | The card switches to **Connected**, with the date it was verified. |
+| **Key rejected** (invalid, revoked, or wrong account) | The key is **not saved**. You are asked to check it was copied in full and has not been revoked. |
+| **Provider unreachable** | The key is saved anyway, so a provider outage does not block you — but marked as **not yet verified**. It is checked again automatically the next time you rotate or test it. |
+
+To replace a key later, select **Rotate key** on a connected card, paste the new value, and select **Save key**. To disconnect a provider entirely, select **Remove** — its models immediately stop being available to your team.
+
+## Provider-Specific Setup
+
+Each provider has account-side setup you need to do **before** pasting a key into ParleHub. These steps happen on the provider's own website.
 
 <Tabs>
   <Tab title="Anthropic">
-    Log in to [console.anthropic.com](https://console.anthropic.com) and go to **API Keys** in the left sidebar. Click **Create Key**, give it a descriptive name (e.g., `parlehub-prod`), and copy the key before closing the dialog — Anthropic only shows the full key once.
+    Create a key in the [Anthropic Console](https://console.anthropic.com) under **API Keys**. Copy it before closing the dialog — Anthropic only shows the full key once.
+
+    Make sure the workspace the key belongs to has billing set up and available credit. A key from a workspace with no credit will connect, but requests will fail.
   </Tab>
   <Tab title="OpenAI">
-    Log in to [platform.openai.com](https://platform.openai.com) and navigate to **API Keys** under your account menu. Click **Create new secret key**, optionally assign it to a project, and copy the value immediately — OpenAI does not display it again after creation.
+    Create a key in the [OpenAI Platform](https://platform.openai.com) under **API keys**. Project-scoped keys (`sk-proj-…`) are supported and recommended, since they let you limit exactly which models a key can use.
+
+    **Check model access on the key's project before connecting it.** OpenAI enables model access per project, separately from having a valid key — a key can be valid and still be refused for a specific model if that model is not enabled for its project, or if the organization has not completed OpenAI's own account verification for that model. ParleHub surfaces this as **"This organisation's OpenAI account can't use '\<model>'"** rather than a generic key error, so you know to check OpenAI's project settings rather than the key itself.
+
+    Confirm the project has billing configured — an unfunded project will pass key verification but fail on real requests with a quota error.
   </Tab>
   <Tab title="Google Gemini">
-    Open [console.cloud.google.com](https://console.cloud.google.com) and select the Google Cloud project you want to bill against. Enable the **Generative Language API** (or Vertex AI API, depending on your setup), then go to **APIs & Services → Credentials** to create or copy an API key.
+    Create a key in [Google AI Studio](https://aistudio.google.com). This uses Google's Gemini Developer API.
+
+    **No Google Cloud project, Vertex AI setup, or service account is needed** — just the API key.
   </Tab>
   <Tab title="Azure OpenAI">
-    In the [Azure portal](https://portal.azure.com), navigate to your Azure OpenAI resource. Under **Resource Management**, select **Keys and Endpoint**. Copy either **KEY 1** or **KEY 2** — both are valid. You will also need your **Endpoint URL** and **Deployment name**, which ParleHub prompts you to enter alongside the key.
+    Create (or reuse) an Azure OpenAI resource in the Azure Portal, and create a **deployment** for each model you want to use. In Azure OpenAI, the model you pick in ParleHub corresponds to a **deployment name** on your resource, not a raw model name.
+
+    <Warning>
+      Azure OpenAI setup is more involved than the other providers because of this deployment step. **Contact ParleHub support** to finish connecting your specific Azure resource and deployments — self-service model selection for Azure OpenAI is still being rolled out.
+    </Warning>
   </Tab>
 </Tabs>
 
-## What Happens to Your Key
+## Enabling Models and Setting a Default
 
-After you save a provider connection, ParleHub stores your API key encrypted at the org level. The key is never displayed again in the UI — only a masked placeholder appears in settings to confirm a key has been saved. The key is used solely to forward API requests on your behalf; it is not shared with other organizations or used for any other purpose.
+Connecting a key does not automatically make every model from that provider available to your team. You choose which models to enable, and one becomes the organization's default model for new conversations.
 
-<Warning>
-  Only org admins can add or remove provider connections. Project admins and members cannot view, copy, or modify API keys in any part of the interface.
-</Warning>
+<Steps>
+  <Step title="Review the Available models list">
+    On a **Connected** provider card, each row shows the model's name, context window size, and whether it supports tools and vision.
+  </Step>
+  <Step title="Tick the models you want and save">
+    Select **Save models**.
+  </Step>
+  <Step title="Optionally turn on Auto-allow new models">
+    When the provider releases a new model, it is enabled automatically instead of waiting for an admin to opt in.
+  </Step>
+  <Step title="Set the organization default">
+    Next to any enabled model, select **Set default**. The first model you enable becomes the default automatically; you can change it at any time.
+  </Step>
+</Steps>
+
+Models your provider account cannot actually see — most commonly an OpenAI model not enabled for the connected project — appear **greyed out and unselectable**, with a note explaining they are not available on your account. Enable them on the provider's side first, then revisit this list.
+
+See [Model Selection](/models/model-selection) for restricting which of these models a given project may use.
+
+## Testing a Connection
+
+**Test connection** sends a real, one-word message to the provider using your organization's key and a chosen model — the same code path a real conversation uses. It is the most reliable way to confirm a key and model work end to end, because some provider-side restrictions (like OpenAI's model-access and account-verification gates) only show up on an actual request, not on a simple key check.
+
+<Steps>
+  <Step title="Select Test connection">
+    On a **Connected** provider card.
+  </Step>
+  <Step title="Confirm the prompt">
+    It tells you which model will be used and that this makes a real request on your own provider account, at a fraction of a cent.
+  </Step>
+  <Step title="Read the result">
+    **Success** shows the response time in milliseconds. **Failure** shows a plain-language reason plus the provider's own error text, so you can act on it directly.
+  </Step>
+</Steps>
 
 <Note>
-  You can connect multiple providers at the same time. Once connected, all enabled models across all your providers become available for org admins to assign to individual projects — and project members can then choose from whichever models have been enabled for their project.
+  Connection tests are not available for **ParleHub Managed** models — there is no API key of your own to test.
 </Note>
+
+## What Happens to Your Key
+
+ParleHub stores your API key encrypted at the org level, resolved at request time. The key is never displayed again in the UI — only a masked placeholder appears in settings to confirm a key has been saved. It is used solely to forward API requests on your behalf.
+
+<Warning>
+  Only Org Admins can add or remove provider connections. Project admins and members cannot view, copy, or modify API keys in any part of the interface.
+</Warning>
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| Key rejected when connecting | Key copied incorrectly, revoked, or from the wrong account | Re-copy the full key (including any prefix) from the provider and try again |
+| Card shows "saved, but not verified" | Provider was unreachable at save time | No action needed — it is re-checked on the next rotate or test |
+| Model greyed out in the Available models list | Provider account cannot see that model (e.g. not enabled on an OpenAI project) | Enable the model on the provider's side, then refresh the list |
+| Test or chat fails: "account can't use this model" | Model not enabled for the key or project, or the provider's own account verification is incomplete | Check the provider's model-access settings for that key or project |
+| Test or chat fails: key rejected | Key invalid or revoked since it was added | Rotate the key with a fresh one |
+| Test or chat fails: no remaining quota or credit | Provider account billing or credit exhausted | Add billing or credit with the provider — retrying will not help |
+| Test or chat fails: rate limited | Too many requests sent to the provider recently | Wait a short while and try again |
+| **Test connection** unavailable | Provider is ParleHub Managed | Managed models have no key of your own to test |
+| Azure OpenAI models not selectable | Deployment/endpoint setup not finished | Contact ParleHub support to complete your Azure resource setup |
+
+Still stuck? Contact ParleHub support with your organization name, the provider, and (if shown) the error detail from the connection test.
