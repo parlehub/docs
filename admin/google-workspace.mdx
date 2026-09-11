@@ -1,0 +1,96 @@
+---
+title: "Connect ParleHub to Google Workspace (SSO and Drive)"
+sidebarTitle: "Connect Google Workspace"
+description: "Set up Google single sign-on and per–Shared Drive storage for your organization, scoped to only the drives you grant."
+icon: "google"
+---
+
+This guide is for an organization's **IT administrator**. It connects ParleHub to your Google Workspace in two parts:
+
+1. **Single sign-on (SSO)** — let your team sign in to ParleHub with their Google Workspace accounts.
+2. **Google Drive storage** — let project agents read and write files in your Shared Drives.
+
+Do them in this order. SSO comes first because it establishes the link between ParleHub and your Google Workspace domain that Drive then reuses.
+
+<Note>
+  **You'll need:** a Google Workspace **Super Administrator** (or an admin with the Security and Drive privileges) to trust the app and grant Drive access. In ParleHub you must be an **Org Admin**.
+</Note>
+
+## Part 1 — Single sign-on with Google
+
+You allow your users to sign in to ParleHub with their Google Workspace accounts instead of a separate ParleHub password. Anyone in your organization whose email matches your domain can then sign in with Google.
+
+<Steps>
+  <Step title="Note your domain">
+    This is the domain your team signs in with, e.g. `contoso.com`. ParleHub uses it to recognize your users and route them into your organization.
+  </Step>
+  <Step title="Trust ParleHub for your organization">
+    In the [Google Admin console](https://admin.google.com) → **Security → Access and data control → API controls → Manage third-party app access**, choose **Configure new app → by OAuth Client ID**, enter the **ParleHub Client ID** (your ParleHub onboarding contact provides it), and mark it **Trusted**. This lets your users sign in to ParleHub and approve access without being blocked by your app-access policy.
+  </Step>
+  <Step title="Configure the connection in ParleHub">
+    Go to **Org settings → Single sign-on**, choose **Google**, and enter the **Email domain** your users sign in with. Then toggle **Enable single sign-on** on.
+  </Step>
+  <Step title="Test it">
+    Sign out, then on the ParleHub login page enter a Workspace email address. A **Sign in with Google** button appears. Complete the Google prompt — you should land back in ParleHub, signed in.
+  </Step>
+</Steps>
+
+<Info>
+  **New users:** the first time a colleague signs in with Google, ParleHub creates their account automatically and places them in your organization — as long as their email domain matches and you have an available seat.
+</Info>
+
+<Note>
+  **How users are matched:** sign-in is routed by the **email domain**, not the account type — anyone whose verified Google email is on your configured domain can sign in, whether it is a managed Workspace account or not. Personal `@gmail.com` addresses cannot sign in to your organization because `gmail.com` is not your configured domain.
+</Note>
+
+<Note>
+  Single sign-on requires a **Team plan or higher**. If your plan is downgraded, Google sign-in stops working at the next login and users fall back to email/password.
+</Note>
+
+## Part 2 — Google Drive as project storage
+
+ParleHub accesses files using its **own application identity**, scoped to **only the Shared Drives you grant it** — never your whole Workspace. The agent can then read and write project files even when no one is actively online. Deleted files go to your **Drive trash**, where your normal retention and recovery rules apply.
+
+<Steps>
+  <Step title="Pick (or create) a Shared Drive">
+    For example a Shared Drive named `Client Delivery`. Using a Shared Drive rather than a personal *My Drive* folder is what keeps ParleHub's access scoped and easy to audit.
+  </Step>
+  <Step title="Grant ParleHub access to that Shared Drive">
+    Open the Shared Drive in Google Drive → **Manage members**, and add ParleHub's **service account email** (your ParleHub onboarding contact provides it, e.g. `parlehub-drive@…iam.gserviceaccount.com`):
+
+    - **Viewer** — the agent can read files.
+    - **Content manager** — the agent can read *and* write files.
+
+    Repeat for each Shared Drive you want a project to use. Access is limited to exactly the drives you add ParleHub to.
+  </Step>
+  <Step title="Connect the Shared Drive to a ParleHub project">
+    Open the project → **Files** (or **Project settings → Storage**), choose **Google Drive**, and pick the Shared Drive from step 1 and an optional sub-folder. Paste the URL of the **Shared Drive itself** — its root, not a sub-folder inside it.
+  </Step>
+  <Step title="ParleHub verifies the connection">
+    It lists the drive's root folder before saving. If it cannot reach the drive, you see an error — the most common cause is that step 2 has not been completed for that drive yet.
+  </Step>
+</Steps>
+
+Files the agent creates appear in that Shared Drive; files your team adds there are visible to the agent's tools.
+
+<Note>
+  **Tenant reuse:** if you already set up single sign-on in Part 1, ParleHub already recognizes your Workspace domain — Drive connects to the same Google organization.
+</Note>
+
+<Info>
+  **Broader access (optional):** if you need the agent to reach files beyond Shared Drives, ParleHub also supports Workspace **domain-wide delegation**, which your Super Administrator authorizes in the Admin console. Ask your ParleHub onboarding contact — most organizations are best served by per–Shared Drive access above.
+</Info>
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| No **Sign in with Google** button | Domain not configured, or SSO disabled | Check the **email domain** and the **Enable** toggle in Org settings → Single sign-on |
+| Google sign-in is blocked or "app not allowed" | ParleHub not trusted in API controls | Mark ParleHub's Client ID **Trusted** (Part 1, step 2) |
+| Google sign-in succeeds but ParleHub rejects it | User's email domain does not match a configured organization, or no seats left | Confirm the domain and your available seats |
+| Personal Gmail cannot sign in | Sign-in is matched by email domain; `gmail.com` is not your configured domain | Use an account whose email is on the configured domain |
+| Google sign-in unavailable | Plan downgraded below Team | Upgrade, or use email/password |
+| Drive connection fails verification | ParleHub not yet a member of that Shared Drive | Add ParleHub's service account to that exact Shared Drive (Part 2, step 2) |
+| Cannot see expected files | Wrong Shared Drive or sub-folder selected | Re-check the drive/folder in the project's storage settings |
+
+Still stuck? Contact ParleHub support with your organization name and the Shared Drive you are connecting.
