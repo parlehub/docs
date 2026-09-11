@@ -68,7 +68,8 @@
             "icon": "toolbox",
             "pages": [
               "tools/mcp-tools",
-              "knowledge/organization-knowledge"
+              "knowledge/organization-knowledge",
+              "knowledge/asking-about-your-org"
             ]
           },
           {
