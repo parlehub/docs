@@ -45,7 +45,7 @@ Your admin grants the ParleHub application permission to verify your users' iden
 </Info>
 
 <Note>
-  Single sign-on requires a **Team plan or higher**. If your plan is downgraded, Microsoft sign-in stops working at the next login and users fall back to email/password.
+  Single sign-on requires the **Business plan or above**. If your plan is downgraded, Microsoft sign-in stops working at the next login and users fall back to email/password.
 </Note>
 
 ## Part 2 — SharePoint as project storage
@@ -53,7 +53,7 @@ Your admin grants the ParleHub application permission to verify your users' iden
 ParleHub accesses files using its **own application identity**, scoped to **only the specific SharePoint sites you grant** — never your whole tenant. The agent can then read and write project files even when no one is actively online. Deleted files go to your **SharePoint recycle bin**, where your normal retention and recovery rules apply.
 
 <Warning>
-  **You'll need the Enterprise plan.** SharePoint storage is available on the **Enterprise** plan only. You must also have completed **Part 1 (single sign-on)** first — SharePoint reuses the Microsoft tenant captured during SSO setup, so there is no tenant to enter here.
+  **You'll need the Business plan or above.** SharePoint storage is available on the **Business** plan and above. You must also have completed **Part 1 (single sign-on)** first — SharePoint reuses the Microsoft tenant captured during SSO setup, so there is no tenant to enter here.
 </Warning>
 
 <Steps>
@@ -147,8 +147,8 @@ To find the right site URL, open the channel in Teams → **Files** tab → **�
 | --- | --- | --- |
 | No **Sign in with Microsoft** button | Domain not configured, or SSO disabled | Check the **email domain** and the **Enable** toggle in Org settings → Single sign-on |
 | Microsoft sign-in succeeds but ParleHub rejects it | User's email domain does not match a configured organization, or no seats left | Confirm the domain and your available seats |
-| Microsoft sign-in unavailable | Plan downgraded below Team | Upgrade, or use email/password |
-| **SharePoint** is not offered in a project's storage settings | Not enabled for the org, or plan below Enterprise | Enable it in **Org settings → File storage → SharePoint**; confirm you are on the **Enterprise** plan |
+| Microsoft sign-in unavailable | Plan downgraded below Business | Upgrade, or use email/password |
+| **SharePoint** is not offered in a project's storage settings | Not enabled for the org, or plan below Business | Enable it in **Org settings → File storage → SharePoint**; confirm you are on the **Business** plan or above |
 | "SharePoint site not found — check the site URL" | You pasted a *folder* or *library* URL rather than the site's own address | Paste only the part up to and including `/sites/<name>`. Pick the library and folder in the next steps, using the folder browser |
 | "ParleHub does not have access to this SharePoint site" | The site exists, but has not been granted to ParleHub yet — expected the first time you connect any site | Click **Grant ParleHub access** on the error, or send the link it gives you to a SharePoint/Global Administrator |
 | SharePoint connection fails verification | Site not yet granted to ParleHub | Complete the per-site grant for that exact site |

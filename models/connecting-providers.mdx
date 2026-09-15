@@ -1,7 +1,7 @@
 ---
 title: "Connect AI Model Providers to ParleHub (BYOK)"
 sidebarTitle: "Connecting Providers"
-description: "Add your Anthropic, OpenAI, Gemini, or Azure OpenAI API keys to ParleHub so model calls run under your own provider agreement and budget."
+description: "Add your Anthropic, OpenAI, Gemini, or Azure AI Foundry API keys to ParleHub so model calls run under your own provider agreement and budget."
 ---
 
 ParleHub is model-agnostic: your organization connects its own API key for each AI provider it wants to use, and ParleHub uses that key to run conversations. This is sometimes called **BYOK** ("bring your own key") or **BYOAK** ("bring your own API key").
@@ -64,11 +64,11 @@ Each provider has account-side setup you need to do **before** pasting a key int
 
     **No Google Cloud project, Vertex AI setup, or service account is needed** — just the API key.
   </Tab>
-  <Tab title="Azure OpenAI">
-    Create (or reuse) an Azure OpenAI resource in the Azure Portal, and create a **deployment** for each model you want to use. In Azure OpenAI, the model you pick in ParleHub corresponds to a **deployment name** on your resource, not a raw model name.
+  <Tab title="Azure AI Foundry">
+    Create (or reuse) an Azure AI Foundry resource in the Azure Portal, and create a **deployment** for each model you want to use. In Azure AI Foundry, the model you pick in ParleHub corresponds to a **deployment name** on your resource, not a raw model name.
 
     <Warning>
-      Azure OpenAI setup is more involved than the other providers because of this deployment step. **Contact ParleHub support** to finish connecting your specific Azure resource and deployments — self-service model selection for Azure OpenAI is still being rolled out.
+      **Bringing your own Azure AI Foundry deployment requires the Business Elite plan or above.** This does not affect ParleHub Managed models, which remain available on every plan. Azure AI Foundry setup is also more involved than the other providers because of the deployment step. **Contact ParleHub support** to finish connecting your specific Azure resource and deployments — self-service model selection for Azure AI Foundry is still being rolled out.
     </Warning>
   </Tab>
 </Tabs>
@@ -136,6 +136,6 @@ ParleHub stores your API key encrypted at the org level, resolved at request tim
 | Test or chat fails: no remaining quota or credit | Provider account billing or credit exhausted | Add billing or credit with the provider — retrying will not help |
 | Test or chat fails: rate limited | Too many requests sent to the provider recently | Wait a short while and try again |
 | **Test connection** unavailable | Provider is ParleHub Managed | Managed models have no key of your own to test |
-| Azure OpenAI models not selectable | Deployment/endpoint setup not finished | Contact ParleHub support to complete your Azure resource setup |
+| Azure AI Foundry models not selectable | Deployment/endpoint setup not finished | Contact ParleHub support to complete your Azure resource setup |
 
 Still stuck? Contact ParleHub support with your organization name, the provider, and (if shown) the error detail from the connection test.
