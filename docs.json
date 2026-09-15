@@ -24,7 +24,7 @@
   "navbar": {
     "primary": {
       "type": "button",
-      "label": "Start Free",
+      "label": "Start Free Trial",
       "href": "https://app.parlehub.com"
     }
   },
