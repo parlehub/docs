@@ -44,7 +44,7 @@ You allow your users to sign in to ParleHub with their Google Workspace accounts
 </Note>
 
 <Note>
-  Single sign-on requires a **Team plan or higher**. If your plan is downgraded, Google sign-in stops working at the next login and users fall back to email/password.
+  Single sign-on requires the **Business plan or above**. If your plan is downgraded, Google sign-in stops working at the next login and users fall back to email/password.
 </Note>
 
 ## Part 2 — Google Drive as project storage
@@ -89,7 +89,7 @@ Files the agent creates appear in that Shared Drive; files your team adds there 
 | Google sign-in is blocked or "app not allowed" | ParleHub not trusted in API controls | Mark ParleHub's Client ID **Trusted** (Part 1, step 2) |
 | Google sign-in succeeds but ParleHub rejects it | User's email domain does not match a configured organization, or no seats left | Confirm the domain and your available seats |
 | Personal Gmail cannot sign in | Sign-in is matched by email domain; `gmail.com` is not your configured domain | Use an account whose email is on the configured domain |
-| Google sign-in unavailable | Plan downgraded below Team | Upgrade, or use email/password |
+| Google sign-in unavailable | Plan downgraded below Business | Upgrade, or use email/password |
 | Drive connection fails verification | ParleHub not yet a member of that Shared Drive | Add ParleHub's service account to that exact Shared Drive (Part 2, step 2) |
 | Cannot see expected files | Wrong Shared Drive or sub-folder selected | Re-check the drive/folder in the project's storage settings |
 

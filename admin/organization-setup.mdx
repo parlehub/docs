@@ -19,7 +19,7 @@ Complete these steps after your org is created to get your firm fully operationa
     Navigate to **Settings → General** and enter your firm's name. This name appears across the workspace and in any billing communications. You can update it at any time.
   </Step>
   <Step title="Connect Model Providers">
-    Navigate to **Settings → Model Providers** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
+    Navigate to **Settings → Model Providers** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure AI Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
   </Step>
   <Step title="Invite Your Team">
     Navigate to **Settings → Members** and send email invitations to your colleagues. Assign each person a role — org admin or member — at invite time. Invitees must accept the email invite before they can access the workspace.
@@ -27,8 +27,8 @@ Complete these steps after your org is created to get your firm fully operationa
   <Step title="Configure SSO (Optional)">
     Navigate to **Settings → Security → SSO** to connect your identity provider (such as Microsoft Entra ID or Google Workspace). Once SSO is active, members can sign in through your IdP without managing a separate ParleHub password.
   </Step>
-  <Step title="Connect Native Storage (Optional — Enterprise Only)">
-    Navigate to **Settings → Storage** to link your firm's own cloud storage bucket. This keeps conversation data and file attachments within your own infrastructure. Native storage is available on the Enterprise plan only.
+  <Step title="Connect Native Storage (Optional — Business Plan and Above)">
+    Navigate to **Settings → Storage** to link your firm's own cloud storage bucket. This keeps conversation data and file attachments within your own infrastructure. Native storage is available on the Business plan and above.
   </Step>
   <Step title="Set Org-Wide Spending Caps">
     Navigate to **Settings → Spending Limits** and set a monthly dollar ceiling on total AI spend for the entire org. This acts as an outer backstop above all individual project and per-user budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
@@ -50,7 +50,7 @@ Each section of the Settings area controls a distinct part of your organization'
     Configure SSO and review authentication settings. Enforcing SSO ensures all members sign in through your firm's identity provider.
   </Card>
   <Card title="Storage" icon="database" href="/security/storage">
-    Connect your firm's own cloud storage for conversation data and file attachments. Available on the Enterprise plan.
+    Connect your firm's own cloud storage for conversation data and file attachments. Available on the Business plan and above.
   </Card>
   <Card title="Spending Limits" icon="circle-dollar-sign" href="/admin/org-caps">
     Set a monthly org-wide AI spending cap and per-user limits. These controls stack on top of individual project budgets.

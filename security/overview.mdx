@@ -1,17 +1,17 @@
 ---
 title: "ParleHub Security and Compliance Overview"
 sidebarTitle: "Overview"
-description: "ParleHub is built for firms that sign client security questionnaires — enterprise SSO, files in your own tenant, and a tamper-evident audit log."
+description: "ParleHub is built for firms that sign client security questionnaires — single sign-on, files in your own tenant, and a tamper-evident audit log."
 ---
 
-If your firm signs client security questionnaires, you already know the questions: where does our data go, who can see it, and how do you prove nothing was tampered with? ParleHub is architected to give you defensible answers — enterprise SSO tied to your identity provider, project files stored inside your own SharePoint or Google Drive tenant, a tamper-evident append-only audit log enforced at the platform level, and role-based access that limits who can see what down to the project level.
+If your firm signs client security questionnaires, you already know the questions: where does our data go, who can see it, and how do you prove nothing was tampered with? ParleHub is architected to give you defensible answers — single sign-on tied to your identity provider, project files stored inside your own SharePoint or Google Drive tenant, a tamper-evident append-only audit log enforced at the platform level, and role-based access that limits who can see what down to the project level.
 
 <CardGroup cols={2}>
-  <Card title="Enterprise SSO" icon="key" href="/security/sso">
+  <Card title="Single Sign-On" icon="key" href="/security/sso">
     Connect Microsoft Entra ID or Google Workspace. Offboarding a user in your identity provider immediately removes their ParleHub access — no manual deprovisioning required.
   </Card>
   <Card title="Native Storage" icon="folder-tree" href="/security/storage">
-    On Enterprise, project files live in your own SharePoint site or Google Drive tenant. Client documents never leave your environment.
+    On the Business plan and above, project files live in your own SharePoint site or Google Drive tenant. Client documents never leave your environment.
   </Card>
   <Card title="Audit Log" icon="scroll" href="/security/audit-log">
     Every sensitive action is recorded in an append-only log enforced at the core platform level. No one — including ParleHub staff — can edit or delete existing entries.
@@ -26,19 +26,19 @@ If your firm signs client security questionnaires, you already know the question
 Understanding the boundaries is just as important as understanding what is included. ParleHub does not:
 
 - **Use personal consumer AI accounts.** All model calls run on your own provider API keys — never through a personal OpenAI, Anthropic, or Google account.
-- **Store files outside your tenant (Enterprise).** On the Enterprise plan, uploaded project files are written directly to your SharePoint or Google Drive. ParleHub processes them in transit to the model but does not retain them in ParleHub-managed storage.
+- **Store files outside your tenant (Business and above).** On the Business plan and above, uploaded project files are written directly to your SharePoint or Google Drive. ParleHub processes them in transit to the model but does not retain them in ParleHub-managed storage.
 - **Mix session data across organizations.** Every organization is fully isolated. Conversations, files, members, and usage data are scoped to your org and never visible to another org on the platform.
 
 ## Answering the AI Security Questionnaire
 
-Use the answers below when completing client or internal security questionnaires. Each answer reflects ParleHub's Enterprise plan unless otherwise noted.
+Use the answers below when completing client or internal security questionnaires. Each answer names the plan it applies to where that varies by plan.
 
 <Accordion title="Where is client data stored?">
-  On the Enterprise plan, project files are stored in your own SharePoint site or Google Drive tenant — the same environment your firm already governs. ParleHub processes file content in transit when sending it to the AI model, but does not persistently store that content outside your tenant. On Free and Team plans, files are stored in ParleHub-managed secure storage.
+  On the Business plan and above, project files are stored in your own SharePoint site or Google Drive tenant — the same environment your firm already governs. ParleHub processes file content in transit when sending it to the AI model, but does not persistently store that content outside your tenant. On the Team plan, files are stored in ParleHub-managed secure storage.
 </Accordion>
 
 <Accordion title="Which AI provider processes our data?">
-  The provider you choose and connect via your own API key. ParleHub supports Anthropic, OpenAI, Google Gemini, and Azure OpenAI. You control the provider relationship, the key, and — where your provider agreement permits — the data processing terms. ParleHub never routes your requests through a shared or pooled consumer account.
+  The provider you choose and connect via your own API key. ParleHub supports Anthropic, OpenAI, Google Gemini, and Azure OpenAI, plus bringing your own Azure AI Foundry deployment on the Business Elite plan and above (managed models are unaffected). You control the provider relationship, the key, and — where your provider agreement permits — the data processing terms. ParleHub never routes your requests through a shared or pooled consumer account.
 </Accordion>
 
 <Accordion title="Who can access our AI conversations?">
@@ -46,7 +46,7 @@ Use the answers below when completing client or internal security questionnaires
 </Accordion>
 
 <Accordion title="Can ParleHub staff read our conversations?">
-  No. On Enterprise, conversations are stored in your own storage environment. On all plans, conversations are scoped to your organization and are not accessible to ParleHub staff in the normal course of operations. The audit log records any administrative access events so you can verify this independently.
+  No. On Business and above, conversations are stored in your own storage environment. On all plans, conversations are scoped to your organization and are not accessible to ParleHub staff in the normal course of operations. The audit log records any administrative access events so you can verify this independently.
 </Accordion>
 
 For the complete security and compliance details, visit [parlehub.com/security](https://www.parlehub.com/security/).

@@ -1,96 +1,129 @@
 ---
-title: "ParleHub Plans: Free, Team, and Enterprise Compared"
+title: "ParleHub Plans: Team, Business, Business Elite, and Enterprise Compared"
 sidebarTitle: "Plans & Billing"
-description: "Compare ParleHub's Free, Team, and Enterprise plans — seats, projects, model spend, SSO, and storage integrations included in each tier."
+description: "Compare ParleHub's Team, Business, Business Elite, and Enterprise plans — seats, projects, model spend, storage, SSO and other features included in each tier."
 ---
 
-ParleHub offers three plans designed to match where your firm is in its AI adoption journey — from a no-commitment pilot on a single engagement to a fully governed, unlimited-seat deployment with your own storage and identity infrastructure. All plans give you per-project budgets, expense codes, and multi-provider model access. The tiers differ in capacity, SSO, storage integration, and the model spend ceiling.
+ParleHub offers four plans designed to match where your firm is in its AI adoption journey — from a small team piloting shared AI conversations to a fully governed, unlimited-seat deployment with your own storage, identity infrastructure and model deployments. All plans give you per-project budgets, expense codes, and multi-provider model access (BYOK). The tiers differ in seat and project capacity, storage, SSO, own-storage integration, bring-your-own model deployments, and organization knowledge.
+
+Every monthly plan you can buy today starts with a **7-day free trial** — there is no separate Free plan. Try ParleHub on a real engagement before you commit to anything.
 
 ## Plans at a glance
 
-<CardGroup cols={3}>
-  <Card
-    title="Free"
-    icon="circle-play"
-    href="https://app.parlehub.com"
-  >
-    **$0 / month**
+<CardGroup cols={2}>
+  <Card title="Team" icon="circle-play" href="https://app.parlehub.com">
+    **\$6 / seat / month**
 
-    - 3 seats
-    - 3 projects
-    - $10/mo shared model spend
-    - Per-project budgets and expense codes
-    - Multi-provider support (BYOK)
-    - Email and password sign-in
-    - Shared project threads and audit log
-  </Card>
-  <Card
-    title="Team"
-    icon="users"
-    href="https://parlehub.com/pricing"
-  >
-    **Flat monthly rate**
+    For a small team sharing AI conversations in ParleHub.
 
-    - 10 seats
+    - Up to 10 seats, no minimum
     - 10 projects
-    - Uncapped model spend (BYOK)
-    - Everything in Free, plus:
-    - Enterprise SSO (Entra ID & Google Workspace)
-    - Org-wide and personal spend caps
-    - Usage analytics by project, person, and model
+    - \$10/mo shared model spend cap
+    - 500 MB storage (flat), 10 MB max file size
+    - 250 files/day search indexing
+    - 7-day free trial
   </Card>
-  <Card
-    title="Enterprise"
-    icon="building-columns"
-    href="https://parlehub.com/pricing"
-  >
-    **Per seat / month**
 
-    - Unlimited seats
-    - Unlimited projects
-    - Uncapped model spend (BYOK)
-    - Everything in Team, plus:
-    - Private projects (visible only to members)
-    - SharePoint & Google Drive storage integration
-    - Dedicated support and onboarding
+  <Card title="Business" icon="users" href="https://app.parlehub.com">
+    **\$12 / seat / month**
+
+    For an organization that needs private projects, single sign-on and its own storage.
+
+    - 10 seats minimum, no maximum
+    - Unlimited projects, uncapped model spend (BYOK)
+    - 500 MB storage per seat, 25 MB max file size
+    - 2,000 files/day search indexing
+    - Everything in Team, plus SSO, private projects, and your own storage (SharePoint or Google Drive)
+    - 7-day free trial
+  </Card>
+
+  <Card title="Business Elite" icon="building">
+    **\$38 / seat / month — launching soon**
+
+    Everything in Business, plus organization knowledge and your own model deployments.
+
+    - 20 seats minimum, no maximum
+    - Unlimited projects, uncapped model spend (BYOK)
+    - 1 GB storage per seat, 25 MB max file size
+    - 3,000 files/day search indexing
+    - Adds Knowledge IQ (organization knowledge) and bring-your-own Azure AI Foundry model deployments
+    - Not purchasable yet — described here ahead of general availability
+  </Card>
+
+  <Card title="Enterprise" icon="building-columns">
+    **Custom pricing — contact ParleHub**
+
+    A negotiated plan for a large organization. Talk to ParleHub about seats, terms and support.
+
+    - 50 seats minimum, no maximum
+    - Unlimited projects, uncapped model spend (BYOK)
+    - 1 GB storage per seat, 25 MB max file size
+    - 5,000 files/day search indexing
+    - Everything in Business Elite
+    - Not self-service — contact ParleHub to discuss terms
   </Card>
 </CardGroup>
 
+<Note>
+  Search indexing paces rather than refuses, on every plan: files over the daily allowance are indexed as the allowance frees up over the following 24 hours, never dropped or blocked.
+</Note>
+
 ## Detailed comparison
 
-| Feature | Free | Team | Enterprise |
-|---|---|---|---|
-| **Seats** | 3 | 10 | Unlimited |
-| **Projects** | 3 | 10 | Unlimited |
-| **Model spend** | $10/mo shared cap | Uncapped (BYOK) | Uncapped (BYOK) |
-| **SSO** | — | Microsoft Entra ID, Google Workspace | Microsoft Entra ID, Google Workspace |
-| **Storage integration** | — | — | SharePoint, Google Drive (your tenant) |
-| **Private projects** | — | — | ✓ |
-| **Tamper-evident audit log** | ✓ | ✓ | ✓ |
-| **Roles** | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member |
-| **Per-project budgets & expense codes** | ✓ | ✓ | ✓ |
-| **Multi-provider model support (BYOK)** | ✓ | ✓ | ✓ |
-| **Pre-flight budget enforcement** | ✓ | ✓ | ✓ |
-| **Dedicated support** | — | — | ✓ |
+| Feature | Team | Business | Business Elite | Enterprise |
+| --- | --- | --- | --- | --- |
+| **Price** | \$6/seat/month | \$12/seat/month | \$38/seat/month — launching soon | Custom — contact ParleHub |
+| **Seats** | Up to 10, no minimum | 10 minimum, no maximum | 20 minimum, no maximum | 50 minimum, no maximum |
+| **Projects** | 10 | Unlimited | Unlimited | Unlimited |
+| **Monthly model spend cap (org-wide)** | \$10 | None | None | None |
+| **Storage** | 500 MB flat | 500 MB per seat | 1 GB per seat | 1 GB per seat |
+| **Max file size** | 10 MB | 25 MB | 25 MB | 25 MB |
+| **Search indexing per day** — paced, not refused: files over budget are indexed as the allowance frees up over the following 24 hours | 250 files | 2,000 files | 3,000 files | 5,000 files |
+| **Single sign-on (SSO)** | — | ✓ | ✓ | ✓ |
+| **Private (restricted) projects** | — | ✓ | ✓ | ✓ |
+| **Your own storage (SharePoint / Google Drive)** | — | ✓ | ✓ | ✓ |
+| **Bring-your-own model deployments (Azure AI Foundry)** | — | — | ✓ | ✓ |
+| **Knowledge IQ (organization knowledge)** | — | — | ✓ | ✓ |
+| **Free trial** | 7 days | 7 days | Not purchasable yet | — |
+| **Audit log** — every change and message is recorded, and ordinary edits cannot alter it | ✓ | ✓ | ✓ | ✓ |
+| **Roles** | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member |
+| **Per-project budgets & expense codes** | ✓ | ✓ | ✓ | ✓ |
+| **Multi-provider model support (BYOK)** | ✓ | ✓ | ✓ | ✓ |
+| **Pre-flight budget enforcement** | ✓ | ✓ | ✓ | ✓ |
+
+<Note>
+  Some features can be included on a plan by agreement with ParleHub. Talk to your ParleHub contact if you need something outside the table above.
+</Note>
 
 ## Understanding model spend
 
 Model spend is the cost of the AI API calls that ParleHub routes through your connected provider keys. When you send a message in a project conversation, ParleHub calls the model on your behalf using the API key you supplied in **Settings > Model Providers**, records the token counts and cost against the project's budget, and passes the charge on to your provider account.
 
-**Free plan:** Your entire organization shares a $10/mo model spend cap across all projects and seats. Once that cap is reached, new messages are blocked until the following month. This is intentionally enough to run a meaningful pilot on one or two engagements without any financial commitment.
+**Team plan:** Your entire organization shares a \$10/mo model spend cap across all projects and seats. Once that cap is reached, new messages are blocked until the following month. This is intentionally enough to run a meaningful pilot on one or two engagements.
 
-**Team plan:** Model spend is uncapped within ParleHub. You pay your model provider directly through your own API keys (Bring Your Own Key). ParleHub enforces the per-project budgets you set and the org-wide and personal caps you configure, but it does not add a markup or impose a ceiling above those limits.
-
-**Enterprise plan:** Same as Team — uncapped through BYOK, with all the per-project and org-level enforcement tools — plus dedicated support to help you structure budgets, configure storage, and roll out across your firm.
+**Business, Business Elite and Enterprise plans:** Model spend is uncapped within ParleHub. You pay your model provider directly through your own API keys (Bring Your Own Key). ParleHub enforces the per-project budgets you set and the org-wide and personal caps you configure, but it does not add a markup or impose a ceiling above those limits.
 
 ### **Managed Models**
 
-These are models that you can use that ParleHub is hosting. This allows you to try models that you don't have a relationship with, or open models you don't want to host yourself. The cost of these models is deducted from your Credit Wallet.
+These are models that you can use that ParleHub is hosting. This allows you to try models that you don't have a relationship with, or open models you don't want to host yourself. The cost of these models is deducted from your Credit Wallet. Managed models are available on every plan, including Team, and are unaffected by the bring-your-own Foundry deployment requirement above — that requirement applies only to connecting a model deployed in your own Azure subscription.
+
+## What happens if your plan changes
+
+If your organization moves to a plan with fewer features, or goes over a limit on your current plan:
+
+- **You keep your data.** Nothing is deleted because a feature is no longer included or a limit has been reached.
+- **Features outside your plan stop working for new use, but what you already have stays visible.** You can still view and remove what you created with a feature your plan no longer includes.
+- **Private projects stay private.** A restricted project never becomes visible to the rest of the organization just because the plan changed.
+- **Going over a limit blocks adding more, not what is already there.** For example, if you are over your seat or storage limit, you cannot add another seat or file until you are back under it, but nobody is removed and nothing already stored is deleted.
 
 <Note>
-  See the full plan comparison, including current pricing for Team and Enterprise, at [parlehub.com/pricing](https://parlehub.com/pricing).
+  If your organization was on the previous Free plan, you have a grace period to choose a paid plan — see your organization's **Settings → Billing** for the exact date, and [Managing Members](/admin/managing-members) if you need to reduce seats first.
 </Note>
 
+<Info>
+  See **Settings → Billing** in the app for the full comparison and current pricing.
+</Info>
+
 <Tip>
-  Start with the Free plan on a single active engagement. Connect one model provider, set a budget against a real matter code, and run a few conversations with the team. Once you can see the cost landing on the right client, you'll have a concrete business case for upgrading — and the migration to Team or Enterprise takes minutes.
+  Start your 7-day free trial on Team or Business against a single active engagement. Connect one model provider, set a budget against a real matter code, and run a few conversations with the team. Once you can see the cost landing on the right client, you'll have a concrete business case for the plan that fits — and upgrading takes minutes from **Settings → Billing**.
 </Tip>
