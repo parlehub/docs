@@ -1,0 +1,48 @@
+---
+title: "Connect Confluence to ParleHub"
+sidebarTitle: "Confluence"
+description: "Connect Confluence from the Integrations gallery — pick a scope, approve access, and let the agent search and read your team's documentation."
+icon: "confluence"
+---
+
+**Confluence** is a branded card in the Integrations gallery — Atlassian's own hosted MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Atlassian. There's nothing to type.
+
+## What it gives the agent
+
+Once connected and enabled on a project, the agent can search and read pages in the Confluence spaces the connection can reach, and answer questions in plain language (_"what does our onboarding runbook say about SSO?"_) by finding and quoting the relevant page. It asks only for **read and search** access — Confluence's card requests exactly those scopes and nothing broader, even though Atlassian's MCP server also fronts Jira and Bitbucket for organizations that use them. Connecting Confluence never grants the agent write access to your pages, and it never grants access to Jira or Bitbucket just because they share the same server.
+
+## Choosing a scope
+
+Confluence is the first integration to offer all three credential scopes, because all three are genuinely useful for it — see [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. In brief, for Confluence specifically:
+
+- **Organization** — one shared connection, typically a service account, that can read the spaces every project may search. Keeps working when nobody's online.
+- **Project** — each project connects its own Atlassian account, so one client engagement's space stays separate from another's.
+- **User** — each member connects their own Atlassian account, so the agent only ever surfaces what that member could see themselves in Confluence — with the answer labelled with whose account fetched it, in shared project conversations as much as personal ones (see [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted)).
+
+## Connecting
+
+<Steps>
+  <Step title="Open the gallery">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Confluence** card.
+  </Step>
+  <Step title="Choose who it's for">
+    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
+  </Step>
+  <Step title="Approve access at Atlassian">
+    For **Organization** scope, the Org Admin is sent to Atlassian to approve access, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of discovery, the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
+
+## Enabling it on a project
+
+Connecting Confluence at Organization or Project scope makes it *available*; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own account is connected. For a **User**-scoped connection, the tool appears in the conversation as soon as the integration is enabled and **any** member has connected — a member who hasn't connected yet gets a plain-language prompt to do so from My Integrations, rather than the tool simply not being there.
+
+## Reconnecting and access renewal
+
+ParleHub renews Confluence's access automatically in the background. If Atlassian stops accepting the stored authorization — revoked, expired, or the granted scopes changed — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
+
+## Disconnecting and removing
+
+Disconnecting a Confluence connection, at any scope, revokes access at Atlassian immediately and deletes the stored credential from ParleHub's vault. Removing the whole integration for your organization starts the same 14-day grace window as any other integration — see [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
