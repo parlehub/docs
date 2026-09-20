@@ -1,0 +1,41 @@
+---
+title: "My Integrations: Connect Your Own Account to a ParleHub Integration"
+sidebarTitle: "My Integrations"
+description: "Connect your own account to an integration your organization has approved, see what's connected, and disconnect any time — from your personal settings."
+icon: "user-gear"
+---
+
+**My Integrations** is for everyone, not just Org Admins. It's where you connect your own account to an integration your organization has set up to work with **User** scope — each member's own access, rather than one shared connection (see [Choosing who the credential belongs to](/tools/integration-scopes)).
+
+## What you'll find there
+
+Reach it from **Profile & preferences → My Integrations**. The list shows every integration your organization has approved for User scope, with your own connection status against each: **Connect**, **Reconnect**, or **Disconnect**.
+
+- **You can only ever see and act on your own connection.** Nobody else's credential shows up here, and nobody else — including an Org Admin — can connect, view, or disconnect yours.
+- **You can't add an integration of your own.** The list only ever shows what an Org Admin has already approved; My Integrations is for connecting to something that already exists, not registering something new.
+
+## Connecting
+
+1. Open **My Integrations** and find the integration.
+2. Select **Connect**. You're sent to the provider to approve access — the same OAuth approval you'd see for any other application — and returned to ParleHub once it's done.
+3. The entry now shows **Connected**, with the account you approved it under.
+
+Once you've connected, the agent uses your account for that integration in every project conversation it's enabled in — and in your personal conversations too. Any reply that used your credential names you in the message, visible to everyone who can see it; see [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted) for what that means in a shared project.
+
+## If you haven't connected yet
+
+An integration set to User scope can still show up in a shared project conversation before you've connected it yourself — a teammate may already have. If you ask the agent to use it and you haven't connected your own account, it tells you plainly that it needs you to connect, with a link straight to this page. The turn still completes; you just don't get an answer from that particular tool until you connect.
+
+## Disconnecting
+
+Select **Disconnect** on any connected entry. This takes effect immediately: your authorization is revoked at the provider, your credential is deleted from ParleHub's vault, and the agent stops using your account for that integration from that point on — in every conversation, not just the one you happen to be in.
+
+You can disconnect at any time, for any reason, and it never affects anyone else's connection to the same integration.
+
+<Note>
+  Leaving your organization, or being deactivated by an Org Admin, disconnects and deletes your personal integration credentials automatically — nothing you connected is left live in ParleHub's vault after your account stops being active.
+</Note>
+
+## If your plan changes
+
+If your organization's plan stops including Integrations, you can still see and disconnect what you've already connected — losing a plan never leaves you unable to unhook your own account. You just can't make a new connection until the plan includes it again. See [Plans & Billing](/plans-and-billing#what-happens-if-your-plan-changes).
