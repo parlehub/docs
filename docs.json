@@ -70,9 +70,12 @@
             "group": "Tools & Knowledge",
             "icon": "toolbox",
             "pages": [
-              "tools/mcp-tools",
+              "tools/integrations",
+              "tools/confluence",
+              "tools/integration-scopes",
               "knowledge/organization-knowledge",
-              "knowledge/asking-about-your-org"
+              "knowledge/asking-about-your-org",
+              "tools/my-integrations"
             ]
           },
           {
@@ -108,5 +111,12 @@
   "logo": {
     "light": "/images/pwa-215x215.png",
     "dark": "/images/pwa-215x215.png"
-  }
+  },
+  "redirects": [
+    {
+      "source": "/tools/mcp-tools",
+      "destination": "/tools/integrations",
+      "permanent": true
+    }
+  ]
 }
