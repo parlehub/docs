@@ -54,6 +54,7 @@
             "group": "Cost Management",
             "pages": [
               "cost/budgets",
+              "cost/currencies",
               "cost/expense-codes",
               "cost/usage-analytics"
             ]

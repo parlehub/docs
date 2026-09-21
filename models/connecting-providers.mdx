@@ -13,7 +13,7 @@ Using your own key means:
 - **Your organization controls which models are available** to your team, and can rotate or remove a key at any time.
 
 <Note>
-  ParleHub also offers **ParleHub Managed** models that need no key of your own — these are billed from your organization's ParleHub credit wallet instead. Managed models do not appear in the setup steps below because there is nothing to connect.
+  ParleHub also offers **ParleHub Managed** models that need no key of your own — these are billed from your organization's ParleHub credit wallet instead, always in US dollars. Managed models do not appear in the setup steps below because there is nothing to connect.
 </Note>
 
 ## Connecting a Provider
@@ -21,14 +21,17 @@ Using your own key means:
 Only **Org Admins** can add, rotate, remove, or test a provider key.
 
 <Steps>
-  <Step title="Open Model Providers settings">
-    Go to **Organization Settings → Model providers**.
+  <Step title="Open Model access settings">
+    Go to **Organization Settings → Model access**. Each provider has its own card.
   </Step>
   <Step title="Paste your API key">
     Find the provider's card and paste your key into the **API key** field. See the tabs below for where to get one, and what to check on the provider's side first.
   </Step>
   <Step title="Select Connect">
     ParleHub makes a small verification call to the provider before saving, so you find out immediately if the key is wrong rather than at chat time.
+  </Step>
+  <Step title="Set the quote currency">
+    If this provider bills you in a currency other than US dollars, say so now — before any rates or spend are recorded. See [Setting your quote currency](#setting-your-quote-currency) below.
   </Step>
 </Steps>
 
@@ -41,6 +44,70 @@ Only **Org Admins** can add, rotate, remove, or test a provider key.
 | **Provider unreachable** | The key is saved anyway, so a provider outage does not block you — but marked as **not yet verified**. It is checked again automatically the next time you rotate or test it. |
 
 To replace a key later, select **Rotate key** on a connected card, paste the new value, and select **Save key**. To disconnect a provider entirely, select **Remove** — its models immediately stop being available to your team.
+
+## Setting Your Quote Currency
+
+The **quote currency** is the currency your agreement with a provider is quoted and billed in. ParleHub supports **USD, CAD, EUR and GBP**, and every connected provider card shows a **Quote currency** line. It defaults to **USD**.
+
+Where you set it depends on the provider:
+
+| Provider | Quote currency |
+| --- | --- |
+| **Anthropic**, **OpenAI** | Fixed at USD. The card reads _"Quote currency: USD — This provider quotes and bills in USD only, so its quote currency cannot be changed."_ |
+| **Google Gemini** | Set on the provider card. |
+| **Azure AI Foundry** | Set on **each deployment**, not on the credential, because one Azure resource can serve deployments under different agreements. The card reads _"Quote currency: USD — This provider's quote currency is set per deployment below, not on the credential."_ |
+| **ParleHub Managed** | Always USD. There is nothing to set. |
+
+<Tabs>
+  <Tab title="Azure AI Foundry deployment">
+    <Steps>
+      <Step title="Open the Azure AI Foundry card">
+        Go to **Organization Settings → Model access** and find **Declared deployments** on the Azure AI Foundry card.
+      </Step>
+      <Step title="Choose the deployment's Quote currency">
+        Each deployment row has its own **Quote currency** list. Pick the currency your Azure agreement bills that deployment in. The change saves as soon as you select it.
+      </Step>
+      <Step title="Enter your rates in that currency">
+        Under **Deployment rates**, the form now reads _"Enter prices in GBP, exactly as your price sheet quotes them — ParleHub stores this deployment's rates in GBP."_ Type the figures exactly as they appear on your price sheet. Do not convert them yourself.
+      </Step>
+    </Steps>
+
+    **Why it matters.** Every message sent to that deployment is costed from those rates, recorded in that currency, and converted at ParleHub's monthly exchange rate wherever it is measured against a project cap or shown in a report. Each rate is stamped with the currency it was entered in and keeps it, so your rate history still reads correctly if the deployment's currency changes later. See [Currencies and Exchange Rates](/cost/currencies).
+
+    <Warning>
+      **If you leave a deployment at USD but type rates from a GBP or EUR price sheet, nothing errors — the figures are simply read as dollars.** Recorded spend is then wrong by the exchange rate, project caps are measured against the wrong amount, and the Foundry reconciliation statement will not match your Azure invoice. Set the currency **before** you enter rates.
+    </Warning>
+
+    **Azure list prices are USD only.** For a deployment in any other currency ParleHub does not apply or compare Azure's list prices — the rate card says _"Azure publishes list prices in USD only, so ParleHub does not compare this GBP deployment against them."_ Moving a deployment away from USD also stops any Azure list price ParleHub was applying to it, so the deployment reads as not priced until you enter your own rate card in the new currency. Do both in one sitting.
+  </Tab>
+  <Tab title="Google Gemini credential">
+    <Steps>
+      <Step title="Open the Google Gemini card">
+        Go to **Organization Settings → Model access**. The card must be **Connected**.
+      </Step>
+      <Step title="Choose the Quote currency">
+        Pick a currency from the **Quote currency** list under _"The currency your agreement with this provider is quoted in."_ The change saves as soon as you select it.
+      </Step>
+    </Steps>
+
+    <Note>
+      Today this is a **declaration**. ParleHub prices Gemini usage from its own USD reference rates, so Gemini costs are still recorded in USD whatever you select here. What the declaration does drive is your organization's **default reporting currency**: if every active credential is quoted in the same currency, reports default to it. See [Currencies and Exchange Rates](/cost/currencies#reporting-currency).
+    </Note>
+  </Tab>
+</Tabs>
+
+### When the quote currency can be changed
+
+You can change a quote currency freely **until your organization has a live rate of its own on file under it**. After that the change is refused, so an existing rate can never end up describing a different price sheet from the one it was typed from. The message names the count and the currency, for example:
+
+> _"This deployment has 1 live rate on file in GBP, entered by your organization. Retire it and re-enter the rate card in EUR before changing the quote currency."_
+
+To change it anyway, retire your rate on the deployment's row under **Deployment rates** (**Use list price**, or **Clear estimate** on a provisioned deployment), change the **Quote currency**, then enter the new rate card. Retired rates stay in the rate history in the currency they were entered in, and spend already recorded keeps the currency and rate it was charged at — changing the currency changes nothing that has already happened.
+
+Two more things worth knowing:
+
+- **Rotating a key keeps its quote currency.** Removing a key and adding a new one for the same provider also carries the previous currency over, rather than resetting to USD.
+- **Every change is recorded in the audit log**, with the old and new currency.
 
 ## Provider-Specific Setup
 
@@ -66,6 +133,8 @@ Each provider has account-side setup you need to do **before** pasting a key int
   </Tab>
   <Tab title="Azure AI Foundry">
     Create (or reuse) an Azure AI Foundry resource in the Azure Portal, and create a **deployment** for each model you want to use. In Azure AI Foundry, the model you pick in ParleHub corresponds to a **deployment name** on your resource, not a raw model name.
+
+    **Check which currency your Azure agreement bills in.** Azure can bill in your local currency, and ParleHub records each deployment's costs in the currency you declare for it. Set each deployment's **Quote currency** before you enter its rates — see [Setting your quote currency](#setting-your-quote-currency).
 
     <Warning>
       **Bringing your own Azure AI Foundry deployment requires the Business Elite plan or above.** This does not affect ParleHub Managed models, which remain available on every plan. Azure AI Foundry setup is also more involved than the other providers because of the deployment step. **Contact ParleHub support** to finish connecting your specific Azure resource and deployments — self-service model selection for Azure AI Foundry is still being rolled out.
@@ -136,6 +205,10 @@ ParleHub stores your API key encrypted at the org level, resolved at request tim
 | Test or chat fails: no remaining quota or credit | Provider account billing or credit exhausted | Add billing or credit with the provider — retrying will not help |
 | Test or chat fails: rate limited | Too many requests sent to the provider recently | Wait a short while and try again |
 | **Test connection** unavailable | Provider is ParleHub Managed | Managed models have no key of your own to test |
+| No **Quote currency** list on a card, only a line of text | The provider bills in USD only (Anthropic, OpenAI), or it is Azure AI Foundry, where the currency is set on each deployment | Nothing to do for a USD-only provider. For Foundry, use the **Quote currency** list on the deployment under **Declared deployments** |
+| Changing a quote currency is refused: "…live rate on file…" | Your organization has a live rate of its own recorded under the current currency | Retire that rate, change the currency, then re-enter the rate card in the new currency — see [When the quote currency can be changed](#when-the-quote-currency-can-be-changed) |
+| A Foundry deployment reads as not priced after a currency change | Azure list prices are USD only, so none applies to a non-USD deployment | Enter your own rates for it under **Deployment rates**, in the deployment's currency |
+| Foundry costs look wrong by roughly an exchange rate | Rates from a non-USD price sheet were entered while the deployment was still set to USD | Retire the rate, set the deployment's **Quote currency**, and re-enter the rate card. Spend already recorded keeps the rate it was charged at |
 | Azure AI Foundry models not selectable | Deployment/endpoint setup not finished | Contact ParleHub support to complete your Azure resource setup |
 
 Still stuck? Contact ParleHub support with your organization name, the provider, and (if shown) the error detail from the connection test.

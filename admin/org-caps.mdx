@@ -10,7 +10,7 @@ ParleHub uses a three-layer budget system to give your firm precise control over
 
 Every AI send in ParleHub passes through up to three budget checks before it is executed. The most restrictive layer wins — if any layer is exhausted, the send is blocked.
 
-1. **Project budget** — blocks a specific send in a specific project when that project's monthly budget is depleted. This is the first and most granular control, scoped to a single client engagement.
+1. **Project budget** — blocks a specific send in a specific project when that project's **monthly cap** or **lifetime cap** is reached. This is the first and most granular control, scoped to a single client engagement, and it is stated in the project's own budget currency. See [Budgets](/cost/budgets).
 
 2. **Personal cap** — blocks any send by a specific user once they have spent their monthly personal limit across *all* of their projects combined. This prevents a single user from consuming a disproportionate share of the org's AI budget regardless of which projects they are active in.
 
@@ -19,6 +19,10 @@ Every AI send in ParleHub passes through up to three budget checks before it is 
 <Info>
   Caps apply to model API call costs only — they do not affect your ParleHub subscription fees.
 </Info>
+
+<Note>
+  **The org-wide cap and personal caps are always in US dollars**, even if your projects are capped and reported in another currency. The org-wide cap field is labelled **Cap (USD / month)**, personal budgets read with the code on the **Members** page (for example `$25.00 USD / month`), and the notice a blocked member sees spells it out too — _"Organization monthly spend cap of \$10.00 USD would be exceeded."_ or _"Personal budget of \$100.00 USD for this period would be exceeded."_ — so the ceiling is not mistaken for your own currency. Only project caps can be set in GBP, EUR or CAD. See [Currencies and Exchange Rates](/cost/currencies#what-stays-in-us-dollars).
+</Note>
 
 ## Setting the Org-Wide Cap
 
@@ -48,7 +52,7 @@ Both limit types reset on the first of each calendar month alongside the org-wid
 When a send would exceed an active cap, ParleHub blocks the request before it reaches the model provider. The member sees an in-app message explaining which limit was reached.
 
 <Accordion title="Project budget blocked">
-  The project has exhausted its monthly budget. The member sending the message can request a budget increase from the project admin, or the project admin can raise the budget directly in the project's settings.
+  The project has reached its monthly cap or its lifetime cap. The notice names which one, in the project's budget currency. Anyone on the project can select **Request a higher limit**; only an Org Admin can approve it or raise the cap directly on the project's **Budget** tab. A monthly cap also resets on the 1st of the next month. See [Budgets](/cost/budgets#how-enforcement-works).
 </Accordion>
 
 <Accordion title="Personal cap blocked">

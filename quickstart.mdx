@@ -27,6 +27,8 @@ This guide walks you through everything you need to go from a blank slate to a r
 
     Paste your API key into the field for your chosen provider and click **Connect**. ParleHub makes a real verification call to the provider before saving, so a bad key fails here rather than at chat time. Then tick the models your team should be able to use and **Set default** on one of them.
 
+    If your provider bills you in a currency other than US dollars — most often an Azure agreement in GBP, EUR or CAD — set the **Quote currency** before you record any rates or spend. See [Setting your quote currency](/models/connecting-providers#setting-your-quote-currency).
+
     ParleHub also offers **ParleHub Managed** models that need no key of your own, billed from your organization's credit wallet. See [Connecting Providers](/models/connecting-providers) for provider-by-provider detail.
   </Step>
   <Step title="Create a project">
@@ -34,7 +36,8 @@ This guide walks you through everything you need to go from a blank slate to a r
 
     - **Name** — typically the engagement name (e.g., *Ashworth M&A*)
     - **Visibility** — **Public** (anyone in your organization can open it) or **Restricted** (members only). This cannot be changed later, so pick **Restricted** if you are unsure.
-    - **Budget (USD)** — the maximum model spend you want to allow on this project. ParleHub blocks new messages once the budget is reached and warns the team at 80%. Set **0** for no limit; spend is still tracked.
+    - **Budget currency** — USD, CAD, EUR or GBP. Pick the currency you report this work in; it is fixed once the project records any spend.
+    - **Cap period** and **Monthly cap** / **Total cap** — the maximum model spend you want to allow on this project, either **Every month** or as a **Total, for the life of the project**. ParleHub blocks new messages once the cap is reached and warns the team at 80%. Set **0** for no limit; spend is still tracked. See [Budgets](/cost/budgets).
     - **Available models** — every model your org enabled is ticked; untick any you want blocked here.
     - **Storage** — **ParleHub Cloud Storage** needs no setup and is the default.
 

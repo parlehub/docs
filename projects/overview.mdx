@@ -31,7 +31,11 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
     - **Restricted** — only people you add as members can open it. Use this for client-confidential or sensitive work.
   </Step>
   <Step title="Set a budget">
-    The project's spending limit in USD. **Set 0 for no limit** — spend is still tracked. You can change it later.
+    - **Budget currency** — the currency this project's spending caps are stated in: USD, CAD, EUR or GBP. Pick the one you report this work in — **it is fixed once the project records any spend.**
+    - **Cap period** — whether the amount below is a limit for **Every month** (spending resets on the 1st) or a **Total, for the life of the project**. Monthly is the default.
+    - **Monthly cap** / **Total cap** — how much the project may spend over that period, in the currency above. **Set 0 for no limit** — spend is still tracked.
+
+    You can change the amount later, and add the other cap, from the project's **Budget** tab. See [Budgets](/cost/budgets).
   </Step>
   <Step title="Choose available models">
     Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected.
@@ -70,7 +74,7 @@ The project workspace has one tab per area of setup.
   </Card>
 
   <Card title="Budget" icon="dollar-sign" href="/cost/budgets">
-    Actual spend computed from real token usage, broken down per conversation.
+    The project's monthly and lifetime caps, and actual spend computed from real token usage, broken down per conversation.
   </Card>
 
   <Card title="Tools" icon="plug" href="/tools/integrations">
@@ -150,7 +154,8 @@ If your organization has connected integrations, open the **Tools** tab and swit
 | Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
 | Cannot find someone in the add-member list | They are not in your organization yet, are deactivated, or are already on the project | Invite them to the organization first |
 | **Remove** refused on the last admin | Every project needs at least one Project Admin | Promote someone else first, then remove |
-| Messages blocked: "This project is over budget" | Spend reached the budget | An Org Admin raises the budget on the **Budget** tab |
+| Messages blocked: "This project's monthly cap of … has been reached" (or lifetime cap) | Spend reached one of the project's caps | Select **Request a higher limit**, or have an Org Admin raise the cap on the **Budget** tab. A monthly cap also resets on the 1st |
+| **Budget currency** cannot be changed | The project has already recorded spend | The currency is fixed from the first spend — see [Budgets](/cost/budgets#why-the-budget-currency-locks) |
 | Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin or Org Admin to make the change, or to promote you |
 
 Still stuck? Contact ParleHub support with your organization name and the project name.

@@ -10,8 +10,8 @@ ParleHub uses role-based access at two distinct levels: the organization level a
 
 | Role | Scope | Key Permissions |
 |---|---|---|
-| **Org Admin** | Org-wide | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; view all usage and the audit log |
-| **Project Admin** | Per-project | Create and delete conversations; manage project members; set and modify the project budget; set the project expense code; approve or deny budget increase requests from members |
+| **Org Admin** | Org-wide | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; set every project's monthly and lifetime caps and its budget currency; set the organization's reporting currency and any project override; set provider and deployment quote currencies; approve or reject requests for a higher project limit; view all usage |
+| **Project Admin** | Per-project | Create and delete conversations; manage project members; set the project expense code; **view** the project's caps, budget currency, reporting currency and spend (read-only); request a higher limit |
 | **Member** | Per-project | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit |
 | **Personal** | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to |
 
@@ -46,9 +46,11 @@ On the Business plan and above, **private projects** take this further — they 
 
 ## Budget Increase Requests
 
-ParleHub lets Project Admins set a spending limit (budget cap) on a project to control AI model costs per engagement. When a Member's action is blocked because the project has hit its budget limit, they can submit a budget increase request directly from the conversation interface.
+Only **Org Admins** set a project's spending caps — a monthly cap, a lifetime cap, or both, in the project's own budget currency. A spend ceiling the spender can raise is not a cost control, so Project Admins and members see the caps read-only. See [Budgets](/cost/budgets).
 
-All Project Admins on that project receive the request. Any one of them can approve or deny it from the project's **Budget** tab. Approvals and denials are recorded in the [audit log](/security/audit-log). Once approved, the new budget limit takes effect immediately and the member can continue their work.
+When a send is blocked because the project has reached a cap, anyone on the project — a Member or a Project Admin — can select **Request a higher limit** directly from the conversation, or from the project's **Budget** tab.
+
+An Org Admin answers the request from **Requests** in the sidebar: they choose which cap to raise, enter the new limit in the project's budget currency, and approve it — or reject it with a reason. Requests and their outcomes are recorded in the [audit log](/security/audit-log). Once approved, the new limit takes effect immediately and the member can continue their work.
 
 <Tip>
   Use expense codes alongside budget caps to tie AI spend directly to client matter numbers in your billing system. Set an expense code under **Project Settings → Budget** and it will appear in usage exports for easy reconciliation.

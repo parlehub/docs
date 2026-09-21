@@ -54,30 +54,18 @@ When you export usage data, every row for that project includes the expense code
 ## Exporting with Expense Codes
 
 <Steps>
-  <Step title="Navigate to Analytics">
-    Go to **Analytics** from the main sidebar, or open **Org Settings → Usage & Billing → Analytics**.
+  <Step title="Open Usage">
+    Select **Usage** in the main sidebar. The Usage screen is for Org Admins.
   </Step>
-  <Step title="Open Export">
-    Click the **Export** tab at the top of the Analytics page.
+  <Step title="Group by Project">
+    Set **Group by** to **Project**. The code column is included only on a project grouping, because no other row is a project.
   </Step>
   <Step title="Choose your date range and projects">
-    Select the date range and filter to specific projects if needed. Leave the project filter empty to export all projects.
+    Select the range and filter to specific projects if needed. Leave the project filter empty to export all projects.
   </Step>
   <Step title="Download CSV">
-    Click **Download CSV**. The file is ready immediately for date ranges up to 90 days. Longer ranges generate an email download link within a few minutes.
+    Select **Download CSV** above the breakdown table.
   </Step>
 </Steps>
 
-Each row in the export includes:
-
-| Column | Description |
-|---|---|
-| `date` | UTC date of the usage |
-| `project_name` | Display name of the project |
-| `expense_code` | The expense code set on the project |
-| `person` | Name and email of the team member |
-| `provider` | AI provider (e.g. Anthropic, OpenAI) |
-| `model` | Specific model used |
-| `input_tokens` | Tokens in the prompt |
-| `output_tokens` | Tokens in the model response |
-| `cost_usd` | Cost in US dollars |
+The export has one row per project, with the project's code in the `Project Code` column, its cost in the `Cost` column, and the currency that cost is in — your organization's reporting currency — in the `Currency` column. A project with no code has an empty cell. See [Usage Analytics](/cost/usage-analytics#exporting-data) for every column, and [Currencies and Exchange Rates](/cost/currencies) for how the reporting currency is chosen.
