@@ -137,8 +137,27 @@ Each provider has account-side setup you need to do **before** pasting a key int
     **Check which currency your Azure agreement bills in.** Azure can bill in your local currency, and ParleHub records each deployment's costs in the currency you declare for it. Set each deployment's **Quote currency** before you enter its rates — see [Setting your quote currency](#setting-your-quote-currency).
 
     <Warning>
-      **Bringing your own Azure AI Foundry deployment requires the Business Elite plan or above.** This does not affect ParleHub Managed models, which remain available on every plan. Azure AI Foundry setup is also more involved than the other providers because of the deployment step. **Contact ParleHub support** to finish connecting your specific Azure resource and deployments — self-service model selection for Azure AI Foundry is still being rolled out.
+      **Bringing your own Azure AI Foundry deployment requires the Business Elite plan or above.** This does not affect ParleHub Managed models, which remain available on every plan. On a plan without it, connecting the resource or declaring a deployment is refused with _"Using your own Azure AI Foundry deployments is not included in your ParleHub plan. Upgrade to enable them…"_
     </Warning>
+
+    Azure AI Foundry has one more step than the other providers — declaring your deployments — and an Org Admin does all of it in **Organization Settings → Model access**. In the app the card is titled **Microsoft Foundry**.
+
+    <Steps>
+      <Step title="Connect the resource">
+        Enter the **Resource endpoint** of your Foundry resource (for example `https://your-resource.services.ai.azure.com`) and its **API key**, then select **Connect**. A Foundry project is not required. A classic Azure OpenAI resource (`.openai.azure.com`) cannot be connected; Microsoft publishes an in-place upgrade to Foundry.
+      </Step>
+      <Step title="Declare your deployments">
+        ParleHub cannot list the deployments on your resource from the API key alone, so you tell it which ones your team may pick. Under **Declared deployments**, select **Add deployment** and enter the **Deployment name** exactly as it appears in your Foundry resource, the **Model it serves**, the **Deployment type**, the **Region** and the **Context window (tokens)**. **Label** and **Capabilities** are optional — leave a capability off unless you have confirmed the deployment supports it. Select **Declare deployment**. The deployment is available to your team as soon as it is declared.
+
+        A deployment's name cannot be edited afterwards, because requests and past usage resolve through it — retire the deployment and declare it again under the new name.
+      </Step>
+      <Step title="Optionally, let ParleHub list them for you">
+        Under **Pick deployments from Azure**, select **Connect Azure** and grant ParleHub read-only access to that one Azure resource. **Pick from Azure** then lists your deployments with their models and billing types as Azure reports them, so you do not have to type them. **Add by hand** stays available for a deployment Azure has not listed yet.
+      </Step>
+      <Step title="Set the quote currency and check the rates">
+        Set each deployment's **Quote currency**, then review **Deployment rates**. ParleHub prices most pay-as-you-go deployments from Microsoft's published USD list price, so they are ready to use as soon as you declare them. A pay-as-you-go deployment that shows no rate needs your rates entered before anyone can send to it. A provisioned deployment has no per-token price: it works normally and its usage is reported in tokens with no cost figure, unless you add an allocation estimate. See [Setting your quote currency](#setting-your-quote-currency).
+      </Step>
+    </Steps>
   </Tab>
 </Tabs>
 
@@ -209,6 +228,7 @@ ParleHub stores your API key encrypted at the org level, resolved at request tim
 | Changing a quote currency is refused: "…live rate on file…" | Your organization has a live rate of its own recorded under the current currency | Retire that rate, change the currency, then re-enter the rate card in the new currency — see [When the quote currency can be changed](#when-the-quote-currency-can-be-changed) |
 | A Foundry deployment reads as not priced after a currency change | Azure list prices are USD only, so none applies to a non-USD deployment | Enter your own rates for it under **Deployment rates**, in the deployment's currency |
 | Foundry costs look wrong by roughly an exchange rate | Rates from a non-USD price sheet were entered while the deployment was still set to USD | Retire the rate, set the deployment's **Quote currency**, and re-enter the rate card. Spend already recorded keeps the rate it was charged at |
-| Azure AI Foundry models not selectable | Deployment/endpoint setup not finished | Contact ParleHub support to complete your Azure resource setup |
+| Azure AI Foundry models not selectable | No deployment has been declared yet, or a pay-as-you-go deployment has no rate | Declare the deployment under **Declared deployments** on the card; if it shows no rate under **Deployment rates**, enter your rates for it |
+| Connecting Azure AI Foundry is refused: "…not included in your ParleHub plan" | Your plan does not include your own Azure AI Foundry deployments | Upgrade to Business Elite or above. An existing connection is untouched and can still be removed or rotated |
 
 Still stuck? Contact ParleHub support with your organization name, the provider, and (if shown) the error detail from the connection test.

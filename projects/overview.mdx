@@ -25,6 +25,7 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
   <Step title="Name and describe it">
     - **Name** — required, e.g. `Q3 Research`. Shown on the project card and everywhere the project is referenced.
     - **Description** — optional; one line on what the project is for.
+    - **Project code** — optional; your own accounting reference for the project, such as a matter number, cost centre or expense code. It appears beside the project's spend in usage reports and CSV exports. See [Expense Codes](/cost/expense-codes).
   </Step>
   <Step title="Choose visibility">
     - **Public** — anyone in your organization can open this project. Members are still used to decide who is a Project Admin.
@@ -33,7 +34,11 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
   <Step title="Set a budget">
     - **Budget currency** — the currency this project's spending caps are stated in: USD, CAD, EUR or GBP. Pick the one you report this work in — **it is fixed once the project records any spend.**
     - **Cap period** — whether the amount below is a limit for **Every month** (spending resets on the 1st) or a **Total, for the life of the project**. Monthly is the default.
-    - **Monthly cap** / **Total cap** — how much the project may spend over that period, in the currency above. **Set 0 for no limit** — spend is still tracked.
+    - **Monthly cap** / **Total cap** — how much the project may spend over that period, in the currency above. **Set 0 for no limit** — spend is still tracked, and the project is created with no cap at all. (On the **Budget** tab afterwards, a cap is switched on or off with a tick rather than by typing 0, so a ticked cap there needs an amount above zero.)
+
+    <Note>
+      The **Budget currency** you pick here is saved together with the cap. A project created with the amount at 0 has no cap to attach it to, so it starts in **USD** whatever you picked. To use another currency, open the project's **Budget** tab and set it there **before the project records any spend** — after that it is fixed.
+    </Note>
 
     You can change the amount later, and add the other cap, from the project's **Budget** tab. See [Budgets](/cost/budgets).
   </Step>
@@ -147,6 +152,7 @@ If your organization has connected integrations, open the **Tools** tab and swit
 | "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | Archive a project you have finished, or upgrade the plan |
 | "Private (Restricted) projects require the Business plan or above" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
 | "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Organization Settings → Billing |
+| Creating the project is refused: "ParleHub can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and ParleHub has not published an exchange rate for that currency yet — a ParleHub issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
 | No **Available models** section on the form | Your organization has not connected any model providers | [Connect a provider key](/models/connecting-providers) first |
 | Nobody can chat in the new project | No models enabled, or you blocked them all here | Re-check the model list on **Project Details**, and the org's enabled models |
 | SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Organization Settings → File storage |

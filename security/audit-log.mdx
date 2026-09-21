@@ -34,7 +34,7 @@ The guarantee comes from how the log is enforced, not just how it is described. 
 In practice this means a compromised Org Admin account cannot scrub activity from the log: there is no feature that would let it, and the database would reject the write even if there were.
 
 <Warning>
-  **The honest claim is DML-immutable, not immutable.** The trigger blocks ordinary writes — `UPDATE` and `DELETE` — but it is not tamper-proof against schema changes. A principal holding `ALTER` or `CONTROL` on the database could disable the trigger, drop it, or `TRUNCATE` past it. That is an accepted, deliberately higher bar: altering the record requires a privileged schema change rather than a routine write, and is not something that can happen through the product. We would rather state that precisely than claim the record cannot be changed by anyone under any circumstances.
+  **What this does and does not guarantee.** The trigger rejects ordinary writes — `UPDATE` and `DELETE` — but it does not protect against schema changes. A principal holding `ALTER` or `CONTROL` on the database could disable the trigger, drop it, or `TRUNCATE` past it. That is an accepted, deliberately higher bar: altering the record requires a privileged schema change rather than a routine write, and is not something that can happen through the product. We would rather state that precisely than claim the record cannot be changed by anyone under any circumstances.
 </Warning>
 
 ## Reviewing the Log

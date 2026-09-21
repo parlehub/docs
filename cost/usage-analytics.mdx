@@ -89,14 +89,14 @@ Each row in the export is one group (a project, user, provider or model), follow
 | `Reasoning Tokens` | Present only when a provider reported reasoning tokens in the period |
 | `Unpriced Tokens` | Present only when some usage ran on provisioned capacity |
 | `Currency` | The three-letter code the `Cost` column is in — your organization's reporting currency, the same on every row |
-| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage. Always the last column |
+| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage. When it is present, it is the last column |
 
 <Note>
-  The cost column is headed `Cost`, not `Cost USD` — the `Currency` column says what it is in. New columns are always added at the end, so an import that reads columns by position keeps working.
+  The cost column is headed `Cost`, not `Cost USD` — the `Currency` column says what it is in. **Read columns by header name, not by position.** Five of the columns above — `Project Code`, `Cached Tokens In`, `Reasoning Tokens`, `Unpriced Tokens` and `Unconverted Tokens` — appear only when there is something to report, so the same report can have a different number of columns from one period to the next. The columns always come in the order shown in the table, so their relative order never changes, but a column's absolute position can: `Currency` sits one place further along in a month where a provider first reports cached tokens.
 </Note>
 
 <Tip>
-  Export monthly, grouped by project, and import by project code into your practice management system to automate client AI cost recovery without manual reconciliation. See [Expense Codes](/cost/expense-codes).
+  Export monthly, grouped by project, and import by project code into your practice management system to automate client AI cost recovery without manual reconciliation. If you automate the import, match columns on their header names (`Project Code`, `Cost`, `Currency`) rather than on column numbers, and skip the final `TOTAL` row so the period is not counted twice. See [Expense Codes](/cost/expense-codes).
 </Tip>
 
 ## Foundry reconciliation statement
