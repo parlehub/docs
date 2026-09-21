@@ -1,10 +1,10 @@
 ---
 title: "ParleHub Security and Compliance Overview"
 sidebarTitle: "Overview"
-description: "ParleHub is built for firms that sign client security questionnaires — single sign-on, files in your own tenant, and a tamper-evident audit log."
+description: "ParleHub is built for firms that sign client security questionnaires — single sign-on, files in your own tenant, and an append-only audit log."
 ---
 
-If your firm signs client security questionnaires, you already know the questions: where does our data go, who can see it, and how do you prove nothing was tampered with? ParleHub is architected to give you defensible answers — single sign-on tied to your identity provider, project files stored inside your own SharePoint or Google Drive tenant, a tamper-evident append-only audit log enforced at the platform level, and role-based access that limits who can see what down to the project level.
+If your firm signs client security questionnaires, you already know the questions: where does our data go, who can see it, and what record is kept of who did what? ParleHub is architected to give you defensible answers — single sign-on tied to your identity provider, project files stored inside your own SharePoint or Google Drive tenant, an append-only audit log enforced at the platform level, and role-based access that limits who can see what down to the project level.
 
 <CardGroup cols={2}>
   <Card title="Single Sign-On" icon="key" href="/security/sso">
@@ -14,10 +14,10 @@ If your firm signs client security questionnaires, you already know the question
     On the Business plan and above, project files live in your own SharePoint site or Google Drive tenant. Client documents never leave your environment.
   </Card>
   <Card title="Audit Log" icon="scroll" href="/security/audit-log">
-    Every sensitive action is recorded in an append-only log enforced at the core platform level. No one — including ParleHub staff — can edit or delete existing entries.
+    Every sensitive action is recorded in an append-only log. ParleHub has no feature that edits or deletes an entry, and the database rejects ordinary updates and deletes. A customer-facing audit view and export are planned, not available yet.
   </Card>
   <Card title="Role-Based Access" icon="shield-halved" href="/security/roles-and-permissions">
-    Four roles span org-level and project-level control. Members only see the projects they belong to; private projects are invisible to everyone else.
+    Four roles span org-level and project-level control. A Restricted project is visible only to its members and to your Org Admins; everyone else cannot see that it exists.
   </Card>
 </CardGroup>
 
@@ -42,11 +42,11 @@ Use the answers below when completing client or internal security questionnaires
 </Accordion>
 
 <Accordion title="Who can access our AI conversations?">
-  Only members of the project in which a conversation lives. Project membership is explicit — users must be added to a project to see it. SSO-offboarded users have their session invalidated and access removed immediately when their account is disabled or removed in your identity provider.
+  It depends on the project's visibility. A conversation in a **Restricted** project can be opened only by that project's members and by your Org Admins, who can open every project in the organization. A conversation in a **Public** project can be opened by anyone in your organization. A personal conversation is visible only to the person who owns it. SSO-offboarded users have their session invalidated and access removed immediately when their account is disabled or removed in your identity provider.
 </Accordion>
 
 <Accordion title="Can ParleHub staff read our conversations?">
-  No. On Business and above, conversations are stored in your own storage environment. On all plans, conversations are scoped to your organization and are not accessible to ParleHub staff in the normal course of operations. The audit log records any administrative access events so you can verify this independently.
+  No. On Business and above, conversations are stored in your own storage environment. On all plans, conversations are scoped to your organization and are not accessible to ParleHub staff in the normal course of operations.
 </Accordion>
 
 For the complete security and compliance details, visit [parlehub.com/security](https://www.parlehub.com/security/).

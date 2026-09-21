@@ -4,59 +4,63 @@ sidebarTitle: "Spending Caps"
 description: "Set a monthly org-wide AI spend ceiling and per-user limits in ParleHub to prevent runaway costs above and beyond per-project budgets."
 ---
 
-ParleHub uses a three-layer budget system to give your firm precise control over AI spend. Project budgets are the innermost layer — they constrain spending within a single engagement. Personal caps and the org-wide cap sit above them as outer backstops, catching overruns that individual project budgets might not anticipate. Understanding how these layers interact helps you tune controls that protect the firm without interrupting day-to-day work.
+ParleHub uses a three-layer budget system to give your firm precise control over AI spend. Project budgets are the innermost layer — they constrain spending within a single engagement. Personal budgets do the same for the personal conversations that belong to no project, and the org-wide cap sits above both as the outer backstop, catching overruns that individual budgets might not anticipate. Understanding how these layers interact helps you tune controls that protect the firm without interrupting day-to-day work.
 
 ## How the Layers Work
 
-Every AI send in ParleHub passes through up to three budget checks before it is executed. The most restrictive layer wins — if any layer is exhausted, the send is blocked.
+Every AI send in ParleHub is checked before it is executed: the org-wide cap always, then the project's caps for a send in a project, or the sender's personal budget for a send in a personal conversation. If any layer that applies is exhausted, the send is blocked.
 
-1. **Project budget** — blocks a specific send in a specific project when that project's monthly budget is depleted. This is the first and most granular control, scoped to a single client engagement.
+1. **Project budget** — blocks a specific send in a specific project when that project's **monthly cap** or **lifetime cap** is reached. This is the first and most granular control, scoped to a single client engagement, and it is stated in the project's own budget currency. See [Budgets](/cost/budgets).
 
-2. **Personal cap** — blocks any send by a specific user once they have spent their monthly personal limit across *all* of their projects combined. This prevents a single user from consuming a disproportionate share of the org's AI budget regardless of which projects they are active in.
+2. **Personal budget** — blocks a send in a **personal conversation** (one that belongs to a person rather than to a project) once that person has used their personal budget for the period, which is a month or a week. Spend in a project counts against the project, never against anyone's personal budget, so this layer bounds the work that is not charged to any engagement.
 
-3. **Org-wide cap** — blocks any send by anyone in the org once total org-level AI spend reaches the monthly ceiling. This is the ultimate backstop: no single project or user can push the org beyond the limit you set.
+3. **Org-wide cap** — blocks any send by anyone in the org, in a project or in a personal conversation, once total org-level AI spend reaches the monthly ceiling. This is the ultimate backstop: no single project or user can push the org beyond the limit you set. If your plan carries a monthly ceiling of its own, the lower of the two applies.
 
 <Info>
   Caps apply to model API call costs only — they do not affect your ParleHub subscription fees.
 </Info>
 
+<Note>
+  **The org-wide cap and personal caps are always in US dollars**, even if your projects are capped and reported in another currency. The org-wide cap field is labelled **Cap (USD / month)**, personal budgets read with the code on the **Members** page (for example `$25.00 USD / month`), and the notice a blocked member sees spells it out too — _"Organization monthly spend cap of \$10.00 USD would be exceeded."_ or _"Personal budget of \$100.00 USD for this period would be exceeded."_ — so the ceiling is not mistaken for your own currency. Only project caps can be set in GBP, EUR or CAD. See [Currencies and Exchange Rates](/cost/currencies#what-stays-in-us-dollars).
+</Note>
+
 ## Setting the Org-Wide Cap
 
 <Steps>
-  <Step title="Open Spending Limits">
-    Navigate to **Settings → Spending Limits**.
+  <Step title="Open the Billing tab">
+    Select **Org settings** in the sidebar and open the **Billing** tab. The **Monthly spend cap** card is at the bottom of the tab.
   </Step>
-  <Step title="Enter the Monthly Dollar Cap">
-    Under **Org-Wide Monthly Limit**, enter the maximum dollar amount the entire org may spend on AI model calls in a single calendar month.
+  <Step title="Enter the monthly cap">
+    In **Cap (USD / month)**, enter the maximum US-dollar amount the entire org may spend on AI model calls in a single calendar month, across all projects and personal conversations. If your plan has a ceiling of its own, the card says so — _"Your plan limits this to \$…/mo"_ — and the cap cannot be set above it. On a plan with no ceiling, leave the field blank for no cap.
   </Step>
   <Step title="Save">
-    Click **Save**. The limit is active immediately. The cap resets automatically on the first of each calendar month, regardless of how much of the period has elapsed.
+    Select **Save cap**. The limit is active immediately. The cap resets automatically on the first of each calendar month, regardless of how much of the period has elapsed.
   </Step>
 </Steps>
 
 ## Setting Per-User Caps
 
-Navigate to **Settings → Spending Limits → Per-User Limits**. You have two options:
+A personal budget is how much one person may spend on their own conversations, outside any project. There are two places to set it:
 
-- **Default cap** — enter a dollar amount in the **Default Limit** field. This applies to every member who does not have a custom limit assigned.
-- **Individual cap** — click a specific member's name in the list and enter a custom monthly limit for that person. Individual limits override the default for that member only.
+- **The organization default** — go to **Organization Settings → Budgets & alerts** and find the **Personal workspaces** card. Enter an amount in **Budget per person**, choose **Each month** or **Each week**, and select **Save changes**. This applies to everyone who does not have a budget of their own. The same card holds **Allow personal conversations**: turn it off and members can only work inside projects.
+- **One person's budget** — select **Members** in the sidebar and, in the **Personal budget** column, select that person's figure (it reads **Default · …** until they have their own). Enter the **Budget**, choose the period, and select **Save**. To put someone back on the default, open the same dialog and select **Use organization default**.
 
-Both limit types reset on the first of each calendar month alongside the org-wide cap.
+A monthly budget resets on the 1st of the month and a weekly one on Monday, at 00:00 UTC.
 
 ## What Happens When a Cap Is Hit
 
 When a send would exceed an active cap, ParleHub blocks the request before it reaches the model provider. The member sees an in-app message explaining which limit was reached.
 
 <Accordion title="Project budget blocked">
-  The project has exhausted its monthly budget. The member sending the message can request a budget increase from the project admin, or the project admin can raise the budget directly in the project's settings.
+  The project has reached its monthly cap or its lifetime cap. The notice names which one, in the project's budget currency. Anyone on the project can select **Request a higher limit**; only an Org Admin can approve it or raise the cap directly on the project's **Budget** tab. A monthly cap also resets on the 1st of the next month. See [Budgets](/cost/budgets#how-enforcement-works).
 </Accordion>
 
 <Accordion title="Personal cap blocked">
-  The member has reached their monthly personal spending limit. Only an org admin can raise the limit. Navigate to **Settings → Spending Limits → Per-User Limits**, select the member, and increase their cap.
+  The member has used their personal budget for the period, so they cannot send in a personal conversation until it resets. Their project work is unaffected. Only an org admin can raise it: select **Members** in the sidebar, select the figure in that person's **Personal budget** column, and enter a higher **Budget** — or raise the default for everyone in **Organization Settings → Budgets & alerts**, on the **Personal workspaces** card.
 </Accordion>
 
 <Accordion title="Org-wide cap blocked">
-  The entire organization has reached its monthly AI spending ceiling. All sends from all members are blocked until an org admin raises the cap or the month resets. Navigate to **Settings → Spending Limits** and increase the **Org-Wide Monthly Limit**.
+  The entire organization has reached its monthly AI spending ceiling. All sends from all members are blocked until an org admin raises the cap or the month resets. Go to **Organization Settings → Billing** and raise the **Cap (USD / month)** on the **Monthly spend cap** card. If the cap is already at your plan's ceiling, it can only be raised by upgrading the plan.
 </Accordion>
 
 <Warning>

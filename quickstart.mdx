@@ -18,14 +18,16 @@ This guide walks you through everything you need to go from a blank slate to a r
     To bring colleagues in immediately, go to **Settings > Members** and enter their work email addresses. They'll receive an invitation and land in your organization after signing up. You can also share your organization's SSO slug so that anyone who authenticates through your identity provider joins automatically, subject to the role you assign new members by default.
   </Step>
   <Step title="Connect a model provider">
-    Navigate to **Settings > Model Providers**. ParleHub supports four providers on your own API keys — choose at least one to start:
+    Select **Org settings** in the sidebar and open the **Model access** tab. ParleHub supports four providers on your own API keys — choose at least one to start:
 
     - **Anthropic** — Claude models
     - **OpenAI** — GPT models
     - **Google Gemini** — via a Google AI Studio key; no Google Cloud project needed
-    - **Azure AI Foundry** — models deployed in your Azure subscription (Business Elite plan and above; contact ParleHub support to finish this one)
+    - **Azure AI Foundry** — models deployed in your Azure subscription (Business Elite plan and above). After connecting the resource you also declare each deployment your team may use — see [Connecting Providers](/models/connecting-providers#provider-specific-setup)
 
     Paste your API key into the field for your chosen provider and click **Connect**. ParleHub makes a real verification call to the provider before saving, so a bad key fails here rather than at chat time. Then tick the models your team should be able to use and **Set default** on one of them.
+
+    If your provider bills you in a currency other than US dollars — most often an Azure agreement in GBP, EUR or CAD — set the **Quote currency** before you record any rates or spend. See [Setting your quote currency](/models/connecting-providers#setting-your-quote-currency).
 
     ParleHub also offers **ParleHub Managed** models that need no key of your own, billed from your organization's credit wallet. See [Connecting Providers](/models/connecting-providers) for provider-by-provider detail.
   </Step>
@@ -34,11 +36,14 @@ This guide walks you through everything you need to go from a blank slate to a r
 
     - **Name** — typically the engagement name (e.g., *Ashworth M&A*)
     - **Visibility** — **Public** (anyone in your organization can open it) or **Restricted** (members only). This cannot be changed later, so pick **Restricted** if you are unsure.
-    - **Budget (USD)** — the maximum model spend you want to allow on this project. ParleHub blocks new messages once the budget is reached and warns the team at 80%. Set **0** for no limit; spend is still tracked.
+    - **Budget currency** — USD, CAD, EUR or GBP. Pick the currency you report this work in; it is fixed once the project records any spend.
+    - **Cap period** and **Monthly cap** / **Total cap** — the maximum model spend you want to allow on this project, either **Every month** or as a **Total, for the life of the project**. ParleHub blocks new messages once the cap is reached and warns the team at 80%. Set **0** for no limit; spend is still tracked, and the project is created with no cap at all and in USD. (On the **Budget** tab afterwards, a cap is switched on or off with a tick rather than by typing 0, so a ticked cap there needs an amount above zero.) See [Budgets](/cost/budgets).
     - **Available models** — every model your org enabled is ticked; untick any you want blocked here.
     - **Storage** — **ParleHub Cloud Storage** needs no setup and is the default.
 
     Click **Create project**. You land in the project workspace as its **Project Admin**.
+
+    If you picked a currency other than USD and creation is refused with _"ParleHub can't currently price budgets in GBP, so this budget can't be saved yet…"_, ParleHub has not published an exchange rate for that currency yet — a ParleHub issue, not yours, and the project was not created. Try again shortly, or create the project with the cap at 0 and set its currency and caps on the **Budget** tab before the project records any spend. See [Troubleshooting](/projects/overview#troubleshooting).
   </Step>
   <Step title="Start a conversation">
     Open your new project and click **New Conversation**. Select a model from the dropdown — the list shows only models available on your connected providers. Type your first message and press **Send**.

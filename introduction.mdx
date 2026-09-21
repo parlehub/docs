@@ -27,14 +27,14 @@ ParleHub was built to close that gap: put a client code on every dollar of AI yo
     icon="coins"
     href="/cost/budgets"
   >
-    Every project carries your own expense code, straight through to the export. Spend and token usage break down by project, person, provider, or model over any date range.
+    Every project carries your own project code — a matter number, cost centre or expense code — straight through to the export. Spend and token usage break down by project, person, provider, or model over any date range.
   </Card>
   <Card
     title="Control"
     icon="sliders"
     href="/cost/budgets"
   >
-    Pre-flight budget enforcement blocks a send before it exceeds the project budget. An 80% warning fires before the ceiling is hit, and blocked users can request an increase in one click.
+    Give each project a monthly cap, a lifetime cap, or both, in USD, GBP, EUR or CAD. Pre-flight enforcement blocks a send before it takes the project past either one, an 80% warning shows before a cap is hit, and anyone who is blocked can request a higher limit right from the notice — with a short note for the Org Admin who approves it.
   </Card>
   <Card
     title="Shared Context"
@@ -55,13 +55,13 @@ ParleHub was built to close that gap: put a client code on every dollar of AI yo
     icon="shield-halved"
     href="/security/overview"
   >
-    Single sign-on via Microsoft Entra ID or Google Workspace, files that never leave your tenant, a tamper-evident append-only audit log, and role-based access at the org and project level.
+    Single sign-on via Microsoft Entra ID or Google Workspace, files that never leave your tenant, an append-only audit log, and role-based access at the org and project level.
   </Card>
 </CardGroup>
 
 ## How it fits together
 
-A ParleHub **project** maps to a client engagement. It has a name, an expense code you assign, a budget ceiling, and a set of members drawn from your organization. Inside a project, the team runs AI-assisted conversations using whichever models you've connected — Anthropic, OpenAI, Google Gemini, or Azure AI Foundry on your own API keys. Every token consumed is recorded against the project's budget in a single canonical ledger that drives both the real-time enforcement and the export report.
+A ParleHub **project** maps to a client engagement. It has a name, a project code you assign (your matter number or expense code), spending caps — monthly, lifetime, or both — in the currency you choose, and a set of members drawn from your organization. Inside a project, the team runs AI-assisted conversations using whichever models you've connected — Anthropic, OpenAI, Google Gemini, or Azure AI Foundry on your own API keys. Every token consumed is recorded against the project's budget in a single canonical ledger that drives both the real-time enforcement and the export report.
 
 Files live in a SharePoint site or Google Drive folder inside your own tenant. ParleHub never copies them to its own storage. When a team member asks the AI to read a contract or query a spreadsheet, the model calls the file through a real tool call and cites what it found — so there's something to review, not just a paragraph that appeared.
 

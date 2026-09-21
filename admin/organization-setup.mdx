@@ -19,7 +19,10 @@ Complete these steps after your org is created to get your firm fully operationa
     Navigate to **Settings → General** and enter your firm's name. This name appears across the workspace and in any billing communications. You can update it at any time.
   </Step>
   <Step title="Connect Model Providers">
-    Navigate to **Settings → Model Providers** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure AI Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
+    Navigate to **Organization Settings → Model access** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure AI Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
+  </Step>
+  <Step title="Set Your Currencies (If You Do Not Work in US Dollars)">
+    If a provider bills you in GBP, EUR or CAD, set its **Quote currency** when you connect it — on each Azure AI Foundry deployment, or on the Google Gemini card — before you enter any rates. Then choose the currency your reports read in under **Organization Settings → Budgets & alerts → Reporting currency**. Each project's caps get their own budget currency when you create it. Everything defaults to USD. See [Currencies and Exchange Rates](/cost/currencies).
   </Step>
   <Step title="Invite Your Team">
     Navigate to **Settings → Members** and send email invitations to your colleagues. Assign each person a role — org admin or member — at invite time. Invitees must accept the email invite before they can access the workspace.
@@ -31,7 +34,7 @@ Complete these steps after your org is created to get your firm fully operationa
     Navigate to **Settings → Storage** to link your firm's own cloud storage bucket. This keeps conversation data and file attachments within your own infrastructure. Native storage is available on the Business plan and above.
   </Step>
   <Step title="Set Org-Wide Spending Caps">
-    Navigate to **Settings → Spending Limits** and set a monthly dollar ceiling on total AI spend for the entire org. This acts as an outer backstop above all individual project and per-user budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
+    Navigate to **Organization Settings → Billing** and, on the **Monthly spend cap** card, enter a **Cap (USD / month)** — a monthly US-dollar ceiling on total model spend for the entire org — then select **Save cap**. This acts as an outer backstop above all individual project caps and personal budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
   </Step>
 </Steps>
 
@@ -59,7 +62,7 @@ Each section of the Settings area controls a distinct part of your organization'
     View your current plan, manage payment methods, and download invoices for your ParleHub subscription.
   </Card>
   <Card title="Audit Log" icon="scroll" href="/security/audit-log">
-    Review a timestamped record of administrative actions taken across the org, including membership changes and settings updates.
+    Understand what ParleHub records in its audit log — membership, settings, budget and provider changes among them. This is a reference page, not a section of Settings: there is no audit screen or export in the app today.
   </Card>
   <Card title="Roles & Permissions" icon="lock" href="/security/roles-and-permissions">
     Understand what org admins, project admins, and members can see and do across the workspace.

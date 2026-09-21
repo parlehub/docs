@@ -22,7 +22,7 @@ Ask these in the conversation where you are already working, rather than leaving
 
 | Ask something like | What you get |
 | --- | --- |
-| *"How much of our budget have we used?"* | This project's budget, what has been spent and what remains — read from the authoritative ledger. |
+| _"How much of our budget have we used?"_ | This project's monthly and lifetime caps, what has been spent and what remains — read from the authoritative ledger, with each figure's currency stated. |
 | *"Who's on this project?"* | The project roster with everyone's role. |
 | *"Which models can we use here?"* | The models actually available in this project — and, if one you expected is missing, why. |
 | *"What can you reach from this project?"* | The tools your organization has registered and enabled here, and the file storage this project is connected to. |
@@ -70,6 +70,14 @@ Spend comes back **split by who it is owed to**, and deliberately never added up
 - **Your own provider keys** — usage billed to you directly by Anthropic, OpenAI, Google or whoever holds the account.
 - **ParleHub-managed models** — usage drawn from your prepaid credit.
 
+**Every figure names its currency, and says how it was arrived at.** The assistant is handed a finished figure with its three-letter code — for example `£4,230.00 GBP` — and a sentence about its basis, which it quotes rather than working anything out itself. It is never given an exchange rate, so it cannot convert a figure on its own. You will see one of three kinds of sentence:
+
+- **No conversion was needed** — the figures are _"exactly as recorded against your usage — no exchange rate was applied"_.
+- **Converted** — the figures were converted at the exchange rate ParleHub published for the month named, or, across several months, each month at its own rate and then added together, with the months listed.
+- **Approximated** — some usage was recorded before ParleHub published a rate for that currency, so it was converted at the earliest rate ParleHub holds.
+
+Organization spend is given in your organization's reporting currency. Your prepaid credit balance is the exception: it is held in US dollars and is not converted, and the assistant says so. In a project, if the caps and the spend figure are in different currencies, the assistant gives both but will not subtract one from the other to tell you what "remains" — it says why instead. See [Currencies and Exchange Rates](/cost/currencies).
+
 A single total would mean two different things at once, so you will not be given one. The managed figure is described as an **estimate**: it is worked out by applying today's settings to past usage, so if your access mode or pricing changed mid-period it will not match exactly. **Your credit history is the authoritative record** — see the **Usage** screen for that.
 
 <Note>
@@ -103,4 +111,5 @@ If nobody has set this up yet, the assistant simply will not have anything to qu
 | It gives you your own usage instead of the organization's | You are not an Org Admin. |
 | It does not seem able to look anything up at all | Some models cannot call tools. Switch the conversation to a model that supports them. |
 | It cannot find a policy you know exists | Check with your Org Admin that the document is published and **Searchable**, and that your project has not opted out of organization knowledge in **Tools & knowledge**. |
+| It says it could not state the figures in your currency and gives US dollars instead | An exchange rate was missing. That is a ParleHub issue, not a problem with your account. Do not compare that answer with figures elsewhere in your own currency — the two differ by an exchange rate. |
 | A spend figure does not match your invoice | The managed figure is an estimate derived from current settings. Use the **Usage** screen and your credit history as the record. |

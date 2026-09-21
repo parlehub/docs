@@ -1,0 +1,129 @@
+---
+title: "Currencies and Exchange Rates: Spend in USD, GBP, EUR or CAD"
+sidebarTitle: "Currencies"
+description: "How ParleHub records AI spend in the currency your provider bills you in, caps projects in a currency you choose, and reports in another — and how monthly exchange rates are applied."
+---
+
+ParleHub can record, cap and report AI spend in **US dollars (USD), Canadian dollars (CAD), euros (EUR) or pounds sterling (GBP)**. If your provider bills you in pounds, you budget a project in pounds and you report to a client in euros, each of those is its own setting — and every money figure on screen says which currency it is in.
+
+If your whole organization works in US dollars, nothing changes for you. Every setting below defaults to USD.
+
+## Three currencies, three jobs
+
+| Currency | What it is | Where it is set |
+| --- | --- | --- |
+| **Quote currency** | The currency your agreement with a model provider is quoted and billed in. Costs are recorded in it. | On the provider's card, or on each Azure AI Foundry deployment, in **Organization Settings → Model access**. See [Connecting Providers](/models/connecting-providers#setting-your-quote-currency). |
+| **Budget currency** | The currency a project's monthly and lifetime caps are stated in. | On the **New project** form, or the project's **Budget** tab. See [Budgets](/cost/budgets). |
+| **Reporting currency** | The currency the **Usage** report and a project's spend figures are shown in. | An organization default in **Organization Settings → Budgets & alerts**, with an optional override on a project's **Budget** tab. See [below](#reporting-currency). |
+
+The three are independent. A UK firm can pay Azure in GBP, cap a project in GBP, and show that project's spend in EUR for a French client — and neither the caps nor the report ever mix the two.
+
+<Warning>
+  Only **Org Admins** can set or change any of the three. Project Admins and members can see them, read-only.
+</Warning>
+
+## Reporting currency
+
+### The organization default
+
+<Steps>
+  <Step title="Open Budgets & alerts">
+    Go to **Organization Settings → Budgets & alerts** and find the **Reporting currency** card.
+  </Step>
+  <Step title="Choose a currency">
+    Pick one from the **Reporting currency** list. Only currencies ParleHub has published exchange rates for are offered.
+  </Step>
+  <Step title="Save">
+    Select **Save changes**. The **Usage** report, its CSV export and every project that follows the default now read in that currency.
+  </Step>
+</Steps>
+
+**If nobody has set it, the default is inherited**, and the card says so: _"Nobody has set this explicitly — it currently reads **GBP**…"_ followed by the reason. The rule is:
+
+- If every active provider credential in your organization has the **same** quote currency, that currency is used.
+- Otherwise — no credentials yet, or credentials in more than one currency — it is **USD**.
+
+An inherited value can change with no action from you: add a second provider credential in another currency and your reports switch to USD. Save a choice on the card to pin it.
+
+<Note>
+  The inherited value looks at the quote currency on your provider **credentials**, not at individual Azure AI Foundry deployments. If your Foundry deployments are quoted in GBP and you want reports in GBP, set the reporting currency explicitly.
+</Note>
+
+### A project override
+
+A project can report in a different currency from the rest of the organization.
+
+<Steps>
+  <Step title="Open the project's Budget tab">
+    Under **Total spend**, find the **Reporting currency** list.
+  </Step>
+  <Step title="Pick a currency">
+    The change saves as soon as you select it. The line underneath reads _"Overrides your organization's default for this project only."_
+  </Step>
+  <Step title="To go back, choose Use your organization's default">
+    This clears the override, so the project follows the organization default again — including if that default changes later. Choosing the same currency as a default your organization has explicitly saved clears the override too.
+  </Step>
+</Steps>
+
+Project Admins and members see the result as a line of text — for example _"Reporting currency: EUR (following your organization's default)"_ — with no control to change it.
+
+<Info>
+  Changing a reporting currency changes how figures are **shown**, never what was recorded. The same project reports the same underlying spend before and after a switch.
+</Info>
+
+## How conversion works
+
+- **Exchange rates are monthly.** ParleHub publishes one rate per currency for each calendar month.
+- **Each message is converted once, at the rate for the month it was sent.** October's usage is converted at October's rate and stays that way. A later rate change never restates a figure you have already reported.
+- **A total is a sum of per-month conversions.** When a report or a cap spans several months, each month's usage is converted at that month's rate and the results are added together — not one conversion of a grand total.
+- **Budget checks and screens use the same arithmetic**, so the figure that blocks a message is the figure you see on the project's **Budget** tab.
+- **Nothing is converted when it does not need to be.** A figure shown in the currency it was recorded in is exactly the amount as charged, with no rate applied.
+- **Usage from before ParleHub published rates for a currency** is converted at the earliest rate ParleHub holds for that currency. Those amounts are an approximation rather than that month's rate, and the assistant says so when it quotes them.
+
+## Where you will see the currency
+
+Every money figure states its currency. A figure in another currency than the one beside it carries its three-letter code, for example `$12.34 USD spent · limit £5,000.00 monthly`.
+
+| Surface | What it shows |
+| --- | --- |
+| Project **Budget** tab | Caps, and spend against them, in the **budget currency**. **Total spend** and **Spend by conversation** in the project's **reporting currency**, named in the heading. The two are shown as separate facts and never netted against each other. |
+| Project cards on **Projects** | Spend and each cap that is switched on, for example `limit £5,000.00 monthly · £20,000.00 lifetime`. |
+| **Usage** report and its CSV | **Total cost (GBP)** and a **Cost (GBP)** column in your reporting currency; the CSV has a `Currency` column. See [Usage Analytics](/cost/usage-analytics). |
+| Foundry reconciliation statement | Each line in the currency that deployment is quoted in, so it can be held against your Azure invoice. It is **not** converted into your reporting currency. |
+| Budget alert notifications and emails | The project's budget currency, for example _"£85.00 of £100.00 used (85%)."_ Monthly and lifetime caps alert separately. |
+| Blocked-message notices | The cap that was reached, in its own currency — _"This project's monthly cap of £5,000.00 has been reached…"_ |
+| The assistant's spend answers | The figure, its currency code, and a sentence saying which months' rates were used. See [Asking About Your Org](/knowledge/asking-about-your-org). |
+
+## "Cost unavailable" is not "Not priced"
+
+Two labels can appear where you would expect a cost. They mean different things, and neither is ever shown as zero.
+
+| Label | What it means |
+| --- | --- |
+| **Not priced** | The usage ran on **provisioned** Azure capacity, which is billed as a flat commitment rather than per token. There is no per-token cost to show; you have already paid for the capacity on your Azure bill. |
+| **Cost unavailable** | The usage **was** charged per token, but ParleHub could not state its cost — typically because an exchange rate was missing. This is a ParleHub issue, not a problem with your account or your usage, and ParleHub is alerted to it. Figures beside it are understated by whatever that usage cost. |
+
+In both cases the tokens are still counted, and a note under the figures says how many were excluded.
+
+## What stays in US dollars
+
+These are always USD, whatever your reporting currency is. Where they appear next to figures in another currency they carry the `USD` code so they cannot be mistaken for your own currency.
+
+- **ParleHub Managed models** — ParleHub prices them in USD and charges your credit wallet in USD. Their usage still appears in the **Usage** report alongside everything else, shown in your reporting currency.
+- **The prepaid credit wallet** and credit purchases.
+- **Your ParleHub subscription**, billed in USD.
+- **Personal budgets** — for example _"Personal budget of \$100.00 USD for this period would be exceeded."_
+- **The organization's monthly spend cap** — the field is labelled **Cap (USD / month)**.
+- **The project consumption cap for platform services**, on the project's **Budget** tab — **Cap (USD / month)**.
+
+## If an exchange rate is missing
+
+Exchange rates are maintained by ParleHub. If one is missing, that is ParleHub's fault and never something wrong with your account, and the message says so.
+
+| What you see | What is happening | What to do |
+| --- | --- | --- |
+| A message is refused: _"ParleHub can't currently convert this model's prices from GBP and so can't check it against your budget…"_ | The model is quoted in a currency ParleHub has no rate for this month, so the send cannot be measured against a cap. It is refused rather than let through unmeasured. | Try again shortly. If it persists, contact ParleHub support. |
+| Saving a budget: _"ParleHub can't currently price budgets in EUR, so this budget can't be saved yet…"_ | No rate has been published for that currency yet. | Try again shortly. Turning a cap off, or changing an amount in the currency the project already uses, still works. |
+| Saving a reporting currency: _"ParleHub can't currently report figures in CAD, so this can't be saved yet…"_ | As above. | Try again shortly. Leaving the currency as it is still works. |
+| A currency in a list shows as _"GBP (unavailable)"_ | The saved currency is not currently offered. | Pick another currency, or on a project choose **Use your organization's default**. |
+| The assistant says it could not state figures in your currency and shows USD instead | A rate was missing for a descriptive answer. Nothing is lost and no money is misstated. | Do not compare that answer with figures elsewhere in your own currency — they differ by an exchange rate. |

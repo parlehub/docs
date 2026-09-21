@@ -90,7 +90,7 @@ Every monthly plan you can buy today starts with a **7-day free trial** — ther
 | **Bring-your-own model deployments (Azure AI Foundry)** | — | — | ✓ | ✓ |
 | **Knowledge IQ (organization knowledge)** | — | — | ✓ | ✓ |
 | **Free trial** | 7 days | 7 days | Not purchasable yet | — |
-| **Audit log** — every change and message is recorded, and ordinary edits cannot alter it | ✓ | ✓ | ✓ | ✓ |
+| **Audit log** — every change and message is recorded, and ordinary edits and deletes are rejected. Recording only: a customer-facing audit view and export are planned, not available yet | ✓ | ✓ | ✓ | ✓ |
 | **Roles** | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member |
 | **Per-project budgets & expense codes** | ✓ | ✓ | ✓ | ✓ |
 | **Multi-provider model support (BYOK)** | ✓ | ✓ | ✓ | ✓ |
@@ -102,15 +102,19 @@ Every monthly plan you can buy today starts with a **7-day free trial** — ther
 
 ## Understanding model spend
 
-Model spend is the cost of the AI API calls that ParleHub routes through your connected provider keys. When you send a message in a project conversation, ParleHub calls the model on your behalf using the API key you supplied in **Settings > Model Providers**, records the token counts and cost against the project's budget, and passes the charge on to your provider account.
+Model spend is the cost of the AI API calls that ParleHub routes through your connected provider keys. When you send a message in a project conversation, ParleHub calls the model on your behalf using the API key you supplied in **Organization Settings → Model access**, records the token counts and cost against the project's budget, and passes the charge on to your provider account.
 
 **Team plan:** Your entire organization shares a \$10/mo model spend cap across all projects and seats. Once that cap is reached, new messages are blocked until the following month. This is intentionally enough to run a meaningful pilot on one or two engagements.
 
 **Business, Business Elite and Enterprise plans:** Model spend is uncapped within ParleHub. You pay your model provider directly through your own API keys (Bring Your Own Key). ParleHub enforces the per-project budgets you set and the org-wide and personal caps you configure, but it does not add a markup or impose a ceiling above those limits.
 
+<Note>
+  **Plan prices, the Team plan's model spend cap, the credit wallet and your ParleHub subscription are all in US dollars.** Your own provider usage is different: ParleHub can record it in the currency your provider bills you in, cap projects in USD, GBP, EUR or CAD, and report in the currency you choose. See [Currencies and Exchange Rates](/cost/currencies).
+</Note>
+
 ### **Managed Models**
 
-These are models that you can use that ParleHub is hosting. This allows you to try models that you don't have a relationship with, or open models you don't want to host yourself. The cost of these models is deducted from your Credit Wallet. Managed models are available on every plan, including Team, and are unaffected by the bring-your-own Foundry deployment requirement above — that requirement applies only to connecting a model deployed in your own Azure subscription.
+These are models that you can use that ParleHub is hosting. This allows you to try models that you don't have a relationship with, or open models you don't want to host yourself. The cost of these models is deducted from your Credit Wallet, which is always held in US dollars. Managed models are available on every plan, including Team, and are unaffected by the bring-your-own Foundry deployment requirement above — that requirement applies only to connecting a model deployed in your own Azure subscription.
 
 ## What happens if your plan changes
 

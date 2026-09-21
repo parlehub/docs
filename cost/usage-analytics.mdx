@@ -1,95 +1,125 @@
 ---
 title: "Usage Analytics: Token Spend Across Projects and People"
 sidebarTitle: "Usage Analytics"
-description: "View and export AI token spend broken down by project, team member, provider, and model across any date range in ParleHub's analytics dashboard."
+description: "View and export AI token spend by project, team member, provider, and model across any date range — in your organization's reporting currency."
 ---
 
-The ParleHub analytics dashboard gives org admins a complete, real-time picture of AI spend across every project, team member, provider, and model in the organization. Instead of reconciling line items from multiple provider invoices, you get one unified view — drillable by the dimensions that matter for professional services billing. Use it to spot high-spend engagements before they hit a budget ceiling, identify which models your team reaches for most, or pull the monthly export your finance team needs.
+The **Usage** screen gives Org Admins a complete picture of AI spend across every project, team member, provider, and model in the organization, read from the same ledger that enforces your budgets. Instead of reconciling line items from multiple provider invoices, you get one view — drillable by the dimensions that matter for professional services billing, in the currency your organization reports in. Use it to spot high-spend engagements before they reach a cap, identify which models your team reaches for most, or pull the export your finance team needs.
 
-## Navigating to Analytics
+## Opening the Usage screen
 
-Open **Analytics** from the main sidebar. By default, the dashboard opens at the org level, showing total spend across all projects and all members for the last 30 days.
+Select **Usage** in the main sidebar. The report opens on the last 30 days, grouped by project.
 
 <Note>
-  Org-level analytics are visible to org admins. Project members without that role see analytics scoped to their own projects only.
+  The Usage screen is for **Org Admins**. Project Admins and members see their own project's spend on that project's **Budget** tab — see [Budgets](/cost/budgets).
 </Note>
 
-You can also reach analytics from **Org Settings → Usage & Billing → Analytics**.
+## The currency of the report
+
+Every cost on this screen is in your organization's **reporting currency**, and says so: the headline reads **Total cost (GBP)** and the table column reads **Cost (GBP)**. An Org Admin sets the reporting currency in **Organization Settings → Budgets & alerts** — see [Currencies and Exchange Rates](/cost/currencies#reporting-currency).
+
+Costs recorded in another currency are converted month by month: each month's usage at ParleHub's exchange rate for that month, then added together. Changing the reporting currency changes how the report is shown, never what was recorded.
+
+<Info>
+  A project can override the reporting currency for its own **Budget** tab. That override does not affect this screen — the organization's Usage report is always in the organization's reporting currency.
+</Info>
 
 ## Dimensions You Can Slice By
 
-Use the dimension tabs and filters at the top of the dashboard to break spend down along any axis — or combine multiple filters to narrow to a specific subset.
+Use **Group by** to break spend down along one axis, and the **Projects**, **People**, **Models** and **Providers** filters to narrow to a specific subset.
 
 <CardGroup cols={2}>
   <Card title="Project" icon="folder-open" href="/projects/overview">
-    See which client engagements are consuming the most tokens and cost. Quickly identify projects approaching their budget ceiling before enforcement triggers.
+    See which client engagements are consuming the most tokens and cost. Personal conversations appear as their own **Personal** row.
   </Card>
-  <Card title="Person" icon="user-group" href="/admin/managing-members">
-    See which team members are the heaviest AI users across the org. Useful for understanding adoption patterns and for reviewing individual spend against personal caps.
+
+  <Card title="User" icon="user-group" href="/admin/managing-members">
+    See which team members are the heaviest AI users across the org. Useful for understanding adoption patterns and for reviewing individual spend against personal budgets.
   </Card>
+
   <Card title="Provider" icon="server" href="/models/connecting-providers">
-    Compare spend across Anthropic, OpenAI, Google Gemini, and Azure AI Foundry. Understand where your AI budget is going at the infrastructure level.
+    Compare spend across Anthropic, OpenAI, Google Gemini, Azure AI Foundry and ParleHub Managed models.
   </Card>
+
   <Card title="Model" icon="microchip" href="/models/supported-models">
-    Break spend down by specific model — compare `gpt-4o` vs `claude-3-5-sonnet` vs `gemini-1.5-pro`. Identify whether cost-efficient models could substitute for premium ones on lower-stakes tasks.
+    Break spend down by specific model. Identify whether cost-efficient models could substitute for premium ones on lower-stakes tasks.
   </Card>
 </CardGroup>
 
-### Date Range
+### Date range, bucket and metric
 
-Set the time window using the date range picker in the top-right corner of the dashboard. Available presets:
+- **Range** — **Last 7 days**, **Last 30 days**, **Last 6 months**, or **Custom** with a start and end date.
+- **Bucket** — chart the period by **Day**, **Week** or **Month**.
+- **Metric** — chart **Cost** or **Tokens**.
 
-- Last 7 days
-- Last 30 days
-- Last 90 days
-- Custom range (pick any start and end date)
+Above the chart, four figures summarize the selection: **Total cost**, **Total tokens**, **Tokens in / out** and **Ledger entries**.
 
-All charts and totals update instantly when you change the range. Custom ranges can span up to 12 months in a single view.
+### Costs that cannot be shown
+
+A cost cell never shows zero for usage that really happened. Instead it reads:
+
+- **Not priced** — the usage ran on provisioned Azure capacity, which is billed as a flat commitment rather than per token. An **Unpriced** column counts those tokens.
+- **Cost unavailable** — the usage was charged per token but ParleHub could not state its cost, typically because an exchange rate was missing. That is a ParleHub issue, not a problem with your account, and a **Cost unavailable** column counts those tokens.
+
+Both columns appear only when there is something to report, with a note under the totals saying how many tokens the cost figures exclude. See [Currencies and Exchange Rates](/cost/currencies#cost-unavailable-is-not-not-priced).
 
 ## Exporting Data
 
-Pull a full CSV export from any analytics view to feed into your billing system, matter management platform, or financial reporting tools.
-
 <Steps>
-  <Step title="Open the Export tab">
-    From the Analytics page, click the **Export** tab.
-  </Step>
-  <Step title="Set filters">
-    Choose a date range. Optionally filter by specific projects, members, or providers to limit the export to what you need.
+  <Step title="Set up the view you want">
+    Choose the range, the **Group by** dimension and any filters. The export contains exactly what the **Breakdown** table shows.
   </Step>
   <Step title="Download">
-    Click **Download CSV**. Exports covering up to 90 days are ready immediately. Longer ranges generate a download link sent to your email within a few minutes.
+    Select **Download CSV** above the table.
   </Step>
 </Steps>
 
-Each row in the export includes:
+Each row in the export is one group (a project, user, provider or model), followed by a `TOTAL` row:
 
 | Column | Description |
-|---|---|
-| `date` | UTC date of the usage record |
-| `project_name` | Project display name |
-| `expense_code` | Client matter or billing code set on the project |
-| `person` | Name and email of the team member |
-| `provider` | AI provider (e.g. Anthropic, OpenAI) |
-| `model` | Specific model name |
-| `input_tokens` | Tokens in the prompt |
-| `output_tokens` | Tokens in the model response |
-| `cost_usd` | Total cost in US dollars |
+| --- | --- |
+| `Group` | The key of the group the row is for — a project or user identifier, a provider, or a model ID. The last row reads `TOTAL` |
+| `Tokens In` | Tokens in the prompts |
+| `Tokens Out` | Tokens in the model responses |
+| `Total Tokens` | The two added together |
+| `Cost` | Cost in the currency named in the `Currency` column. Blank where the cost is not priced or unavailable |
+| `Share %` | The row's share of the total |
+| `Project Code` | The project's code. Present only when grouped by project |
+| `Cached Tokens In` | Present only when a provider reported cached input tokens in the period |
+| `Reasoning Tokens` | Present only when a provider reported reasoning tokens in the period |
+| `Unpriced Tokens` | Present only when some usage ran on provisioned capacity |
+| `Currency` | The three-letter code the `Cost` column is in — your organization's reporting currency, the same on every row |
+| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage. When it is present, it is the last column |
+
+<Note>
+  The cost column is headed `Cost`, not `Cost USD` — the `Currency` column says what it is in. **Read columns by header name, not by position.** Five of the columns above — `Project Code`, `Cached Tokens In`, `Reasoning Tokens`, `Unpriced Tokens` and `Unconverted Tokens` — appear only when there is something to report, so the same report can have a different number of columns from one period to the next. The columns always come in the order shown in the table, so their relative order never changes, but a column's absolute position can: `Currency` sits one place further along in a month where a provider first reports cached tokens.
+</Note>
 
 <Tip>
-  Export monthly and import by expense code into your practice management system to automate client AI cost recovery without manual reconciliation.
+  Export monthly, grouped by project, and import by project code into your practice management system to automate client AI cost recovery without manual reconciliation. If you automate the import, match columns on their header names (`Project Code`, `Cost`, `Currency`) rather than on column numbers, and skip the final `TOTAL` row so the period is not counted twice. See [Expense Codes](/cost/expense-codes).
 </Tip>
+
+## Foundry reconciliation statement
+
+If you bring your own Azure AI Foundry deployments, the **Foundry reconciliation statement** sits below the usage report. Pick a **Month** to see what ParleHub metered on each deployment, meter by meter, laid out to sit beside your Azure invoice; **Export CSV** downloads it.
+
+This statement deliberately stays in the units your Azure invoice is billed in:
+
+- **Each line is in the currency its deployment is quoted in**, not your reporting currency, and nothing on it is converted. The statement says so — for example _"Figures are in GBP — the currency your deployments are quoted in, so they are the amounts to hold against your Azure invoice…"_
+- **Each deployment's heading names its currency.** If a deployment's quote currency changed during the month, the heading reads _"Quoted in more than one currency — see each line"_, and every meter line still states its own.
+- **Where any line is not in US dollars, the period total and the per-project cost column are withheld**, with a note explaining why. Adding amounts in different currencies would not be meaningful.
+- **In the CSV**, the columns are headed `Rate per 1M Tokens` and `Cost`, and a `Currency` column at the end gives each line's currency.
 
 ## One Canonical Ledger
 
-The analytics dashboard and ParleHub's budget enforcement engine read from the same underlying token ledger. The spend number you see in a project's analytics view is the same number that triggers the 80% warning banner and the pre-flight budget block.
+The Usage screen and ParleHub's budget enforcement read from the same underlying token ledger, using the same month-by-month conversion. The spend a project's **Budget** tab shows against a cap is the same number that triggers the 80% warning and the pre-flight block.
 
-There is no lag, no reconciliation gap, and no difference between "reported spend" and "enforced spend." When analytics shows a project at $420 of a $500 budget, enforcement will block at $500 — not at some independently calculated figure.
+There is no lag, no reconciliation gap, and no difference between "reported spend" and "enforced spend." When a project shows £420.00 of a £500.00 monthly cap used, enforcement blocks at £500.00 — not at some independently calculated figure.
 
 <Info>
-  Token counts reflect actual billed tokens from the provider response. ParleHub does not mark up, round, or adjust token counts — what the provider reports is what you see and what you are charged for.
+  Token counts reflect the tokens the provider reported for each response. ParleHub does not mark up, round, or adjust token counts.
 </Info>
 
 <Accordion title="Why a single ledger matters for professional services">
-  In a billable-hours environment, the number on your analytics export needs to match the number on any client invoice or write-off memo. Because ParleHub uses one canonical ledger for both reporting and enforcement, you can export usage data and use it directly in billing workflows — with confidence that the numbers reconcile with the limits your team experienced during the engagement.
+  In a billable-hours environment, the number on your usage export needs to match the number on any client invoice or write-off memo. Because ParleHub uses one canonical ledger for both reporting and enforcement, you can export usage data and use it directly in billing workflows — with confidence that the numbers reconcile with the limits your team experienced during the engagement.
 </Accordion>
