@@ -1,7 +1,7 @@
 ---
 title: "Usage Analytics: Token Spend Across Projects and People"
 sidebarTitle: "Usage Analytics"
-description: "View and export AI token spend by project, team member, provider, and model across any date range — in your organization's reporting currency."
+description: "View and export AI spend by project, team member, provider, model and Auto tier across any date range, and see what prompt caching saved, in your organization's reporting currency."
 ---
 
 The **Usage** screen gives Org Admins a complete picture of AI spend across every project, team member, provider, and model in the organization, read from the same ledger that enforces your budgets. Instead of reconciling line items from multiple provider invoices, you get one view — drillable by the dimensions that matter for professional services billing, in the currency your organization reports in. Use it to spot high-spend engagements before they reach a cap, identify which models your team reaches for most, or pull the export your finance team needs.
@@ -46,6 +46,45 @@ Use **Group by** to break spend down along one axis, and the **Projects**, **Peo
   </Card>
 </CardGroup>
 
+### Auto groupings
+
+If your organization uses [Auto](/models/auto), two more **Group by** options show what Auto did with your spend. Every figure is actual billed spend; nothing on this screen is an estimated saving.
+
+**Auto tier** splits spend by the tier Auto chose:
+
+| Group | What it holds |
+| --- | --- |
+| **Everyday**, **Standard**, **Frontier** | Answers Auto routed to that tier |
+| **Auto, fell back to the default model** | Auto answers that went to your organization's default model because the tier models couldn't serve them |
+| **Auto, tier not recorded** | A small number of Auto answers from 25 September 2026, before the tier was recorded |
+| **Chosen by a person** | Answers on a model someone picked by name |
+| **Background** | Work that isn't an answer, such as compacting a long conversation |
+
+**How the model was chosen** splits the same spend by the reason: **Auto's rule**, **Deep**, **Stronger retry**, **Project starting tier**, **Moved up after stronger retries**, **Person's pick** and **Background**.
+
+Combine either grouping with the **Models** filter, or group by **Model**, to see which model actually served each tier.
+
+<Info>
+  These groupings are on every plan. An organization that has never used Auto sees its spend under **Chosen by a person**. An organization that stops using Auto can still see how its past spend was split.
+</Info>
+
+### Prompt cache
+
+Providers charge much less for text they have recently seen (the **prompt cache**), and a little more to store it for reuse. The **Prompt cache** block beside the totals shows what that did to your spend for the range and filters you've selected:
+
+- **Served from cache**: the share of input tokens that came from the cache.
+- **Cache reads saved**: what the cached input would have cost at the normal input price, minus what it did cost.
+- **Cache writes cost extra**: what storing text in the cache cost above the normal input price.
+- **Net**: the two together, shown as **Saved** an amount, or **Cost** an amount **more** when caching cost more than it saved.
+
+These figures are **exact, not estimated**. Each message recorded the prices it was charged, so the saving is worked out from those prices, in your reporting currency, on the billed amount. The same four figures appear as columns on every grouping.
+
+Some usage can't be measured, for example usage recorded before the cost breakdown existed, usage on provisioned capacity with no per-token price, or usage with no exchange rate. It is counted separately and says so, never guessed.
+
+<Tip>
+  A high share served from cache usually means people work in long, continuous conversations. Short, one-off conversations write to the cache without reusing it, which is when **Net** can show a cost.
+</Tip>
+
 ### Date range, bucket and metric
 
 - **Range** — **Last 7 days**, **Last 30 days**, **Last 6 months**, or **Custom** with a start and end date.
@@ -74,7 +113,7 @@ Both columns appear only when there is something to report, with a note under th
   </Step>
 </Steps>
 
-Each row in the export is one group (a project, user, provider or model), followed by a `TOTAL` row:
+Each row in the export is one group (a project, user, provider, model, or one of the [Auto groupings](#auto-groupings)), followed by a `TOTAL` row:
 
 | Column | Description |
 | --- | --- |
@@ -89,10 +128,11 @@ Each row in the export is one group (a project, user, provider or model), follow
 | `Reasoning Tokens` | Present only when a provider reported reasoning tokens in the period |
 | `Unpriced Tokens` | Present only when some usage ran on provisioned capacity |
 | `Currency` | The three-letter code the `Cost` column is in — your organization's reporting currency, the same on every row |
-| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage. When it is present, it is the last column |
+| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage |
+| `Served From Cache %`, `Cache Reads Saved`, `Cache Writes Extra`, `Cache Net` | The [prompt cache](#prompt-cache) figures, in the `Currency` column's currency. Present only when some usage in the period could be measured; blank on a row with nothing measurable. When present, they are the last four columns |
 
 <Note>
-  The cost column is headed `Cost`, not `Cost USD` — the `Currency` column says what it is in. **Read columns by header name, not by position.** Five of the columns above — `Project Code`, `Cached Tokens In`, `Reasoning Tokens`, `Unpriced Tokens` and `Unconverted Tokens` — appear only when there is something to report, so the same report can have a different number of columns from one period to the next. The columns always come in the order shown in the table, so their relative order never changes, but a column's absolute position can: `Currency` sits one place further along in a month where a provider first reports cached tokens.
+  The cost column is headed `Cost`, not `Cost USD` — the `Currency` column says what it is in. **Read columns by header name, not by position.** Several of the columns above — `Project Code`, `Cached Tokens In`, `Reasoning Tokens`, `Unpriced Tokens`, `Unconverted Tokens` and the four prompt cache columns — appear only when there is something to report, so the same report can have a different number of columns from one period to the next. The columns always come in the order shown in the table, so their relative order never changes, but a column's absolute position can: `Currency` sits one place further along in a month where a provider first reports cached tokens.
 </Note>
 
 <Tip>

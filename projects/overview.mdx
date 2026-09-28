@@ -43,7 +43,7 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
     You can change the amount later, and add the other cap, from the project's **Budget** tab. See [Budgets](/cost/budgets).
   </Step>
   <Step title="Choose available models">
-    Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected.
+    Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected. After creation, blocked models and any other rules for this project live in its [model policy](/models/model-policy), on the **Budget** tab.
   </Step>
   <Step title="Choose storage">
     **ParleHub Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
@@ -79,7 +79,7 @@ The project workspace has one tab per area of setup.
   </Card>
 
   <Card title="Budget" icon="dollar-sign" href="/cost/budgets">
-    The project's monthly and lifetime caps, and actual spend computed from real token usage, broken down per conversation.
+    The project's monthly and lifetime caps and actual spend per conversation, plus its model policy, per-message spending limit and Auto starting tier.
   </Card>
 
   <Card title="Tools" icon="plug" href="/tools/integrations">
@@ -154,7 +154,9 @@ If your organization has connected integrations, open the **Tools** tab and swit
 | "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Organization Settings → Billing |
 | Creating the project is refused: "ParleHub can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and ParleHub has not published an exchange rate for that currency yet — a ParleHub issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
 | No **Available models** section on the form | Your organization has not connected any model providers | [Connect a provider key](/models/connecting-providers) first |
-| Nobody can chat in the new project | No models enabled, or you blocked them all here | Re-check the model list on **Project Details**, and the org's enabled models |
+| Nobody can chat in the new project | No models enabled, or the project's model policy leaves none usable | Check the project's [model policy](/models/model-policy) on the **Budget** tab, then the organization's enabled models and policy |
+| A message is refused: an admin has restricted this model | The organization's or project's [model policy](/models/model-policy) doesn't allow that model | Select **Continue with …** to resend on an allowed model, or ask an admin to change the policy |
+| A message is refused for its cost, not the budget | It is over the [per-message spending limit](/models/model-policy#per-message-spending-limit) | Compact the conversation or start a new one, or select **Request a higher limit** |
 | SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Organization Settings → File storage |
 | Saving storage fails a connectivity check | ParleHub has not been granted access to that site or Shared Drive | Grant access on the provider's side first, then save again |
 | Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
