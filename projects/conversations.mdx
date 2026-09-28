@@ -16,7 +16,7 @@ Conversations in ParleHub are not private chat windows — they are shared, pers
     Click **New Conversation** in the top-right corner. Give the conversation a descriptive title so teammates can find it later — for example, *"Contract risk review — MSA v3"*.
   </Step>
   <Step title="Select a model">
-    Choose an AI model from the model picker. The dropdown shows only the models your project admin has approved for this engagement.
+    Choose an AI model from the model picker, or **Auto** to let ParleHub pick a model for each conversation (see [Auto](/models/auto)). Models your organization's or project's [model policy](/models/model-policy) doesn't allow appear greyed out and marked **blocked by an admin**.
   </Step>
   <Step title="Send your first message">
     Type your message and press **Enter** (or click **Send**). The thread is now live and visible to all project members.
@@ -42,6 +42,16 @@ This is fundamentally different from deleting a message and retyping: deleting r
 <Info>
   Branches are visible to all project members. Use the branch selector at the fork point to switch between the original thread and any alternatives.
 </Info>
+
+### A stronger answer is a branch too
+
+On an answer from [Auto](/models/auto), **Try with a stronger model** asks the same question again, one tier up. The new answer opens as a branch beside the first, so you can compare them. If a teammate does this on an answer you're reading, your screen doesn't move. You see a notice such as _"Adi retried this with a stronger model · View"_, and can switch when you're ready.
+
+### Replying on an earlier branch
+
+You can carry on from any branch, not just the newest one. Switch to the branch you want and send a message. Your message and the assistant's answer stay on **that** branch, and the other branches are untouched.
+
+Each branch is its own conversation for the model: it only sees that branch's history. Automatic compaction and cost estimates follow the branch you're on too.
 
 ## Promoting a personal chat
 

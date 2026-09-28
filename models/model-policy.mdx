@@ -1,0 +1,100 @@
+---
+title: "Model Policy: Decide Which Models Your Firm Can Use"
+sidebarTitle: "Model Policy"
+description: "Write rules for which AI models can be used across your organization and in each project, review what a change affects before saving, and cap what one message may cost."
+icon: "shield-halved"
+---
+
+A **model policy** decides which models can be used at all. Instead of ticking models one by one, you write rules, such as _"only these providers"_ or _"nothing above this price"_. They are checked every time someone sends a message, so a model released tomorrow is decided by today's rules.
+
+The policy applies everywhere a model is chosen: the model picker, every message, and [Auto](/models/auto), which only ever picks from models the policy allows.
+
+<Info>
+  Model policy and the per-message spending limit are included on the **Business**, **Business Elite** and **Enterprise** plans.
+</Info>
+
+## Two levels: organization and project
+
+| Level | Who | Where | What it does |
+| --- | --- | --- | --- |
+| **Organization** | Org Admin | **Organization Settings → Model access → Model policy** | Applies to every project and to personal conversations |
+| **Project** | Project Admin or Org Admin | The project's **Budget** tab | Adds stricter rules for one project |
+
+A project's rules can only **narrow** the organization's rules, never widen them. If a project rule would allow something the organization's rules don't, you're told before you can save.
+
+## The rules you can set
+
+| Rule | Example |
+| --- | --- |
+| **Only allow these providers** | Only your own Anthropic and Azure AI Foundry keys |
+| **Maximum input price** (per million tokens) | Nothing more expensive than a mid-range model on a high-volume project |
+| **Only allow models that can use tools** | Keep file tools and integrations working in every conversation |
+| **Only allow these models** | A short approved list for a regulated client |
+| **Blocked models** | Everything except one specific model |
+
+Leave a rule empty and it doesn't restrict anything. A model has to pass every rule you set.
+
+## Review before you save
+
+Select **Review changes** before saving. ParleHub shows what the change would do:
+
+- Whether a project rule would **widen** the organization's rules, and which organization rule it conflicts with.
+- Whether any project or personal conversations would be left with **no usable model**.
+- How many conversations **active in the last 30 days** are on a model the change would newly stop, per project.
+
+**Save policy** is offered only once the review has run and nothing in it blocks the change.
+
+<Note>
+  When a saved change stops a model that recent conversations were using, the members of those projects are notified straight away (_"A model policy change affects your conversations"_), so nobody finds out by being refused mid-task.
+</Note>
+
+## What members see
+
+### A blocked model in the picker
+
+A model your policy stops stays in the model picker, greyed out and marked **blocked by an admin**. It doesn't silently disappear. If someone opens a conversation that was last on a blocked model, it reopens on the project's default model and says why.
+
+### A message a rule stops
+
+If someone sends on a model the policy doesn't allow, the message isn't sent. Instead they see:
+
+- **Why:** an admin has restricted that model. It never says which rule, or who set it.
+- **A way to carry on:** **Continue with …** on one suggested model, the lowest-priced model the policy allows that can still do the job (including using tools, if the conversation has used them). One click resends the same message in the same conversation. That send is checked again, so a policy that changed in between still applies.
+- **Who can change it:** a link to the relevant policy for an admin who can lift it. A Project Admin stopped by an **organization** rule gets **Ask an organization admin to change the policy**, which sends a request to the Org Admins' **Requests** queue.
+
+## Per-message spending limit
+
+A **per-message spending limit** caps what one message may cost. A message whose estimated cost is over the limit is refused **before** any model is called, so one very long conversation can't spend a month's budget in a single answer.
+
+| Level | Who | Where |
+| --- | --- | --- |
+| **Organization** | Org Admin | **Organization Settings → Billing** |
+| **Project** (stricter only) | Project Admin or Org Admin | The project's **Budget** tab |
+
+The lower of the two applies. When a message is refused, the notice says it isn't a budget problem, names the limit, and points to what helps: compact the conversation, or start a new one. When a **project** limit refused it, the notice also offers **Request a higher limit**, which an Org Admin can approve.
+
+Each limit is set in a currency: the project's budget currency, or one the Org Admin chooses (US dollars by default). See [Currencies](/cost/currencies).
+
+<Tip>
+  The per-message limit is separate from [project budgets](/cost/budgets) and [spending caps](/admin/org-caps). Budgets cap total spend over a period; the per-message limit stops a single message from being unexpectedly expensive.
+</Tip>
+
+## If your plan changes
+
+If your organization moves to a plan without model policy:
+
+- **Your rules and limits keep applying.** Losing the feature never loosens a control you set.
+- **You can remove them, but not add new ones or raise a limit.**
+- **Nothing is deleted.**
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Model Selection" icon="list-check" href="/models/model-selection">
+    Enable models for your organization and set the default.
+  </Card>
+
+  <Card title="Auto" icon="wand-magic-sparkles" href="/models/auto">
+    Let ParleHub pick the model for each conversation, inside these rules.
+  </Card>
+</CardGroup>

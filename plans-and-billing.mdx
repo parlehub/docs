@@ -1,7 +1,7 @@
 ---
 title: "ParleHub Plans: Team, Business, Business Elite, and Enterprise Compared"
 sidebarTitle: "Plans & Billing"
-description: "Compare ParleHub's Team, Business, Business Elite, and Enterprise plans — seats, projects, model spend, storage, SSO and other features included in each tier."
+description: "Compare ParleHub's Team, Business, Business Elite, and Enterprise plans: seats, projects, model spend, storage, SSO, Auto, model policy and other features included in each tier."
 ---
 
 ParleHub offers four plans designed to match where your firm is in its AI adoption journey — from a small team piloting shared AI conversations to a fully governed, unlimited-seat deployment with your own storage, identity infrastructure and model deployments. All plans give you per-project budgets, expense codes, and multi-provider model access (BYOK). The tiers differ in seat and project capacity, storage, SSO, own-storage integration, bring-your-own model deployments, and organization knowledge.
@@ -36,6 +36,7 @@ Every monthly plan you can buy today starts with a **7-day free trial** — ther
     - 2,000 files/day search indexing
     - Up to 10 [integrations](/tools/integrations)
     - Everything in Team, plus SSO, private projects, and your own storage (SharePoint or Google Drive)
+    - [Auto](/models/auto) model routing and [model policy](/models/model-policy)
     - 7-day free trial
   </Card>
 
@@ -89,6 +90,8 @@ Every monthly plan you can buy today starts with a **7-day free trial** — ther
 | **Your own storage (SharePoint / Google Drive)** | — | ✓ | ✓ | ✓ |
 | **Bring-your-own model deployments (Azure AI Foundry)** | — | — | ✓ | ✓ |
 | **Knowledge IQ (organization knowledge)** | — | — | ✓ | ✓ |
+| [**Auto**](/models/auto): ParleHub picks a lower-cost or stronger model for each conversation | — | ✓ | ✓ | ✓ |
+| [**Model policy**](/models/model-policy): rules for which models can be used, and a per-message spending limit | — | ✓ | ✓ | ✓ |
 | **Free trial** | 7 days | 7 days | Not purchasable yet | — |
 | **Audit log** — every change and message is recorded, and ordinary edits and deletes are rejected. Recording only: a customer-facing audit view and export are planned, not available yet | ✓ | ✓ | ✓ | ✓ |
 | **Roles** | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member | Org admin, project admin, member |
@@ -124,6 +127,8 @@ If your organization moves to a plan with fewer features, or goes over a limit o
 - **Features outside your plan stop working for new use, but what you already have stays visible.** You can still view and remove what you created with a feature your plan no longer includes.
 - **Private projects stay private.** A restricted project never becomes visible to the rest of the organization just because the plan changed.
 - **Going over a limit blocks adding more, not what is already there.** For example, if you are over your seat or storage limit, you cannot add another seat or file until you are back under it, but nobody is removed and nothing already stored is deleted.
+- **Losing Auto stops routing, and nothing else.** Each conversation on Auto stays on the model it last used, with a one-line note, and nothing is refused. See [Set Up Auto](/models/auto-setup#if-your-plan-changes).
+- **Losing model policy never loosens a rule.** Your model rules and per-message spending limits keep applying. You can remove them, but not add new ones or raise a limit. See [Model Policy](/models/model-policy#if-your-plan-changes).
 - **Losing Integrations stops adding and using them, not what you already connected.** You cannot connect a new integration or count on the agent calling one it already had, but every integration you configured stays visible, and anyone who connected their own account can still view and disconnect it. See [Choosing who the credential belongs to](/tools/integration-scopes#if-your-plan-changes).
 
 <Note>

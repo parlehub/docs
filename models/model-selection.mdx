@@ -1,7 +1,7 @@
 ---
 title: "Choose Which AI Models a Project Can Use"
 sidebarTitle: "Model Selection"
-description: "Enable models for your organization, set the org default, and restrict which of them each project may use — then switch models mid-conversation."
+description: "Enable models for your organization, set the default, narrow them with a model policy, or let Auto pick — then switch models mid-conversation."
 ---
 
 Model choice in ParleHub is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
@@ -14,26 +14,32 @@ The first model you enable becomes the default automatically; use **Set default*
 
 Full detail, including what to do when a model appears greyed out: [Connecting Providers](/models/connecting-providers).
 
-## Level 2 — The models a project may use
+## Level 2 — Rules for which models can be used
 
-Every model your organization has enabled is available to a project **by default**. You narrow that list per project to steer a team toward cost-efficient models for routine work, keep an expensive model off a high-volume project, or enforce a specific provider for a compliance-sensitive engagement.
+Every model your organization has enabled is available to every project **by default**. To narrow that, write a [model policy](/models/model-policy): rules such as _"only these providers"_, _"nothing above this price"_ or _"blocked models"_. You set them for the whole organization in **Organization Settings → Model access → Model policy**, and make them stricter for one project on that project's **Budget** tab.
+
+Use it to steer a team toward cost-efficient models for routine work, keep an expensive model off a high-volume project, or keep a compliance-sensitive engagement on one provider. **Review changes** shows what a change would affect before you save it.
 
 <Steps>
   <Step title="At project creation">
     The **New project** form shows an **Available models** checklist with every org-enabled model ticked. Untick any you want to **block** for this project. The section only appears if your organization has models connected.
   </Step>
   <Step title="After creation">
-    Adjust the same list from the project's **Project Details** tab.
+    The project's blocked models, and any other rules for it, are in its model policy on the **Budget** tab.
   </Step>
 </Steps>
 
+<Note>
+  A project's rules can only narrow the organization's, never widen them. A model the policy stops stays visible in the picker, greyed out and marked **blocked by an admin**, so members know why they can't use it.
+</Note>
+
 <Warning>
-  If you untick every model, nobody will be able to chat in the project. If a project's members report they cannot send anything, check this list first, then check the organization's enabled models.
+  If a project's rules leave no usable model, nobody can chat in that project. **Review changes** warns you before you save a change that would do this.
 </Warning>
 
-<Note>
-  A project restriction can only narrow the organization's list, never widen it. Unticking a model here does not disable it anywhere else.
-</Note>
+## Let ParleHub pick: Auto
+
+On the **Business** plan and above, the model picker also offers **Auto** at the top. With Auto, ParleHub picks a lower-cost model for routine conversations and a stronger one for demanding ones, from models your Org Admin names, and every answer shows which model wrote it. See [Auto](/models/auto), and [Set Up Auto](/models/auto-setup) for admins.
 
 ## Switching models mid-conversation
 
