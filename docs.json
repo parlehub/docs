@@ -65,7 +65,8 @@
               "models/connecting-providers",
               "models/supported-models",
               "models/model-selection",
-              "models/auto"
+              "models/auto",
+              "models/auto-setup"
             ]
           },
           {
