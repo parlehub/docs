@@ -1,0 +1,128 @@
+---
+title: "Auto: Let ParleHub Pick the Right Model for Each Conversation"
+sidebarTitle: "Auto"
+description: "Auto answers routine conversations on a cheaper model and demanding ones on a stronger one, inside your firm's rules, and always shows which model answered."
+icon: "wand-magic-sparkles"
+---
+
+**Auto** is an option at the top of the model picker. Choose it, and ParleHub picks the model for the conversation: routine work goes to a lower-cost model, and demanding work goes to a stronger one. Every answer shows which model wrote it, and nothing is routed unless someone picks Auto.
+
+<Info>
+  Auto is included on the **Business**, **Business Elite** and **Enterprise** plans. An Org Admin sets it up first: see [Set Up Auto](/models/auto-setup).
+</Info>
+
+## The three tiers
+
+Auto never chooses from every model your organization has. Your Org Admin names one model for each tier:
+
+| Tier | Used for | Example |
+| --- | --- | --- |
+| **Everyday** | Routine messages: quick questions, drafts, short summaries | Claude Haiku |
+| **Standard** | Long conversations, attached files, and work that uses tools | Claude Sonnet |
+| **Frontier** (optional) | Only when a person asks for it (see [Asking for more](#asking-for-more)) | Claude Opus |
+
+Auto only ever picks from models your organization's [model policy](/models/model-policy) allows.
+
+## How Auto picks
+
+When a conversation starts on Auto, it goes to **Standard** if any of these is true, and to **Everyday** otherwise:
+
+- The conversation is large: over about 30,000 tokens, counting its history and instructions (roughly 50 pages of text).
+- Files are attached to the message.
+- The conversation has been using tools (such as reading files or searching) and the Everyday model can't use them.
+
+Auto decides from these facts alone. It never reads the content of a message to decide, so nothing written in a message, file or tool result can talk it into a more expensive model.
+
+The answer's caption shows what Auto chose, for example **Auto · Claude Haiku**.
+
+### Auto keeps the model while a conversation is active
+
+Providers charge much less for text they have seen recently, but only on the same model. Switching models mid-conversation loses that discount, so Auto keeps a conversation on its model while people are actively using it.
+
+Auto only reconsiders at a **pause**:
+
+- **Six minutes or more** since the conversation last got an answer, from anyone in it.
+- **The first message after the conversation is compacted.**
+
+At those moments switching costs nothing extra. If the conversation now needs a different tier, Auto switches and everyone in the conversation sees one line, for example:
+
+> _Now using Claude Sonnet: this conversation was idle and now needs a more capable model._
+
+### When a model isn't available
+
+If the model Auto wants is blocked by your model policy, or can't serve the conversation, Auto tries the next tier down, then your organization's default model. It never moves up to Frontier to get round a block, and it never refuses a message just because its first choice was unavailable.
+
+## Asking for more
+
+Auto never sends a conversation to Frontier on its own. People can ask for a stronger answer in three ways.
+
+<CardGroup cols={3}>
+  <Card title="Deep" icon="arrow-up">
+    A toggle next to the model picker. It sends **this message** one tier up, then switches itself off.
+  </Card>
+  <Card title="Try with a stronger model" icon="rotate">
+    On any Auto answer. It asks the same question again, one tier above the model that answered.
+  </Card>
+  <Card title="Project starting tier" icon="layer-group">
+    A project setting. Auto in that project starts at Standard or Frontier and never goes below it.
+  </Card>
+</CardGroup>
+
+### Deep
+
+Turn on **Deep** before you send a message that needs more care. That message goes one tier up (Everyday to Standard, or Standard to Frontier), and its caption shows **(Deep)**. The next message goes back to the conversation's usual model.
+
+If your organization has no Frontier model, Deep answers on the strongest model it has and says so. In a project that already starts at Frontier, Deep isn't shown, because there is nothing stronger.
+
+### Try with a stronger model
+
+Use **Try with a stronger model** on an Auto answer that wasn't good enough. You don't need to rate the answer first. ParleHub asks the same question again, one tier above the model that answered. The new answer sits beside the first, as a new branch you can switch between with the ‹ 1 / 2 › control.
+
+The option appears only when a stronger tier exists and your organization's rules allow it.
+
+### Moving up by itself
+
+When people in an Everyday conversation have used **Try with a stronger model** twice, Auto moves the conversation up to Standard at its next pause, and keeps it there. Everyone in the conversation sees:
+
+> _Now using Claude Sonnet: answers here were retried with a stronger model._
+
+A thumbs-down on its own never moves a conversation. A rating is feedback, not a request to spend more of your project's budget. Auto also never moves a whole conversation to Frontier by itself.
+
+## Auto in shared conversations
+
+- **A teammate's retry doesn't move your screen.** If someone uses **Try with a stronger model** on an answer you're reading, you stay where you are and see a notice such as _"Adi retried this with a stronger model · View"_.
+- **Two people sending at once** after a pause produce one switch and one notice.
+- **A message that was refused** (for example by a budget or a model rule) never changes the conversation's model and never shows a switch notice.
+- **Naming a model stops Auto.** If someone picks a model by name, that model answers every message until someone picks Auto again.
+
+## Examples
+
+One organization, with Everyday set to Claude Haiku, Standard to Claude Sonnet and Frontier to Claude Opus.
+
+<AccordionGroup>
+  <Accordion title="A quick question in a new conversation">
+    _"What are our standard payment terms?"_ No files, no tools, a few hundred tokens. **Everyday · Claude Haiku.**
+  </Accordion>
+  <Accordion title="Comparing two attached contracts">
+    Two PDFs attached. **Standard · Claude Sonnet**, because files are attached.
+  </Accordion>
+  <Accordion title="A thread that grew over lunch">
+    A conversation that started small is now 45,000 tokens. After a 50-minute break, the next message switches it to **Standard · Claude Sonnet**, with a notice. Two minutes later, "Make it shorter" stays on Sonnet, because the conversation is active again.
+  </Accordion>
+  <Accordion title="A hard question in the middle of a thread">
+    On a Sonnet conversation, an associate turns on **Deep** and asks whether a clause is enforceable. That one message goes to **Frontier · Claude Opus**. The next message is back on Sonnet.
+  </Accordion>
+  <Accordion title="A project that blocks the Standard model">
+    A large question in a project whose rules block Sonnet goes to **Everyday · Claude Haiku**, the next tier down, never up to Opus.
+  </Accordion>
+</AccordionGroup>
+
+## What Auto doesn't change
+
+- **Budgets and limits still apply.** Project budgets, spending caps and the [per-message spending limit](/models/model-policy#per-message-spending-limit) check every message on Auto exactly as they do on a named model.
+- **You can always see the model.** The picker and every answer's caption say which model answered.
+- **Your spend is reported by tier.** Org Admins can see spend by Auto tier, and by how each model was chosen, on the [Usage](/cost/usage-analytics#auto-groupings) screen.
+
+<Tip>
+  Want every message on one specific model? Pick that model by name instead of Auto. Auto only ever routes when someone chooses it.
+</Tip>
