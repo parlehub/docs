@@ -4,3 +4,78 @@ sidebarTitle: "Set Up Auto"
 description: "Name your Everyday, Standard and Frontier models, switch Auto on, make it the default if you want, and set where Auto starts in each project."
 icon: "sliders"
 ---
+
+An Org Admin sets up [Auto](/models/auto) once, for the whole organization. You choose which model answers at each tier, and Auto picks between them for each conversation.
+
+<Info>
+  Auto is included on the **Business**, **Business Elite** and **Enterprise** plans.
+</Info>
+
+## Choose your tier models and switch Auto on
+
+<Steps>
+  <Step title="Open Model access">
+    Go to **Organization Settings → Model access** and find the **Auto** card.
+  </Step>
+  <Step title="Choose the Everyday model">
+    **Everyday model** answers routine messages, which is most of what your team sends. ParleHub suggests the lowest-priced model your organization can use.
+  </Step>
+  <Step title="Choose the Standard model">
+    **Standard model** answers demanding messages: long conversations, attached files, and tool use the Everyday model can't handle.
+  </Step>
+  <Step title="Optionally, choose a Frontier model">
+    **Frontier model** is your most capable model. Chat reaches it only when a person asks: with Deep, with **Try with a stronger model**, or in a project set to start at Frontier. Auto never chooses it automatically in chat. You can leave it empty.
+  </Step>
+  <Step title="Switch Auto on and save">
+    Tick **Switch Auto on** and select **Save Auto settings**. Auto now appears at the top of the model picker for everyone in your organization.
+  </Step>
+</Steps>
+
+<Note>
+  Each tier needs a different model, and every model you choose must be allowed by your organization's [model policy](/models/model-policy). If a policy later blocks one of them, the card shows **Blocked by your model policy** and Auto falls back to the next tier down for affected conversations.
+</Note>
+
+## Make Auto the default
+
+Out of the box, new conversations start on your organization's default model, not on Auto. To make Auto the starting point:
+
+- **For the whole organization:** on the **Auto** card, select **Make Auto the default**. The model that used to be the default now shows a **Default when Auto is off** label. That is where new conversations go if Auto stops being available.
+- **For yourself:** anyone can choose Auto as their own default model in their profile.
+
+If Auto is the default but can't be used (for example, it has been switched off), new conversations open on the next default instead, with a one-line note saying why. Nothing is changed for you: switching Auto back on makes it the default again.
+
+## Set where Auto starts in a project
+
+Some engagements always need a stronger model. A **Project Admin** or **Org Admin** can set a project's **Auto starting tier** on the project's **Budget** tab.
+
+| Starting tier | What happens in this project |
+| --- | --- |
+| **Everyday** (the default) | Auto answers routine messages with the Everyday model and moves up when a conversation needs it. |
+| **Standard** | Auto never drops below the Standard model in this project. |
+| **Frontier** | Every Auto message in this project uses the Frontier model. Deep isn't shown, because there is nothing stronger. |
+
+Choosing a higher starting tier shows the price difference first, because it raises the cost of every Auto message in the project. Select **Save starting tier** to apply it. Budgets and the per-message spending limit still apply.
+
+<Note>
+  **Frontier** is offered only when your organization has a Frontier model. If the starting tier's model is briefly unavailable, Auto uses the next model down and says so. The conversation moves back up at its next pause once the model can answer again.
+</Note>
+
+## If your plan changes
+
+If your organization moves to a plan without Auto:
+
+- **Auto stops choosing models.** Each conversation on Auto stays on the model it last used, with a one-line note. Nothing is refused.
+- **Your settings stay visible.** You can still view your tier models and switch Auto off.
+- **Nothing is deleted.** Past answers keep their captions, and your usage reports still show how past spend was split by tier.
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="How Auto works" icon="wand-magic-sparkles" href="/models/auto">
+    What members see, how Auto picks, and how to ask for a stronger answer.
+  </Card>
+
+  <Card title="Model policy" icon="shield-halved" href="/models/model-policy">
+    Decide which models can be used at all. Auto only picks inside these rules.
+  </Card>
+</CardGroup>
