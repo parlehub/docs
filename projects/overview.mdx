@@ -144,12 +144,38 @@ SharePoint and Google Drive only appear if an Org Admin has enabled them for you
 
 If your organization has connected integrations, open the **Tools** tab and switch on the ones this project should have. Nothing is enabled by default — an integration is available to a project only once it is toggled on there. See [Integrations](/tools/integrations).
 
+## Archiving and restoring a project
+
+When a project is finished, an Org Admin can archive it instead of leaving it in the active list. Archiving is **Org Admin only** — a Project Admin can see the control but cannot use it.
+
+<Warning>
+  **Archiving permanently deletes the project's knowledge sources and integration connections.** Restoring the project later brings the project itself back, but **not** that deleted data. Conversations and files are not affected either way — archiving and restoring never touch them.
+</Warning>
+
+<Steps>
+  <Step title="Open Project Details → Danger Zone">
+    Scroll to the bottom of the project's **Details** tab.
+  </Step>
+  <Step title="Select Archive">
+    Type the project's name exactly to confirm, then select **Archive project**. This extra step exists because the data loss above is real and cannot be undone by restoring.
+  </Step>
+</Steps>
+
+An archived project:
+
+- Stops counting against your subscription's project limit.
+- Drops off everyone's **Pinned** list (their pin is kept and reappears automatically if the project is restored).
+- Stays fully readable — anyone who could open it before can still open it, browse its conversations, and read its files.
+- Loses team access to any Microsoft 365 or Google Workspace integrations it had connected, and every knowledge source it owned — both are deleted, not paused.
+
+To restore one, go to the **Projects** page and open the collapsed **Archived** section at the bottom of the list. Each archived project's card has a **Restore** button — a single confirm click, since restoring destroys nothing.
+
 ## Troubleshooting
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | No **New project** button | You are not an Org Admin | Project creation is Org Admin only — ask one to create it and make you a Project Admin |
-| "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | Archive a project you have finished, or upgrade the plan |
+| "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | [Archive](#archiving-and-restoring-a-project) a project you have finished, or upgrade the plan |
 | "Private (Restricted) projects require the Business plan or above" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
 | "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Organization Settings → Billing |
 | Creating the project is refused: "ParleHub can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and ParleHub has not published an exchange rate for that currency yet — a ParleHub issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
