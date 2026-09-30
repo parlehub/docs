@@ -1,0 +1,79 @@
+---
+title: "Web Search: Let ParleHub Agents Search the Web with Cited Sources"
+sidebarTitle: "Web Search"
+description: "Turn Web Search on for your organization, give it to an agent or use the built-in @researcher, and understand its limits, domain rules and third-party query disclosure."
+icon: "magnifying-glass"
+---
+
+With Web Search, an agent can look something up on the web and answer with **numbered, cited sources** — instead of answering from memory with no way to check it. This page is for **Org Admins** deciding whether to switch it on, **Agent Authors** who give it to an agent, and anyone who asks an agent a question whose answer isn't in your files.
+
+## What it does
+
+When an agent that has Web Search needs current or public information, it runs a search and reads the results: each one's title, site, age and a few passages of text from the page. It answers from those results and cites each one it uses with a number like **[1]** or **[2]**. The sources are listed under the message, and you can open each one in a new tab.
+
+The site name in that list is the real address ParleHub fetched, not a label the agent chose. For more on how sources are shown and kept honest, see [How web research stays safe](/tools/web-search-safety).
+
+## Your search queries go to a third party
+
+<Warning>
+  **The search query the agent writes is sent to ParleHub's web search provider, Brave, which is a third party.** Switching Web Search on is your organization's consent to that.
+</Warning>
+
+- The agent is told not to put confidential details from the conversation into a query, but it is the agent that writes it — if a question is sensitive, don't ask for it to be searched.
+- ParleHub does not keep the query: it is not written to your conversation's tool activity, to ParleHub's logs, or to our usage analytics.
+- Only the query goes to the search provider. Your files, your conversation and your organization's details are not sent with it.
+
+## Turning it on
+
+<Info>
+  Web Search is **off by default**, and it's available on the **Business plan and above**. See [Plans & Billing](/plans-and-billing).
+</Info>
+
+<Steps>
+  <Step title="An Org Admin switches it on">
+    In **Organization Settings → Skills**, turn Web Search on. Set the domain allow/block rules here first if you want them in place from the start — see [Blocking and allowing sites](#blocking-and-allowing-sites) below.
+  </Step>
+  <Step title="An Agent Author adds the skill to an agent">
+    In the agent's editor, under **Skills**, add **Web Search**.
+  </Step>
+  <Step title="The agent can now search">
+    From then on, that agent can search in every project and personal conversation it answers in. Agents without the skill — including the built-in Project Assistant — never search.
+  </Step>
+</Steps>
+
+If an agent has the skill but your organization has switched Web Search off, or your plan no longer includes it, the agent keeps the skill on its settings but can't use it, and it will say so when it would have searched.
+
+## Meet @researcher
+
+ParleHub ships a built-in agent, **@researcher**, that already holds the Web Search skill — so once your organization switches Web Search on, anyone can `@researcher` a question in a personal conversation, or in any project it has been added to, and get a searched, cited answer, without an Agent Author having to build one first.
+
+- It searches the web and answers with numbered, cited sources, the same as any agent holding the skill.
+- Its queries go to ParleHub's third-party search provider, Brave — see [Your search queries go to a third party](#your-search-queries-go-to-a-third-party) above.
+- It holds no file tools of its own, but a research turn in a project conversation still asks for approval before any file change, and turns off your integrations for the rest of that reply — see [Search results are untrusted](/tools/web-search-safety) below.
+- It's subject to the same monthly search allowance as every other agent — see [Limits](#limits) below.
+- If your organization hasn't switched Web Search on yet, @researcher says so and stops rather than guessing; an Org Admin turns it on in **Organization Settings → Skills**.
+- You can add @researcher to a project like any other agent, or leave it for personal conversations — it's never added automatically. A Project Admin can remove it from a project, the same as any other agent, but nobody in your organization can edit or delete @researcher itself.
+
+## Limits
+
+- **Per reply:** an agent can run at most **10 searches** while answering one message, including any searches by other agents it asks for help. Past that, it answers from what it already found.
+- **Per month:** your organization has a monthly allowance of searches that depends on your plan. When it runs out, the agent tells you the web search limit has been reached for this month and answers without searching. The allowance resets at the start of each month.
+- **Nothing is ever charged** for a search. The allowance is a limit, not a bill, and it never stops a conversation.
+
+## Blocking and allowing sites
+
+An Org Admin controls which sites a search may return, in **Organization Settings → Skills → Web Search**:
+
+- **Blocked domains** — results from these sites are never shown to the agent.
+- **Allowed domains** — optional. Leave it empty to allow every site that isn't blocked. If you add any, only those sites are shown.
+- **A domain covers its subdomains.** Blocking `example.com` also blocks `docs.example.com`. Enter a domain name only — no `https://`, path or wildcard — up to 500 of each.
+- **Changes apply to the next search.** No project, agent or prompt can loosen them.
+- ParleHub's own sites are never returned, whatever the rules say.
+
+When results are removed by these rules, the agent is told how many were removed — but not which ones.
+
+## Search results are untrusted
+
+Anyone can write a web page, so ParleHub treats everything a search returns as information, never as instructions. Once search results have arrived in a reply, any file change the agent makes for the rest of that reply is held for a person to approve, and the agent can't use your integrations until your next message.
+
+[How web research stays safe](/tools/web-search-safety) explains both of these rules in full, and why they are deliberate.
