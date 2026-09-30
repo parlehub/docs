@@ -1,0 +1,61 @@
+---
+title: "Semantic File Search: Find Passages by Meaning, Not Exact Words"
+sidebarTitle: "Semantic File Search"
+description: "How ParleHub indexes your project files so the agent can find passages by meaning — what that sends to a third party, what it costs, and how to turn it off, reindex, or delete the index."
+---
+
+Semantic file search lets the agent find passages in your project files by meaning rather than exact wording — you can ask about "the termination terms" and get the right clause even if the document says "non-renewal" instead. To make that possible, **ParleHub sends the text of your project files to its embedding provider**, which turns each passage into a vector the agent can search over. This page explains what that means before it explains any button.
+
+## What indexing sends, and where
+
+When a file is added, written or edited in a project, its text is broken into passages and sent to ParleHub's embedding provider so it can be indexed for meaning-based search. This is a real outbound call with the document's own content in it — not a summary and not metadata. The provider returns vectors it uses to answer search queries; it is not used to store or repurpose your files.
+
+<Warning>
+  **This is on by default for every project.** Leaving it alone is itself a choice — your organization's project files are indexed unless an Org Admin turns it off. If your organization has a reason its documents' content should never leave for a third party, that decision belongs with your Org Admin, made deliberately rather than by default.
+</Warning>
+
+## It costs your organization nothing
+
+Indexing and reindexing are free. ParleHub absorbs the embedding cost itself — it is never billed to your organization or debited from any credit balance, however much you index or how often you run **Reindex**.
+
+## Turning it on and off
+
+An Org Admin controls this from **Organization Settings → File storage**, on the **Semantic file search** card. Any member of the organization can see whether it is on; only an Org Admin can change it.
+
+<Note>
+  **Turning it on does not index files that are already there.** The setting is on by default, so a brand-new project indexes its files as they arrive and this is invisible. But an organization that was already using ParleHub before this feature shipped has files that were never indexed — there is no off-to-on transition to trigger a catch-up, because for most organizations the setting was never off. **Reindex** (below) is the only way to bring those files into search. Without running it, search will look broken on an established project even though nothing is wrong.
+</Note>
+
+Switching it **off** stops any more file text being sent to the embedding provider. You are then asked a second question, because these are genuinely different decisions with different costs:
+
+- **Turn off and keep the index** — stops indexing new activity, but what has already been indexed stays searchable. Turning search back on later resumes from here.
+- **Turn off and delete the index** — also deletes everything already indexed. This is **permanent**. Turning search back on afterwards indexes your files again from scratch, from nothing.
+
+## Reindex
+
+The **Reindex** button (shown under **Reindex all project files** while search is on) queues every file in every one of your organization's projects to be indexed. Use it to bring in files that predate the feature or that arrived while search was switched off.
+
+- **It is safe to run as often as you like.** A file that has not changed since it was last indexed is skipped, so a repeat reindex costs nothing extra.
+- **It runs in the background.** There is no progress bar or completion figure — files become searchable individually as they are processed, not all at once.
+
+## What gets indexed
+
+| | |
+| --- | --- |
+| Indexed | Text-like files (`.md`, `.txt`, `.json`, `.html`, `.xml`, `.yaml`, `.csv`, code), plus PDF, Word (`.docx`) and PowerPoint (`.pptx`), which are converted to text first |
+| Skipped | Images, archives and other binary files; any file over 25 MB |
+| Per-project limit | Up to 20,000 files are indexed in a single reindex pass |
+
+This mirrors what the agent's file tools can already read — see [File Tools](/projects/file-tools) for the same file-type limits in more detail.
+
+## What happens as files change
+
+- **Deleting a file removes it from search.** A file sitting in the recycle bin is not searchable — it has to be permanently gone or restored, not merely sent there.
+- **Moving a file takes its search results with it.** You do not need to reindex after a move.
+- **Restoring a deleted file puts it back in search.**
+
+## When search is switched off
+
+If you ask the agent something that would normally use semantic search while an Org Admin has switched it off, the agent tells you search is disabled — it does **not** tell you it searched and found nothing. That distinction matters: "disabled" means the corpus was never consulted, while "no results" would wrongly suggest your files don't contain the answer.
+
+**Exact and regex search still works regardless of this setting.** The agent's `fs_grep` tool searches file contents literally — the same way a regular grep would — whether semantic search is on or off. So "off" is a reduced capability, not a broken one: you lose meaning-based search over your documents, not the ability to search them at all.
