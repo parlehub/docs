@@ -47,7 +47,8 @@
               "projects/overview",
               "projects/conversations",
               "projects/shared-context",
-              "projects/file-tools"
+              "projects/file-tools",
+              "projects/file-search"
             ]
           },
           {
