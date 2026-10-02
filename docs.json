@@ -80,7 +80,9 @@
               "tools/integration-scopes",
               "knowledge/organization-knowledge",
               "knowledge/asking-about-your-org",
-              "tools/my-integrations"
+              "tools/my-integrations",
+              "tools/web-search",
+              "tools/web-search-safety"
             ]
           },
           {
