@@ -1,0 +1,44 @@
+---
+title: "Choose How Hard the Model Thinks"
+sidebarTitle: "Thinking Level"
+description: "Use the Thinking control beside the model picker to give a reasoning model more or less time to think before it answers."
+---
+
+Some models reason through a problem before they write an answer. The **Thinking** control lets you choose how much effort a model puts into that reasoning, one message at a time. Use more for a hard analysis or a tricky draft, and less when you want a quick answer.
+
+## Choose a level
+
+<Steps>
+  <Step title="Pick a model that supports it">
+    In the chat toolbar, choose a named model in the **model selector**. If the model supports a thinking level, **Thinking** appears beside the model picker.
+  </Step>
+  <Step title="Choose a level">
+    Pick **Default**, **Low**, **Medium** or **High**, then send your message.
+  </Step>
+</Steps>
+
+| Level | What it does |
+| --- | --- |
+| **Default** | The model thinks at its own default. This is the same as sending without the control. |
+| **Low** | Less thinking. Faster replies for routine questions. |
+| **Medium** | A balance between speed and depth. |
+| **High** | The most thinking. Slower, and best for complex, multi-step work. |
+
+The level applies to the message you send. The conversation remembers it, so when you come back, **Thinking** is set to the level of the latest reply.
+
+## When the control is hidden
+
+- **The model doesn't support it.** ParleHub shows **Thinking** only for models confirmed to accept a thinking level. More models are added as they are tested.
+- **You chose Auto.** With [Auto](/models/auto), ParleHub picks the model for you, so it also leaves thinking at the default.
+
+## See which level wrote a reply
+
+When a level other than **Default** is used, the reply's label shows it next to the model name, for example **GPT-6 Astra · High thinking**. Every project member sees the same label, both live and after a reload.
+
+## Cost and limits
+
+A higher level doesn't raise the reply's token allowance. Thinking uses part of that allowance, so a higher level can mean longer waits and more output tokens for the same question, but your [budgets](/cost/budgets) stay in control. Providers that report thinking separately show it in the `Reasoning Tokens` column of your [usage reports](/cost/usage-analytics).
+
+<Tip>
+  Start at **Default**. Move to **High** for the turns that need careful reasoning, such as reviewing a contract clause or reconciling figures, then drop back.
+</Tip>
