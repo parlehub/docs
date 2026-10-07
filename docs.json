@@ -79,6 +79,7 @@
               "tools/confluence",
               "tools/fathom",
               "tools/fireflies",
+              "tools/linear",
               "tools/integration-scopes",
               "knowledge/organization-knowledge",
               "knowledge/asking-about-your-org",
