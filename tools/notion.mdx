@@ -1,0 +1,68 @@
+---
+title: "Connect Notion to Parle"
+sidebarTitle: "Notion"
+description: "Connect Notion from the Integrations gallery so the agent can search, read and update your workspace pages and databases, and choose who the connection belongs to."
+icon: "notion"
+---
+
+**Notion** is a branded card in the Integrations gallery, under **Documentation** and **Productivity**. It uses Notion's own hosted MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Notion. There's nothing to type.
+
+## What it gives the agent
+
+Once connected and enabled on a project, the agent can search your Notion workspace, read pages and databases, create and update pages, add comments, and look up workspace members. That lets it answer questions from your wiki, meeting notes and project boards (_"what did we decide about the pricing page?"_) and keep those pages up to date.
+
+<Warning>
+  **Notion can write, and the access can't be narrowed to read-only.** Notion offers a single permission, `default`, so Parle cannot ask for less. The agent can read everything the connecting Notion account can see, and change anything that account can edit. A change takes effect in your real Notion workspace as soon as the agent makes it; there is no separate approval step before a write. The connection runs under the Notion account that connected it, so it can never reach more than that account can.
+</Warning>
+
+Page content can include text written by other people or pasted from the web. Treat what the agent reads from Notion with the same care you would any shared document.
+
+## Choosing a scope
+
+Notion offers all three credential scopes. See [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. In brief, for Notion specifically:
+
+- **User (recommended)** — each member connects their own Notion account, so the agent only reaches what that member can see and edit in Notion. Because Notion can write, this is the safest choice: changes are made with the account of the member whose conversation made the call, not with one shared connection acting for anyone in a project conversation (see [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted)).
+- **Organization** — one shared connection, typically a dedicated Notion account, that every project may use. It keeps working when nobody is online, but anyone in a project that has it enabled can cause writes with that account's access.
+- **Project** — each project connects its own Notion account, so one client engagement's workspace stays separate from another's.
+
+## Connecting
+
+<Steps>
+  <Step title="Open the gallery">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Notion** card.
+  </Step>
+  <Step title="Choose who it's for">
+    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
+  </Step>
+  <Step title="Approve access at Notion">
+    For **Organization** scope, the Org Admin is sent to Notion to approve access, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
+  </Step>
+</Steps>
+
+The rest follows the same connect flow as any OAuth 2.0 integration. See [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the connected card and what **Reconnect required** and **Reconnect recommended** mean.
+
+## Enabling it on a project
+
+Connecting Notion at Organization or Project scope makes it _available_; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own account is connected. For a **User**-scoped connection, the tool appears in the conversation as soon as the integration is enabled and **any** member has connected. A member who hasn't connected yet gets a plain-language prompt to do so from My Integrations.
+
+## Reconnecting and access renewal
+
+Parle renews Notion's access automatically in the background. If Notion stops accepting the stored authorization, the card shows **Reconnect required** and the integration stops working until it is fixed.
+
+Parle connects to Notion by registering itself as an application with Notion the first time you connect. If Notion lets that registration lapse, **Reconnect will not fix it**, because it reuses the same registration. What to do depends on the scope:
+
+| Scope | What you see | What to do |
+|---|---|---|
+| **Organization** | **Reconnect required** on the integration card | An Org Admin selects **Disconnect**, then **Connect**. This creates a fresh registration. |
+| **User** | **Reconnect required** in your [My Integrations](/tools/my-integrations); Reconnect fails again | Ask an Org Admin to remove the Notion integration and add it again from the gallery, then connect your account again. |
+| **Project** | **Reconnect required** on the project's **Tools** tab; Reconnect fails again | Ask an Org Admin to remove the Notion integration and add it again from the gallery, then reconnect the project. |
+
+<Note>
+  For User and Project scope this is a heavy fix: removing and re-adding the integration means every member or project has to connect again, and each project's on/off choice for Notion has to be set again. A lighter, targeted recovery is planned. Whether and how often Notion lets registrations lapse hasn't been confirmed, so you may never see this.
+</Note>
+
+## Disconnecting and removing
+
+Disconnecting a Notion connection, at any scope, deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer use it. Before deleting it, Parle asks Notion to revoke the access Notion issued. That request is best effort: if it fails, the disconnect still goes ahead. That Notion actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parle's access yourself in Notion: open **Settings**, go to your account's **Connections** list, and disconnect Parle there.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
