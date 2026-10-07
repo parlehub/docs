@@ -1,0 +1,61 @@
+---
+title: "Connect Otter to Parle"
+sidebarTitle: "Otter"
+description: "Connect your own Otter account from My Integrations so the agent can search and read your meeting transcripts and summaries, read-only."
+icon: "microphone"
+---
+
+**Otter** is a branded card in the Integrations gallery, in the **Meetings** category. It uses Otter's own hosted MCP server, with the address and authentication already fixed by the card. Once an Org Admin has added it to your organization, each member connects their own Otter account and approves access at Otter. There's nothing to type.
+
+<Warning>
+  Read this before you connect. Anything the agent reads from an Otter recording can appear in a Parle project conversation, and every member of that project can see that conversation. A transcript may contain other people's words, including client-confidential or privileged material. You are responsible for having recorded those meetings lawfully and with the consent of the other participants. Parle does not ask them, and their words may be surfaced to the agent and the project.
+</Warning>
+
+## What it gives the agent
+
+Once you have connected and the integration is enabled on a project, the agent can search your recorded Otter conversations and read their transcripts and summaries, and answer questions in plain language (_"what did we agree about the rollout date in Tuesday's call?"_). Only conversations your Otter account can see are available.
+
+The access is **read-only**. Parle asks Otter for exactly two permissions, and both only read:
+
+- **Identify your account** (`profile:read`) — tells Parle which Otter account you connected.
+- **Read your conversations** (`conversations:read`) — search your conversations and read their transcripts and summaries.
+
+Otter offers no write permission for this connection, so the agent cannot change or delete anything in your Otter account.
+
+## Choosing a scope
+
+Otter offers **User** scope only. Each member connects their own Otter account, and the integration cannot be shared organization-wide or project-wide. A meeting transcript belongs to the person whose account recorded it (and to the other people in the meeting), so one shared connection would let every member's agent read one person's conversations without their consent. Parle refuses to register Otter at Organization or Project scope. See [Choosing who the credential belongs to](/tools/integration-scopes) for what User scope means, including [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted): when the agent uses your account in a shared project conversation, the result is visible to everyone in that project, and the answer is labelled with whose account fetched it.
+
+## Connecting
+
+<Steps>
+  <Step title="An Org Admin adds Otter to the organization">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Otter** card. Only an Org Admin can do this. It makes Otter available but connects nobody's account.
+  </Step>
+  <Step title="Enable it on a project">
+    A Project Admin switches Otter on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)).
+  </Step>
+  <Step title="Each member connects their own account">
+    Open [My Integrations](/tools/my-integrations), find **Otter**, read the warning shown beside **Connect**, and select **Connect**. You are sent to Otter to approve access, then return to a **Connected** card.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration. See [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of discovery, the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
+
+<Note>
+  You'll need an Otter account that can use Otter's MCP access. Which Otter plans include it is set by Otter and may change, so check with Otter if the approval step is refused.
+</Note>
+
+## Using it in conversations
+
+The tool appears in a conversation as soon as the integration is enabled and **any** member has connected. A member who hasn't connected yet gets a plain-language prompt to connect from My Integrations. Calls run under the Otter account of the member whose conversation made the call, so the agent sees only what that member could see in Otter.
+
+## Reconnecting and access renewal
+
+Parle renews Otter's access automatically in the background. If Otter stops accepting the stored authorization (revoked, expired, or the granted permissions changed), the card shows **Reconnect required**, and the integration stops working for you until you approve access again.
+
+## Disconnecting
+
+Select **Disconnect** on your Otter card in [My Integrations](/tools/my-integrations). This deletes your stored credential from Parle's vault and removes your connection, so the agent can no longer use your account. Before deleting it, Parle asks Otter to revoke the access Otter issued. That request is best effort: if it fails, the disconnect still goes ahead. That Otter actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parle's access yourself in Otter: in your Otter account settings at [otter.ai](https://otter.ai), find the connected apps or integrations list and remove Parle there.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
