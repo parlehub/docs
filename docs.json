@@ -77,6 +77,13 @@
             "pages": [
               "tools/integrations",
               "tools/confluence",
+              "tools/fathom",
+              "tools/fireflies",
+              "tools/linear",
+              "tools/miro",
+              "tools/notion",
+              "tools/otter",
+              "tools/productive",
               "tools/integration-scopes",
               "knowledge/organization-knowledge",
               "knowledge/asking-about-your-org",

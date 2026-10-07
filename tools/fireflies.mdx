@@ -1,0 +1,56 @@
+---
+title: "Connect Fireflies to Parle"
+sidebarTitle: "Fireflies"
+description: "Connect your own Fireflies account from My Integrations so the agent can search your meetings and read transcripts, summaries and action items."
+icon: "microphone-lines"
+---
+
+**Fireflies** is a branded card in the Integrations gallery in the **Meetings** category — Fireflies' own hosted MCP server, with the address and authentication already fixed by the card. An Org Admin adds the integration to your organization once; after that, each member connects their own Fireflies account. There's nothing to type.
+
+<Warning>
+  Read this before you connect. Anything the agent reads from a meeting can appear in the project conversation, and **every member of that project can see that conversation**. A transcript may contain other people's words, including client-confidential or privileged material. You are responsible for having recorded those meetings lawfully and with the consent of the other participants. Parle does not ask them, and their words may be surfaced to the agent and to the project.
+</Warning>
+
+## What it gives the agent
+
+Once you've connected your account and the integration is enabled on a project, the agent can search your recorded meetings, read transcripts, summaries and action items, and list your recent meetings. You can ask in plain language (_"what did we decide about the rollout in Tuesday's call?"_) and it finds and quotes the relevant meeting. Only meetings your Fireflies account can see are available.
+
+Fireflies' access request is limited to identifying your account (**profile**) and seeing its email address (**email**). Those are identity scopes, and they **cannot narrow what the agent can do afterwards**. The agent can use whatever tools Fireflies' server offers, which may include tools that change data in your Fireflies account, and Parle does not ask you to approve each use. Treat a connected Fireflies account as one the agent can act in, not just read.
+
+## Who it's for: User scope only
+
+Fireflies is available at **User** scope only. Each member connects their own account, and the integration cannot be shared organization-wide or project-wide. A meeting transcript belongs to the person whose account recorded it, and to the other people in the meeting. A shared credential would let every member's agent read one person's meetings without their consent, so Parle refuses any other scope rather than just hiding it. See [Choosing who the credential belongs to](/tools/integration-scopes) for what User scope means in general, including [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted): in a shared project conversation, what the agent fetches with your account is visible to the whole project.
+
+## Connecting
+
+<Steps>
+  <Step title="An Org Admin adds the integration">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Fireflies** card. Only an Org Admin can do this. The scope is fixed to User, so nobody authenticates at this point.
+  </Step>
+  <Step title="Open My Integrations">
+    Each member who wants the agent to use their meetings goes to [My Integrations](/tools/my-integrations) and finds **Fireflies**. The warning above is shown beside **Connect**.
+  </Step>
+  <Step title="Approve access at Fireflies">
+    Select **Connect**. You're sent to Fireflies to sign in and approve access, then returned to Parle with the card showing **Connected**.
+  </Step>
+</Steps>
+
+The connect flow follows the same mechanics as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for what **Reconnect required** and **Reconnect recommended** mean.
+
+<Note>
+  You'll need an active Fireflies account. Check Fireflies' own documentation for any plan or admin requirements on its side.
+</Note>
+
+## Enabling it on a project
+
+A Project Admin still has to switch Fireflies on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). The tool then appears in conversations as soon as the integration is enabled and **any** member has connected. A member who hasn't connected yet gets a plain-language prompt to do so from My Integrations. The agent only ever uses the account of the member whose conversation made the call, and the answer is labelled with whose account fetched it.
+
+## Reconnecting and access renewal
+
+Parle renews Fireflies access automatically in the background. If Fireflies stops accepting the stored authorization — revoked, expired, or the granted scopes changed — the card shows **Reconnect required**, and the integration stops working for that member until they approve access again from My Integrations.
+
+## Disconnecting
+
+Select **Disconnect** on your Fireflies card in [My Integrations](/tools/my-integrations). This deletes your stored credential from Parle's vault and removes your connection, so the agent can no longer use your account. Before deleting it, Parle asks Fireflies to revoke the access Fireflies issued. That request is best effort: if it fails, the disconnect still goes ahead. That Fireflies actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parle's access yourself in your Fireflies account settings (for example under its integrations or developer settings).
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).

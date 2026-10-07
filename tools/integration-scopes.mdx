@@ -5,10 +5,10 @@ description: "What Organization, Project, and User scope mean for an integration
 icon: "shield-halved"
 ---
 
-Every integration credential ParleHub stores belongs to exactly one of three scopes. The scope you pick when you connect an integration decides three things: **who authenticates**, **whose access the agent uses** for a given call, and **who can end up reading the result**. It's the most consequential choice in setting an integration up, so read this before connecting anything that reaches content not everyone in your organization should see.
+Every integration credential Parle stores belongs to exactly one of three scopes. The scope you pick when you connect an integration decides three things: **who authenticates**, **whose access the agent uses** for a given call, and **who can end up reading the result**. It's the most consequential choice in setting an integration up, so read this before connecting anything that reaches content not everyone in your organization should see.
 
 <Info>
-  **A catalogue entry decides which scopes it even offers — you're never choosing from all three.** The right scope is a property of the system being connected, not of the admin's mood. [Confluence](/tools/confluence) can sensibly be any of the three, because a documentation space can reasonably be org-shared, project-owned, or personal. A personal mailbox or calendar integration would only ever offer **User** scope: a shared inbox credential handed to every project's agent isn't a sensible thing for any catalogue entry to permit, so the entry simply never offers Organization or Project for it.
+  **A catalogue entry decides which scopes it even offers — you're never choosing from all three.** The right scope is a property of the system being connected, not of the admin's mood. [Confluence](/tools/confluence), [Linear](/tools/linear), [Miro](/tools/miro), [Notion](/tools/notion) and [Productive](/tools/productive) can sensibly be any of the three, because a documentation space, issue tracker, board or project workspace can reasonably be org-shared, project-owned, or personal. The meeting recorders, [Fathom](/tools/fathom), [Fireflies](/tools/fireflies) and [Otter](/tools/otter), only ever offer **User** scope: a recording belongs to the person who made it and to the people in the meeting, so each member connects their own account and the integration can't be shared organization-wide or project-wide. Parle refuses Organization or Project scope for them rather than just hiding it.
 </Info>
 
 ## Organization scope
@@ -19,7 +19,7 @@ Every integration credential ParleHub stores belongs to exactly one of three sco
 - **Whose access the agent uses:** the connected account's, for every call from every project.
 - **Who can see the results:** anyone in any project the integration is enabled on.
 
-**Organization scope is the only one that survives unattended agent work.** Nothing else about ParleHub requires a person to be online for the agent to act, and Organization scope is what keeps that true for integrations too — there's always a credential available, because it doesn't belong to whoever happens to be in the conversation. Pick this for a service account, or a space every project may legitimately search.
+**Organization scope is the only one that survives unattended agent work.** Nothing else about Parle requires a person to be online for the agent to act, and Organization scope is what keeps that true for integrations too — there's always a credential available, because it doesn't belong to whoever happens to be in the conversation. Pick this for a service account, or a space every project may legitimately search.
 
 ## Project scope
 
@@ -43,9 +43,9 @@ Pick this when different projects should each see only their own space in the co
 
 User-scoped integrations are allowed in shared project conversations, and that has a real consequence worth stating plainly: if Alice asks a question that triggers a Confluence call, the agent fetches with **Alice's** credential, and the answer goes to **everyone in that conversation** — so a colleague may end up reading content their own account couldn't have retrieved themselves. Nothing about a shared conversation stops working because one member's connection reached further than another's would have.
 
-The alternative — restricting User-scoped integrations to personal, one-person conversations — was considered and rejected: project conversations are where ParleHub's collaboration happens, and walling User scope off from them would gut the feature for exactly the teams it's meant to help.
+The alternative — restricting User-scoped integrations to personal, one-person conversations — was considered and rejected: project conversations are where Parle's collaboration happens, and walling User scope off from them would gut the feature for exactly the teams it's meant to help.
 
-What ParleHub does instead is disclose it, every time. **Whenever a reply used a member's own credential, the message says so** — for example, _"Retrieved using Alice's Confluence account"_ — visible to everyone who can see that message, in shared conversations and personal ones alike. It's a permanent part of the message: reopening the thread tomorrow still shows whose access produced the answer, not just at the moment it happened. This is also recorded in your organization's audit log, but the label on the message is the control that matters here — there is no customer-facing audit screen or export today, so audit alone would make the disclosure invisible to the people it actually affects.
+What Parle does instead is disclose it, every time. **Whenever a reply used a member's own credential, the message says so** — for example, _"Retrieved using Alice's Confluence account"_ — visible to everyone who can see that message, in shared conversations and personal ones alike. It's a permanent part of the message: reopening the thread tomorrow still shows whose access produced the answer, not just at the moment it happened. This is also recorded in your organization's audit log, but the label on the message is the control that matters here — there is no customer-facing audit screen or export today, so audit alone would make the disclosure invisible to the people it actually affects.
 
 <Warning>
   There's no setting to turn the disclosure label off, and there won't be one. A label whose "off" position hides exactly the thing it exists to reveal isn't a control worth offering.
@@ -55,7 +55,7 @@ If a member hasn't connected their own account yet, the integration still appear
 
 ## Changing scope
 
-Changing an integration's scope is a **disconnect and reconnect**, not a migration — there's no path that carries a credential from one scope to another, because a Project or User connection is a genuinely different account authenticating, not the same one relabelled. ParleHub tells you this before you confirm a scope change.
+Changing an integration's scope is a **disconnect and reconnect**, not a migration — there's no path that carries a credential from one scope to another, because a Project or User connection is a genuinely different account authenticating, not the same one relabelled. Parle tells you this before you confirm a scope change.
 
 ## If your plan changes
 

@@ -1,0 +1,52 @@
+---
+title: "Connect Fathom to Parle"
+sidebarTitle: "Fathom"
+description: "Connect your own Fathom account from the Integrations gallery so the agent can search your recorded meetings and read transcripts, summaries and action items."
+icon: "video"
+---
+
+**Fathom** is a branded card in the Integrations gallery, in the **Meetings** category — Fathom's own hosted MCP server, with the address and authentication already fixed by the card. An Org Admin adds the card to your organization; then each member connects their own Fathom account from [My Integrations](/tools/my-integrations). There's nothing to type.
+
+## What it gives the agent
+
+Once you've connected and the integration is enabled on a project, the agent can search your recorded meetings and read their transcripts, summaries and action items, and answer questions in plain language (_"what did we decide about the rollout on Tuesday's call?"_). Only meetings your Fathom account can already see are available.
+
+Fathom offers a single permission, `mcp`, and it cannot be narrowed. Fathom describes the connector as read-only, and Parle's card describes it as being for reading your meetings. Parle has no approval step for tool calls, so each call runs as soon as the agent makes it, under the member whose conversation made the call.
+
+<Warning>
+  **Read this before you connect.** Anything the agent reads from a meeting can appear in the project conversation, which every member of that project can see. A recording or transcript may contain other people's words, including client-confidential or privileged material. You are responsible for having recorded those meetings lawfully and with the consent of the other participants; Parle does not ask them, and their words may be surfaced to the agent and the project.
+</Warning>
+
+## Choosing a scope
+
+Fathom is **User scope only**. A recording is one person's data, so each member connects their own Fathom account, and the integration cannot be shared organization-wide or project-wide. Parle won't register Fathom at Organization or Project scope. See [Choosing who the credential belongs to](/tools/integration-scopes) for what User scope means, including [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted).
+
+## Connecting
+
+<Steps>
+  <Step title="An Org Admin adds Fathom">
+    An Org Admin goes to **Organization Settings → Integrations**, selects **Add integration**, and chooses the **Fathom** card. Only an Org Admin can add an integration to the organization.
+  </Step>
+  <Step title="Enable it on a project">
+    A Project Admin switches Fathom on for the project from its **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)).
+  </Step>
+  <Step title="Each member connects their own account">
+    Each member opens [My Integrations](/tools/my-integrations), reads the warning beside **Connect**, and approves access at Fathom.
+  </Step>
+</Steps>
+
+The connect flow is the same as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for what **Reconnect required** and **Reconnect recommended** mean. A member who hasn't connected yet gets a plain-language prompt to do so from My Integrations.
+
+<Note>
+  **You'll need:** a Fathom account that can view the meetings you want the agent to read. Fathom's own documentation doesn't state a plan requirement for its MCP server. If you use Fathom through a team, check with your Fathom admin whether connectors are enabled.
+</Note>
+
+## Reconnecting and access renewal
+
+Parle renews Fathom's access automatically in the background. If Fathom stops accepting the stored authorization, the card shows **Reconnect required** and Fathom stops working for you until you approve access again from My Integrations.
+
+## Disconnecting
+
+Select **Disconnect** on your Fathom card in [My Integrations](/tools/my-integrations). This deletes your stored credential from Parle's vault and removes your connection, so Parle can no longer call Fathom for you. Fathom doesn't offer a way for Parle to revoke access on its side, so Parle can't withdraw it there. The access Fathom issued to Parle may stay listed in your Fathom account, and may remain valid until it expires or you remove it. To end it at Fathom, remove Parle's access yourself: Fathom's public documentation doesn't say where in its settings to do this, so if you can't find Parle in your Fathom account's connected apps, contact Fathom support at help@fathom.video.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).

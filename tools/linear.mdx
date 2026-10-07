@@ -1,0 +1,72 @@
+---
+title: "Connect Linear to Parle"
+sidebarTitle: "Linear"
+description: "Connect Linear from the Integrations gallery — pick a scope, approve access, and let the agent read and update your issues, projects and comments."
+icon: "list-check"
+---
+
+**Linear** is a branded card in the Integrations gallery — Linear's own hosted MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Linear. There's nothing to type.
+
+<Warning>
+  Linear is a **read and write** integration. Once connected, the agent can change your real Linear workspace — and it does so the moment it calls the tool, with no approval step in between. Read [Choosing a scope](#choosing-a-scope) before you connect it.
+</Warning>
+
+## What it gives the agent
+
+Once connected and enabled on a project, the agent can search and read issues, projects, cycles and documents that the connected Linear account can see, and answer questions in plain language (_"what's left in this cycle?"_). It can also make changes: create and update issues, change an issue's status or assignee, and add comments. That makes it useful for summarising a cycle, triaging a backlog, or filing well-formed issues straight from a conversation.
+
+Linear's card asks for exactly two permissions, and nothing broader:
+
+- **read** — read issues, projects, cycles and documents your Linear account can already see. This never writes or changes anything.
+- **write** — create and update issues, change their status and assignee, and add comments.
+
+Parle doesn't ask Linear for a read-only grant: the card requests both, so a connected Linear can always write. Changes made through Linear run as the Linear account that was connected.
+
+<Note>
+  Text in Linear — issue titles, descriptions and comments — can be written by other people, including outside reporters or other integrations, and reaches the agent as written. Treat what the agent does on the strength of an issue's content with the same care you would any instruction from outside your team.
+</Note>
+
+## Choosing a scope
+
+Linear offers all three credential scopes — see [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. In brief, for Linear specifically:
+
+- **User (recommended)** — each member connects their own Linear account, and the agent only ever acts with that member's access. Because Linear access is authorised per member, every change is made under the account of the member whose conversation made the call, rather than under a shared identity. See [the fan-out consequence](/tools/integration-scopes#the-fan-out-consequence-and-why-its-accepted) for what this means in shared project conversations.
+- **Project** — each project connects its own Linear account, so one client engagement's workspace access stays separate from another's. Any member of that project can then have the agent write to Linear through that one account.
+- **Organization** — one shared connection that every project can use. Because it is a shared credential, it can **write on behalf of any project member** whose conversation calls the tool, and the changes appear in Linear as that one shared account. Choose it only if that is what you want.
+
+Because Linear can write, **User** is marked **Recommended** in the scope picker.
+
+## Connecting
+
+<Steps>
+  <Step title="Open the gallery">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Linear** card.
+  </Step>
+  <Step title="Choose who it's for">
+    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
+  </Step>
+  <Step title="Approve access at Linear">
+    For **Organization** scope, the Org Admin is sent to Linear to approve access, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of discovery, the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
+
+## Enabling it on a project
+
+Connecting Linear at Organization or Project scope makes it _available_; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own account is connected. For a **User**-scoped connection, the tool appears in the conversation as soon as the integration is enabled and **any** member has connected — a member who hasn't connected yet gets a plain-language prompt to do so from My Integrations, rather than the tool simply not being there.
+
+## Limits to know about
+
+- **Unattended work.** Parle can't yet use Linear for unattended work, so research tasks and live artifacts can't use it. It works in conversations.
+- **No per-tool limits.** You can't currently allow reading but block writing for a connection; the card connects with both permissions.
+
+## Reconnecting and access renewal
+
+Parle renews Linear's access automatically in the background. If Linear stops accepting the stored authorization — revoked, expired, or the granted scopes changed — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
+
+## Disconnecting and removing
+
+Disconnecting a Linear connection, at any scope, deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer use it. Before deleting it, Parle asks Linear to revoke the access Linear issued. That request is best effort: if it fails, the disconnect still goes ahead. That Linear actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parle's access yourself in Linear: sign in to Linear, open your account settings, and remove Parle from the applications you've authorized (look under your account's security and access settings). Each member who connected their own account at User scope does this for their own connection.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
