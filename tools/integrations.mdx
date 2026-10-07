@@ -1,26 +1,33 @@
 ---
-title: "Connect Integrations to ParleHub: Confluence and Custom MCP Tools"
+title: "Connect Integrations to Parle: Branded Cards and Custom MCP Tools"
 sidebarTitle: "Integrations"
 description: "Pick a system from the Integrations gallery, choose who its credential belongs to, and enable it on the projects that need it."
 icon: "plug"
 ---
 
-Integrations let the ParleHub agent do things outside a conversation — search Confluence, look up a Jira ticket, call your own service — by connecting it to a system your organization already uses.
+Integrations let the Parle agent do things outside a conversation — search Confluence, look up a Jira ticket, call your own service — by connecting it to a system your organization already uses.
 
-You pick an integration from the **gallery** in **Organization Settings → Integrations**. Each card is a system ParleHub knows how to connect to, with its server address and authentication method already filled in — you supply only what is genuinely yours: a credential, or an approval at the provider.
+You pick an integration from the **gallery** in **Organization Settings → Integrations**. Each card is a system Parle knows how to connect to, with its server address and authentication method already filled in — you supply only what is genuinely yours: a credential, or an approval at the provider.
 
 - **Confluence** is a branded card. Its server address (Atlassian's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card, so there is nothing to type before you approve access. See [Connecting Confluence](/tools/confluence) for what it can do and which scope to pick.
-- **Custom MCP Tool** is the card for everything else that runs an **MCP server** (an external service that speaks the Model Context Protocol) but has no card of its own. You give ParleHub its address and how to authenticate, and it behaves exactly like any other integration from then on.
+- **Fathom** is a branded card in the Meetings category, available at User scope only: each member connects their own Fathom account so the agent can search their recorded meetings and read transcripts, summaries and action items. Its server address (Fathom's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. See [Connecting Fathom](/tools/fathom) for the shared-thread and recording-consent warning, and how disconnecting works.
+- **Fireflies** is a branded card in the **Meetings** category, available at **User** scope only: each member connects their own account from [My Integrations](/tools/my-integrations). Its server address (Fireflies' own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. Transcripts the agent reads in a project conversation are visible to everyone in that thread, so read the consent warning first. See [Connecting Fireflies](/tools/fireflies).
+- **Linear** is a branded card. Its server address (Linear's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card, so there is nothing to type before you approve access. Unlike a read-only integration it can create and update issues and comments, so User scope is recommended. See [Connecting Linear](/tools/linear) for what it can do and which scope to pick.
+- **Miro** is a branded card in the Whiteboards category. Its server address (Miro's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. The agent can read boards and also create or edit content on them, so read [Connecting Miro](/tools/miro) for which scope to pick and what it can change.
+- **Notion** is a branded card. Its server address (Notion's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. The agent can search, read, create and update pages and databases, and Notion's access can't be narrowed to read-only, so User scope is recommended. See [Connecting Notion](/tools/notion).
+- **Otter** is a branded card in the **Meetings** category. Its server address (Otter's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. It is **User scope only** and **read-only**: each member connects their own Otter account from [My Integrations](/tools/my-integrations), and the agent can search and read that member's transcripts and summaries but never change anything. See [Connecting Otter](/tools/otter), including the warning about shared-thread visibility and recording consent.
+- **Productive** is a branded card for agency management: projects, time, budgets and resourcing. Its server address (Productive's own hosted MCP server) and authentication (OAuth 2.0) are fixed by the card. It requires Productive's Ultimate plan and can change billing data, so User scope is recommended. See [Connecting Productive](/tools/productive).
+- **Custom MCP Tool** is the card for everything else that runs an **MCP server** (an external service that speaks the Model Context Protocol) but has no card of its own. You give Parle its address and how to authenticate, and it behaves exactly like any other integration from then on.
 
 Setting one up has two levels, and both are deliberate:
 
 1. **Connect it once for your organization.** Only **Org Admins** can do this, so project members cannot point the agent at arbitrary external services.
 2. **Enable it per project.** A connected integration is available to nothing until a project switches it on — so an integration that reaches sensitive systems can be limited to the projects that should have it.
 
-ParleHub calls the other system **from the server side**, never from anyone's browser, and the credentials you store are never sent to a client.
+Parle calls the other system **from the server side**, never from anyone's browser, and the credentials you store are never sent to a client.
 
 <Note>
-  **You'll need:** to be an **Org Admin** in ParleHub, and — for the Custom MCP Tool card — the MCP server's **HTTPS URL** plus whatever it needs for authentication (an API key or token, or an OAuth 2.0 application at the provider).
+  **You'll need:** to be an **Org Admin** in Parle, and — for the Custom MCP Tool card — the MCP server's **HTTPS URL** plus whatever it needs for authentication (an API key or token, or an OAuth 2.0 application at the provider).
 </Note>
 
 <Info>
@@ -31,13 +38,13 @@ ParleHub calls the other system **from the server side**, never from anyone's br
 
 A card that supports more than one scope asks **who this connection is for** when you add it: **Organization**, **Project**, or **User** (each member connects their own account). The choice decides who authenticates, whose access the agent uses for that call, and who can end up reading the result — it's the single most consequential decision in setting an integration up, so it has [its own page](/tools/integration-scopes). Read it before you connect anything that reaches content not everyone in your organization should see.
 
-Confluence is the only card today that offers all three; Custom MCP Tool offers Organization and Project. A card only ever offers the scopes it declares support for — a personal mailbox or calendar integration, for instance, would never offer Organization scope, because a shared inbox credential isn't a sensible thing to hand every project's agent.
+Confluence, Linear, Miro, Notion and Productive offer all three. Fathom, Fireflies and Otter offer **User** only: a meeting recording belongs to the person who made it, so each member connects their own account and these can't be shared organization-wide or project-wide. Custom MCP Tool offers Organization and Project. A card only ever offers the scopes it declares support for.
 
 ## Part 1 — Connect an integration to your organization
 
 ### What happens
 
-You pick an integration from the gallery and fill in whatever it still needs. Before saving, ParleHub checks the address is safe and that the other system actually answers — so a typo, a firewalled server, or an address that points somewhere it shouldn't is caught now rather than mid-conversation. That check runs on every integration, **including one whose address was filled in for you** — a pre-filled address gets no special treatment.
+You pick an integration from the gallery and fill in whatever it still needs. Before saving, Parle checks the address is safe and that the other system actually answers — so a typo, a firewalled server, or an address that points somewhere it shouldn't is caught now rather than mid-conversation. That check runs on every integration, **including one whose address was filled in for you** — a pre-filled address gets no special treatment.
 
 <Steps>
   <Step title="Open the Integrations gallery">
@@ -60,7 +67,7 @@ You pick an integration from the gallery and fill in whatever it still needs. Be
   </Step>
 </Steps>
 
-### What ParleHub checks before saving
+### What Parle checks before saving
 
 - The URL **must be HTTPS**. Plain `http://` is rejected.
 - The URL **must not point to a private, internal, or loopback address** — `localhost`, `10.x`, `192.168.x`, link-local, and cloud metadata addresses are all refused, including when a public-looking hostname resolves to one. This protects your cloud environment from being reached through the agent.
@@ -72,7 +79,7 @@ You pick an integration from the gallery and fill in whatever it still needs. Be
 
 ## Part 2 — Authentication
 
-Choose the option that matches what the provider gives you. Confluence always uses OAuth 2.0; Custom MCP Tool offers both.
+Choose the option that matches what the provider gives you. Every branded card (Confluence, Fathom, Fireflies, Linear, Miro, Notion, Otter and Productive) always uses OAuth 2.0; Custom MCP Tool offers both.
 
 <Tabs>
   <Tab title="API key or token in a header">
@@ -90,23 +97,23 @@ Choose the option that matches what the provider gives you. Confluence always us
   <Tab title="OAuth 2.0">
     Use this when the provider wants an administrator (or, for Project/User scope, the connecting project or member) to approve access rather than hand out a static key.
 
-    For an integration connected at **Organization** scope, ParleHub holds one connection shared by every project it's enabled for — so the agent keeps working when nobody is online. A **Project** or **User** scoped integration instead keeps a separate connection per project or per member, each connected from that project's Tools tab or that member's My Integrations page. Whoever approved a given connection is recorded and shown on its card.
+    For an integration connected at **Organization** scope, Parle holds one connection shared by every project it's enabled for — so the agent keeps working when nobody is online. A **Project** or **User** scoped integration instead keeps a separate connection per project or per member, each connected from that project's Tools tab or that member's My Integrations page. Whoever approved a given connection is recorded and shown on its card.
 
     1. Select **OAuth 2.0** in the connect form and select **Connect**. No credentials are entered at this point.
-    2. On the new card, select **Find settings automatically**. For a server that supports it, ParleHub works out every setting from the URL alone — including registering an application with the provider on your behalf — and reports what it found. Confluence's server always resolves this way.
+    2. On the new card, select **Find settings automatically**. For a server that supports it, Parle works out every setting from the URL alone — including registering an application with the provider on your behalf — and reports what it found. Every branded card's server resolves this way.
     3. If discovery only gets part-way, the manual form opens **pre-filled with whatever was found**. Fill in the rest from the application you registered with the provider:
        - **Authorization endpoint** and **Token endpoint** — from the provider's OAuth documentation.
        - **Client ID**, and **Client secret** if the provider issued one (leave blank for a public client).
        - **Scopes** — space-separated. Ask only for what the integration actually needs. A branded card like Confluence fixes its own scopes and skips this step.
 
        Then select **Save OAuth settings**.
-    4. Select **Connect**. You're sent to the provider to approve access, and returned to ParleHub with the result. The card shows **Connected**, along with the account, who connected it, the granted scopes, and when the access was last renewed.
+    4. Select **Connect**. You're sent to the provider to approve access, and returned to Parle with the result. The card shows **Connected**, along with the account, who connected it, the granted scopes, and when the access was last renewed.
   </Tab>
 </Tabs>
 
 ### Two OAuth states that need your attention
 
-ParleHub renews access automatically, but two states do not resolve themselves:
+Parle renews access automatically, but two states do not resolve themselves:
 
 | State | What it means | What to do |
 | --- | --- | --- |
@@ -149,18 +156,18 @@ For a **User** scoped integration, whose credential answers the call depends on 
 
 Every call is written to your organization's [audit log](/security/audit-log) against the user, the conversation and the tool. The record covers **what happened, not what was said**: the tool's name and category, whether it succeeded, failed or was cancelled, how long it took, and the size of the request and response.
 
-The request and response payloads themselves are deliberately never stored. A tool's arguments routinely contain your own documents, and ordinary writes to the audit log are rejected — an entry can't be edited or deleted through ParleHub or by an ordinary database write — so keeping payloads there would put a second copy of your content somewhere ParleHub's own deletion paths can't reach.
+The request and response payloads themselves are deliberately never stored. A tool's arguments routinely contain your own documents, and ordinary writes to the audit log are rejected — an entry can't be edited or deleted through Parle or by an ordinary database write — so keeping payloads there would put a second copy of your content somewhere Parle's own deletion paths can't reach.
 
 ## Part 5 — Maintaining an integration
 
-**None of this depends on your plan.** If your plan stops including integrations you can't connect a new one, but everything below stays available — so an organization is never left holding a credential in ParleHub's vault that it can't take back out.
+**None of this depends on your plan.** If your plan stops including integrations you can't connect a new one, but everything below stays available — so an organization is never left holding a credential in Parle's vault that it can't take back out.
 
 | Task | Where | Effect |
 | --- | --- | --- |
 | Replace an API key or token | Integration card → **Rotate secret** on that header | New value stored in the vault; takes effect on the next call |
 | Re-approve an OAuth connection | Integration card → **Reconnect** | Sends you back to the provider to approve again |
-| Drop one connection | Integration card → **Disconnect** | Takes effect immediately: the stored authorization is revoked at the provider, the secret is deleted from the vault, and the integration stops working until reconnected |
-| Remove an integration entirely | Integration card → **Remove** | Disappears from every project immediately, but its credentials are **kept for 14 days** — add it back inside that window and nobody has to reconnect. After 14 days, every credential it held is revoked at the provider and deleted from the vault |
+| Drop one connection | Integration card → **Disconnect** | Takes effect immediately: where the provider offers a way to revoke, Parle asks it to revoke the stored authorization (best effort; Miro and Fathom offer none, so remove access there yourself), the secret is deleted from the vault, and the integration stops working until reconnected |
+| Remove an integration entirely | Integration card → **Remove** | Disappears from every project immediately, but its credentials are **kept for 14 days** — add it back inside that window and nobody has to reconnect. After 14 days, every credential it held is deleted from the vault, after a best-effort request to the provider to revoke it where the provider offers one |
 
 <Note>
   **Remove** and **Disconnect** are worded apart on purpose. Disconnect is unambiguous and immediate; Remove gives you a two-week window to change your mind before the credentials are actually destroyed.
@@ -171,9 +178,9 @@ The request and response payloads themselves are deliberately never stored. A to
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | "MCP server URL must use HTTPS" | The URL starts with `http://` | Use the server's HTTPS address |
-| "must not point to a private, loopback, link-local, or metadata address" | The URL is (or resolves to) an internal address | ParleHub only reaches MCP servers on the public internet — publish the server, or use a provider-hosted one |
+| "must not point to a private, loopback, link-local, or metadata address" | The URL is (or resolves to) an internal address | Parle only reaches MCP servers on the public internet — publish the server, or use a provider-hosted one |
 | "MCP server hostname could not be resolved" | Typo in the hostname, or the DNS record doesn't exist publicly | Re-check the URL |
-| "MCP server is not reachable" / "did not respond within the timeout" | Server down, or blocking ParleHub at its firewall | Confirm the server is up and reachable from outside your network, then connect again |
+| "MCP server is not reachable" / "did not respond within the timeout" | Server down, or blocking Parle at its firewall | Confirm the server is up and reachable from outside your network, then connect again |
 | Connected fine, but the agent says it has no such tool | It isn't enabled on **this** project, you're in a personal conversation, or (User scope) nobody in the project has connected their own account yet | Enable it on the project's **Tools** tab; start the chat inside a project; connect from [My Integrations](/tools/my-integrations) |
 | Tool list toggles are greyed out | You're not an Org Admin | Ask an Org Admin to enable it — members can view but not change |
 | A card shows **Reconnect required** | The provider rejected the stored authorization (revoked, expired, or scopes changed) | Select **Reconnect** and approve again at the provider |
@@ -181,7 +188,7 @@ The request and response payloads themselves are deliberately never stored. A to
 | "Find settings automatically" only partly works | The server doesn't publish full OAuth metadata | Complete the remaining fields manually — what was found is already filled in |
 | Tool calls fail with an authorization error | The key was revoked at the provider, or scopes are too narrow | Rotate the secret, or reconnect with the scopes the integration needs |
 | "already enabled for this project" | It's on already | No action needed — refresh the Tools tab |
-| "Connecting integrations is not included in your ParleHub plan" | Your plan doesn't include integrations, or you already have as many as it includes | The message names the plan that includes them. Everything you've connected stays listed and removable |
+| "Connecting integrations is not included in your Parle plan" | Your plan doesn't include integrations, or you already have as many as it includes | The message names the plan that includes them. Everything you've connected stays listed and removable |
 | **Add integration** is missing | Your plan doesn't include integrations, or you're not an Org Admin | See the panel at the top of the Integrations tab |
 
-Still stuck? Contact ParleHub support with your organization name, the integration's name, and (for Custom MCP Tool) the server URL you're connecting.
+Still stuck? Contact Parle support with your organization name, the integration's name, and (for Custom MCP Tool) the server URL you're connecting.
