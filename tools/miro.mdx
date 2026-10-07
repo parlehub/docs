@@ -1,0 +1,69 @@
+---
+title: "Connect Miro to Parle"
+sidebarTitle: "Miro"
+description: "Connect Miro from the Integrations gallery — pick a scope, approve access, and let the agent read your boards and create or edit board content."
+icon: "object-group"
+---
+
+**Miro** is a branded card in the Integrations gallery, in the **Whiteboards** category — Miro's own hosted MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Miro. There's nothing to type.
+
+<Note>
+  **Miro Enterprise plans:** Miro turns its MCP server off by default there. A Miro admin must enable it first, under **Admin settings → Apps & Integrations → MCP**, before anyone can connect from Parle.
+</Note>
+
+## What it gives the agent
+
+Once connected and enabled on a project, the agent can find and summarise boards, read the sticky notes, frames, cards and comments on them, and **create or edit** content: frames, sticky notes, shapes, cards, tables and diagrams. It's useful for turning a workshop board into a written summary or next steps, or drafting a diagram from a conversation.
+
+The card requests two Miro permissions:
+
+| Permission | What it allows |
+| --- | --- |
+| `boards:read` | Read your boards and their items, sticky notes, frames and comments. Never writes or changes anything. |
+| `boards:write` | Create and edit items on your boards: frames, sticky notes, shapes, cards, tables and diagrams. |
+
+<Warning>
+  This integration **writes to your real Miro boards**. There is no approval step before a change: when the agent decides to create or edit something, it happens during that turn, under the connected Miro account (at User scope, the account of the member whose conversation made the call). Text on a board, including sticky notes and comments, can be written by any collaborator on it, guests included, and reaches the agent as-is, so treat board content as untrusted input.
+</Warning>
+
+## Choosing a scope
+
+Miro offers all three credential scopes — see [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. For Miro specifically:
+
+- **User** (recommended) — each member connects their own Miro account, so the agent only works with the boards that member can reach, and changes it makes in a shared project conversation run under that member's Miro account. Miro access is per person, which is why the card marks this scope as recommended.
+- **Project** — each project connects one Miro account, shared by everyone using the integration in that project.
+- **Organization** — one shared connection for every project that enables it.
+
+<Info>
+  When you approve access, Miro asks you to **pick a team**. A grant may therefore reach only the boards of that one team, not every team in your Miro account. If the agent can't see a board you expected, check which team was selected when access was approved, and reconnect choosing the right one.
+</Info>
+
+## Connecting
+
+<Steps>
+  <Step title="Open the gallery">
+    Go to **Organization Settings → Integrations**, select **Add integration**, and choose the **Miro** card.
+  </Step>
+  <Step title="Choose who it's for">
+    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
+  </Step>
+  <Step title="Approve access at Miro">
+    For **Organization** scope, the Org Admin is sent to Miro to approve access, choosing a team, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of discovery, the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
+
+## Enabling it on a project
+
+Connecting Miro at Organization or Project scope makes it _available_; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own account is connected. For a **User**-scoped connection, the tool appears in the conversation as soon as the integration is enabled and **any** member has connected — a member who hasn't connected yet gets a plain-language prompt to do so from My Integrations.
+
+## Reconnecting and access renewal
+
+If Miro stops accepting the stored authorization — revoked, expired, or the granted permissions changed — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
+
+## Disconnecting and removing
+
+Disconnecting a Miro connection, at any scope, deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer use it. Miro doesn't offer a way for Parle to revoke access on its side, so Parle can't withdraw it there. The access Miro issued to Parle may stay listed in your Miro account, and may remain valid until it expires or you remove it. To end it at Miro, remove Parle's access yourself: open your Miro profile settings, go to the apps and integrations area, and remove the Parle authorization there.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
