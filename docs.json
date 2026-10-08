@@ -66,6 +66,7 @@
               "models/connecting-providers",
               "models/supported-models",
               "models/model-selection",
+      "models/thinking-level",
               "models/auto",
               "models/auto-setup",
               "models/model-policy"
