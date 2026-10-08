@@ -4,11 +4,11 @@ sidebarTitle: "Model Selection"
 description: "Enable models for your organization, set the default, narrow them with a model policy, or let Auto pick — then switch models mid-conversation."
 ---
 
-Model choice in ParleHub is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
+Model choice in Parle is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
 
 ## Level 1 — The organization's enabled models
 
-Connecting a provider key does not automatically make every model from that provider available. An **Org Admin** ticks the models the firm should be able to use in **Organization Settings → Model access**, and one of them is the organization's **default model** for new conversations.
+Connecting a provider key does not automatically make every model from that provider available. An **Org Admin** ticks the models the firm should be able to use in **Organization Settings → Models**, and one of them is the organization's **default model** for new conversations.
 
 The first model you enable becomes the default automatically; use **Set default** next to any enabled model to change it. There is also an **Auto-allow new models** toggle per provider — when the provider releases a new model, it is enabled automatically instead of waiting for an admin to opt in.
 
@@ -37,9 +37,9 @@ Use it to steer a team toward cost-efficient models for routine work, keep an ex
   If a project's rules leave no usable model, nobody can chat in that project. **Review changes** warns you before you save a change that would do this.
 </Warning>
 
-## Let ParleHub pick: Auto
+## Let Parle pick: Auto
 
-On the **Business** plan and above, the model picker also offers **Auto** at the top. With Auto, ParleHub picks a lower-cost model for routine conversations and a stronger one for demanding ones, from models your Org Admin names, and every answer shows which model wrote it. See [Auto](/models/auto), and [Set Up Auto](/models/auto-setup) for admins.
+On the **Business** plan and above, the model picker also offers **Auto** at the top. With Auto, Parle picks a lower-cost model for routine conversations and a stronger one for demanding ones, from models your Org Admin names, and every answer shows which model wrote it. See [Auto](/models/auto), and [Set Up Auto](/models/auto-setup) for admins.
 
 ## Switching models mid-conversation
 
@@ -57,7 +57,7 @@ All previous messages — yours and the assistant's — remain visible and intac
 
 ## Not every model can use tools
 
-[File tools](/projects/file-tools), [integrations](/tools/integrations), and the assistant's ability to look up your own budgets and policies all depend on the model supporting tool calls. The **Available models** list in Organization Settings shows per model whether it supports tools and vision, alongside its context window.
+[File tools](/projects/file-tools), [integrations](/tools/integrations), and the assistant's ability to look up your own budgets and policies all depend on the model supporting tool calls. The **Available models** list in **Organization Settings → Models** shows per model whether it supports tools and vision, alongside its context window.
 
 If the assistant seems unable to look anything up or reach a file, the model on that conversation is the first thing to check — switch to one that supports tools.
 

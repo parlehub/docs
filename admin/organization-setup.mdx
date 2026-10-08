@@ -1,14 +1,14 @@
 ---
-title: "Set Up Your ParleHub Organization"
+title: "Set Up Your Parle Organization"
 sidebarTitle: "Organization Setup"
-description: "Configure your ParleHub organization — name, model providers, SSO, storage, and spending caps — to get your whole firm ready for client AI work."
+description: "Configure your Parle organization — name, model providers, SSO, storage, and spending caps — to get your whole firm ready for client AI work."
 ---
 
-Your organization is the top-level container in ParleHub. Everything your firm does in ParleHub — projects, members, model providers, billing, and spending controls — lives under a single org. As an org admin, you control who belongs to the org, which AI providers are available, how costs are managed, and how the workspace integrates with your firm's identity and storage infrastructure.
+Your organization is the top-level container in Parle. Everything your firm does in Parle — projects, members, model providers, billing, and spending controls — lives under a single org. As an org admin, you control who belongs to the org, which AI providers are available, how costs are managed, and how the workspace integrates with your firm's identity and storage infrastructure.
 
 ## Creating Your Organization
 
-When you sign up for ParleHub for the first time, a setup wizard prompts you to name your organization. The account that completes this step becomes the first org admin automatically. From that point, you can invite additional admins, configure providers, and begin creating projects for your client engagements.
+When you sign up for Parle for the first time, a setup wizard prompts you to name your organization. The account that completes this step becomes the first org admin automatically. From that point, you can invite additional admins, configure providers, and begin creating projects for your client engagements.
 
 ## Key Configuration Steps
 
@@ -16,31 +16,60 @@ Complete these steps after your org is created to get your firm fully operationa
 
 <Steps>
   <Step title="Name Your Organization">
-    Navigate to **Settings → General** and enter your firm's name. This name appears across the workspace and in any billing communications. You can update it at any time.
+    Go to **Org settings → Organization** and use the **Organization profile** card to enter your firm's name. The name appears across the workspace and in any billing communications. You can rename the organization at any time: change the name, then save it. The name is required and can be up to 100 characters.
+  </Step>
+  <Step title="Add Your Logo (Optional)">
+    On the same **Organization profile** card, select **Upload logo**. Your logo appears next to the organization name in the sidebar and in the organization picker; until you add one, Parle shows your organization's initials. See [Organization logo](#organization-logo) for the accepted formats and limits.
   </Step>
   <Step title="Connect Model Providers">
-    Navigate to **Organization Settings → Model access** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure AI Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
+    Navigate to **Org settings → Models** and add the AI providers your firm will use (for example, OpenAI, Anthropic, or Azure AI Foundry). Provider credentials are stored at the org level and made available to all projects. See the [Connecting Providers](/models/connecting-providers) guide for step-by-step instructions.
   </Step>
   <Step title="Set Your Currencies (If You Do Not Work in US Dollars)">
-    If a provider bills you in GBP, EUR or CAD, set its **Quote currency** when you connect it — on each Azure AI Foundry deployment, or on the Google Gemini card — before you enter any rates. Then choose the currency your reports read in under **Organization Settings → Budgets & alerts → Reporting currency**. Each project's caps get their own budget currency when you create it. Everything defaults to USD. See [Currencies and Exchange Rates](/cost/currencies).
+    If a provider bills you in GBP, EUR or CAD, set its **Quote currency** when you connect it — on each Azure AI Foundry deployment, or on the Google Gemini card — before you enter any rates. Then choose the currency your reports read in under **Org settings → Budgets & alerts → Reporting currency**. Each project's caps get their own budget currency when you create it. Everything defaults to USD. See [Currencies and Exchange Rates](/cost/currencies).
   </Step>
   <Step title="Invite Your Team">
-    Navigate to **Settings → Members** and send email invitations to your colleagues. Assign each person a role — org admin or member — at invite time. Invitees must accept the email invite before they can access the workspace.
+    Navigate to **Members** in the sidebar and send email invitations to your colleagues. Assign each person a role — org admin or member — at invite time. Invitees must accept the email invite before they can access the workspace.
   </Step>
   <Step title="Configure SSO (Optional)">
-    Navigate to **Settings → Security → SSO** to connect your identity provider (such as Microsoft Entra ID or Google Workspace). Once SSO is active, members can sign in through your IdP without managing a separate ParleHub password.
+    Go to **Org settings → Organization → Single sign-on** to connect your identity provider (such as Microsoft Entra ID or Google Workspace). Once SSO is active, members can sign in through your IdP without managing a separate Parle password.
   </Step>
   <Step title="Connect Native Storage (Optional — Business Plan and Above)">
-    Navigate to **Settings → Storage** to link your firm's own cloud storage bucket. This keeps conversation data and file attachments within your own infrastructure. Native storage is available on the Business plan and above.
+    Go to **Org settings → Files & search → File storage** to choose which storage your projects can use. Parle Cloud Storage needs no setup; you can also connect your firm's own SharePoint library or Google Shared Drive so project files stay in your own infrastructure. Connecting your own storage is available on the Business plan and above.
   </Step>
   <Step title="Set Org-Wide Spending Caps">
-    Navigate to **Organization Settings → Billing** and, on the **Monthly spend cap** card, enter a **Cap (USD / month)** — a monthly US-dollar ceiling on total model spend for the entire org — then select **Save cap**. This acts as an outer backstop above all individual project caps and personal budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
+    Navigate to **Org settings → Budgets & alerts** and, on the **Monthly spend cap** card, enter a **Cap (USD / month)** — a monthly US-dollar ceiling on total model spend for the entire org — then select **Save cap**. This acts as an outer backstop above all individual project caps and personal budgets. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for details.
   </Step>
 </Steps>
 
-## Settings Reference
+## Organization logo
 
-Each section of the Settings area controls a distinct part of your organization's configuration.
+An org admin can give the organization a logo from **Org settings → Organization → Organization profile**. Select **Upload logo** (or **Replace logo** to swap an existing one), and **Remove logo** to go back to the initials.
+
+| Requirement | Limit |
+| --- | --- |
+| Formats | PNG, JPEG or WebP. SVG is not accepted. |
+| File size | 512 KB at most |
+| Dimensions | 1,024 px at most on each side |
+| Animation | Animated images are refused |
+
+Parle checks the image itself rather than trusting the file name, then stores a resized PNG (shown at up to 512 px) so it stays sharp and light. Only org admins can change the logo; every member sees it. If an upload is refused, the card tells you why, and your existing logo is left in place.
+
+## Where things live in Org settings
+
+**Org settings** (in the sidebar, for org admins) has six tabs:
+
+| Tab | What is on it |
+| --- | --- |
+| **Organization** | **Organization profile** (name and logo), **Time zone**, **Organization instructions**, **Single sign-on**, **CLI sessions**, and your plan: **Current plan**, **Your plan includes** and **Seats** |
+| **Models** | How you source model access, your provider keys, **Model policy**, and **Auto** |
+| **Budgets & alerts** | **Credit wallet**, **Monthly spend cap**, **Per-message spending limit**, **Personal workspaces**, **Budget alerts** and **Reporting currency** |
+| **Files & search** | **File storage** (Parle Cloud Storage, SharePoint, Google Drive) and **Semantic file search** |
+| **Knowledge & skills** | **Organization knowledge**, **Deck template** and **Skills** |
+| **Integrations** | **Chat apps** (Microsoft Teams) and **Tools** (the integrations gallery) |
+
+Members are managed on their own **Members** page, and platform usage this month is on the **Usage** page.
+
+## Related guides
 
 <CardGroup cols={2}>
   <Card title="Members" icon="users" href="/admin/managing-members">
@@ -58,11 +87,11 @@ Each section of the Settings area controls a distinct part of your organization'
   <Card title="Spending Limits" icon="circle-dollar-sign" href="/admin/org-caps">
     Set a monthly org-wide AI spending cap and per-user limits. These controls stack on top of individual project budgets.
   </Card>
-  <Card title="Billing" icon="credit-card" href="/plans-and-billing">
-    View your current plan, manage payment methods, and download invoices for your ParleHub subscription.
+  <Card title="Plans & Billing" icon="credit-card" href="/plans-and-billing">
+    View your current plan, seats and what your plan includes in **Org settings → Organization**, and select **Manage billing** on the **Current plan** card for payment methods and invoices.
   </Card>
   <Card title="Audit Log" icon="scroll" href="/security/audit-log">
-    Understand what ParleHub records in its audit log — membership, settings, budget and provider changes among them. This is a reference page, not a section of Settings: there is no audit screen or export in the app today.
+    Understand what Parle records in its audit log — membership, settings, budget and provider changes among them. This is a reference page, not a section of Settings: there is no audit screen or export in the app today.
   </Card>
   <Card title="Roles & Permissions" icon="lock" href="/security/roles-and-permissions">
     Understand what org admins, project admins, and members can see and do across the workspace.
@@ -70,5 +99,5 @@ Each section of the Settings area controls a distinct part of your organization'
 </CardGroup>
 
 <Note>
-  Only org admins can access **Settings**. The first user to create the organization is automatically assigned the org admin role.
+  Only org admins can access **Org settings**. The first user to create the organization is automatically assigned the org admin role.
 </Note>

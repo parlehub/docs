@@ -1,14 +1,14 @@
 ---
 title: "File Tools: Work Directly with Your Project Documents"
 sidebarTitle: "File Tools"
-description: "The ParleHub agent lists, reads, writes and deletes files in the project's own storage — the same four tools whichever storage provider is behind them."
+description: "The Parle agent lists, reads, writes and deletes files in the project's own storage — the same four tools whichever storage provider is behind them."
 ---
 
-Rather than asking you to paste excerpts into a chat window, ParleHub gives the agent direct access to the documents stored in the project. When you ask a question that requires reading a contract, scanning a balance sheet, or summarizing a presentation, the agent reaches into the project's file store and runs a tool call against it. You get an answer grounded in the actual source material — not one built from text you copied in manually.
+Rather than asking you to paste excerpts into a chat window, Parle gives the agent direct access to the documents stored in the project. When you ask a question that requires reading a contract, scanning a balance sheet, or summarizing a presentation, the agent reaches into the project's file store and runs a tool call against it. You get an answer grounded in the actual source material — not one built from text you copied in manually.
 
 ## The four file tools
 
-Whatever storage a project is rooted at — ParleHub Cloud Storage, a SharePoint document library, or a Google Shared Drive — the agent sees the same four normalized operations. Nothing in a conversation depends on which provider is behind them.
+Whatever storage a project is rooted at — Parle Cloud Storage, a SharePoint document library, or a Google Shared Drive — the agent sees the same four normalized operations. Nothing in a conversation depends on which provider is behind them.
 
 | Tool | What it does |
 | --- | --- |
@@ -18,7 +18,7 @@ Whatever storage a project is rooted at — ParleHub Cloud Storage, a SharePoint
 | `fs_delete_file` | Delete a file |
 
 <Warning>
-  **File tools are not read-only.** The agent can create, overwrite, and delete files in the location the project is rooted at. That is deliberate — it is how a drafted deliverable ends up in your SharePoint folder rather than trapped in a chat window — but it means the grant you give ParleHub on that location is the real control. If you want read-only behavior, grant read-only access on the provider's side: see [Storage](/security/storage).
+  **File tools are not read-only.** The agent can create, overwrite, and delete files in the location the project is rooted at. That is deliberate — it is how a drafted deliverable ends up in your SharePoint folder rather than trapped in a chat window — but it means the grant you give Parle on that location is the real control. If you want read-only behavior, grant read-only access on the provider's side: see [Storage](/security/storage).
 </Warning>
 
 <Info>
@@ -46,7 +46,7 @@ Whatever storage a project is rooted at — ParleHub Cloud Storage, a SharePoint
     Navigate to the project and select **Files**.
   </Step>
   <Step title="Add your documents">
-    Upload them here, or — if the project is rooted in SharePoint or Google Drive — simply put them in that folder the way your team normally does. Files your team adds at source are visible to the agent's tools without any upload step in ParleHub.
+    Upload them here, or — if the project is rooted in SharePoint or Google Drive — simply put them in that folder the way your team normally does. Files your team adds at source are visible to the agent's tools without any upload step in Parle.
   </Step>
   <Step title="Confirm the agent can see them">
     Start a conversation in the project and ask the agent to list the files, or ask a question that references a document by name.

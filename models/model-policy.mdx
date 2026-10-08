@@ -17,7 +17,7 @@ The policy applies everywhere a model is chosen: the model picker, every message
 
 | Level | Who | Where | What it does |
 | --- | --- | --- | --- |
-| **Organization** | Org Admin | **Organization Settings → Model access → Model policy** | Applies to every project and to personal conversations |
+| **Organization** | Org Admin | **Organization Settings → Models → Model policy** | Applies to every project and to personal conversations |
 | **Project** | Project Admin or Org Admin | The project's **Budget** tab | Adds stricter rules for one project |
 
 A project's rules can only **narrow** the organization's rules, never widen them. If a project rule would allow something the organization's rules don't, you're told before you can save.
@@ -36,7 +36,7 @@ Leave a rule empty and it doesn't restrict anything. A model has to pass every r
 
 ## Review before you save
 
-Select **Review changes** before saving. ParleHub shows what the change would do:
+Select **Review changes** before saving. Parle shows what the change would do:
 
 - Whether a project rule would **widen** the organization's rules, and which organization rule it conflicts with.
 - Whether any project or personal conversations would be left with **no usable model**.
@@ -68,7 +68,7 @@ A **per-message spending limit** caps what one message may cost. A message whose
 
 | Level | Who | Where |
 | --- | --- | --- |
-| **Organization** | Org Admin | **Organization Settings → Billing** |
+| **Organization** | Org Admin | **Organization Settings → Budgets & alerts → Per-message spending limit** |
 | **Project** (stricter only) | Project Admin or Org Admin | The project's **Budget** tab |
 
 The lower of the two applies. When a message is refused, the notice says it isn't a budget problem, names the limit, and points to what helps: compact the conversation, or start a new one. When a **project** limit refused it, the notice also offers **Request a higher limit**, which an Org Admin can approve.
@@ -95,6 +95,6 @@ If your organization moves to a plan without model policy:
   </Card>
 
   <Card title="Auto" icon="wand-magic-sparkles" href="/models/auto">
-    Let ParleHub pick the model for each conversation, inside these rules.
+    Let Parle pick the model for each conversation, inside these rules.
   </Card>
 </CardGroup>
