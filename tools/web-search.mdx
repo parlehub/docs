@@ -31,7 +31,7 @@ The site name in that list is the real address Parle fetched, not a label the ag
 
 <Steps>
   <Step title="An Org Admin switches it on">
-    In **Organization Settings → Knowledge & skills → Skills**, turn Web Search on. Set the domain allow/block rules here first if you want them in place from the start — see [Blocking and allowing sites](#blocking-and-allowing-sites) below.
+    In **Org settings → Knowledge & skills → Skills**, turn Web Search on. Set the domain allow/block rules here first if you want them in place from the start — see [Blocking and allowing sites](#blocking-and-allowing-sites) below.
   </Step>
   <Step title="An Agent Author adds the skill to an agent">
     In the agent's editor, under **Skills**, add **Web Search**.
@@ -51,7 +51,7 @@ Parle ships a built-in agent, **@researcher**, that already holds the Web Search
 - Its queries go to Parle's third-party search provider, Brave — see [Your search queries go to a third party](#your-search-queries-go-to-a-third-party) above.
 - It holds no file tools of its own, but a research turn in a project conversation still asks for approval before any file change, and turns off your integrations for the rest of that reply — see [Search results are untrusted](/tools/web-search-safety) below.
 - It's subject to the same monthly search allowance as every other agent — see [Limits](#limits) below.
-- If your organization hasn't switched Web Search on yet, @researcher says so and stops rather than guessing; an Org Admin turns it on in **Organization Settings → Knowledge & skills → Skills**.
+- If your organization hasn't switched Web Search on yet, @researcher says so and stops rather than guessing; an Org Admin turns it on in **Org settings → Knowledge & skills → Skills**.
 - You can add @researcher to a project like any other agent, or leave it for personal conversations — it's never added automatically. A Project Admin can remove it from a project, the same as any other agent, but nobody in your organization can edit or delete @researcher itself.
 
 ## Limits
@@ -62,7 +62,7 @@ Parle ships a built-in agent, **@researcher**, that already holds the Web Search
 
 ## Blocking and allowing sites
 
-An Org Admin controls which sites a search may return, in **Organization Settings → Knowledge & skills → Skills → Web Search**:
+An Org Admin controls which sites a search may return, in **Org settings → Knowledge & skills → Skills → Web Search**:
 
 - **Blocked domains** — results from these sites are never shown to the agent.
 - **Allowed domains** — optional. Leave it empty to allow every site that isn't blocked. If you add any, only those sites are shown.

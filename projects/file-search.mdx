@@ -20,7 +20,7 @@ Indexing and reindexing are free. Parle absorbs the embedding cost itself — it
 
 ## Turning it on and off
 
-An Org Admin controls this from **Organization Settings → Files & search**, on the **Semantic file search** card. Any member of the organization can see whether it is on; only an Org Admin can change it.
+An Org Admin controls this from **Org settings → Files & search**, on the **Semantic file search** card. Any member of the organization can see whether it is on; only an Org Admin can change it.
 
 <Note>
   **Turning it on does not index files that are already there.** The setting is on by default, so a brand-new project indexes its files as they arrive and this is invisible. But an organization that was already using Parle before this feature shipped has files that were never indexed — there is no off-to-on transition to trigger a catch-up, because for most organizations the setting was never off. **Reindex** (below) is the only way to bring those files into search. Without running it, search will look broken on an established project even though nothing is wrong.
