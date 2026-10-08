@@ -1,10 +1,10 @@
 ---
 title: "Audit Log: Append-Only Record of Sensitive Actions"
 sidebarTitle: "Audit Log"
-description: "ParleHub records sensitive actions in an append-only audit log that rejects ordinary edits and deletions at the database layer."
+description: "Parle records sensitive actions in an append-only audit log that rejects ordinary edits and deletions at the database layer."
 ---
 
-Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced. ParleHub writes every sensitive action across your organization to an append-only audit log, enforced at two layers so that ordinary application and database writes cannot rewrite history.
+Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced. Parle writes every sensitive action across your organization to an append-only audit log, enforced at two layers so that ordinary application and database writes cannot rewrite history.
 
 ## What the Audit Log Captures
 
@@ -21,14 +21,14 @@ Every message (inbound and outbound), configuration change, member change, budge
 Each record includes a timestamp, the actor, the target resource (project, file, user, or setting), the org and project it belongs to, and the before/after values where a setting changed.
 
 <Info>
-  **The audit log is not a payload store.** For a tool call it records the tool's name and category, whether it succeeded, failed or was cancelled, how long it took, and the size of the request and response — but never the request and response themselves. A tool's arguments routinely contain your own documents, and because audit rows resist deletion, storing payloads there would put a second copy of your content somewhere ParleHub's own deletion paths cannot reach.
+  **The audit log is not a payload store.** For a tool call it records the tool's name and category, whether it succeeded, failed or was cancelled, how long it took, and the size of the request and response — but never the request and response themselves. A tool's arguments routinely contain your own documents, and because audit rows resist deletion, storing payloads there would put a second copy of your content somewhere Parle's own deletion paths cannot reach.
 </Info>
 
 ## Append-Only Enforcement
 
 The guarantee comes from how the log is enforced, not just how it is described. Two independent layers apply:
 
-1. **The application layer.** The repositories that write audit records expose no update or delete operation at all. There is no code path in ParleHub — no admin screen, no API endpoint, no support tool — that edits or removes an entry.
+1. **The application layer.** The repositories that write audit records expose no update or delete operation at all. There is no code path in Parle — no admin screen, no API endpoint, no support tool — that edits or removes an entry.
 2. **The database layer.** An `INSTEAD OF UPDATE, DELETE` trigger on the audit tables rejects both statements regardless of which account issues them. A direct SQL `UPDATE` or `DELETE` against an audit row fails, even from a connection that holds write permission on the table.
 
 In practice this means a compromised Org Admin account cannot scrub activity from the log: there is no feature that would let it, and the database would reject the write even if there were.
@@ -40,7 +40,7 @@ In practice this means a compromised Org Admin account cannot scrub activity fro
 ## Reviewing the Log
 
 <Note>
-  **A customer-facing audit view is on the roadmap and is not available yet.** There is currently no audit screen, export, or API in the ParleHub application for org administrators. Records are being captured today, so nothing is lost in the meantime — but if your engagement depends on retrieving them, raise it with ParleHub support rather than assuming self-service access.
+  **A customer-facing audit view is on the roadmap and is not available yet.** There is currently no audit screen, export, or API in the Parle application for org administrators. Records are being captured today, so nothing is lost in the meantime — but if your engagement depends on retrieving them, raise it with Parle support rather than assuming self-service access.
 </Note>
 
 Planned for a future release:
@@ -49,4 +49,4 @@ Planned for a future release:
 - **CSV export** — download a full or filtered extract for compliance tooling, legal review, or archival.
 - **A SIEM webhook** — stream events to your own security information and event management platform.
 
-If a client or regulator asks for evidence of your AI usage controls before those ship, contact ParleHub support with your organization name and the window you need covered.
+If a client or regulator asks for evidence of your AI usage controls before those ship, contact Parle support with your organization name and the window you need covered.

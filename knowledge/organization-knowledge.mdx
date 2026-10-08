@@ -1,5 +1,5 @@
 ---
-title: "Set Up Organization Knowledge in ParleHub"
+title: "Set Up Organization Knowledge in Parle"
 sidebarTitle: "Organization Knowledge"
 description: "Connect a SharePoint or Drive library, or publish policies by hand, so the assistant can quote your firm's documents with a citation in any conversation."
 icon: "books"
@@ -13,10 +13,10 @@ There are two ways to get documents in, and they are not equal:
 
 <CardGroup cols={2}>
   <Card title="Connect a library you already maintain" icon="link">
-    Point ParleHub at a SharePoint site or Google Drive folder your firm already edits in. **This is the intended route.** Editing a policy at source is what updates the answers, so there is no second copy to go stale.
+    Point Parle at a SharePoint site or Google Drive folder your firm already edits in. **This is the intended route.** Editing a policy at source is what updates the answers, so there is no second copy to go stale.
   </Card>
   <Card title="Publish a document by hand" icon="upload">
-    Upload the file to ParleHub. The fallback for firms with no such library, or for a one-off document that lives nowhere else.
+    Upload the file to Parle. The fallback for firms with no such library, or for a one-off document that lives nowhere else.
   </Card>
 </CardGroup>
 
@@ -25,10 +25,10 @@ There are two ways to get documents in, and they are not equal:
 </Note>
 
 <Note>
-  **You'll need:** to be an **Org Admin** in ParleHub. To connect a library you also need that provider already switched on for your organization under file storage — see [Connect Microsoft 365](/admin/microsoft-365) or [Connect Google Workspace](/admin/google-workspace).
+  **You'll need:** to be an **Org Admin** in Parle. To connect a library you also need that provider already switched on for your organization under file storage — see [Connect Microsoft 365](/admin/microsoft-365) or [Connect Google Workspace](/admin/google-workspace).
 </Note>
 
-Everything below happens in **Organization Settings → Knowledge**.
+Everything below happens in **Org settings → Knowledge & skills**.
 
 ## Before you start — who can see this
 
@@ -38,13 +38,13 @@ Everything below happens in **Organization Settings → Knowledge**.
 
 ## Part 1 — Connect a library you already maintain
 
-You tell ParleHub where your document library lives. ParleHub checks it can read that location, then indexes the documents in it so they can be quoted. It re-checks periodically, so a policy edited at source is reflected in answers without anyone re-uploading anything.
+You tell Parle where your document library lives. Parle checks it can read that location, then indexes the documents in it so they can be quoted. It re-checks periodically, so a policy edited at source is reflected in answers without anyone re-uploading anything.
 
-**Connecting does not move or change anything. ParleHub only ever reads.**
+**Connecting does not move or change anything. Parle only ever reads.**
 
 <Steps>
   <Step title="Open the Knowledge tab">
-    Go to **Organization Settings → Knowledge**. **Connected library** is the first card on the page.
+    Go to **Org settings → Knowledge & skills**. **Connected library** is the first card on the page.
   </Step>
   <Step title="Choose the provider">
     **SharePoint** or **Google Drive**. Only providers your organization has already switched on for file storage can be connected; if the card tells you it cannot be bound, that is why.
@@ -59,7 +59,7 @@ You tell ParleHub where your document library lives. ParleHub checks it can read
     The note above the button is the one thing on this screen worth stopping for — see below.
   </Step>
   <Step title="Connect the library">
-    Select **Connect library**. ParleHub verifies it can read the location before saving, so a wrong id or a permissions gap is caught now rather than silently producing an empty corpus.
+    Select **Connect library**. Parle verifies it can read the location before saving, so a wrong id or a permissions gap is caught now rather than silently producing an empty corpus.
   </Step>
 </Steps>
 
@@ -69,17 +69,17 @@ You tell ParleHub where your document library lives. ParleHub checks it can read
   **Anyone who can edit files in that location is shaping what the assistant tells your whole organization.**
 </Warning>
 
-This is the real consequence of connecting, and it is why the screen states it before you click rather than burying it in documentation. ParleHub reads whatever is in that folder and can quote it in any conversation in your firm. Before you connect:
+This is the real consequence of connecting, and it is why the screen states it before you click rather than burying it in documentation. Parle reads whatever is in that folder and can quote it in any conversation in your firm. Before you connect:
 
 - Choose a location whose contributors you would trust to **publish a company policy**.
-- Manage who can write there **in SharePoint or Google Drive**. ParleHub cannot restrict it for you — the permissions on that folder are the control.
+- Manage who can write there **in SharePoint or Google Drive**. Parle cannot restrict it for you — the permissions on that folder are the control.
 - A general-purpose "Documents" library that everyone can write to is usually the wrong choice. A curated "Policies" folder with a small set of owners is usually the right one.
 
 ### Keeping an eye on it
 
 Once connected, the card shows **when the library was last checked**.
 
-If ParleHub stops being able to read it — permissions changed, the site moved, a token expired — the card says so plainly:
+If Parle stops being able to read it — permissions changed, the site moved, a token expired — the card says so plainly:
 
 > **This library can't be read right now.** … The assistant is still answering from the last successful check, so its answers may be out of date.
 
@@ -87,7 +87,7 @@ That behavior is deliberate: the corpus keeps answering from its last good index
 
 ### Disconnecting
 
-**Disconnect** stops ParleHub checking that library for changes. Documents already indexed from it **stay searchable** — if you want them gone, retire or delete them individually (Part 3).
+**Disconnect** stops Parle checking that library for changes. Documents already indexed from it **stay searchable** — if you want them gone, retire or delete them individually (Part 3).
 
 ## Part 2 — Publish a document by hand
 
@@ -95,7 +95,7 @@ Use this when there is no library to point at, or for a document that only exist
 
 <Steps>
   <Step title="Open the publish form">
-    In **Organization Settings → Knowledge**, go to **Publish a document**.
+    In **Org settings → Knowledge & skills**, go to **Publish a document**.
   </Step>
   <Step title="Name it the way people name it">
     This is what the assistant **cites**, so make it the name people actually use. "Travel & expenses policy", not "TE-POL-2026-v3-FINAL".
@@ -104,7 +104,7 @@ Use this when there is no library to point at, or for a document that only exist
     A short note on what the document covers.
   </Step>
   <Step title="Set Effective from (optional)">
-    When this version starts applying. Leave blank for today. This is a different fact from when you uploaded it, which is why ParleHub tracks it separately from your storage provider's version history.
+    When this version starts applying. Leave blank for today. This is a different fact from when you uploaded it, which is why Parle tracks it separately from your storage provider's version history.
   </Step>
   <Step title="Pick the file and publish">
     Select **Publish**.
@@ -113,7 +113,7 @@ Use this when there is no library to point at, or for a document that only exist
 
 ### What you can publish
 
-PDF, Word, PowerPoint, Markdown, plain text, CSV, JSON, HTML, XML and YAML. ParleHub extracts the text for you.
+PDF, Word, PowerPoint, Markdown, plain text, CSV, JSON, HTML, XML and YAML. Parle extracts the text for you.
 
 <Warning>
   **Scanned documents with no text layer cannot be indexed.** A photographed or scanned PDF is an image as far as the file is concerned. If you publish one it will end up in the **Can't be indexed** state — that is a statement about the file, not a failure to retry. Run it through OCR first, or publish a text-bearing version.
@@ -123,7 +123,7 @@ PDF, Word, PowerPoint, Markdown, plain text, CSV, JSON, HTML, XML and YAML. Parl
 
 ### Publishing an update
 
-**Publish again under the same name.** ParleHub creates a new version and retires the previous one automatically. You do not need to remove the old one first — the form tells you it is about to do this when it recognizes the name.
+**Publish again under the same name.** Parle creates a new version and retires the previous one automatically. You do not need to remove the old one first — the form tells you it is about to do this when it recognizes the name.
 
 ### The states a document can be in
 
@@ -131,7 +131,7 @@ PDF, Word, PowerPoint, Markdown, plain text, CSV, JSON, HTML, XML and YAML. Parl
 | --- | --- |
 | **Indexing…** | Being prepared for search. Normal for a freshly published document, and it is not answerable yet. |
 | **Searchable · N passages** | Done. It can be quoted, and `N` is roughly how many separately citable chunks it produced. |
-| **Indexing failed — retrying** | A transient problem. ParleHub is retrying; no action needed unless it persists. |
+| **Indexing failed — retrying** | A transient problem. Parle is retrying; no action needed unless it persists. |
 | **Can't be indexed** | Terminal. No text could be extracted — almost always a scanned document. It will never become searchable as-is. |
 | **Retired — not quotable** | Superseded or retired. Out of the index and out of circulation. |
 
@@ -174,14 +174,14 @@ The assistant searches the corpus and answers with the relevant passage, followe
 
 Two things about citations are worth telling your team, because they are what make the answers usable with a client:
 
-- **The label comes from ParleHub's own record, not from the answer text.** The assistant cannot invent a citation, and a citation cannot drift from what was actually read.
+- **The label comes from Parle's own record, not from the answer text.** The assistant cannot invent a citation, and a citation cannot drift from what was actually read.
 - **Hovering shows the effective date** of the version that was quoted.
 
 See [Asking About Your Organization](/knowledge/asking-about-your-org) for what your team can ask once this is set up.
 
 ## What it costs
 
-**Nothing.** Preparing documents for search does not draw on your project budgets or your prepaid credit — ParleHub absorbs it, however much you publish. The tokens spent answering a question are billed normally, exactly as any other message.
+**Nothing.** Preparing documents for search does not draw on your project budgets or your prepaid credit — Parle absorbs it, however much you publish. The tokens spent answering a question are billed normally, exactly as any other message.
 
 ## Troubleshooting
 
@@ -191,6 +191,6 @@ See [Asking About Your Organization](/knowledge/asking-about-your-org) for what 
 | **Can't be indexed** | The file has no text layer — almost certainly a scan. OCR it and publish again. |
 | The assistant does not use a document you published | Check its state is **Searchable**, that **Available in conversations** is on, and that the project has not opted out in **Tools & knowledge**. |
 | The assistant quotes an old policy | Check the new version actually published (same name creates a new version and retires the old). If the corpus is source-connected, check the **last checked** time and whether the library is readable. |
-| **This library can't be read right now** | ParleHub has lost access to the connected location. Check the folder still exists and the permissions are intact. Answers continue from the last good index meanwhile. |
+| **This library can't be read right now** | Parle has lost access to the connected location. Check the folder still exists and the permissions are intact. Answers continue from the last good index meanwhile. |
 | The **Connected library** card says it cannot be bound | The provider is not switched on for your organization under file storage yet. |
 | A citation shows **[document unavailable]** | The cited document has been retired or removed since that message was written. Working as intended. |

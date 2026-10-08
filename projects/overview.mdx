@@ -1,10 +1,10 @@
 ---
 title: "Projects: Organize AI Work by Client Engagement"
 sidebarTitle: "Overview"
-description: "A project is ParleHub's shared workspace — conversations, files, standing instructions, a budget, and the tools the agent may use, scoped to one engagement."
+description: "A project is Parle's shared workspace — conversations, files, standing instructions, a budget, and the tools the agent may use, scoped to one engagement."
 ---
 
-A **project** is the shared workspace in ParleHub. Everything the team does for a piece of work lives inside it: conversations everyone on the project can see and continue, the project's files, a spending budget, standing instructions for the agent, and the tools it is allowed to use.
+A **project** is the shared workspace in Parle. Everything the team does for a piece of work lives inside it: conversations everyone on the project can see and continue, the project's files, a spending budget, standing instructions for the agent, and the tools it is allowed to use.
 
 Creating one takes under a minute. The parts that make it genuinely useful — members, storage, context, budget — are set up afterwards from the project's own tabs.
 
@@ -46,7 +46,7 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
     Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected. After creation, blocked models and any other rules for this project live in its [model policy](/models/model-policy), on the **Budget** tab.
   </Step>
   <Step title="Choose storage">
-    **ParleHub Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
+    **Parle Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
   </Step>
   <Step title="Create the project">
     You land in the project's workspace, already added as its **Project Admin**.
@@ -114,13 +114,13 @@ Change someone's access or role directly in the roster, or **Remove** them. Ever
 
 ## Pointing the project at storage
 
-Every project has a file area the team and the agent both use. By default that is ParleHub-managed storage, which works immediately. If your organization has connected SharePoint or Google Drive, you can instead root the project in a document library or Shared Drive so files stay in your own tenant.
+Every project has a file area the team and the agent both use. By default that is Parle-managed storage, which works immediately. If your organization has connected SharePoint or Google Drive, you can instead root the project in a document library or Shared Drive so files stay in your own tenant.
 
 <Steps>
   <Step title="Open Project Details → Storage">
     Choose a provider.
   </Step>
-  <Step title="ParleHub Cloud Storage">
+  <Step title="Parle Cloud Storage">
     Managed storage, no setup.
   </Step>
   <Step title="SharePoint">
@@ -130,7 +130,7 @@ Every project has a file area the team and the agent both use. By default that i
     Paste the URL of the **Shared Drive itself** — its root, not a sub-folder inside it.
   </Step>
   <Step title="Save storage">
-    ParleHub checks it can actually reach the location before saving, so a permissions gap is caught now.
+    Parle checks it can actually reach the location before saving, so a permissions gap is caught now.
   </Step>
 </Steps>
 
@@ -177,14 +177,14 @@ To restore one, go to the **Projects** page and open the collapsed **Archived** 
 | No **New project** button | You are not an Org Admin | Project creation is Org Admin only — ask one to create it and make you a Project Admin |
 | "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | [Archive](#archiving-and-restoring-a-project) a project you have finished, or upgrade the plan |
 | "Private (Restricted) projects require the Business plan or above" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
-| "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Organization Settings → Billing |
-| Creating the project is refused: "ParleHub can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and ParleHub has not published an exchange rate for that currency yet — a ParleHub issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
+| "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Org settings → Organization → Current plan |
+| Creating the project is refused: "Parle can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and Parle has not published an exchange rate for that currency yet — a Parle issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
 | No **Available models** section on the form | Your organization has not connected any model providers | [Connect a provider key](/models/connecting-providers) first |
 | Nobody can chat in the new project | No models enabled, or the project's model policy leaves none usable | Check the project's [model policy](/models/model-policy) on the **Budget** tab, then the organization's enabled models and policy |
 | A message is refused: an admin has restricted this model | The organization's or project's [model policy](/models/model-policy) doesn't allow that model | Select **Continue with …** to resend on an allowed model, or ask an admin to change the policy |
 | A message is refused for its cost, not the budget | It is over the [per-message spending limit](/models/model-policy#per-message-spending-limit) | Compact the conversation or start a new one, or select **Request a higher limit** |
-| SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Organization Settings → File storage |
-| Saving storage fails a connectivity check | ParleHub has not been granted access to that site or Shared Drive | Grant access on the provider's side first, then save again |
+| SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Org settings → Files & search → File storage |
+| Saving storage fails a connectivity check | Parle has not been granted access to that site or Shared Drive | Grant access on the provider's side first, then save again |
 | Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
 | Cannot find someone in the add-member list | They are not in your organization yet, are deactivated, or are already on the project | Invite them to the organization first |
 | **Remove** refused on the last admin | Every project needs at least one Project Admin | Promote someone else first, then remove |
@@ -192,4 +192,4 @@ To restore one, go to the **Projects** page and open the collapsed **Archived** 
 | **Budget currency** cannot be changed | The project has already recorded spend | The currency is fixed from the first spend — see [Budgets](/cost/budgets#why-the-budget-currency-locks) |
 | Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin or Org Admin to make the change, or to promote you |
 
-Still stuck? Contact ParleHub support with your organization name and the project name.
+Still stuck? Contact Parle support with your organization name and the project name.

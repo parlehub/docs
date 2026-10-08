@@ -1,11 +1,11 @@
 ---
-title: "Ask the Assistant About Your Own ParleHub Setup"
+title: "Ask the Assistant About Your Own Parle Setup"
 sidebarTitle: "Asking About Your Org"
 description: "Ask about budgets, models, tools, storage and your firm's policies without leaving the conversation — and know when the answer was actually looked up."
 icon: "circle-question"
 ---
 
-This page is for **everyone**. It covers the questions you can ask the assistant about **your own ParleHub setup and your firm's documents** — the things it used to guess at, and now looks up.
+This page is for **everyone**. It covers the questions you can ask the assistant about **your own Parle setup and your firm's documents** — the things it used to guess at, and now looks up.
 
 There are two halves, and they work differently:
 
@@ -68,13 +68,13 @@ In a personal conversation the assistant still checks your role. If you are not 
 Spend comes back **split by who it is owed to**, and deliberately never added up:
 
 - **Your own provider keys** — usage billed to you directly by Anthropic, OpenAI, Google or whoever holds the account.
-- **ParleHub-managed models** — usage drawn from your prepaid credit.
+- **Parle-managed models** — usage drawn from your prepaid credit.
 
 **Every figure names its currency, and says how it was arrived at.** The assistant is handed a finished figure with its three-letter code — for example `£4,230.00 GBP` — and a sentence about its basis, which it quotes rather than working anything out itself. It is never given an exchange rate, so it cannot convert a figure on its own. You will see one of three kinds of sentence:
 
 - **No conversion was needed** — the figures are _"exactly as recorded against your usage — no exchange rate was applied"_.
-- **Converted** — the figures were converted at the exchange rate ParleHub published for the month named, or, across several months, each month at its own rate and then added together, with the months listed.
-- **Approximated** — some usage was recorded before ParleHub published a rate for that currency, so it was converted at the earliest rate ParleHub holds.
+- **Converted** — the figures were converted at the exchange rate Parle published for the month named, or, across several months, each month at its own rate and then added together, with the months listed.
+- **Approximated** — some usage was recorded before Parle published a rate for that currency, so it was converted at the earliest rate Parle holds.
 
 Organization spend is given in your organization's reporting currency. Your prepaid credit balance is the exception: it is held in US dollars and is not converted, and the assistant says so. In a project, if the caps and the spend figure are in different currencies, the assistant gives both but will not subtract one from the other to tell you what "remains" — it says why instead. See [Currencies and Exchange Rates](/cost/currencies).
 
@@ -96,7 +96,7 @@ You will get the relevant passage, followed by a **citation** — the document n
 
 Three things worth knowing:
 
-- **The citation is trustworthy by construction.** Its label is resolved from ParleHub's own record of the document, not written by the assistant — so it cannot cite one document and link to another, and it cannot invent one.
+- **The citation is trustworthy by construction.** Its label is resolved from Parle's own record of the document, not written by the assistant — so it cannot cite one document and link to another, and it cannot invent one.
 - **Hover the citation** to see the effective date of the version that was quoted.
 - **A retired policy cannot be quoted.** When your firm supersedes a document, the old version comes out of the index — so you will not get a confidently-cited answer from a policy that no longer applies. In an older conversation, a citation to a since-retired document shows as `[document unavailable]` rather than opening.
 
@@ -111,5 +111,5 @@ If nobody has set this up yet, the assistant simply will not have anything to qu
 | It gives you your own usage instead of the organization's | You are not an Org Admin. |
 | It does not seem able to look anything up at all | Some models cannot call tools. Switch the conversation to a model that supports them. |
 | It cannot find a policy you know exists | Check with your Org Admin that the document is published and **Searchable**, and that your project has not opted out of organization knowledge in **Tools & knowledge**. |
-| It says it could not state the figures in your currency and gives US dollars instead | An exchange rate was missing. That is a ParleHub issue, not a problem with your account. Do not compare that answer with figures elsewhere in your own currency — the two differ by an exchange rate. |
+| It says it could not state the figures in your currency and gives US dollars instead | An exchange rate was missing. That is a Parle issue, not a problem with your account. Do not compare that answer with figures elsewhere in your own currency — the two differ by an exchange rate. |
 | A spend figure does not match your invoice | The managed figure is an estimate derived from current settings. Use the **Usage** screen and your credit history as the record. |

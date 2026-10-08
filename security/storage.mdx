@@ -1,28 +1,28 @@
 ---
 title: "Native Storage: Files Stay in Your SharePoint or Drive"
 sidebarTitle: "Storage"
-description: "On the Business plan and above, a ParleHub project can be rooted in a SharePoint document library or a Google Shared Drive you already own, granted one location at a time."
+description: "On the Business plan and above, a Parle project can be rooted in a SharePoint document library or a Google Shared Drive you already own, granted one location at a time."
 ---
 
 When a lawyer uploads a due diligence document or an accountant attaches a client's financials to a project, that file should not travel to a third-party storage environment your firm has no control over. Most cloud AI tools persist uploaded documents in their own infrastructure — which creates data residency concerns, potential conflicts with client confidentiality agreements, and murky answers on security questionnaires.
 
-ParleHub's native storage integration addresses this: on the Business plan and above, a project can be rooted directly in a SharePoint document library or a Google Shared Drive **inside your own tenant**, governed by your existing permissions and retention policies.
+Parle's native storage integration addresses this: on the Business plan and above, a project can be rooted directly in a SharePoint document library or a Google Shared Drive **inside your own tenant**, governed by your existing permissions and retention policies.
 
 <Note>
-  Native storage integration is available on the **Business** plan and above. Otherwise, projects use **ParleHub Cloud Storage** — managed storage scoped to your organization, which needs no setup.
+  Native storage integration is available on the **Business** plan and above. Otherwise, projects use **Parle Cloud Storage** — managed storage scoped to your organization, which needs no setup.
 </Note>
 
 ## Least-privilege by design
 
-ParleHub reaches your files using its **own application identity**, scoped to **only the specific locations you grant** — never your whole tenant. This is the part that matters on a security questionnaire, so it is worth being precise about:
+Parle reaches your files using its **own application identity**, scoped to **only the specific locations you grant** — never your whole tenant. This is the part that matters on a security questionnaire, so it is worth being precise about:
 
-- **ParleHub does not provision anything in your tenant.** You choose an existing site, library, or Shared Drive; ParleHub is granted access to it.
+- **Parle does not provision anything in your tenant.** You choose an existing site, library, or Shared Drive; Parle is granted access to it.
 - **Each location is granted explicitly, one at a time.** Granting one SharePoint site does not grant another. A private or shared Teams channel is its own SharePoint site and needs its own grant.
 - **The agent works when nobody is online.** Because access is held by an application identity rather than a signed-in user's session, a long-running task does not depend on someone keeping a browser tab open.
-- **Deletions land in your recycle bin.** Files deleted through ParleHub go to the SharePoint recycle bin or Drive trash, where your normal retention and recovery rules apply.
+- **Deletions land in your recycle bin.** Files deleted through Parle go to the SharePoint recycle bin or Drive trash, where your normal retention and recovery rules apply.
 
 <Warning>
-  **The agent can write, not just read.** Project file tools cover listing, reading, writing, and deleting files in the location the project is rooted at. Grant the permission level you actually want: SharePoint sites can be granted read-only, and a Google Shared Drive can add ParleHub as **Viewer** rather than **Content manager**.
+  **The agent can write, not just read.** Project file tools cover listing, reading, writing, and deleting files in the location the project is rooted at. Grant the permission level you actually want: SharePoint sites can be granted read-only, and a Google Shared Drive can add Parle as **Viewer** rather than **Content manager**.
 </Warning>
 
 ## Connecting a location
@@ -31,37 +31,37 @@ Storage is set up in two stages: an Org Admin enables the provider once for the 
 
 <CardGroup cols={2}>
   <Card title="SharePoint" icon="microsoft" href="/admin/microsoft-365">
-    Enable the SharePoint host for your org, grant ParleHub access to each site, then root a project at a document library or folder. Includes Teams channel folders.
+    Enable the SharePoint host for your org, grant Parle access to each site, then root a project at a document library or folder. Includes Teams channel folders.
   </Card>
 
   <Card title="Google Drive" icon="google" href="/admin/google-workspace">
-    Add ParleHub's service account to each Shared Drive as Viewer or Content manager, then root a project at that drive.
+    Add Parle's service account to each Shared Drive as Viewer or Content manager, then root a project at that drive.
   </Card>
 </CardGroup>
 
-ParleHub verifies it can actually list the location before saving the configuration, so a permissions gap surfaces at setup rather than mid-conversation.
+Parle verifies it can actually list the location before saving the configuration, so a permissions gap surfaces at setup rather than mid-conversation.
 
 ## Permissions and access
 
-Storage access in ParleHub is **project-scoped, not per-user**. This is an important distinction to get right when answering a client questionnaire:
+Storage access in Parle is **project-scoped, not per-user**. This is an important distinction to get right when answering a client questionnaire:
 
 - A project is rooted at one location. Everyone who can open that project can use the agent's file tools against it.
-- Who can open the project is controlled in ParleHub by the project's visibility and member list — see [Roles & Permissions](/security/roles-and-permissions).
-- ParleHub's own grant on the site or Shared Drive is what bounds the blast radius on your side. It reaches that location and nothing else in your tenant.
+- Who can open the project is controlled in Parle by the project's visibility and member list — see [Roles & Permissions](/security/roles-and-permissions).
+- Parle's own grant on the site or Shared Drive is what bounds the blast radius on your side. It reaches that location and nothing else in your tenant.
 
 <Warning>
-  ParleHub does not mirror individual users' SharePoint or Drive permissions into a project. If a document library contains material that only some project members should see, root the project somewhere narrower rather than relying on per-file permissions to filter it.
+  Parle does not mirror individual users' SharePoint or Drive permissions into a project. If a document library contains material that only some project members should see, root the project somewhere narrower rather than relying on per-file permissions to filter it.
 </Warning>
 
 <Tip>
-  Because files live in your SharePoint or Google Drive, your existing data loss prevention (DLP) policies, retention labels, and eDiscovery tooling apply to ParleHub project files automatically — no additional configuration needed.
+  Because files live in your SharePoint or Google Drive, your existing data loss prevention (DLP) policies, retention labels, and eDiscovery tooling apply to Parle project files automatically — no additional configuration needed.
 </Tip>
 
 ## When a location moves or disappears
 
-ParleHub binds to the folder itself, not to its name. Renaming a SharePoint folder or a Teams channel does not break the project.
+Parle binds to the folder itself, not to its name. Renaming a SharePoint folder or a Teams channel does not break the project.
 
-**Deleting** the folder does. The project's Storage settings will show _"needs reconnecting"_, and an admin re-picks a folder to fix it. ParleHub deliberately will not fall back to another folder that happens to have the old name, because a new folder reusing that name could belong to a different client.
+**Deleting** the folder does. The project's Storage settings will show _"needs reconnecting"_, and an admin re-picks a folder to fix it. Parle deliberately will not fall back to another folder that happens to have the old name, because a new folder reusing that name could belong to a different client.
 
 <Info>
   Disconnecting storage does not delete your files. Everything remains in your SharePoint site or Shared Drive exactly as it was.

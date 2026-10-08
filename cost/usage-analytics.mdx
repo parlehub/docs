@@ -16,9 +16,9 @@ Select **Usage** in the main sidebar. The report opens on the last 30 days, grou
 
 ## The currency of the report
 
-Every cost on this screen is in your organization's **reporting currency**, and says so: the headline reads **Total cost (GBP)** and the table column reads **Cost (GBP)**. An Org Admin sets the reporting currency in **Organization Settings → Budgets & alerts** — see [Currencies and Exchange Rates](/cost/currencies#reporting-currency).
+Every cost on this screen is in your organization's **reporting currency**, and says so: the headline reads **Total cost (GBP)** and the table column reads **Cost (GBP)**. An Org Admin sets the reporting currency in **Org settings → Budgets & alerts → Reporting currency** — see [Currencies and Exchange Rates](/cost/currencies#reporting-currency).
 
-Costs recorded in another currency are converted month by month: each month's usage at ParleHub's exchange rate for that month, then added together. Changing the reporting currency changes how the report is shown, never what was recorded.
+Costs recorded in another currency are converted month by month: each month's usage at Parle's exchange rate for that month, then added together. Changing the reporting currency changes how the report is shown, never what was recorded.
 
 <Info>
   A project can override the reporting currency for its own **Budget** tab. That override does not affect this screen — the organization's Usage report is always in the organization's reporting currency.
@@ -38,7 +38,7 @@ Use **Group by** to break spend down along one axis, and the **Projects**, **Peo
   </Card>
 
   <Card title="Provider" icon="server" href="/models/connecting-providers">
-    Compare spend across Anthropic, OpenAI, Google Gemini, Azure AI Foundry and ParleHub Managed models.
+    Compare spend across Anthropic, OpenAI, Google Gemini, Azure AI Foundry and Parle Managed models.
   </Card>
 
   <Card title="Model" icon="microchip" href="/models/supported-models">
@@ -98,7 +98,7 @@ Above the chart, four figures summarize the selection: **Total cost**, **Total t
 A cost cell never shows zero for usage that really happened. Instead it reads:
 
 - **Not priced** — the usage ran on provisioned Azure capacity, which is billed as a flat commitment rather than per token. An **Unpriced** column counts those tokens.
-- **Cost unavailable** — the usage was charged per token but ParleHub could not state its cost, typically because an exchange rate was missing. That is a ParleHub issue, not a problem with your account, and a **Cost unavailable** column counts those tokens.
+- **Cost unavailable** — the usage was charged per token but Parle could not state its cost, typically because an exchange rate was missing. That is a Parle issue, not a problem with your account, and a **Cost unavailable** column counts those tokens.
 
 Both columns appear only when there is something to report, with a note under the totals saying how many tokens the cost figures exclude. See [Currencies and Exchange Rates](/cost/currencies#cost-unavailable-is-not-not-priced).
 
@@ -128,7 +128,7 @@ Each row in the export is one group (a project, user, provider, model, or one of
 | `Reasoning Tokens` | Present only when a provider reported reasoning tokens in the period |
 | `Unpriced Tokens` | Present only when some usage ran on provisioned capacity |
 | `Currency` | The three-letter code the `Cost` column is in — your organization's reporting currency, the same on every row |
-| `Unconverted Tokens` | Present only when ParleHub could not state a cost for some usage |
+| `Unconverted Tokens` | Present only when Parle could not state a cost for some usage |
 | `Served From Cache %`, `Cache Reads Saved`, `Cache Writes Extra`, `Cache Net` | The [prompt cache](#prompt-cache) figures, in the `Currency` column's currency. Present only when some usage in the period could be measured; blank on a row with nothing measurable. When present, they are the last four columns |
 
 <Note>
@@ -141,7 +141,7 @@ Each row in the export is one group (a project, user, provider, model, or one of
 
 ## Foundry reconciliation statement
 
-If you bring your own Azure AI Foundry deployments, the **Foundry reconciliation statement** sits below the usage report. Pick a **Month** to see what ParleHub metered on each deployment, meter by meter, laid out to sit beside your Azure invoice; **Export CSV** downloads it.
+If you bring your own Azure AI Foundry deployments, the **Foundry reconciliation statement** sits below the usage report. Pick a **Month** to see what Parle metered on each deployment, meter by meter, laid out to sit beside your Azure invoice; **Export CSV** downloads it.
 
 This statement deliberately stays in the units your Azure invoice is billed in:
 
@@ -152,14 +152,14 @@ This statement deliberately stays in the units your Azure invoice is billed in:
 
 ## One Canonical Ledger
 
-The Usage screen and ParleHub's budget enforcement read from the same underlying token ledger, using the same month-by-month conversion. The spend a project's **Budget** tab shows against a cap is the same number that triggers the 80% warning and the pre-flight block.
+The Usage screen and Parle's budget enforcement read from the same underlying token ledger, using the same month-by-month conversion. The spend a project's **Budget** tab shows against a cap is the same number that triggers the 80% warning and the pre-flight block.
 
 There is no lag, no reconciliation gap, and no difference between "reported spend" and "enforced spend." When a project shows £420.00 of a £500.00 monthly cap used, enforcement blocks at £500.00 — not at some independently calculated figure.
 
 <Info>
-  Token counts reflect the tokens the provider reported for each response. ParleHub does not mark up, round, or adjust token counts.
+  Token counts reflect the tokens the provider reported for each response. Parle does not mark up, round, or adjust token counts.
 </Info>
 
 <Accordion title="Why a single ledger matters for professional services">
-  In a billable-hours environment, the number on your usage export needs to match the number on any client invoice or write-off memo. Because ParleHub uses one canonical ledger for both reporting and enforcement, you can export usage data and use it directly in billing workflows — with confidence that the numbers reconcile with the limits your team experienced during the engagement.
+  In a billable-hours environment, the number on your usage export needs to match the number on any client invoice or write-off memo. Because Parle uses one canonical ledger for both reporting and enforcement, you can export usage data and use it directly in billing workflows — with confidence that the numbers reconcile with the limits your team experienced during the engagement.
 </Accordion>
