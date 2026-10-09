@@ -94,6 +94,13 @@
             ]
           },
           {
+            "group": "Architecture",
+            "icon": "sitemap",
+            "pages": [
+              "architecture/overview"
+            ]
+          },
+          {
             "group": "Security & Governance",
             "pages": [
               "security/overview",
