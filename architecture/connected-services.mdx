@@ -1,1 +1,91 @@
+---
+title: "Connected Services: What Parle Talks To and What It Sends"
+sidebarTitle: "Connected Services"
+description: "Every external service Parle can connect to: AI model providers, file storage, sign-in, connected apps, web search and the services Parle itself relies on. For each, see what it receives and whose credential is used."
+icon: "plug"
+---
 
+This page lists every external service Parle can connect to, grouped by what it is for. For each one it shows when Parle contacts it, what it receives, and whose credential Parle uses. For the overall picture, see the [Architecture Overview](/architecture/overview).
+
+The services fall into two groups:
+
+- **Services you choose.** Your organization picks them and usually holds its own account with them: your AI provider, your storage, your identity provider, your connected apps.
+- **Services Parle relies on.** Parle uses them to run the product: hosting, managed models, search indexing, email, payments and analytics.
+
+## AI models
+
+Every message needs a model to answer it. Parle sends the model what it needs for the answer: the conversation so far, the project's standing instructions, and any file excerpts or tool results the agent has gathered.
+
+| Provider | When Parle contacts it | Whose credential |
+| --- | --- | --- |
+| **Anthropic** | Your organization has added an Anthropic key and a conversation uses one of its models | Your API key |
+| **OpenAI** | Same, for an OpenAI key | Your API key |
+| **Google Gemini** | Same, for a Google key or your own Google Cloud (Vertex AI) project | Your API key or service account |
+| **Azure AI Foundry (yours)** | Same, for a Foundry resource in your own Azure subscription | Your credential |
+| **Parle managed models** | Your organization uses managed models instead of, or alongside, its own keys | Parle's. These models run inside Parle's own Azure environment |
+
+With your own key, you hold the relationship with that AI company and its data terms apply. Parle stores the key in its secrets vault, uses it only when it makes a call, and never shows it to a browser. See [Connecting Providers](/models/connecting-providers).
+
+## File storage
+
+Each project keeps its files in one place.
+
+| Storage | Where files live | Whose credential |
+| --- | --- | --- |
+| **Parle storage** | In Parle's own storage, on Microsoft Azure | Parle's |
+| **SharePoint** | In a SharePoint site you grant, inside your Microsoft 365 tenant | Access you grant to that site only |
+| **Google Drive** | In a Shared Drive you grant, inside your Google Workspace | Access you grant to that drive only |
+
+With SharePoint or Google Drive, files stay in your own tenant: Parle reads and writes them there rather than copying them elsewhere. See [Native Storage](/security/storage).
+
+## Sign-in
+
+| Method | What Parle exchanges |
+| --- | --- |
+| **Email and password** | Handled by Parle itself |
+| **Microsoft Entra ID** | Parle sends a sign-in request and receives your name, email address and a user identifier |
+| **Google Workspace** | Same, from Google |
+
+If you connect a Microsoft account, Parle may also fetch your own profile photo from Microsoft to show as your avatar. See [Single Sign-On](/security/sso).
+
+## Microsoft Teams
+
+If your organization links a Teams channel to a project, Microsoft Teams sends Parle the messages in which someone mentions Parle. Parle may also read recent messages in that channel for context, and it posts the answer back into the channel, or a link to it when not everyone in the channel is a member of the project.
+
+## Connected apps
+
+Connected apps let the agent work in systems your firm already uses. Each one is connected once, then switched on for the projects that need it.
+
+| App | What the agent can do |
+| --- | --- |
+| **Confluence** | Search and read pages |
+| **Jira** | Read and work with issues |
+| **Linear** | Read and update issues, projects and comments |
+| **Notion** | Search, read and update pages and databases |
+| **Miro** | Read boards and create or edit board content |
+| **monday.com** | Work with boards and items |
+| **Productive** | Work with projects, time, budgets and invoices |
+| **Fathom** | Search meetings and read transcripts and summaries |
+| **Fireflies** | Search meetings and read transcripts and summaries |
+| **Otter** | Search and read transcripts and summaries, read-only |
+| **Your own MCP server** | Whatever tools that server offers |
+
+When the agent uses a tool, the app receives the request the agent writes, which can include text from the conversation, and Parle receives the app's reply. The credential belongs to the organization, the project or each user, depending on how the app was connected. It is stored by Parle and never sent to a browser. See [Integrations](/tools/integrations) and [Credential Scopes](/tools/integration-scopes).
+
+## Web search
+
+If your organization switches **Web Search** on (it is off by default), an agent that has it can search the web. The search query the agent writes is sent to **Brave** on Parle's account. Nothing else from the conversation is sent. See [Web Search](/tools/web-search).
+
+## Services Parle relies on
+
+| Service | What it does | What it receives |
+| --- | --- | --- |
+| **Microsoft Azure** | Hosts the Parle service, its database and Parle storage, and runs Parle managed models | Everything Parle stores and processes |
+| **Search indexing** | Lets the agent find passages in project files, organization knowledge and past messages by meaning | Their text, sent to Parle's embedding provider on Parle's account. File indexing can be switched off. See [Semantic File Search](/projects/file-search) |
+| **Email delivery** (Microsoft Azure) | Sends invitations and notifications | The recipient's email address and the message |
+| **Stripe** | Takes subscription payments | Your organization's name and billing contact email. No conversations or files |
+| **Google Analytics** | Shows us how the web app is used | Anonymous page types only. No names, identifiers or content |
+
+<Note>
+  Parle does not use your content to train AI models, and it does not sell your data.
+</Note>
