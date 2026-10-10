@@ -1,0 +1,91 @@
+---
+title: "Connect QuickBooks Online to Parle"
+sidebarTitle: "QuickBooks Online"
+description: "Connect a client's QuickBooks Online company to its project so the agent can answer questions from the live books. Read-only: Parle never creates, changes or deletes anything in QuickBooks."
+icon: "calculator"
+---
+
+**QuickBooks Online** is a branded card in the Integrations gallery, in the **Accounting** category. Parle connects to Intuit's QuickBooks Online API directly, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Intuit. There's nothing to type.
+
+The point is to answer questions from a company's live books instead of someone exporting reports by hand: _"what's our gross margin this quarter?"_, _"which customers are more than 60 days overdue?"_, _"what do we owe suppliers at month end?"_.
+
+## What it gives the agent
+
+Once connected and switched on for a project, the agent can:
+
+- **Read the company's information**: its name, address, fiscal year and other details.
+- **Look up records**: find invoices, bills, payments, customers, suppliers, accounts and other records with a read-only query.
+- **Run a report**: the **profit and loss**, **balance sheet**, **aged receivables** or **aged payables** report, for a date range (or an as-of date for the aged reports), on a cash or accrual basis.
+
+### Read-only, and only the accounting permission
+
+Parle only ever reads from QuickBooks. None of its QuickBooks tools can create, change or delete anything, and Parle never takes or moves payments.
+
+The card asks Intuit for exactly one permission, **accounting** (`com.intuit.quickbooks.accounting`). Intuit doesn't offer a read-only version of that permission, so the read-only guarantee comes from Parle's side: every request Parle sends is a read, and the look-up tool accepts a single read-only query and refuses anything else. Parle never asks for Intuit's **payments** permission, and never asks Intuit for your personal profile.
+
+<Note>
+  Text in QuickBooks, such as customer names, memos and descriptions, reaches the agent as written. Parle tells the agent to treat it as the company's data and never as instructions.
+</Note>
+
+## Who can see it
+
+<Warning>
+  **Everyone in a project that uses this connection can ask about this company's books.** Figures, customer and supplier names and invoice details the agent reads from QuickBooks appear in the shared project conversation, for every member of that project to see. Connect a company only to a project whose members should see its books.
+</Warning>
+
+## Choosing a scope
+
+QuickBooks Online offers two credential scopes, **Project** and **Organization**. See [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. For QuickBooks specifically:
+
+- **Project (recommended)**: one client company per project. Connect each client's books to that client's project, so only that project's conversations can read them. This is the usual setup for a firm that keeps several clients' books.
+- **Organization**: one connection, typically your firm's own books, that a Project Admin can switch on for any project. Every member of each project it's switched on for can ask about it.
+
+There's **no User scope**. A project conversation shows every answer to every member, so one person's privately connected books would surface in a shared thread. Parle won't register QuickBooks Online at User scope.
+
+## Connecting
+
+<Steps>
+  <Step title="An Org Admin adds QuickBooks Online">
+    An Org Admin goes to **Org settings → Integrations → Tools**, selects **Add integration**, chooses the **QuickBooks Online** card, and picks **Project** or **Organization**. Only an Org Admin can add an integration to the organization.
+  </Step>
+  <Step title="Approve access at Intuit">
+    For **Organization** scope, the Org Admin is sent to Intuit, signs in, chooses the QuickBooks company and approves access. For **Project** scope, each project's **Project Admin** does this from that project's **Tools** tab, choosing that client's company. The warning above is shown beside **Connect** before you go.
+  </Step>
+  <Step title="Check the company name">
+    Back in Parle, the connected card shows the **name of the QuickBooks company** it's connected to, so you can confirm you attached the right client's books.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration. See [Part 2 — Authentication](/tools/integrations#part-2-authentication) for what the connected card, **Reconnect required** and **Reconnect recommended** mean.
+
+A connection covers **one QuickBooks company**. The company is the one you chose at Intuit when you approved access; the agent can't be pointed at a different company from a conversation. To connect a different company, reconnect and choose it at Intuit.
+
+## Enabling it on a project
+
+Connecting QuickBooks Online makes it _available_; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own company is connected.
+
+<Warning>
+  **One QuickBooks connection per project.** If two QuickBooks Online connections are switched on for the same project (for example your firm's own books at Organization scope and a client's at Project scope), **neither works** in that project until one is switched off. Parle won't guess which company's books you meant, and the agent will say an administrator needs to switch all but one off.
+</Warning>
+
+## Research Tasks and live artifacts
+
+QuickBooks Online works in conversations, and **Research Tasks** and **live artifacts** in a project can also read it, so a scheduled report or a dashboard can be built from the company's books. The same rules apply: only a project where the connection is switched on can use it, and what they read is visible to that project's members.
+
+A live artifact can show cached figures from a recent read rather than querying QuickBooks every time it's opened, so its numbers can be slightly behind the books, and everyone in the project who can open the artifact sees them.
+
+## Limits to know about
+
+- **100 rows per query.** A single look-up returns at most 100 records. When more match, the agent is told the result is partial, is told not to total it, and can fetch the next page. For totals, ask for a report rather than adding up records.
+- **Reports.** The four reports above are the ones available: profit and loss, balance sheet, aged receivables and aged payables.
+- **One company per project.** See [Enabling it on a project](#enabling-it-on-a-project).
+
+## Reconnecting and access renewal
+
+Parle renews QuickBooks access automatically in the background. If Intuit stops accepting the stored authorization (revoked, expired, or access removed in QuickBooks), the card shows **Reconnect required**, and QuickBooks stops working for that connection until whoever connected it approves access again.
+
+## Disconnecting and removing
+
+Disconnecting a QuickBooks Online connection, at either scope, revokes Parle's access at Intuit, then deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer read that company's books. If Intuit can't be reached, the disconnect still goes ahead in Parle. To double-check, look for Parle in the apps connected to your QuickBooks Online company and remove it there.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
