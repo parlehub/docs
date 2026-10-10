@@ -94,6 +94,14 @@
             ]
           },
           {
+            "group": "Architecture",
+            "icon": "sitemap",
+            "pages": [
+              "architecture/overview",
+              "architecture/connected-services"
+            ]
+          },
+          {
             "group": "Security & Governance",
             "pages": [
               "security/overview",
