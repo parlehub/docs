@@ -97,7 +97,8 @@
             "group": "Architecture",
             "icon": "sitemap",
             "pages": [
-              "architecture/overview"
+              "architecture/overview",
+              "architecture/connected-services"
             ]
           },
           {
