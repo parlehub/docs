@@ -16,6 +16,47 @@ Using your own key means:
   Parle also offers **Parle Managed** models that need no key of your own — these are billed from your organization's Parle credit wallet instead, always in US dollars. Managed models do not appear in the setup steps below because there is nothing to connect.
 </Note>
 
+## Features That Run Only on Parle Managed Models
+
+Two features always run on Parle Managed models, whatever provider keys your organization has connected:
+
+- **Research tasks**, where the agent works through a piece of research on its own over many steps.
+- **Live artifacts**, which Parle's artifact builder creates and repairs for you.
+
+### Why these features don't use your own keys
+
+Both features run unattended through many steps, and both rely on detailed instructions that Parle writes, tests and keeps up to date. They only work well on models that are capable enough for that kind of work and have been tested with those instructions.
+
+Running them on Parle Managed models lets Parle make sure that:
+
+- **A capable model is always available**, whichever providers your organization has connected and whichever models it has enabled.
+- **The instructions and the model work together.** Parle tests every change to its instructions on the models that will actually run them. A model reached through your own key could be older, smaller or set up differently. The task could then stop partway through, or finish with weaker results and no clear error.
+
+For the same reason, these features have no model picker. Parle chooses the model. Their usage is charged to your organization's credit wallet in US dollars, like any other Parle Managed usage.
+
+### What your organization needs
+
+An Org Admin sets how your organization gets model access in **Org settings → Models**. To use research tasks or live artifacts, it must be set to one of these:
+
+- **Parle credits only**
+- **Our keys first, Parle credits as backup**: your conversations still use your own key wherever one is set. Parle credits are used only for models you have no key for, and for research tasks and live artifacts.
+
+The credit wallet (**Org settings → Budgets & alerts**) also needs funds. Live artifacts also need the Business Elite plan or above. See [Plans & Billing](/plans-and-billing).
+
+### If your organization uses only its own keys
+
+When model access is set to **Our own keys only**, Parle does not run research tasks or live artifacts on your keys. It refuses them and tells you what to change:
+
+> _"Research tasks run on Parle-managed models billed to your credit wallet, and your organization uses only its own API keys. To use research tasks, an organization admin can switch to hybrid access in Organization settings and top up the credit wallet."_
+
+Live artifacts show the same kind of message. In practice:
+
+- **You can't start, restart or resume a research task.** If a task is already running when your organization switches to its own keys only, it stops before its next model call. You can resume it after switching back.
+- **You can't create a live artifact or keep building one.** The artifact builder's changes are refused.
+- **Nothing is deleted.** Existing research tasks and their results stay readable and can still be cancelled. Your artifacts are kept too.
+
+To turn these features back on, an Org Admin switches model access to **Our keys first, Parle credits as backup** and tops up the credit wallet.
+
 ## Connecting a Provider
 
 Only **Org Admins** can add, rotate, remove, or test a provider key.
