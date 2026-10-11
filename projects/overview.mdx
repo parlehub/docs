@@ -9,7 +9,7 @@ A **project** is the shared workspace in Parle. Everything the team does for a p
 Creating one takes under a minute. The parts that make it genuinely useful — members, storage, context, budget — are set up afterwards from the project's own tabs.
 
 <Note>
-  **You'll need:** to be an **Org Admin**. Creating projects is Org Admin only; once a project exists, its **Project Admins** run it day to day.
+  **You'll need:** to be an **Org Admin** or **Business Admin**. Only they can create projects; once a project exists, its **Project Admins** run it day to day.
 </Note>
 
 <Tip>
@@ -146,7 +146,7 @@ If your organization has connected integrations, open the **Tools** tab and swit
 
 ## Archiving and restoring a project
 
-When a project is finished, an Org Admin can archive it instead of leaving it in the active list. Archiving is **Org Admin only** — a Project Admin can see the control but cannot use it.
+When a project is finished, an Org Admin or Business Admin can archive it instead of leaving it in the active list. Only they can archive — a Project Admin can see the control but cannot use it.
 
 <Warning>
   **Archiving permanently deletes the project's knowledge sources and integration connections.** Restoring the project later brings the project itself back, but **not** that deleted data. Conversations and files are not affected either way — archiving and restoring never touch them.
@@ -174,7 +174,7 @@ To restore one, go to the **Projects** page and open the collapsed **Archived** 
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| No **New project** button | You are not an Org Admin | Project creation is Org Admin only — ask one to create it and make you a Project Admin |
+| No **New project** button | You are not an Org Admin or Business Admin | Only they can create projects — ask one to create it and make you a Project Admin |
 | "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | [Archive](#archiving-and-restoring-a-project) a project you have finished, or upgrade the plan |
 | "Private (Restricted) projects require the Business plan or above" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
 | "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Org settings → Organization → Current plan |
@@ -188,8 +188,8 @@ To restore one, go to the **Projects** page and open the collapsed **Archived** 
 | Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
 | Cannot find someone in the add-member list | They are not in your organization yet, are deactivated, or are already on the project | Invite them to the organization first |
 | **Remove** refused on the last admin | Every project needs at least one Project Admin | Promote someone else first, then remove |
-| Messages blocked: "This project's monthly cap of … has been reached" (or lifetime cap) | Spend reached one of the project's caps | Select **Request a higher limit**, or have an Org Admin raise the cap on the **Budget** tab. A monthly cap also resets on the 1st |
+| Messages blocked: "This project's monthly cap of … has been reached" (or lifetime cap) | Spend reached one of the project's caps | Select **Request a higher limit**, or have an Org Admin or Business Admin raise the cap on the **Budget** tab. A monthly cap also resets on the 1st |
 | **Budget currency** cannot be changed | The project has already recorded spend | The currency is fixed from the first spend — see [Budgets](/cost/budgets#why-the-budget-currency-locks) |
-| Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin or Org Admin to make the change, or to promote you |
+| Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin, Org Admin or Business Admin to make the change, or to promote you |
 
 Still stuck? Contact Parle support with your organization name and the project name.

@@ -1,32 +1,48 @@
 ---
 title: "Roles and Permissions in Parle"
 sidebarTitle: "Roles & Permissions"
-description: "Parle has four roles — Org Admin, Project Admin, Member, and Personal. Learn what each role can do and how to assign roles to team members."
+description: "Parle has five roles — Org Admin, Business Admin, Project Admin, Member, and Personal. Learn what each role can do and how to assign roles to team members."
 ---
 
-Parle uses role-based access at two distinct levels: the organization level and the project level. Org-level roles control who can manage firm-wide settings like SSO, billing, storage, and member rosters. Project-level roles control who can do what inside a specific project. A person can be a Member at the org level but a Project Admin on a particular client engagement — the two levels are independent. This two-tier model lets you give senior staff or engagement leads control over their own projects without granting them access to firm-wide configuration.
+Parle uses role-based access at two distinct levels: the organization level and the project level. Org-level roles control who can manage firm-wide settings like SSO, billing, storage, and member rosters, and who decides how the AI works across the firm. Project-level roles control who can do what inside a specific project. A person can be a Member at the org level but a Project Admin on a particular client engagement — the two levels are independent. This two-tier model lets you give senior staff or engagement leads control over their own projects without granting them access to firm-wide configuration.
 
 ## Role Overview
 
 | Role | Scope | Key Permissions |
 |---|---|---|
-| **Org Admin** | Org-wide | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; set every project's monthly and lifetime caps and its budget currency; set the organization's reporting currency and any project override; set provider and deployment quote currencies; approve or reject requests for a higher project limit; archive and restore projects; view all usage |
+| **Org Admin** | Org-wide | Manage members, invites and roles; model provider keys, managed models, model policy, default model and routing; configure SSO; connect file storage and set up file search; integrations (MCP tools, OAuth connections, Teams); billing, seats and credit; the org-wide spend cap, send ceiling, research-task limits and budget alerts; prompt caching, tool logging and research data location; organization settings (name, logo, time zone, reporting currency, personal workspace); set provider and deployment quote currencies. Plus everything a Business Admin can do |
+| **Business Admin** | Org-wide | Create agents, edit or archive any agent in the organization, set the default agent, and choose who is an Agent Author; edit organization instructions (`org.md`); curate organization knowledge and choose its sources from storage an Org Admin has connected; manage skills and deck templates; create and archive projects; set every project's monthly and lifetime caps and its budget currency; approve or reject requests for a higher project limit; act as Project Admin on every project, Restricted ones included; view organization usage, per-project spend, the usage export and the ratings report |
 | **Project Admin** | Per-project | Create and delete conversations; manage project members; set the **Project code** (your expense or billing code for the project); **view** the project's caps, budget currency, reporting currency and spend (read-only); request a higher limit |
 | **Member** | Per-project | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit |
 | **Personal** | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to |
 
 <Note>
-  On the **Business** plan and above, a project can be **Restricted** (private): it is hidden from the project list for everyone who is not one of its members. Only its members — and Org Admins, who see every project — can see that it exists. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
+  On the **Business** plan and above, a project can be **Restricted** (private): it is hidden from the project list for everyone who is not one of its members. Only its members — and Org Admins and Business Admins, who see every project — can see that it exists. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
 </Note>
+
+<Note>
+  **Agent Author** is not a role. It is a permission an Org Admin or Business Admin gives to individual members so they can create and edit agents, whatever their role.
+</Note>
+
+## Which org role should I give?
+
+The two admin roles split the work between the business side and IT:
+
+- **Business Admin** is for the people who decide how the AI works and how projects are set up — practice leads, operations managers, knowledge managers. They run the agent library, organization instructions and knowledge, skills, deck templates, and projects and their budgets. They cannot change anyone's role or invite people, and they have no access to model keys, model policy, SSO, file storage setup, integrations, billing, org-wide spend limits or organization settings.
+- **Org Admin** is for IT and whoever owns the account. They control people, sign-in, model access, storage, integrations and money, and they can also do everything a Business Admin can.
+
+A Business Admin who needs a different model or a new integration asks an Org Admin, using an admin request. Budget alerts and billing notices still go to Org Admins.
+
+The Business Admin role is available on every plan. What a Business Admin manages still depends on your plan — for example, creating agents needs a plan that includes the agent library.
 
 ## Assigning Roles
 
 <Steps>
   <Step title="Assign or change an org-level role">
-    Go to **Members** in the sidebar. Find the member in the list and click their name or the role badge next to it. Select the new role from the dropdown. Changes take effect immediately.
+    Go to **Members** in the sidebar. Find the member in the list and click their name or the role badge next to it. Select the new role from the dropdown. Changes take effect immediately. Only an Org Admin can change an org-level role, including making someone a Business Admin.
   </Step>
   <Step title="Assign or change a project-level role">
-    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins and that project's Project Admins can change project roles.
+    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins, Business Admins and that project's Project Admins can change project roles.
   </Step>
   <Step title="Add a new member to a project">
     From the project's **Members** tab, click **Add Member**, search for the person by name or email, select their project role, and confirm. They immediately gain access to the project's conversations and files.
@@ -43,15 +59,15 @@ Project visibility is strictly enforced on the server — it is not just a UI pr
 - A **Public** project can be opened by anyone in your organization.
 - A **Restricted** (private) project can be seen and opened only by the people who have been added to it as members. For everyone else it does not appear in the project list, and a direct link to it behaves as though the project does not exist. Restricted projects are available on the Business plan and above.
 
-**Org Admins are the exception.** An Org Admin sees every project in the organization in the project list and can open any of them, Restricted ones included, so that they can manage its members, budget and settings. If a matter must be kept from a particular person, that person should not hold the Org Admin role.
+**Org Admins and Business Admins are the exception.** They see every project in the organization in the project list and can open any of them, Restricted ones included, so that they can manage its members, budget and settings. If a matter must be kept from a particular person, that person should not hold the Org Admin or Business Admin role.
 
 ## Budget Increase Requests
 
-Only **Org Admins** set a project's spending caps — a monthly cap, a lifetime cap, or both, in the project's own budget currency. A spend ceiling the spender can raise is not a cost control, so Project Admins and members see the caps read-only. See [Budgets](/cost/budgets).
+Only **Org Admins** and **Business Admins** set a project's spending caps — a monthly cap, a lifetime cap, or both, in the project's own budget currency. A spend ceiling the spender can raise is not a cost control, so Project Admins and members see the caps read-only. See [Budgets](/cost/budgets).
 
 When a send is blocked because the project has reached a cap, anyone on the project — a Member or a Project Admin — can select **Request a higher limit** directly from the conversation, or from the project's **Budget** tab.
 
-An Org Admin answers the request from **Requests** in the sidebar: they choose which cap to raise, enter the new limit in the project's budget currency, and approve it — or reject it with a reason. Requests and their outcomes are recorded in the [audit log](/security/audit-log). Once approved, the new limit takes effect immediately and the member can continue their work.
+An Org Admin or Business Admin answers the request from **Requests** in the sidebar: they choose which cap to raise, enter the new limit in the project's budget currency, and approve it — or reject it with a reason. Requests and their outcomes are recorded in the [audit log](/security/audit-log). Once approved, the new limit takes effect immediately and the member can continue their work.
 
 <Tip>
   Use project codes alongside budget caps to tie AI spend directly to client matter numbers in your billing system. Set the **Project code** on the project's **Project Details** tab and it will appear in usage exports for easy reconciliation. See [Expense Codes](/cost/expense-codes).

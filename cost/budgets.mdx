@@ -16,7 +16,7 @@ A project's budget is **two independent caps**, stated in the project's own **bu
 You can switch on either, both, or neither, and each has its own amount. Neither implies the other: a monthly cap alone paces spend with no ceiling on the total, and a lifetime cap alone bounds the total with no pacing. **Reaching either one blocks new messages.**
 
 <Warning>
-  Only **Org Admins** can set, switch on, switch off or change a cap, or choose the budget currency. Project Admins and members see the caps and the spend against them, read-only, under the line _"Read-only — only an organization admin can change the budget."_
+  Only **Org Admins** and **Business Admins** can set, switch on, switch off or change a cap, or choose the budget currency. Project Admins and members see the caps and the spend against them, read-only, under the line _"Read-only — only an organization admin can change the budget."_
 </Warning>
 
 ## The Budget tab
@@ -36,7 +36,7 @@ The **Budget** tab on a project shows what the project has actually spent — co
 
 <Steps>
   <Step title="Open the Budget tab">
-    Navigate to the project and select **Budget**. Org Admins see a **Set spending caps** panel.
+    Navigate to the project and select **Budget**. Org Admins and Business Admins see a **Set spending caps** panel.
   </Step>
   <Step title="Choose the Budget currency">
     Pick the currency you report this work in. **It is fixed once the project records any spend**, so choose it before the team starts.
@@ -81,10 +81,10 @@ A lifetime cap reads the same way without the monthly reset sentence. The **Budg
 
 Anyone on the project — including a Project Admin — can select **Request a higher limit**, in the blocked conversation or on the **Budget** tab, and add a short note explaining why. The request quotes the caps currently in force, in the project's own currency.
 
-An Org Admin answers it from **Requests** in the sidebar: they choose **Which cap** to raise (**Monthly** or **Lifetime**), enter a **New limit (GBP)** in the project's budget currency, and select **Approve & apply** — or reject it with a reason. An approval only raises a cap that is already switched on; switching a cap on or off is done on the **Budget** tab. Both the request and its outcome are recorded in the audit log.
+An Org Admin or Business Admin answers it from **Requests** in the sidebar: they choose **Which cap** to raise (**Monthly** or **Lifetime**), enter a **New limit (GBP)** in the project's budget currency, and select **Approve & apply** — or reject it with a reason. An approval only raises a cap that is already switched on; switching a cap on or off is done on the **Budget** tab. Both the request and its outcome are recorded in the audit log.
 
 <Tip>
-  Set caps slightly above your expected engagement cost to avoid mid-project interruptions. Raising one later is quick, but it does need an Org Admin to be available.
+  Set caps slightly above your expected engagement cost to avoid mid-project interruptions. Raising one later is quick, but it does need an Org Admin or Business Admin to be available.
 </Tip>
 
 ### Budget alerts
@@ -107,7 +107,7 @@ Project caps do not operate in isolation. Each of these can independently stop a
 
 <CardGroup cols={3}>
   <Card title="Project Caps" icon="folder" href="/projects/overview">
-    Monthly and lifetime, scoped to a single project, in the project's budget currency. Set by an Org Admin.
+    Monthly and lifetime, scoped to a single project, in the project's budget currency. Set by an Org Admin or Business Admin.
   </Card>
 
   <Card title="Personal Budget" icon="user" href="/admin/managing-members">
@@ -145,7 +145,7 @@ Usage that Parle could not put a cost on is never shown as zero: it reads **Not 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
 | **Budget currency** is greyed out | The project has recorded spend | The currency is fixed from the first spend. Set the caps in the current currency, or start a new project |
-| No **Set spending caps** panel | You are not an Org Admin | Use **Request a higher limit**, or ask an Org Admin |
+| No **Set spending caps** panel | You are not an Org Admin or Business Admin | Use **Request a higher limit**, or ask an Org Admin or Business Admin |
 | "Enter a monthly cap above £0.00, or switch the monthly cap off." | A ticked cap has no amount | Type an amount, or untick the cap |
 | "Parle can't currently price budgets in EUR, so this budget can't be saved yet…" | Parle has not published an exchange rate for that currency yet — a Parle issue, not yours | Try again shortly. Turning a cap off, or changing an amount in the currency the project already uses, still works |
 | Messages refused: "Parle can't currently convert this model's prices from GBP…" | An exchange rate is missing, so the send cannot be measured against a cap | Try again shortly; contact Parle support if it persists |
