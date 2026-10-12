@@ -10,14 +10,14 @@ Parle uses role-based access at two distinct levels: the organization level and 
 
 | Role | Scope | Key Permissions |
 |---|---|---|
-| **Org Admin** | Org-wide | Manage members, invites and roles; model provider keys, managed models, model policy, default model and routing; configure SSO; connect file storage and set up file search; integrations (MCP tools, OAuth connections, Teams); billing, seats and credit; the org-wide spend cap, send ceiling, research-task limits and budget alerts; prompt caching, tool logging and research data location; organization settings (name, logo, time zone, reporting currency, personal workspace); set provider and deployment quote currencies. Plus everything a Business Admin can do |
-| **Business Admin** | Org-wide | Create agents, edit or archive any agent in the organization, set the default agent, and choose who is an Agent Author; edit organization instructions (`org.md`); curate organization knowledge and choose its sources from storage an Org Admin has connected; manage skills and deck templates; create and archive projects; set every project's monthly and lifetime caps and its budget currency; approve or reject requests for a higher project limit; act as Project Admin on every project, Restricted ones included; view organization usage, per-project spend, the usage export and the ratings report |
+| **Org Admin** | Org-wide | Manage members, invites and roles; model provider keys, managed models, model policy, default model and routing; configure SSO; connect file storage and set up file search; integrations (MCP tools, OAuth connections, Teams); billing, seats and credit; the org-wide spend cap, send ceiling, research-task limits and budget alerts; prompt caching, tool logging and research data location; organization settings (name, logo, time zone, reporting currency, personal workspace); set provider and deployment quote currencies; see and manage every project, Restricted ones included (members, settings, storage, `agent.md`, tools and agents, caps). Plus everything a Business Admin can do |
+| **Business Admin** | Org-wide | Create agents, edit or archive any agent in the organization, set the default agent, and choose who is an Agent Author; edit organization instructions (`org.md`); curate organization knowledge and choose its sources from storage an Org Admin has connected; manage skills and deck templates; create projects; on any project they can see, set its monthly and lifetime caps, budget currency and reporting currency override, archive or restore it, and approve or reject requests for a higher limit; view organization usage, per-project spend, the usage export and the ratings report |
 | **Project Admin** | Per-project | Create and delete conversations; manage project members; set the **Project code** (your expense or billing code for the project); **view** the project's caps, budget currency, reporting currency and spend (read-only); request a higher limit |
 | **Member** | Per-project | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit |
 | **Personal** | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to |
 
 <Note>
-  On the **Business** plan and above, a project can be **Restricted** (private): it is hidden from the project list for everyone who is not one of its members. Only its members — and Org Admins and Business Admins, who see every project — can see that it exists. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
+  On the **Business** plan and above, a project can be **Restricted** (private): it is hidden from the project list for everyone who is not one of its members. Only its members — and Org Admins, who see every project — can see that it exists. A Business Admin sees a Restricted project only if they are a member of it. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
 </Note>
 
 <Note>
@@ -28,8 +28,8 @@ Parle uses role-based access at two distinct levels: the organization level and 
 
 The two admin roles split the work between the business side and IT:
 
-- **Business Admin** is for the people who decide how the AI works and how projects are set up — practice leads, operations managers, knowledge managers. They run the agent library, organization instructions and knowledge, skills, deck templates, and projects and their budgets. They act as Project Admin on every project, so they can add people to a project, but they cannot set or change anyone's organization role, and they have no access to model keys, model policy, SSO, file storage setup, integrations, billing, org-wide spend limits or organization settings.
-- **Org Admin** is for IT and whoever owns the account. They control people, sign-in, model access, storage, integrations and money, and they can also do everything a Business Admin can.
+- **Business Admin** is for the people who decide how the AI works and how projects are set up — practice leads, operations managers, knowledge managers. They run the agent library, organization instructions and knowledge, skills and deck templates; they create projects, and on any project they can see they set its caps and currencies, archive or restore it, and approve requests for a higher limit. They are not implicitly inside every project: they see a Restricted project only if they are a member of it, and inside any project they act only through their role on it, Project Admin or Member. Whoever creates a project becomes its Project Admin, so a Business Admin who creates one runs it. They cannot set or change anyone's organization role, and they have no access to model keys, model policy, SSO, file storage setup, integrations, billing, org-wide spend limits or organization settings.
+- **Org Admin** is for IT and whoever owns the account. They control people, sign-in, model access, storage, integrations and money, and they can also do everything a Business Admin can. Unlike a Business Admin, they see and manage every project, Restricted ones included.
 
 A Business Admin who needs a different model or a new integration asks an Org Admin, using an admin request. Budget alerts and billing notices still go to Org Admins.
 
@@ -42,7 +42,7 @@ The Business Admin role is available on every plan. What a Business Admin manage
     Go to **Members** in the sidebar. Find the member in the list and click their name or the role badge next to it. Select the new role from the dropdown. Changes take effect immediately. Only an Org Admin can change an org-level role, including making someone a Business Admin.
   </Step>
   <Step title="Assign or change a project-level role">
-    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins, Business Admins and that project's Project Admins can change project roles.
+    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins and that project's Project Admins can change project roles — a Business Admin can do so only on a project where they are a Project Admin.
   </Step>
   <Step title="Add a new member to a project">
     From the project's **Members** tab, click **Add Member**, search for the person by name or email, select their project role, and confirm. They immediately gain access to the project's conversations and files.
@@ -59,7 +59,7 @@ Project visibility is strictly enforced on the server — it is not just a UI pr
 - A **Public** project can be opened by anyone in your organization.
 - A **Restricted** (private) project can be seen and opened only by the people who have been added to it as members. For everyone else it does not appear in the project list, and a direct link to it behaves as though the project does not exist. Restricted projects are available on the Business plan and above.
 
-**Org Admins and Business Admins are the exception.** They see every project in the organization in the project list and can open any of them, Restricted ones included, so that they can manage its members, budget and settings. If a matter must be kept from a particular person, that person should not hold the Org Admin or Business Admin role.
+**Org Admins are the exception.** They see every project in the organization in the project list and can open any of them, Restricted ones included, so that they can manage its members, budget and settings. Business Admins are not: like anyone else, they see a Restricted project only if they are a member of it. If a matter must be kept from a particular person, that person should not hold the Org Admin role or be added to the project.
 
 ## Budget Increase Requests
 
