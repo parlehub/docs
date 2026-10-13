@@ -1,0 +1,80 @@
+---
+title: "Connect GitHub to Parle"
+sidebarTitle: "GitHub"
+description: "Connect GitHub from the Integrations gallery — pick a scope, approve access, and let the agent search code and read your repositories, issues, pull requests and workflow runs, read-only."
+icon: "github"
+---
+
+**GitHub** is a branded card in the Integrations gallery — GitHub's own hosted, **read-only** MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at GitHub. There's nothing to type, and nobody in your organization has to register an app with GitHub.
+
+<Note>
+  GitHub is **read-only** in Parle. The card connects to GitHub's read-only server, which refuses every write, so the agent can't create issues, comment, open pull requests or change code. Read [What the approval means](#what-the-approval-means) for the one thing worth knowing about how that is enforced.
+</Note>
+
+## What it gives the agent
+
+Once connected and enabled on a project, the agent can answer questions about the repositories the connected GitHub account can already see:
+
+- **Search code** — find code, repositories and users matching a search query.
+- **Read a file or commit** — read a file's contents, or a commit's message and changes.
+- **Browse issues and pull requests** — list and read issues, pull requests and their comments.
+- **View workflow runs** — read GitHub Actions workflow runs and their status.
+
+That makes it useful for questions like _"what changed in the billing service this week?"_ or _"is the release workflow passing?"_ without leaving the conversation.
+
+## What the approval means
+
+Parle asks GitHub for exactly one permission, **repo**: read the repositories, code, issues, pull requests and workflow runs your account can already see.
+
+GitHub doesn't offer a read-only version of that access for private repositories — `repo` is the narrowest grant that can read them, and it also covers writes. So the read-only guarantee comes from the **server the card connects to**, which refuses every write, rather than from the grant itself. Parle never writes or changes anything in GitHub.
+
+<Note>
+  Issues, pull requests, comments, commit messages and code can be written by other people — including outside contributors on public repositories — and reach the agent as written. Treat what the agent does on the strength of that content with the same care you would any instruction from outside your team. Because the connection is read-only, the most a planted instruction can do is influence what the agent says, not change anything in GitHub.
+</Note>
+
+## Choosing a scope
+
+GitHub offers all three credential scopes — see [Choosing who the credential belongs to](/tools/integration-scopes) for the full explanation of what each one means. In brief, for GitHub specifically:
+
+- **User (recommended)** — each member connects their own GitHub account, and the agent only ever reads repositories that member can already see.
+- **Project** — each project connects its own GitHub account, so one client engagement's repositories stay separate from another's. Every member of that project can then ask the agent about whatever that one account can see.
+- **Organization** — one shared connection that every project can use. It reads with the connecting person's repository access on behalf of **every project member**, private repositories included. Choose it only if that is what you want, for example a shared account that can see a specific set of repositories.
+
+Because GitHub access is personal, **User** is marked **Recommended** in the scope picker.
+
+## Connecting
+
+<Steps>
+  <Step title="Open the gallery">
+    Go to **Org settings → Integrations → Tools**, select **Add integration**, and choose the **GitHub** card.
+  </Step>
+  <Step title="Choose who it's for">
+    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
+  </Step>
+  <Step title="Approve access at GitHub">
+    For **Organization** scope, the Org Admin is sent to GitHub to approve access, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
+  </Step>
+</Steps>
+
+What happens next follows the same connect flow as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
+
+<Note>
+  If your company restricts which third-party apps can access its GitHub organization, GitHub may ask an organization owner to approve **Parle** the first time someone connects. That is a GitHub setting on your side, and the approval is yours to give.
+</Note>
+
+## Enabling it on a project
+
+Connecting GitHub at Organization or Project scope makes it _available_; a Project Admin still has to switch it on for each project from the **Tools** tab (see [Part 3](/tools/integrations#part-3-enable-an-integration-on-a-project)). For a **Project**-scoped connection, switching it on shows the project as **not connected** until that project's own account is connected. For a **User**-scoped connection, the tool appears in the conversation as soon as the integration is enabled and **any** member has connected — a member who hasn't connected yet gets a plain-language prompt to do so from My Integrations, rather than the tool simply not being there.
+
+## Limits to know about
+
+- **Read-only.** The agent can't write to GitHub through this card.
+- **Unattended work.** Parle can't yet use GitHub for unattended work, so research tasks and live artifacts can't use it. It works in conversations.
+
+## Reconnecting and removing
+
+If GitHub stops accepting the stored authorization — for example, someone removes Parle from their GitHub authorized apps — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
+
+Disconnecting a GitHub connection, at any scope, deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer use it. To be certain access is also ended on GitHub's side, remove Parle from your authorized applications in your GitHub account settings. Each member who connected their own account at User scope does this for their own connection.
+
+Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).
