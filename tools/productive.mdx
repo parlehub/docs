@@ -1,5 +1,5 @@
 ---
-title: "Connect Productive to Parle"
+title: "Connect Productive to Parlé"
 sidebarTitle: "Productive"
 description: "Connect Productive from the Integrations gallery — pick a scope, approve access, and let the agent work with your projects, time, budgets and invoices."
 icon: "chart-gantt"
@@ -8,7 +8,9 @@ icon: "chart-gantt"
 **Productive** is a branded card in the Integrations gallery (categories **Productivity** and **Time & Billing**) — Productive's own hosted MCP server, with the address and authentication already fixed by the card. Connecting it is: pick the card, choose who it's for, approve access at Productive. There's nothing to type.
 
 <Note>
-  **You'll need:** a Productive organization on the **Ultimate** plan with AI features enabled. Productive's MCP server is only available there. A connection covers one Productive organization at a time.
+	**You'll need:** a Productive organization on the **Ultimate** plan with AI
+	features enabled. Productive's MCP server is only available there. A
+	connection covers one Productive organization at a time.
 </Note>
 
 ## What it gives the agent
@@ -16,7 +18,12 @@ icon: "chart-gantt"
 Once connected and enabled on a project, the agent can search projects and tasks, read budgets, time entries, resourcing and sales deals, and answer questions in plain language (_"who has capacity next month?"_, _"where is this project against budget?"_). It can also make changes: create or update tasks, log time, update budgets, and create and change invoices and expenses. The card requests Productive's two scopes, **read** and **write**, and nothing else.
 
 <Warning>
-  Productive's write access reaches **billing data** — time entries, budgets, invoices and expenses that your firm bills clients from. There is no approval step: a change runs as soon as the agent makes the call, under the connected Productive account (at User scope, the account of the member whose conversation made it). We recommend the **User** scope so that every change is attributable to a named person.
+	Productive's write access reaches **billing data** — time entries, budgets,
+	invoices and expenses that your firm bills clients from. There is no approval
+	step: a change runs as soon as the agent makes the call, under the connected
+	Productive account (at User scope, the account of the member whose
+	conversation made it). We recommend the **User** scope so that every change is
+	attributable to a named person.
 </Warning>
 
 ## Choosing a scope
@@ -30,15 +37,21 @@ All three credential scopes are available — see [Choosing who the credential b
 ## Connecting
 
 <Steps>
-  <Step title="Open the gallery">
-    Go to **Org settings → Integrations → Tools**, select **Add integration**, and choose the **Productive** card.
-  </Step>
-  <Step title="Choose who it's for">
-    Pick Organization, Project, or User. Only an Org Admin can register the integration at all; the scope decides who authenticates from here.
-  </Step>
-  <Step title="Approve access at Productive">
-    For **Organization** scope, the Org Admin is sent to Productive to approve access, and returns to a **Connected** card. For **Project** scope, each project's Project Admin does this from that project's **Tools** tab. For **User** scope, each member does this from their own [My Integrations](/tools/my-integrations) page.
-  </Step>
+	<Step title="Open the gallery">
+		Go to **Org settings → Integrations → Tools**, select **Add integration**,
+		and choose the **Productive** card.
+	</Step>
+	<Step title="Choose who it's for">
+		Pick Organization, Project, or User. Only an Org Admin can register the
+		integration at all; the scope decides who authenticates from here.
+	</Step>
+	<Step title="Approve access at Productive">
+		For **Organization** scope, the Org Admin is sent to Productive to approve
+		access, and returns to a **Connected** card. For **Project** scope, each
+		project's Project Admin does this from that project's **Tools** tab. For
+		**User** scope, each member does this from their own [My
+		Integrations](/tools/my-integrations) page.
+	</Step>
 </Steps>
 
 What happens next follows the same connect flow as any OAuth 2.0 integration — see [Part 2 — Authentication](/tools/integrations#part-2-authentication) for the general mechanics of discovery, the connected card, and what **Reconnect required** and **Reconnect recommended** mean.
@@ -51,10 +64,10 @@ Connecting Productive at Organization or Project scope makes it _available_; a P
 
 ## Reconnecting and access renewal
 
-Parle renews Productive's access automatically in the background. If Productive stops accepting the stored authorization — revoked, expired, or the granted scopes changed — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
+Parlé renews Productive's access automatically in the background. If Productive stops accepting the stored authorization — revoked, expired, or the granted scopes changed — the card shows **Reconnect required**, and the integration stops working until whoever connected it approves access again.
 
 ## Disconnecting and removing
 
-Disconnecting a Productive connection, at any scope, deletes the stored credential from Parle's vault and removes the connection, so the agent can no longer use it. Before deleting it, Parle asks Productive to revoke the access Productive issued. That request is best effort: if it fails, the disconnect still goes ahead. That Productive actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parle's access yourself in Productive: check the authorized apps or AI connections in your Productive account settings and remove Parle there.
+Disconnecting a Productive connection, at any scope, deletes the stored credential from Parlé's vault and removes the connection, so the agent can no longer use it. Before deleting it, Parlé asks Productive to revoke the access Productive issued. That request is best effort: if it fails, the disconnect still goes ahead. That Productive actually ends the access on its side hasn't been confirmed against a live account, so to be certain it's gone, also remove Parlé's access yourself in Productive: check the authorized apps or AI connections in your Productive account settings and remove Parlé there.
 
 Removing the whole integration for your organization starts the same 14-day grace window as any other integration. See [Part 5 — Maintaining an integration](/tools/integrations#part-5-maintaining-an-integration).

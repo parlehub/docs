@@ -1,19 +1,22 @@
 ---
 title: "Projects: Organize AI Work by Client Engagement"
 sidebarTitle: "Overview"
-description: "A project is Parle's shared workspace — conversations, files, standing instructions, a budget, and the tools the agent may use, scoped to one engagement."
+description: "A project is Parlé's shared workspace — conversations, files, standing instructions, a budget, and the tools the agent may use, scoped to one engagement."
 ---
 
-A **project** is the shared workspace in Parle. Everything the team does for a piece of work lives inside it: conversations everyone on the project can see and continue, the project's files, a spending budget, standing instructions for the agent, and the tools it is allowed to use.
+A **project** is the shared workspace in Parlé. Everything the team does for a piece of work lives inside it: conversations everyone on the project can see and continue, the project's files, a spending budget, standing instructions for the agent, and the tools it is allowed to use.
 
 Creating one takes under a minute. The parts that make it genuinely useful — members, storage, context, budget — are set up afterwards from the project's own tabs.
 
 <Note>
-  **You'll need:** to be an **Org Admin**. Creating projects is Org Admin only; once a project exists, its **Project Admins** run it day to day.
+	**You'll need:** to be an **Org Admin**. Creating projects is Org Admin only;
+	once a project exists, its **Project Admins** run it day to day.
 </Note>
 
 <Tip>
-  **Worth doing first:** connect at least one AI model for your organization — see [Connecting Providers](/models/connecting-providers). A project without any enabled models can be created, but nobody will be able to chat in it.
+	**Worth doing first:** connect at least one AI model for your organization —
+	see [Connecting Providers](/models/connecting-providers). A project without
+	any enabled models can be created, but nobody will be able to chat in it.
 </Tip>
 
 ## Creating a project
@@ -41,12 +44,13 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
     </Note>
 
     You can change the amount later, and add the other cap, from the project's **Budget** tab. See [Budgets](/cost/budgets).
+
   </Step>
   <Step title="Choose available models">
     Every model your organization has enabled is ticked by default. Untick any you want to **block** for this project, for example to keep an expensive model off a high-volume project. This section only appears if your organization has models connected. After creation, blocked models and any other rules for this project live in its [model policy](/models/model-policy), on the **Budget** tab.
   </Step>
   <Step title="Choose storage">
-    **Parle Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
+    **Parlé Cloud Storage** needs no setup and is the default. If your organization has connected SharePoint or Google Drive, you can point the project at it after creation.
   </Step>
   <Step title="Create the project">
     You land in the project's workspace, already added as its **Project Admin**.
@@ -54,7 +58,9 @@ Creating one takes under a minute. The parts that make it genuinely useful — m
 </Steps>
 
 <Warning>
-  **Visibility cannot be changed from the project's tabs later — decide it now.** If you are unsure, **Restricted** is the safer choice; you can always add the whole team as members.
+	**Visibility cannot be changed from the project's tabs later — decide it
+	now.** If you are unsure, **Restricted** is the safer choice; you can always
+	add the whole team as members.
 </Warning>
 
 ## The project workspace
@@ -66,21 +72,22 @@ The project workspace has one tab per area of setup.
     Shared AI threads. Everyone on the project sees them and can pick any of them up.
   </Card>
 
-  <Card title="Files" icon="folder-open" href="/projects/file-tools">
-    The project's file area, which the team and the agent both use.
-  </Card>
+<Card title="Files" icon="folder-open" href="/projects/file-tools">
+	The project's file area, which the team and the agent both use.
+</Card>
 
-  <Card title="Project Details" icon="sliders">
-    Storage configuration and `agent.md`, the project's standing instructions.
-  </Card>
+<Card title="Project Details" icon="sliders">
+	Storage configuration and `agent.md`, the project's standing instructions.
+</Card>
 
-  <Card title="Members" icon="users" href="/security/roles-and-permissions">
-    Who is on the project, and who administers it.
-  </Card>
+<Card title="Members" icon="users" href="/security/roles-and-permissions">
+	Who is on the project, and who administers it.
+</Card>
 
-  <Card title="Budget" icon="dollar-sign" href="/cost/budgets">
-    The project's monthly and lifetime caps and actual spend per conversation, plus its model policy, per-message spending limit and Auto starting tier.
-  </Card>
+<Card title="Budget" icon="dollar-sign" href="/cost/budgets">
+	The project's monthly and lifetime caps and actual spend per conversation,
+	plus its model policy, per-message spending limit and Auto starting tier.
+</Card>
 
   <Card title="Tools" icon="plug" href="/tools/integrations">
     Which of your organization's connected integrations this project may use.
@@ -92,46 +99,48 @@ The project workspace has one tab per area of setup.
 On a **Restricted** project the member list _is_ the access list. On a **Public** project everyone in the organization can already open it, so this mainly decides who the admins are.
 
 <Steps>
-  <Step title="Open the Members tab">
-    Under **Add an org member**, pick the person.
-  </Step>
-  <Step title="Set their access">
-    **Project Admin** — can edit project details, the context file, storage, and membership. **Project Member** — can use the project.
-  </Step>
-  <Step title="Optionally set a project role">
-    Free text describing what they do here, e.g. `Business Analyst`. It is a label for the team, not a permission.
-  </Step>
-  <Step title="Select Add member">
-    Repeat for everyone who needs access.
-  </Step>
+	<Step title="Open the Members tab">
+		Under **Add an org member**, pick the person.
+	</Step>
+	<Step title="Set their access">
+		**Project Admin** — can edit project details, the context file, storage, and
+		membership. **Project Member** — can use the project.
+	</Step>
+	<Step title="Optionally set a project role">
+		Free text describing what they do here, e.g. `Business Analyst`. It is a
+		label for the team, not a permission.
+	</Step>
+	<Step title="Select Add member">Repeat for everyone who needs access.</Step>
 </Steps>
 
 Change someone's access or role directly in the roster, or **Remove** them. Every project must keep **at least one Project Admin** — removing the last one is refused.
 
 <Note>
-  People must already be members of your organization before they can be added to a project. See [Managing Members](/admin/managing-members).
+	People must already be members of your organization before they can be added
+	to a project. See [Managing Members](/admin/managing-members).
 </Note>
 
 ## Pointing the project at storage
 
-Every project has a file area the team and the agent both use. By default that is Parle-managed storage, which works immediately. If your organization has connected SharePoint or Google Drive, you can instead root the project in a document library or Shared Drive so files stay in your own tenant.
+Every project has a file area the team and the agent both use. By default that is Parlé-managed storage, which works immediately. If your organization has connected SharePoint or Google Drive, you can instead root the project in a document library or Shared Drive so files stay in your own tenant.
 
 <Steps>
-  <Step title="Open Project Details → Storage">
-    Choose a provider.
-  </Step>
-  <Step title="Parle Cloud Storage">
-    Managed storage, no setup.
-  </Step>
-  <Step title="SharePoint">
-    Paste the **site URL** (e.g. `https://contoso.sharepoint.com/sites/Marketing`) and select **Resolve**, choose a **document library**, and optionally a **folder** within it to root the project at.
-  </Step>
-  <Step title="Google Drive">
-    Paste the URL of the **Shared Drive itself** — its root, not a sub-folder inside it.
-  </Step>
-  <Step title="Save storage">
-    Parle checks it can actually reach the location before saving, so a permissions gap is caught now.
-  </Step>
+	<Step title="Open Project Details → Storage">Choose a provider.</Step>
+	<Step title="Parlé Cloud Storage">Managed storage, no setup.</Step>
+	<Step title="SharePoint">
+		Paste the **site URL** (e.g.
+		`https://contoso.sharepoint.com/sites/Marketing`) and select **Resolve**,
+		choose a **document library**, and optionally a **folder** within it to root
+		the project at.
+	</Step>
+	<Step title="Google Drive">
+		Paste the URL of the **Shared Drive itself** — its root, not a sub-folder
+		inside it.
+	</Step>
+	<Step title="Save storage">
+		Parlé checks it can actually reach the location before saving, so a
+		permissions gap is caught now.
+	</Step>
 </Steps>
 
 SharePoint and Google Drive only appear if an Org Admin has enabled them for your organization, and each needs its own tenant-side permission grant first — see [Connect Microsoft 365](/admin/microsoft-365) and [Connect Google Workspace](/admin/google-workspace).
@@ -149,16 +158,21 @@ If your organization has connected integrations, open the **Tools** tab and swit
 When a project is finished, an Org Admin can archive it instead of leaving it in the active list. Archiving is **Org Admin only** — a Project Admin can see the control but cannot use it.
 
 <Warning>
-  **Archiving permanently deletes the project's knowledge sources and integration connections.** Restoring the project later brings the project itself back, but **not** that deleted data. Conversations and files are not affected either way — archiving and restoring never touch them.
+	**Archiving permanently deletes the project's knowledge sources and
+	integration connections.** Restoring the project later brings the project
+	itself back, but **not** that deleted data. Conversations and files are not
+	affected either way — archiving and restoring never touch them.
 </Warning>
 
 <Steps>
-  <Step title="Open Project Details → Danger Zone">
-    Scroll to the bottom of the project's **Details** tab.
-  </Step>
-  <Step title="Select Archive">
-    Type the project's name exactly to confirm, then select **Archive project**. This extra step exists because the data loss above is real and cannot be undone by restoring.
-  </Step>
+	<Step title="Open Project Details → Danger Zone">
+		Scroll to the bottom of the project's **Details** tab.
+	</Step>
+	<Step title="Select Archive">
+		Type the project's name exactly to confirm, then select **Archive project**.
+		This extra step exists because the data loss above is real and cannot be
+		undone by restoring.
+	</Step>
 </Steps>
 
 An archived project:
@@ -172,24 +186,24 @@ To restore one, go to the **Projects** page and open the collapsed **Archived** 
 
 ## Troubleshooting
 
-| Symptom | Likely cause | Fix |
-| --- | --- | --- |
-| No **New project** button | You are not an Org Admin | Project creation is Org Admin only — ask one to create it and make you a Project Admin |
-| "Project limit reached: your plan allows N projects" | Your subscription tier caps active projects | [Archive](#archiving-and-restoring-a-project) a project you have finished, or upgrade the plan |
-| "Private (Restricted) projects require the Business plan or above" | Restricted visibility is not available on your tier | Create it as Public, or upgrade |
-| "Your subscription is not active" | Subscription incomplete, unpaid, or cancelled | Complete or update the subscription in Org settings → Organization → Current plan |
-| Creating the project is refused: "Parle can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and Parle has not published an exchange rate for that currency yet — a Parle issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
-| No **Available models** section on the form | Your organization has not connected any model providers | [Connect a provider key](/models/connecting-providers) first |
-| Nobody can chat in the new project | No models enabled, or the project's model policy leaves none usable | Check the project's [model policy](/models/model-policy) on the **Budget** tab, then the organization's enabled models and policy |
-| A message is refused: an admin has restricted this model | The organization's or project's [model policy](/models/model-policy) doesn't allow that model | Select **Continue with …** to resend on an allowed model, or ask an admin to change the policy |
-| A message is refused for its cost, not the budget | It is over the [per-message spending limit](/models/model-policy#per-message-spending-limit) | Compact the conversation or start a new one, or select **Request a higher limit** |
-| SharePoint or Google Drive not offered under Storage | The provider is not enabled for your organization | An Org Admin enables it in Org settings → Files & search → File storage |
-| Saving storage fails a connectivity check | Parle has not been granted access to that site or Shared Drive | Grant access on the provider's side first, then save again |
-| Someone cannot open the project | It is **Restricted** and they are not a member | Add them on the **Members** tab |
-| Cannot find someone in the add-member list | They are not in your organization yet, are deactivated, or are already on the project | Invite them to the organization first |
-| **Remove** refused on the last admin | Every project needs at least one Project Admin | Promote someone else first, then remove |
-| Messages blocked: "This project's monthly cap of … has been reached" (or lifetime cap) | Spend reached one of the project's caps | Select **Request a higher limit**, or have an Org Admin raise the cap on the **Budget** tab. A monthly cap also resets on the 1st |
-| **Budget currency** cannot be changed | The project has already recorded spend | The currency is fixed from the first spend — see [Budgets](/cost/budgets#why-the-budget-currency-locks) |
-| Project details are read-only | You are not a Project Admin on this project | Ask a Project Admin or Org Admin to make the change, or to promote you |
+| Symptom                                                                                                           | Likely cause                                                                                                                                                                                                                                          | Fix                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No **New project** button                                                                                         | You are not an Org Admin                                                                                                                                                                                                                              | Project creation is Org Admin only — ask one to create it and make you a Project Admin                                                                                                                                                                                                                                       |
+| "Project limit reached: your plan allows N projects"                                                              | Your subscription tier caps active projects                                                                                                                                                                                                           | [Archive](#archiving-and-restoring-a-project) a project you have finished, or upgrade the plan                                                                                                                                                                                                                               |
+| "Private (Restricted) projects require the Business plan or above"                                                | Restricted visibility is not available on your tier                                                                                                                                                                                                   | Create it as Public, or upgrade                                                                                                                                                                                                                                                                                              |
+| "Your subscription is not active"                                                                                 | Subscription incomplete, unpaid, or cancelled                                                                                                                                                                                                         | Complete or update the subscription in Org settings → Organization → Current plan                                                                                                                                                                                                                                            |
+| Creating the project is refused: "Parlé can't currently price budgets in EUR, so this budget can't be saved yet…" | You chose a **Budget currency** other than USD and typed a cap, and Parlé has not published an exchange rate for that currency yet — a Parlé issue, not yours. Despite the wording, it is the whole project that was not created, not just its budget | Try again shortly. To get started straight away, create the project with the cap amount at 0 — it is created in USD with no cap — then set the currency and caps on its **Budget** tab once rates are available. Do that **before the project records any spend**, because the budget currency is fixed from the first spend |
+| No **Available models** section on the form                                                                       | Your organization has not connected any model providers                                                                                                                                                                                               | [Connect a provider key](/models/connecting-providers) first                                                                                                                                                                                                                                                                 |
+| Nobody can chat in the new project                                                                                | No models enabled, or the project's model policy leaves none usable                                                                                                                                                                                   | Check the project's [model policy](/models/model-policy) on the **Budget** tab, then the organization's enabled models and policy                                                                                                                                                                                            |
+| A message is refused: an admin has restricted this model                                                          | The organization's or project's [model policy](/models/model-policy) doesn't allow that model                                                                                                                                                         | Select **Continue with …** to resend on an allowed model, or ask an admin to change the policy                                                                                                                                                                                                                               |
+| A message is refused for its cost, not the budget                                                                 | It is over the [per-message spending limit](/models/model-policy#per-message-spending-limit)                                                                                                                                                          | Compact the conversation or start a new one, or select **Request a higher limit**                                                                                                                                                                                                                                            |
+| SharePoint or Google Drive not offered under Storage                                                              | The provider is not enabled for your organization                                                                                                                                                                                                     | An Org Admin enables it in Org settings → Files & search → File storage                                                                                                                                                                                                                                                      |
+| Saving storage fails a connectivity check                                                                         | Parlé has not been granted access to that site or Shared Drive                                                                                                                                                                                        | Grant access on the provider's side first, then save again                                                                                                                                                                                                                                                                   |
+| Someone cannot open the project                                                                                   | It is **Restricted** and they are not a member                                                                                                                                                                                                        | Add them on the **Members** tab                                                                                                                                                                                                                                                                                              |
+| Cannot find someone in the add-member list                                                                        | They are not in your organization yet, are deactivated, or are already on the project                                                                                                                                                                 | Invite them to the organization first                                                                                                                                                                                                                                                                                        |
+| **Remove** refused on the last admin                                                                              | Every project needs at least one Project Admin                                                                                                                                                                                                        | Promote someone else first, then remove                                                                                                                                                                                                                                                                                      |
+| Messages blocked: "This project's monthly cap of … has been reached" (or lifetime cap)                            | Spend reached one of the project's caps                                                                                                                                                                                                               | Select **Request a higher limit**, or have an Org Admin raise the cap on the **Budget** tab. A monthly cap also resets on the 1st                                                                                                                                                                                            |
+| **Budget currency** cannot be changed                                                                             | The project has already recorded spend                                                                                                                                                                                                                | The currency is fixed from the first spend — see [Budgets](/cost/budgets#why-the-budget-currency-locks)                                                                                                                                                                                                                      |
+| Project details are read-only                                                                                     | You are not a Project Admin on this project                                                                                                                                                                                                           | Ask a Project Admin or Org Admin to make the change, or to promote you                                                                                                                                                                                                                                                       |
 
-Still stuck? Contact Parle support with your organization name and the project name.
+Still stuck? Contact Parlé support with your organization name and the project name.

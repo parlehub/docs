@@ -1,25 +1,26 @@
 ---
-title: "Auto: Let Parle Pick the Right Model for Each Conversation"
+title: "Auto: Let Parlé Pick the Right Model for Each Conversation"
 sidebarTitle: "Auto"
 description: "Auto answers routine conversations on a cheaper model and demanding ones on a stronger one, inside your firm's rules, and always shows which model answered."
 icon: "wand-magic-sparkles"
 ---
 
-**Auto** is an option at the top of the model picker. Choose it, and Parle picks the model for the conversation: routine work goes to a lower-cost model, and demanding work goes to a stronger one. Every answer shows which model wrote it, and nothing is routed unless someone chooses Auto.
+**Auto** is an option at the top of the model picker. Choose it, and Parlé picks the model for the conversation: routine work goes to a lower-cost model, and demanding work goes to a stronger one. Every answer shows which model wrote it, and nothing is routed unless someone chooses Auto.
 
 <Info>
-  Auto is included on the **Business**, **Business Elite** and **Enterprise** plans. An Org Admin sets it up first: see [Set Up Auto](/models/auto-setup).
+	Auto is included on the **Business**, **Business Elite** and **Enterprise**
+	plans. An Org Admin sets it up first: see [Set Up Auto](/models/auto-setup).
 </Info>
 
 ## The three tiers
 
 Auto never chooses from every model your organization has. Your Org Admin names one model for each tier:
 
-| Tier | Used for | Example |
-| --- | --- | --- |
-| **Everyday** | Routine messages: quick questions, drafts, short summaries | Claude Haiku |
-| **Standard** | Long conversations, attached files, and work that uses tools | Claude Sonnet |
-| **Frontier** (optional) | Only when a person asks for it (see [Asking for more](#asking-for-more)) | Claude Opus |
+| Tier                    | Used for                                                                 | Example       |
+| ----------------------- | ------------------------------------------------------------------------ | ------------- |
+| **Everyday**            | Routine messages: quick questions, drafts, short summaries               | Claude Haiku  |
+| **Standard**            | Long conversations, attached files, and work that uses tools             | Claude Sonnet |
+| **Frontier** (optional) | Only when a person asks for it (see [Asking for more](#asking-for-more)) | Claude Opus   |
 
 Auto only ever picks from models your organization's [model policy](/models/model-policy) allows.
 
@@ -61,9 +62,10 @@ Auto never sends a conversation to Frontier on its own. People can ask for a str
     A toggle next to the model picker. It sends **this message** one tier up, then switches itself off.
   </Card>
 
-  <Card title="Try with a stronger model" icon="rotate">
-    On any Auto answer. It asks the same question again, one tier above the model that answered.
-  </Card>
+<Card title="Try with a stronger model" icon="rotate">
+	On any Auto answer. It asks the same question again, one tier above the model
+	that answered.
+</Card>
 
   <Card title="Project starting tier" icon="layer-group">
     A project setting. Auto in that project starts at Standard or Frontier and never goes below it.
@@ -78,7 +80,7 @@ If your organization has no Frontier model, Deep answers on the strongest model 
 
 ### Try with a stronger model
 
-Use **Try with a stronger model** on an Auto answer that wasn't good enough. You don't need to rate the answer first. Parle asks the same question again, one tier above the model that answered. The new answer sits beside the first, as a new branch you can switch between with the ‹ 1 / 2 › control.
+Use **Try with a stronger model** on an Auto answer that wasn't good enough. You don't need to rate the answer first. Parlé asks the same question again, one tier above the model that answered. The new answer sits beside the first, as a new branch you can switch between with the ‹ 1 / 2 › control.
 
 The option appears only when a stronger tier exists and your organization's rules allow it.
 
@@ -106,17 +108,22 @@ One organization, with Everyday set to Claude Haiku, Standard to Claude Sonnet a
     _"What are our standard payment terms?"_ No files, no tools, a few hundred tokens. **Everyday · Claude Haiku.**
   </Accordion>
 
-  <Accordion title="Comparing two attached contracts">
-    Two PDFs attached. **Standard · Claude Sonnet**, because files are attached.
-  </Accordion>
+<Accordion title="Comparing two attached contracts">
+	Two PDFs attached. **Standard · Claude Sonnet**, because files are attached.
+</Accordion>
 
-  <Accordion title="A thread that grew over lunch">
-    A conversation that started small is now 45,000 tokens. After a 50-minute break, the next message switches it to **Standard · Claude Sonnet**, with a notice. Two minutes later, "Make it shorter" stays on Sonnet, because the conversation is active again.
-  </Accordion>
+<Accordion title="A thread that grew over lunch">
+	A conversation that started small is now 45,000 tokens. After a 50-minute
+	break, the next message switches it to **Standard · Claude Sonnet**, with a
+	notice. Two minutes later, "Make it shorter" stays on Sonnet, because the
+	conversation is active again.
+</Accordion>
 
-  <Accordion title="A hard question in the middle of a thread">
-    On a Sonnet conversation, an associate turns on **Deep** and asks whether a clause is enforceable. That one message goes to **Frontier · Claude Opus**. The next message is back on Sonnet.
-  </Accordion>
+<Accordion title="A hard question in the middle of a thread">
+	On a Sonnet conversation, an associate turns on **Deep** and asks whether a
+	clause is enforceable. That one message goes to **Frontier · Claude Opus**.
+	The next message is back on Sonnet.
+</Accordion>
 
   <Accordion title="A project that blocks the Standard model">
     A large question in a project whose rules block Sonnet goes to **Everyday · Claude Haiku**, the next tier down, never up to Opus.
@@ -130,5 +137,6 @@ One organization, with Everyday set to Claude Haiku, Standard to Claude Sonnet a
 - **Your spend is reported by tier.** Org Admins can see spend by Auto tier, and by how each model was chosen, on the [Usage](/cost/usage-analytics#auto-groupings) screen.
 
 <Tip>
-  Want every message on one specific model? Pick that model by name instead of Auto. Auto only ever routes when someone chooses it.
+	Want every message on one specific model? Pick that model by name instead of
+	Auto. Auto only ever routes when someone chooses it.
 </Tip>

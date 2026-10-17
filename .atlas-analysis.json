@@ -1,7 +1,7 @@
 {
   "projectType": "saas",
-  "projectName": "ParleHub",
-  "projectDescription": "ParleHub is a shared AI workspace for professional services firms that allocates AI spend by client project code, with budget controls, team collaboration, and enterprise-grade governance.",
+  "projectName": "Parlé",
+  "projectDescription": "Parlé is a shared AI workspace for professional services firms that allocates AI spend by client project code, with budget controls, team collaboration, and enterprise-grade governance.",
   "theme": "luma",
   "primaryColor": "#4d8eff",
   "lightColor": "#87b0fb",

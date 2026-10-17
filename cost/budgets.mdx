@@ -1,10 +1,10 @@
 ---
 title: "Project Budgets: Set Ceilings Before You Hit Them"
 sidebarTitle: "Budgets"
-description: "Give every Parle project a monthly cap, a lifetime cap, or both, in USD, GBP, EUR or CAD. Reaching either blocks new messages — and the bar warns the team at 80%."
+description: "Give every Parlé project a monthly cap, a lifetime cap, or both, in USD, GBP, EUR or CAD. Reaching either blocks new messages — and the bar warns the team at 80%."
 ---
 
-Parle enforces budgets before spend happens, not after. Rather than reviewing an invoice at month-end and discovering a project ran over, every project can carry spending caps that Parle checks before a message is sent. Your team works freely up to the cap, and the guardrail kicks in exactly when it needs to, not when the billing cycle closes.
+Parlé enforces budgets before spend happens, not after. Rather than reviewing an invoice at month-end and discovering a project ran over, every project can carry spending caps that Parlé checks before a message is sent. Your team works freely up to the cap, and the guardrail kicks in exactly when it needs to, not when the billing cycle closes.
 
 ## Two caps, in a currency you choose
 
@@ -16,7 +16,10 @@ A project's budget is **two independent caps**, stated in the project's own **bu
 You can switch on either, both, or neither, and each has its own amount. Neither implies the other: a monthly cap alone paces spend with no ceiling on the total, and a lifetime cap alone bounds the total with no pacing. **Reaching either one blocks new messages.**
 
 <Warning>
-  Only **Org Admins** can set, switch on, switch off or change a cap, or choose the budget currency. Project Admins and members see the caps and the spend against them, read-only, under the line _"Read-only — only an organization admin can change the budget."_
+	Only **Org Admins** can set, switch on, switch off or change a cap, or choose
+	the budget currency. Project Admins and members see the caps and the spend
+	against them, read-only, under the line _"Read-only — only an organization
+	admin can change the budget."_
 </Warning>
 
 ## The Budget tab
@@ -26,31 +29,41 @@ The **Budget** tab on a project shows what the project has actually spent — co
 - **Budget & spend** — one card per cap, showing `spent of cap used`, a progress bar, the percentage used and the amount remaining, all in the budget currency. The header reads **Limits in GBP** (or whichever currency the project uses). A cap that is switched off reads **No monthly cap** or **No lifetime cap** — never a zero — and a project with both off reads **No limit — tracking spend only**.
 - **Total spend (EUR)** — the project's whole spend, in its **reporting currency**, which can differ from the budget currency. The **Reporting currency** control underneath sets a project override — see [Currencies and Exchange Rates](/cost/currencies#a-project-override).
 - **Spend by conversation (EUR)** — the same spend broken down per conversation, also in the reporting currency.
-- **Consumption (platform services)** — a separate card, shown to Org Admins only, that controls how the project draws on your organization's credit wallet for Parle platform services such as OCR and Parle Managed models. When its **Billing mode** is **Capped allowance**, it shows a **Cap (USD / month)** field. That cap is unrelated to the monthly and lifetime caps above, and it is **always in US dollars** whatever the project's budget currency is — so a GBP project shows **Limits in GBP** at the top of the tab and a US-dollar cap further down, and both are correct. See [what stays in US dollars](/cost/currencies#what-stays-in-us-dollars).
+- **Consumption (platform services)** — a separate card, shown to Org Admins only, that controls how the project draws on your organization's credit wallet for Parlé platform services such as OCR and Parlé Managed models. When its **Billing mode** is **Capped allowance**, it shows a **Cap (USD / month)** field. That cap is unrelated to the monthly and lifetime caps above, and it is **always in US dollars** whatever the project's budget currency is — so a GBP project shows **Limits in GBP** at the top of the tab and a US-dollar cap further down, and both are correct. See [what stays in US dollars](/cost/currencies#what-stays-in-us-dollars).
 
 <Note>
-  When the budget currency and the reporting currency differ, the caps and the total are shown as **separate facts**. The total is never subtracted from a cap or turned into a percentage of one — figures in two currencies are not comparable. Each cap's own spent, remaining and percentage figures are worked out in the budget currency, and they are what enforcement uses.
+	When the budget currency and the reporting currency differ, the caps and the
+	total are shown as **separate facts**. The total is never subtracted from a
+	cap or turned into a percentage of one — figures in two currencies are not
+	comparable. Each cap's own spent, remaining and percentage figures are worked
+	out in the budget currency, and they are what enforcement uses.
 </Note>
 
 ## Setting the caps
 
 <Steps>
-  <Step title="Open the Budget tab">
-    Navigate to the project and select **Budget**. Org Admins see a **Set spending caps** panel.
-  </Step>
-  <Step title="Choose the Budget currency">
-    Pick the currency you report this work in. **It is fixed once the project records any spend**, so choose it before the team starts.
-  </Step>
-  <Step title="Tick the caps you want and enter amounts">
-    Tick **Monthly cap**, **Lifetime cap**, or both, and type an amount in **Monthly cap amount (GBP)** or **Lifetime cap amount (GBP)**. A ticked cap needs an amount above zero.
-  </Step>
-  <Step title="Save">
-    Select **Save budget**. The caps take effect immediately.
-  </Step>
+	<Step title="Open the Budget tab">
+		Navigate to the project and select **Budget**. Org Admins see a **Set
+		spending caps** panel.
+	</Step>
+	<Step title="Choose the Budget currency">
+		Pick the currency you report this work in. **It is fixed once the project
+		records any spend**, so choose it before the team starts.
+	</Step>
+	<Step title="Tick the caps you want and enter amounts">
+		Tick **Monthly cap**, **Lifetime cap**, or both, and type an amount in
+		**Monthly cap amount (GBP)** or **Lifetime cap amount (GBP)**. A ticked cap
+		needs an amount above zero.
+	</Step>
+	<Step title="Save">
+		Select **Save budget**. The caps take effect immediately.
+	</Step>
 </Steps>
 
 <Note>
-  **Leave both caps off for no limit.** Spend is still tracked and still attributed to the project — you simply get no hard stop. A cap you switch off **keeps the amount you typed**, so switching it back on restores it.
+	**Leave both caps off for no limit.** Spend is still tracked and still
+	attributed to the project — you simply get no hard stop. A cap you switch off
+	**keeps the amount you typed**, so switching it back on restores it.
 </Note>
 
 You can also set one cap when you create the project: the **New project** form asks for a **Budget currency**, a **Cap period** (**Every month** or **Total, for the life of the project**) and an amount. Add the other cap afterwards from the **Budget** tab. See [Projects](/projects/overview#creating-a-project).
@@ -65,10 +78,13 @@ Nothing about their enforcement changed. A project that had a budget now has a *
 
 ## How enforcement works
 
-Each cap's bar turns **amber at 80%** and **red at 100%**, and Parle warns in the conversation from 80% — for example _"This project is at 85% of its monthly cap of £5,000.00."_
+Each cap's bar turns **amber at 80%** and **red at 100%**, and Parlé warns in the conversation from 80% — for example _"This project is at 85% of its monthly cap of £5,000.00."_
 
 <Tip>
-  Budgets cap total spend over a period. To stop a single message from being unexpectedly expensive, set a [per-message spending limit](/models/model-policy#per-message-spending-limit), organization-wide or stricter for this project on the same **Budget** tab.
+	Budgets cap total spend over a period. To stop a single message from being
+	unexpectedly expensive, set a [per-message spending
+	limit](/models/model-policy#per-message-spending-limit), organization-wide or
+	stricter for this project on the same **Budget** tab.
 </Tip>
 
 **When a project reaches either cap, new messages in it are blocked.** The notice names the cap and its currency, and says who can fix it:
@@ -84,7 +100,9 @@ Anyone on the project — including a Project Admin — can select **Request a h
 An Org Admin answers it from **Requests** in the sidebar: they choose **Which cap** to raise (**Monthly** or **Lifetime**), enter a **New limit (GBP)** in the project's budget currency, and select **Approve & apply** — or reject it with a reason. An approval only raises a cap that is already switched on; switching a cap on or off is done on the **Budget** tab. Both the request and its outcome are recorded in the audit log.
 
 <Tip>
-  Set caps slightly above your expected engagement cost to avoid mid-project interruptions. Raising one later is quick, but it does need an Org Admin to be available.
+	Set caps slightly above your expected engagement cost to avoid mid-project
+	interruptions. Raising one later is quick, but it does need an Org Admin to be
+	available.
 </Tip>
 
 ### Budget alerts
@@ -110,9 +128,10 @@ Project caps do not operate in isolation. Each of these can independently stop a
     Monthly and lifetime, scoped to a single project, in the project's budget currency. Set by an Org Admin.
   </Card>
 
-  <Card title="Personal Budget" icon="user" href="/admin/managing-members">
-    A per-user limit that applies across all the projects a member works in, plus their personal conversations. Always in USD.
-  </Card>
+<Card title="Personal Budget" icon="user" href="/admin/managing-members">
+	A per-user limit that applies across all the projects a member works in, plus
+	their personal conversations. Always in USD.
+</Card>
 
   <Card title="Org-Wide Cap" icon="building" href="/admin/org-caps">
     The outermost backstop. No single project or member can push total org spend past this ceiling. Always in USD.
@@ -125,28 +144,30 @@ A member with personal-budget headroom and project-cap headroom can still be blo
 
 Spend is recorded per message in an append-only ledger, attributed to **either** the project (for project conversations) **or** the user (for personal conversations) — never both. That is what makes a per-project figure defensible when you take it to a client.
 
-Each message's cost is recorded in the currency your provider quoted it in and converted **once**, at Parle's exchange rate for the month it was sent. A cap that spans several months adds up each month's spend at that month's rate, so a later rate change never restates what a project has already spent. See [Currencies and Exchange Rates](/cost/currencies#how-conversion-works).
+Each message's cost is recorded in the currency your provider quoted it in and converted **once**, at Parlé's exchange rate for the month it was sent. A cap that spans several months adds up each month's spend at that month's rate, so a later rate change never restates what a project has already spent. See [Currencies and Exchange Rates](/cost/currencies#how-conversion-works).
 
 Two kinds of spend are tracked separately and deliberately never added together:
 
 - **Your own provider keys** — usage billed to you directly by Anthropic, OpenAI, Google, or whoever holds the account, in the currency of your agreement. See [Connecting Providers](/models/connecting-providers).
-- **Parle-managed models** — usage drawn from your prepaid credit wallet, always in US dollars.
+- **Parlé-managed models** — usage drawn from your prepaid credit wallet, always in US dollars.
 
-A single combined total would mean two different things at once, so Parle does not present one. The managed figure is an **estimate**, worked out by applying current settings to past usage; your credit history on the **Usage** screen is the authoritative record.
+A single combined total would mean two different things at once, so Parlé does not present one. The managed figure is an **estimate**, worked out by applying current settings to past usage; your credit history on the **Usage** screen is the authoritative record.
 
-Usage that Parle could not put a cost on is never shown as zero: it reads **Not priced** or **Cost unavailable**, with a note saying how many tokens the figures exclude. See [what the two labels mean](/cost/currencies#cost-unavailable-is-not-not-priced).
+Usage that Parlé could not put a cost on is never shown as zero: it reads **Not priced** or **Cost unavailable**, with a note saying how many tokens the figures exclude. See [what the two labels mean](/cost/currencies#cost-unavailable-is-not-not-priced).
 
 <Tip>
-  Anyone on a project can ask the assistant _"How much of our budget have we used?"_ mid-conversation and get the figure read from the ledger, with its currency. See [Asking About Your Org](/knowledge/asking-about-your-org).
+	Anyone on a project can ask the assistant _"How much of our budget have we
+	used?"_ mid-conversation and get the figure read from the ledger, with its
+	currency. See [Asking About Your Org](/knowledge/asking-about-your-org).
 </Tip>
 
 ## Troubleshooting
 
-| Symptom | Likely cause | Fix |
-| --- | --- | --- |
-| **Budget currency** is greyed out | The project has recorded spend | The currency is fixed from the first spend. Set the caps in the current currency, or start a new project |
-| No **Set spending caps** panel | You are not an Org Admin | Use **Request a higher limit**, or ask an Org Admin |
-| "Enter a monthly cap above £0.00, or switch the monthly cap off." | A ticked cap has no amount | Type an amount, or untick the cap |
-| "Parle can't currently price budgets in EUR, so this budget can't be saved yet…" | Parle has not published an exchange rate for that currency yet — a Parle issue, not yours | Try again shortly. Turning a cap off, or changing an amount in the currency the project already uses, still works |
-| Messages refused: "Parle can't currently convert this model's prices from GBP…" | An exchange rate is missing, so the send cannot be measured against a cap | Try again shortly; contact Parle support if it persists |
-| **Total spend** is in a different currency from the caps | The project's reporting currency differs from its budget currency | Expected — see [Currencies and Exchange Rates](/cost/currencies) |
+| Symptom                                                                          | Likely cause                                                                              | Fix                                                                                                               |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Budget currency** is greyed out                                                | The project has recorded spend                                                            | The currency is fixed from the first spend. Set the caps in the current currency, or start a new project          |
+| No **Set spending caps** panel                                                   | You are not an Org Admin                                                                  | Use **Request a higher limit**, or ask an Org Admin                                                               |
+| "Enter a monthly cap above £0.00, or switch the monthly cap off."                | A ticked cap has no amount                                                                | Type an amount, or untick the cap                                                                                 |
+| "Parlé can't currently price budgets in EUR, so this budget can't be saved yet…" | Parlé has not published an exchange rate for that currency yet — a Parlé issue, not yours | Try again shortly. Turning a cap off, or changing an amount in the currency the project already uses, still works |
+| Messages refused: "Parlé can't currently convert this model's prices from GBP…"  | An exchange rate is missing, so the send cannot be measured against a cap                 | Try again shortly; contact Parlé support if it persists                                                           |
+| **Total spend** is in a different currency from the caps                         | The project's reporting currency differs from its budget currency                         | Expected — see [Currencies and Exchange Rates](/cost/currencies)                                                  |

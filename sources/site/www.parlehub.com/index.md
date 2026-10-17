@@ -4,11 +4,11 @@ Shared AI workspace · For firms that bill by the client
 
 # Every hour has a _client code_. Your AI spend has none.
 
-**ParleHub is a shared AI workspace for your whole team.** Every project gets its own budget and your own expense code, so AI cost lands on the engagement that caused it — and exports into the system you already bill from.
+**ParléHub is a shared AI workspace for your whole team.** Every project gets its own budget and your own expense code, so AI cost lands on the engagement that caused it — and exports into the system you already bill from.
 
 [Start free arrow\_forward](https://app.parlehub.com) [See how it works](https://parlehub.com/#product-deep-dive)
 
-Example of a shared ParleHub project: a live team conversation with its own project code and budget, connected to your model providers, storage, and identity provider.
+Example of a shared ParléHub project: a live team conversation with its own project code and budget, connected to your model providers, storage, and identity provider.
 
 Anthropic
 
@@ -34,7 +34,7 @@ Clause 4 caps liability at 12 months' fees. Flagging for legal review
 
 Project budget $620 / $1,000
 
-Example of a shared ParleHub project: a live team conversation with its own project code and budget, connected to your model providers, storage, and identity provider.
+Example of a shared ParléHub project: a live team conversation with its own project code and budget, connected to your model providers, storage, and identity provider.
 
 Project · Ashworth M&A ENG-4417
 
@@ -46,7 +46,7 @@ Project budget $620 / $1,000
 
 Anthropic OpenAI Gemini Azure OpenAI SharePoint Google Drive Entra ID Google Workspace
 
-[![ParleHub - The collaborative AI hub with built-in cost tracking | Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1212742&theme=dark&t=1786576905859)](https://www.producthunt.com/products/parlehub?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-parlehub)
+[![ParléHub - The collaborative AI hub with built-in cost tracking | Product Hunt](https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1212742&theme=dark&t=1786576905859)](https://www.producthunt.com/products/parlehub?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-parlehub)
 
 Visibility
 
@@ -59,9 +59,9 @@ On personal accounts, with client documents, under terms nobody reviewed. You ca
 - check\_circle Model calls run on your provider keys and your agreement, or on models we host under ours, never a personal consumer account
 - check\_circle Four levels of role, and projects only their members can see
 
-![Screenshot of ParleHub's organization model-provider settings, where each provider connects with your own API key; OpenAI is connected with its available models listed and a default selected](https://parlehub.com/images/modelconnection.png)
+![Screenshot of ParléHub's organization model-provider settings, where each provider connects with your own API key; OpenAI is connected with its available models listed and a default selected](https://parlehub.com/images/modelconnection.png)
 
-![Screenshot of ParleHub's organization usage analytics: token spend and cost across projects over the last 30 days, shown as a per-project bar chart with filters and summary totals](https://parlehub.com/images/billing.png)
+![Screenshot of ParléHub's organization usage analytics: token spend and cost across projects over the last 30 days, shown as a per-project bar chart with filters and summary totals](https://parlehub.com/images/billing.png)
 
 Cost allocation
 
@@ -89,9 +89,9 @@ Metered spend with no ceiling is the opposite of how a firm plans. One enthusias
 
 The ceiling becomes a number you set rather than a number you discover, and it does not stop the work, because there is a path through it.
 
-![Screenshot of a ParleHub project's Budget tab, showing 40% of a $1,000 budget used with spent/budget/remaining totals, a set-budget control, a platform-consumption billing-mode option, and a per-conversation spend breakdown with message counts](https://parlehub.com/images/budget.png)
+![Screenshot of a ParléHub project's Budget tab, showing 40% of a $1,000 budget used with spent/budget/remaining totals, a set-budget control, a platform-consumption billing-mode option, and a per-conversation spend breakdown with message counts](https://parlehub.com/images/budget.png)
 
-![Screenshot of the ParleHub projects view, showing a team's shared projects and conversation threads visible to every member](https://parlehub.com/images/projectlist.png)
+![Screenshot of the ParléHub projects view, showing a team's shared projects and conversation threads visible to every member](https://parlehub.com/images/projectlist.png)
 
 Shared context
 
@@ -118,7 +118,7 @@ Work nobody can review gets re-done by whoever has to sign it, at their rate. In
 
 You still check the work. The difference is that there is something to check, instead of a paragraph that appeared from nowhere.
 
-![Screenshot of the ParleHub AI assistant reading and querying a spreadsheet file inside a project conversation](https://parlehub.com/images/agent-tools.png)
+![Screenshot of the ParléHub AI assistant reading and querying a spreadsheet file inside a project conversation](https://parlehub.com/images/agent-tools.png)
 
 Governance
 

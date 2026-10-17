@@ -1,39 +1,54 @@
 ---
-title: "Roles and Permissions in Parle"
+title: "Roles and Permissions in Parlé"
 sidebarTitle: "Roles & Permissions"
-description: "Parle has four roles — Org Admin, Project Admin, Member, and Personal. Learn what each role can do and how to assign roles to team members."
+description: "Parlé has four roles — Org Admin, Project Admin, Member, and Personal. Learn what each role can do and how to assign roles to team members."
 ---
 
-Parle uses role-based access at two distinct levels: the organization level and the project level. Org-level roles control who can manage firm-wide settings like SSO, billing, storage, and member rosters. Project-level roles control who can do what inside a specific project. A person can be a Member at the org level but a Project Admin on a particular client engagement — the two levels are independent. This two-tier model lets you give senior staff or engagement leads control over their own projects without granting them access to firm-wide configuration.
+Parlé uses role-based access at two distinct levels: the organization level and the project level. Org-level roles control who can manage firm-wide settings like SSO, billing, storage, and member rosters. Project-level roles control who can do what inside a specific project. A person can be a Member at the org level but a Project Admin on a particular client engagement — the two levels are independent. This two-tier model lets you give senior staff or engagement leads control over their own projects without granting them access to firm-wide configuration.
 
 ## Role Overview
 
-| Role | Scope | Key Permissions |
-|---|---|---|
-| **Org Admin** | Org-wide | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; set every project's monthly and lifetime caps and its budget currency; set the organization's reporting currency and any project override; set provider and deployment quote currencies; approve or reject requests for a higher project limit; archive and restore projects; view all usage |
-| **Project Admin** | Per-project | Create and delete conversations; manage project members; set the **Project code** (your expense or billing code for the project); **view** the project's caps, budget currency, reporting currency and spend (read-only); request a higher limit |
-| **Member** | Per-project | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit |
-| **Personal** | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to |
+| Role              | Scope              | Key Permissions                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ----------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Org Admin**     | Org-wide           | Manage members and roles; configure SSO; connect storage providers; set org-wide model provider; manage billing and plan; set org-level usage caps; set every project's monthly and lifetime caps and its budget currency; set the organization's reporting currency and any project override; set provider and deployment quote currencies; approve or reject requests for a higher project limit; archive and restore projects; view all usage |
+| **Project Admin** | Per-project        | Create and delete conversations; manage project members; set the **Project code** (your expense or billing code for the project); **view** the project's caps, budget currency, reporting currency and spend (read-only); request a higher limit                                                                                                                                                                                                 |
+| **Member**        | Per-project        | Create and participate in conversations; upload files to the project; use file tools (search, summarize, extract) against project documents; submit budget increase requests when blocked by a limit                                                                                                                                                                                                                                             |
+| **Personal**      | Private chats only | Run private AI conversations that are not shared with any project or org member; cannot see or access any project thread they are not explicitly added to                                                                                                                                                                                                                                                                                        |
 
 <Note>
-  On the **Business** plan and above, a project can be **Restricted** (private): it is hidden from the project list for everyone who is not one of its members. Only its members — and Org Admins, who see every project — can see that it exists. This is designed for sensitive matters — restructuring work, partner-level engagements, or any matter where even the existence of the project is confidential.
+	On the **Business** plan and above, a project can be **Restricted** (private):
+	it is hidden from the project list for everyone who is not one of its members.
+	Only its members — and Org Admins, who see every project — can see that it
+	exists. This is designed for sensitive matters — restructuring work,
+	partner-level engagements, or any matter where even the existence of the
+	project is confidential.
 </Note>
 
 ## Assigning Roles
 
 <Steps>
-  <Step title="Assign or change an org-level role">
-    Go to **Members** in the sidebar. Find the member in the list and click their name or the role badge next to it. Select the new role from the dropdown. Changes take effect immediately.
-  </Step>
-  <Step title="Assign or change a project-level role">
-    Open the project and go to the **Members** tab. Find the member and click the role badge next to their name. Select **Project Admin** or **Member** from the dropdown. Only Org Admins and that project's Project Admins can change project roles.
-  </Step>
-  <Step title="Add a new member to a project">
-    From the project's **Members** tab, click **Add Member**, search for the person by name or email, select their project role, and confirm. They immediately gain access to the project's conversations and files.
-  </Step>
-  <Step title="Remove a member from a project">
-    From the project's **Members** tab, click the menu next to the member's name and select **Remove from Project**. They lose access to the project immediately. Their past contributions (messages, uploaded files) remain in the project record.
-  </Step>
+	<Step title="Assign or change an org-level role">
+		Go to **Members** in the sidebar. Find the member in the list and click
+		their name or the role badge next to it. Select the new role from the
+		dropdown. Changes take effect immediately.
+	</Step>
+	<Step title="Assign or change a project-level role">
+		Open the project and go to the **Members** tab. Find the member and click
+		the role badge next to their name. Select **Project Admin** or **Member**
+		from the dropdown. Only Org Admins and that project's Project Admins can
+		change project roles.
+	</Step>
+	<Step title="Add a new member to a project">
+		From the project's **Members** tab, click **Add Member**, search for the
+		person by name or email, select their project role, and confirm. They
+		immediately gain access to the project's conversations and files.
+	</Step>
+	<Step title="Remove a member from a project">
+		From the project's **Members** tab, click the menu next to the member's name
+		and select **Remove from Project**. They lose access to the project
+		immediately. Their past contributions (messages, uploaded files) remain in
+		the project record.
+	</Step>
 </Steps>
 
 ## Project Visibility
@@ -54,5 +69,8 @@ When a send is blocked because the project has reached a cap, anyone on the proj
 An Org Admin answers the request from **Requests** in the sidebar: they choose which cap to raise, enter the new limit in the project's budget currency, and approve it — or reject it with a reason. Requests and their outcomes are recorded in the [audit log](/security/audit-log). Once approved, the new limit takes effect immediately and the member can continue their work.
 
 <Tip>
-  Use project codes alongside budget caps to tie AI spend directly to client matter numbers in your billing system. Set the **Project code** on the project's **Project Details** tab and it will appear in usage exports for easy reconciliation. See [Expense Codes](/cost/expense-codes).
+	Use project codes alongside budget caps to tie AI spend directly to client
+	matter numbers in your billing system. Set the **Project code** on the
+	project's **Project Details** tab and it will appear in usage exports for easy
+	reconciliation. See [Expense Codes](/cost/expense-codes).
 </Tip>

@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Parle",
+  "name": "Parlé",
   "theme": "mint",
   "favicon": {
     "light": "/images/apple-touch-icon.png",
@@ -130,7 +130,7 @@
       "website": "https://www.parlehub.com"
     }
   },
-  "description": "Learn what Parle is, why it was built for professional services firms, and how it solves AI cost allocation, collaboration, and governance.",
+  "description": "Learn what Parlé is, why it was built for professional services firms, and how it solves AI cost allocation, collaboration, and governance.",
   "logo": {
     "light": "/images/pwa-215x215.png",
     "dark": "/images/pwa-215x215.png"

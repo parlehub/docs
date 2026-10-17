@@ -9,27 +9,29 @@ Some models reason through a problem before they write an answer. The **Thinking
 ## Choose a level
 
 <Steps>
-  <Step title="Pick a model that supports it">
-    In the chat toolbar, choose a named model in the **model selector**. If the model supports a thinking level, **Thinking** appears beside the model picker.
-  </Step>
-  <Step title="Choose a level">
-    Pick **Default**, **Low**, **Medium** or **High**, then send your message.
-  </Step>
+	<Step title="Pick a model that supports it">
+		In the chat toolbar, choose a named model in the **model selector**. If the
+		model supports a thinking level, **Thinking** appears beside the model
+		picker.
+	</Step>
+	<Step title="Choose a level">
+		Pick **Default**, **Low**, **Medium** or **High**, then send your message.
+	</Step>
 </Steps>
 
-| Level | What it does |
-| --- | --- |
+| Level       | What it does                                                                          |
+| ----------- | ------------------------------------------------------------------------------------- |
 | **Default** | The model thinks at its own default. This is the same as sending without the control. |
-| **Low** | Less thinking. Faster replies for routine questions. |
-| **Medium** | A balance between speed and depth. |
-| **High** | The most thinking. Slower, and best for complex, multi-step work. |
+| **Low**     | Less thinking. Faster replies for routine questions.                                  |
+| **Medium**  | A balance between speed and depth.                                                    |
+| **High**    | The most thinking. Slower, and best for complex, multi-step work.                     |
 
 The level applies to the message you send. The conversation remembers it, so when you come back, **Thinking** is set to the level of the latest reply.
 
 ## When the control is hidden
 
-- **The model doesn't support it.** ParleHub shows **Thinking** only for models confirmed to accept a thinking level. More models are added as they are tested.
-- **You chose Auto.** With [Auto](/models/auto), ParleHub picks the model for you, so it also leaves thinking at the default.
+- **The model doesn't support it.** ParléHub shows **Thinking** only for models confirmed to accept a thinking level. More models are added as they are tested.
+- **You chose Auto.** With [Auto](/models/auto), ParléHub picks the model for you, so it also leaves thinking at the default.
 
 ## See which level wrote a reply
 
@@ -40,5 +42,7 @@ When a level other than **Default** is used, the reply's label shows it next to 
 A higher level doesn't raise the reply's token allowance. Thinking uses part of that allowance, so a higher level can mean longer waits and more output tokens for the same question, but your [budgets](/cost/budgets) stay in control. Providers that report thinking separately show it in the `Reasoning Tokens` column of your [usage reports](/cost/usage-analytics).
 
 <Tip>
-  Start at **Default**. Move to **High** for the turns that need careful reasoning, such as reviewing a contract clause or reconciling figures, then drop back.
+	Start at **Default**. Move to **High** for the turns that need careful
+	reasoning, such as reviewing a contract clause or reconciling figures, then
+	drop back.
 </Tip>

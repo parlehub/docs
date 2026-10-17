@@ -4,7 +4,7 @@ sidebarTitle: "Model Selection"
 description: "Enable models for your organization, set the default, narrow them with a model policy, or let Auto pick — then switch models mid-conversation."
 ---
 
-Model choice in Parle is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
+Model choice in Parlé is set at two levels. Your organization decides which models exist at all; each project then narrows that list to the models appropriate for that engagement. Within a project, members pick from what is left, and can switch mid-conversation.
 
 ## Level 1 — The organization's enabled models
 
@@ -21,25 +21,31 @@ Every model your organization has enabled is available to every project **by def
 Use it to steer a team toward cost-efficient models for routine work, keep an expensive model off a high-volume project, or keep a compliance-sensitive engagement on one provider. **Review changes** shows what a change would affect before you save it.
 
 <Steps>
-  <Step title="At project creation">
-    The **New project** form shows an **Available models** checklist with every org-enabled model ticked. Untick any you want to **block** for this project. The section only appears if your organization has models connected.
-  </Step>
-  <Step title="After creation">
-    The project's blocked models, and any other rules for it, are in its model policy on the **Budget** tab.
-  </Step>
+	<Step title="At project creation">
+		The **New project** form shows an **Available models** checklist with every
+		org-enabled model ticked. Untick any you want to **block** for this project.
+		The section only appears if your organization has models connected.
+	</Step>
+	<Step title="After creation">
+		The project's blocked models, and any other rules for it, are in its model
+		policy on the **Budget** tab.
+	</Step>
 </Steps>
 
 <Note>
-  A project's rules can only narrow the organization's, never widen them. A model the policy stops stays visible in the picker, greyed out and marked **blocked by an admin**, so members know why they can't use it.
+	A project's rules can only narrow the organization's, never widen them. A
+	model the policy stops stays visible in the picker, greyed out and marked
+	**blocked by an admin**, so members know why they can't use it.
 </Note>
 
 <Warning>
-  If a project's rules leave no usable model, nobody can chat in that project. **Review changes** warns you before you save a change that would do this.
+	If a project's rules leave no usable model, nobody can chat in that project.
+	**Review changes** warns you before you save a change that would do this.
 </Warning>
 
-## Let Parle pick: Auto
+## Let Parlé pick: Auto
 
-On the **Business** plan and above, the model picker also offers **Auto** at the top. With Auto, Parle picks a lower-cost model for routine conversations and a stronger one for demanding ones, from models your Org Admin names, and every answer shows which model wrote it. See [Auto](/models/auto), and [Set Up Auto](/models/auto-setup) for admins.
+On the **Business** plan and above, the model picker also offers **Auto** at the top. With Auto, Parlé picks a lower-cost model for routine conversations and a stronger one for demanding ones, from models your Org Admin names, and every answer shows which model wrote it. See [Auto](/models/auto), and [Set Up Auto](/models/auto-setup) for admins.
 
 ## Switching models mid-conversation
 
@@ -48,11 +54,17 @@ You can switch to a different model at any point in an open conversation — mid
 All previous messages — yours and the assistant's — remain visible and intact, and the new model sees the same thread from the beginning. You can change models partway through a long document review without restarting it.
 
 <Tip>
-  A productive pattern for billable work: start on a faster, cheaper model for exploration, research and rough drafting, then switch to your most capable model for the final review and polish pass. This keeps spend down without compromising the deliverable.
+	A productive pattern for billable work: start on a faster, cheaper model for
+	exploration, research and rough drafting, then switch to your most capable
+	model for the final review and polish pass. This keeps spend down without
+	compromising the deliverable.
 </Tip>
 
 <Note>
-  **The model used for each message is recorded with that message** and in the token ledger that backs your [budgets](/cost/budgets) and usage reporting. You can see exactly which model produced each response — useful for client billing transparency and for reviewing AI-assisted work product.
+	**The model used for each message is recorded with that message** and in the
+	token ledger that backs your [budgets](/cost/budgets) and usage reporting. You
+	can see exactly which model produced each response — useful for client billing
+	transparency and for reviewing AI-assisted work product.
 </Note>
 
 ## Give the model more time to think
@@ -66,5 +78,8 @@ For models that support it, a **Thinking** control appears beside the model pick
 If the assistant seems unable to look anything up or reach a file, the model on that conversation is the first thing to check — switch to one that supports tools.
 
 <Tip>
-  Members of a project can ask _"Which models can we use here?"_ in the conversation itself, and get the list actually available in that project — plus, if one they expected is missing, why. See [Asking About Your Org](/knowledge/asking-about-your-org).
+	Members of a project can ask _"Which models can we use here?"_ in the
+	conversation itself, and get the list actually available in that project —
+	plus, if one they expected is missing, why. See [Asking About Your
+	Org](/knowledge/asking-about-your-org).
 </Tip>

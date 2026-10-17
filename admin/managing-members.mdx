@@ -1,10 +1,10 @@
 ---
 title: "Invite and Manage Members in Your Organization"
 sidebarTitle: "Managing Members"
-description: "Invite team members to your Parle organization, assign org roles, remove departing staff, and manage per-user AI spending limits."
+description: "Invite team members to your Parlé organization, assign org roles, remove departing staff, and manage per-user AI spending limits."
 ---
 
-Members are the people in your firm who have access to Parle. As an org admin, you control who joins the organization, what role they hold, how much they can spend on AI each month, and when their access is revoked. Keeping your member list accurate is especially important in professional services environments where staff turnover and client confidentiality go hand in hand.
+Members are the people in your firm who have access to Parlé. As an org admin, you control who joins the organization, what role they hold, how much they can spend on AI each month, and when their access is revoked. Keeping your member list accurate is especially important in professional services environments where staff turnover and client confidentiality go hand in hand.
 
 ## Inviting Members
 
@@ -24,15 +24,16 @@ Send email invitations directly from the Members settings page. Invitees receive
     - **Member** — access only to the projects they are explicitly added to
 
     You can change a member's role at any time after they join.
+
   </Step>
   <Step title="Send the Invitation">
-    Click **Send Invite**. Parle sends a confirmation email to the address you entered. The invitation expires after 72 hours if not accepted. You can resend or revoke pending invitations from the Members list.
+    Click **Send Invite**. Parlé sends a confirmation email to the address you entered. The invitation expires after 72 hours if not accepted. You can resend or revoke pending invitations from the Members list.
   </Step>
 </Steps>
 
 ## SSO-Enabled Organizations
 
-If your organization has configured SSO, members can sign in through your identity provider (such as Microsoft Entra ID or Google Workspace) without needing to accept a separate Parle password invite. However, SSO alone does not grant access — you still control who belongs to the org by managing user provisioning in your IdP. Users who authenticate via SSO but have not been provisioned for Parle will be denied entry.
+If your organization has configured SSO, members can sign in through your identity provider (such as Microsoft Entra ID or Google Workspace) without needing to accept a separate Parlé password invite. However, SSO alone does not grant access — you still control who belongs to the org by managing user provisioning in your IdP. Users who authenticate via SSO but have not been provisioned for Parlé will be denied entry.
 
 ## Changing a Member's Role
 
@@ -44,26 +45,29 @@ Navigate to **Members** in the sidebar, click the member's name, then select a n
 
 Removing a member revokes their access to the org and all projects instantly.
 
-Navigate to **Members** in the sidebar, click the member's name, then click **Remove from Org** and confirm. The member can no longer sign in to your Parle workspace.
+Navigate to **Members** in the sidebar, click the member's name, then click **Remove from Org** and confirm. The member can no longer sign in to your Parlé workspace.
 
-If SSO is configured with automatic deprovisioning, disabling the user's account in your IdP achieves the same result without a manual step in Parle.
+If SSO is configured with automatic deprovisioning, disabling the user's account in your IdP achieves the same result without a manual step in Parlé.
 
 <Warning>
-  Removing a member from the org does **not** delete their conversations in shared projects. Those threads remain visible to other project members. If the content is sensitive, review shared project threads before or after removing the member.
+	Removing a member from the org does **not** delete their conversations in
+	shared projects. Those threads remain visible to other project members. If the
+	content is sensitive, review shared project threads before or after removing
+	the member.
 </Warning>
 
 ## Plan Seat Limits
 
-Parle enforces seat limits based on your subscription plan:
+Parlé enforces seat limits based on your subscription plan:
 
-| Plan | Seats |
-| --- | --- |
-| Team | Up to 10 seats, no minimum |
-| Business | 10 seats minimum, no maximum |
+| Plan           | Seats                                         |
+| -------------- | --------------------------------------------- |
+| Team           | Up to 10 seats, no minimum                    |
+| Business       | 10 seats minimum, no maximum                  |
 | Business Elite | 20 seats minimum, no maximum — launching soon |
-| Enterprise | 50 seats minimum, no maximum — contact Parle |
+| Enterprise     | 50 seats minimum, no maximum — contact Parlé  |
 
-If you attempt to invite a member after reaching your plan's seat limit, Parle will prompt you to upgrade before the invitation can be sent. Upgrade your plan from **Org settings → Organization → Current plan**.
+If you attempt to invite a member after reaching your plan's seat limit, Parlé will prompt you to upgrade before the invitation can be sent. Upgrade your plan from **Org settings → Organization → Current plan**.
 
 ## Per-User Spending Limits
 
@@ -73,11 +77,17 @@ Org admins can set a **personal budget** for each member: how much that person m
 - Set **one person's budget** on the **Members** page: in the **Personal budget** column, select that person's figure (it reads **Default · …** until they have their own), enter the **Budget** and its period, and select **Save**. **Use organization default** in the same dialog puts them back on the default.
 
 <Note>
-  Per-user limits are always in **US dollars**, whatever currency your projects are capped or reported in. On the **Members** page a personal budget reads with its code — for example `$25.00 USD / month` — so it is not mistaken for your own currency. See [Currencies and Exchange Rates](/cost/currencies#what-stays-in-us-dollars).
+	Per-user limits are always in **US dollars**, whatever currency your projects
+	are capped or reported in. On the **Members** page a personal budget reads
+	with its code — for example `$25.00 USD / month` — so it is not mistaken for
+	your own currency. See [Currencies and Exchange
+	Rates](/cost/currencies#what-stays-in-us-dollars).
 </Note>
 
 A monthly budget resets on the 1st of the month and a weekly one on Monday, at 00:00 UTC. See [Org-Wide and Per-User AI Spending Caps](/admin/org-caps) for a full explanation of how spending layers interact.
 
 <Tip>
-  Use SSO with automatic deprovisioning to ensure offboarded staff lose access the moment their account is disabled in Entra ID or Google Workspace — no manual removal step required in Parle.
+	Use SSO with automatic deprovisioning to ensure offboarded staff lose access
+	the moment their account is disabled in Entra ID or Google Workspace — no
+	manual removal step required in Parlé.
 </Tip>
