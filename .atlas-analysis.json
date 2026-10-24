@@ -73,7 +73,7 @@
     "Native file tools: search, read, query spreadsheets, convert documents",
     "Enterprise SSO via Microsoft Entra ID and Google Workspace",
     "Files stored in your own SharePoint or Google Drive tenant",
-    "Tamper-evident append-only audit log",
+    "Append-only audit log, readable and exportable by Org Admins on Business and above",
     "Multi-provider support: Anthropic, OpenAI, Google Gemini, Azure OpenAI",
     "Role-based access: org admin, project admin, member",
     "Usage analytics broken down by project, person, provider, or model"
@@ -86,6 +86,7 @@
     "SSO configuration (Entra ID, Google Workspace)",
     "Storage integration (SharePoint, Google Drive)",
     "Role assignment (org admin, project admin, member)",
-    "Audit log access"
+    "Audit log view and export (Org Admin, Business and above)",
+    "Organization data export as a zip (Org Admin, Business and above)"
   ]
 }

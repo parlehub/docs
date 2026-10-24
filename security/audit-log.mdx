@@ -1,10 +1,57 @@
 ---
 title: "Audit Log: Append-Only Record of Sensitive Actions"
 sidebarTitle: "Audit Log"
-description: "Parlé records sensitive actions in an append-only audit log that rejects ordinary edits and deletions at the database layer."
+description: "Parlé records sensitive actions in an append-only audit log. Org Admins on the Business plan and above can read, filter and export their organization's entries from Org settings → Audit log."
 ---
 
-Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced. Parlé writes every sensitive action across your organization to an append-only audit log, enforced at two layers so that ordinary application and database writes cannot rewrite history.
+Regulated practices — law firms, accounting firms, and consulting practices working under client data agreements — need to demonstrate not just that access controls exist, but that those controls were actually enforced. Parlé writes every sensitive action across your organization to an append-only audit log, and rejects ordinary attempts to edit or delete an entry.
+
+## Reading the log
+
+Org Admins can read their organization's audit log in **Org settings → Audit log**.
+
+<Info>
+	**Plan requirement.** Reading and exporting the audit log is available on the
+	Business plan and above, and only to Org Admins. On other plans the **Audit
+	log** tab shows an upgrade prompt. Parlé records the same actions on every
+	plan, and nothing already recorded is removed if a plan changes, so a
+	later upgrade shows the full history.
+</Info>
+
+The log shows your organization's own entries only, newest first, as plain sentences such as who did what to which project. Each entry also shows the action code and, where Parlé has it, the IP address the action came from. Times are shown in your organization's time zone (UTC if none is set).
+
+### Filters
+
+Use the filters above the list and select **Apply filters**:
+
+| Filter | What it does |
+| --- | --- |
+| **From** and **To** | Entries between two days, in your organization's time zone. The **To** day is included. |
+| **Who** | Entries by one member of your organization. |
+| **Action type** | One family of actions, such as Projects, API keys, Sign-in, Messages or Billing. |
+| **Resource type** | One kind of thing acted on. The list offers the kinds that appear in your log. |
+
+The list loads a page at a time; select **Show more** for older entries. If a filter matches too much for Parlé to read in time, narrow the date range or add a filter.
+
+### Exporting
+
+Select **Export CSV** or **Export JSON** to download the entries that match the current filters. One export holds up to 50,000 entries; if your filters match more, Parlé asks you to narrow the date range or add a filter.
+
+- **CSV** columns: Timestamp (UTC), Local time, Actor, Actor user id, Event, Action, Resource type, Resource, Resource id, Project, Project id, Changes, IP address.
+- **JSON** holds the same entries, with the filters used, the time zone and the time of the export.
+- The file is named like `parle-audit-log-20261024-153000.csv`.
+
+Export is a download from the screen. There is no audit API, no SIEM feed and no webhook: those are not available.
+
+### Reading the log is recorded too
+
+Opening the audit log and exporting it are themselves written to the audit log, against the person who did it. The entry records the filters used and how many entries were returned, never the entries themselves.
+
+### What an entry shows, and what it leaves out
+
+- **Who.** A member of your organization is named. An action Parlé itself carried out is shown as Parlé. A person who is not a member of your organization, including Parlé staff acting on a support request, is described rather than named, and their user id and IP address are withheld.
+- **What changed.** Where a setting changed, the entry lists the before and after values of a fixed set of safe fields. It never shows raw stored values, and never shows a credential.
+- **Retention.** Entries are kept indefinitely; there is no automatic deletion.
 
 ## What the Audit Log Captures
 
@@ -16,9 +63,8 @@ Every message (inbound and outbound), configuration change, member change, budge
 - **Provider events** — AI model provider connected, disconnected, or its key rotated
 - **Tool events** — an integration connected, enabled on a project, or called in a conversation
 - **Conversation events** — messages sent and received
+- **Data export events** — an [organization data export](/admin/data-export) requested or downloaded
 - **Admin actions** — org settings changed; storage provider connected or disconnected
-
-Each record includes a timestamp, the actor, the target resource (project, file, user, or setting), the org and project it belongs to, and the before/after values where a setting changed.
 
 <Info>
 	**The audit log is not a payload store.** For a tool call it records the
@@ -34,36 +80,20 @@ Each record includes a timestamp, the actor, the target resource (project, file,
 
 The guarantee comes from how the log is enforced, not just how it is described. Two independent layers apply:
 
-1. **The application layer.** The repositories that write audit records expose no update or delete operation at all. There is no code path in Parlé — no admin screen, no API endpoint, no support tool — that edits or removes an entry.
-2. **The database layer.** An `INSTEAD OF UPDATE, DELETE` trigger on the audit tables rejects both statements regardless of which account issues them. A direct SQL `UPDATE` or `DELETE` against an audit row fails, even from a connection that holds write permission on the table.
+1. **The application layer.** The repositories that write audit records expose no update or delete operation at all. No screen in the product, including the audit log screen, edits or removes an entry.
+2. **The database layer.** An `INSTEAD OF UPDATE, DELETE` trigger on the audit tables rejects both statements regardless of which account issues them. A direct SQL `UPDATE` or `DELETE` against an audit row is rejected, even from a connection that holds write permission on the table.
 
-In practice this means a compromised Org Admin account cannot scrub activity from the log: there is no feature that would let it, and the database would reject the write even if there were.
+In practice this means a compromised Org Admin account cannot scrub activity from the log: there is no feature that would let it, and the database rejects ordinary writes even if there were.
 
 <Warning>
 	**What this does and does not guarantee.** The trigger rejects ordinary writes
 	— `UPDATE` and `DELETE` — but it does not protect against schema changes. A
 	principal holding `ALTER` or `CONTROL` on the database could disable the
 	trigger, drop it, or `TRUNCATE` past it. That is an accepted, deliberately
-	higher bar: altering the record requires a privileged schema change rather
-	than a routine write, and is not something that can happen through the
-	product. We would rather state that precisely than claim the record cannot be
-	changed by anyone under any circumstances.
+	higher bar: altering the record requires a deliberate, privileged schema
+	change rather than a routine write, and is not something that can happen
+	through the product. We would rather state that precisely than claim the
+	record can never be changed by anyone under any circumstances.
 </Warning>
 
-## Reviewing the Log
-
-<Note>
-	**A customer-facing audit view is on the roadmap and is not available yet.**
-	There is currently no audit screen, export, or API in the Parlé application
-	for org administrators. Records are being captured today, so nothing is lost
-	in the meantime — but if your engagement depends on retrieving them, raise it
-	with Parlé support rather than assuming self-service access.
-</Note>
-
-Planned for a future release:
-
-- **An org audit view** — filter by event type, user, project, and date range.
-- **CSV export** — download a full or filtered extract for compliance tooling, legal review, or archival.
-- **A SIEM webhook** — stream events to your own security information and event management platform.
-
-If a client or regulator asks for evidence of your AI usage controls before those ship, contact Parlé support with your organization name and the window you need covered.
+If a client or regulator asks for evidence of your AI usage controls, an Org Admin on a plan that includes the audit log can export the relevant window from **Org settings → Audit log**. On other plans, contact Parlé support with your organization name and the window you need covered.
