@@ -54,13 +54,15 @@ Inside each project folder:
 
 - **`Project-Settings.json`** — the project's name, project code, description, visibility, time zone, memory setting, budget caps and currency, the agents available in it, and which tools are enabled.
 - **`Project-Instructions.md`** and **`Project-Context-Files/`** — the project's instructions and any other context files, as currently written.
-- **`Conversations/`** — one JSON file per conversation in the project, archived conversations included. A file holds the conversation's messages in order with their author, role, status, model, token counts, and a record of each tool call (the tool, its outcome and the file paths it touched). If a conversation was branched by editing and resending a message, the file holds the branch you would continue today, and records how many messages sit on other branches.
+- **`Conversations/`** — one JSON file per conversation in the project, archived conversations included. A file holds the conversation's messages in order with their author (as a user id), role, status, model, token counts, and a record of each tool call (the tool, its outcome and the file paths it touched). If a conversation was branched by editing and resending a message, the file holds the branch you would continue today, and records how many messages sit on other branches.
 - **`Artifacts/`** — each published artifact as a standalone `.html` file, plus `Artifacts.json` listing what was written and what was skipped. An artifact that was never published has nothing to export and is listed as skipped.
-- **`Project-Memory.json`** — the project's memory facts in every status, with who proposed them and where they came from.
+- **`Project-Memory.json`** — the project's memory facts in every status, with who proposed them (as a user id) and where they came from.
 - **`Research-Tasks/`** — the project's Research Tasks: goal, acceptance criteria, due date, spend limit, status and timestamps. Each task's transcript is in `Conversations/`.
 - **`Files/`** and **`Files.json`** — the files Parlé itself hosts for the project, keeping your folder structure. `Files.json` lists what was copied.
 
 Anything that does not exist for your organization, such as a project with no artifacts, is simply left out.
+
+People are recorded by user id, not by name. The zip does not include a list of your members, so keep your own record of who is who if you will hand the export to someone outside Parlé.
 
 ## What is not in the zip
 
