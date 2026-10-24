@@ -124,7 +124,7 @@ Governance
 
 ## Built for the person who fills in the security questionnaire
 
-Enterprise SSO, files that never leave your own tenant, and an append-only audit trail.
+Enterprise SSO, files that never leave your own tenant, and an append-only audit trail that admins on Business and above can read and export.
 
 badge
 
@@ -142,7 +142,7 @@ history\_edu
 
 Append-only audit log
 
-Ordinary edits and deletes are rejected by the database
+Enforced at the core platform level; readable and exportable by Org Admins on Business and above
 
 admin\_panel\_settings
 
