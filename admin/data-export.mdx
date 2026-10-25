@@ -1,0 +1,83 @@
+---
+title: "Export Your Organization's Data"
+sidebarTitle: "Data Export"
+description: "Download a copy of your organization's projects, conversations, artifacts, memory, instructions and Parlé-hosted files from Parlé as one zip, from Org settings → Data export."
+---
+
+An Org Admin can download a copy of the organization's data in Parlé as a single zip file. Use it to keep your own copy of an engagement, hand a project's record to a client, or move work somewhere else.
+
+<Info>
+	**Plan requirement.** Starting a data export is available on the Business plan
+	and above. On other plans the **Data export** tab shows an upgrade prompt
+	instead of the start form. Only Org Admins see the tab and can start or
+	download an export. If your plan changes, exports you made earlier stay listed
+	and downloadable until they expire.
+</Info>
+
+## Start an export
+
+<Steps>
+	<Step title="Open Data export">
+		Go to **Org settings → Data export**.
+	</Step>
+	<Step title="Choose what to export">
+		Select **Export everything** to include every project in the organization,
+		archived projects included, or **Choose projects** and tick the projects you
+		want.
+	</Step>
+	<Step title="Start the export">
+		Select **Start export**. Parlé assembles the zip in the background, so you
+		can leave the page and come back. The export moves from **Queued** to
+		**Running** to **Ready**. If something goes wrong it shows **Failed**, with
+		the reason.
+	</Step>
+	<Step title="Download it">
+		When the export is **Ready**, select **Download**. Parlé gives you a
+		download link that works for 15 minutes; you can get a new link whenever you
+		need one. The file is named like `parle-data-export-20261024-1530.zip`.
+	</Step>
+</Steps>
+
+Only one export can run at a time for your organization. You can start another once the current one has finished. Each finished export is kept for 7 days and then removed, so download it within that window.
+
+## What is in the zip
+
+At the top level of the zip:
+
+- **`Organization-Settings.json`** — how your organization is set up: name, plan and seat count, time zone, default agent, single sign-on configurations (provider, protocol, tenant and domain), the names of your connected integrations and their authentication type, and which model providers have an active key. Also what identifies the export itself: when it was generated, its scope and the projects it covers.
+- **`Organization-Instructions.md`** — your organization instructions, if you have set any.
+- **`Agents/`** — the agents your organization created: name, description, instructions and the integrations, knowledge sources, skills and capability groups they are granted, by name. Only the current version of each agent is exported.
+- **`Research-Task-Templates/`** — the Research Task templates your organization created, current version only.
+- **`Projects/`** — one folder per project, described below.
+
+Inside each project folder:
+
+- **`Project-Settings.json`** — the project's name, project code, description, visibility, time zone, memory setting, budget caps and currency, the agents available in it, and which tools are enabled.
+- **`Project-Instructions.md`** and **`Project-Context-Files/`** — the project's instructions and any other context files, as currently written.
+- **`Conversations/`** — one JSON file per conversation in the project, archived conversations included. A file holds the conversation's messages in order with their author (as a user id), role, status, model, token counts, and a record of each tool call (the tool, its outcome and the file paths it touched). If a conversation was branched by editing and resending a message, the file holds the branch you would continue today, and records how many messages sit on other branches.
+- **`Artifacts/`** — each published artifact as a standalone `.html` file, plus `Artifacts.json` listing what was written and what was skipped. An artifact that was never published has nothing to export and is listed as skipped.
+- **`Project-Memory.json`** — the project's memory facts in every status, with who proposed them (as a user id) and where they came from.
+- **`Research-Tasks/`** — the project's Research Tasks: goal, acceptance criteria, due date, spend limit, status and timestamps. Each task's transcript is in `Conversations/`.
+- **`Files/`** and **`Files.json`** — the files Parlé itself hosts for the project, keeping your folder structure. `Files.json` lists what was copied.
+
+Anything that does not exist for your organization, such as a project with no artifacts, is simply left out.
+
+People are recorded by user id, not by name. The zip does not include a list of your members, so keep your own record of who is who if you will hand the export to someone outside Parlé.
+
+## What is not in the zip
+
+- **Personal conversations.** An organization export contains project conversations only. A conversation that belongs to one person and no project is never included.
+- **Files that live in your own storage.** If a project's files are in your SharePoint site, your Google Drive, or your own Azure Blob container, they are not copied. `Files.json` lists the project with the reason, so you know where to find them.
+- **Credentials and secrets.** API keys, vault references, tool server addresses and credentials, SSO metadata and storage connection details are never written.
+- **Billing and spend records.** Invoices, payment details and the usage ledger are not in the export. Use [Usage Analytics](/cost/usage-analytics) to export spend.
+- **The audit log.** The audit log is a separate record with its own export. See [Audit Log](/security/audit-log).
+- **Automation run conversations**, and the full tool inputs and results behind each tool call.
+- **Version history** for agents, templates and instructions: only the current version is exported.
+
+## What gets recorded
+
+Starting an export and downloading one are each written to your [audit log](/security/audit-log) against the person who did it. The download link itself is never written to the record.
+
+## If an export fails
+
+A failed export shows the reason beside it. You can start a new export straight away. If it keeps failing, contact Parlé support with the time you started it.

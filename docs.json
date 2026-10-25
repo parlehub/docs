@@ -117,6 +117,7 @@
               "admin/organization-setup",
               "admin/managing-members",
               "admin/org-caps",
+              "admin/data-export",
               "admin/microsoft-365",
               "admin/google-workspace"
             ]

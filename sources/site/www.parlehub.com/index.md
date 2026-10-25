@@ -124,7 +124,7 @@ Governance
 
 ## Built for the person who fills in the security questionnaire
 
-Enterprise SSO, files that never leave your own tenant, and an audit trail that cannot be quietly edited.
+Enterprise SSO, files that never leave your own tenant, and an append-only audit trail that admins on Business and above can read and export.
 
 badge
 
@@ -140,9 +140,9 @@ SharePoint & Google Drive, in your tenant
 
 history\_edu
 
-Tamper-evident audit log
+Append-only audit log
 
-Append-only, enforced at the core platform level
+Enforced at the core platform level; readable and exportable by Org Admins on Business and above
 
 admin\_panel\_settings
 
