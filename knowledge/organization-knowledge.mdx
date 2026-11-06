@@ -167,16 +167,53 @@ Both are on each document in **Published documents**, and they are different:
 	anything. The guarantee arrives late, but it arrives.
 </Note>
 
-## Part 4 — Where it applies
+## Part 4 — Switching a knowledge source off
+
+Each knowledge source has its own **Enabled** switch in **Org settings → Knowledge & skills**. That switch is the control over whether the source's content is sent for indexing. Use it when you need to protect a sensitive library.
+
+While a source is switched off:
+
+- The agent quotes nothing from it, in any conversation.
+- Nothing new can be added to it. Uploading, replacing a file and editing text are all refused until you switch it back on.
+- Parlé sends none of its content for indexing, including anything that was still waiting to be indexed.
+
+### Keep or delete Parlé's index
+
+When you switch a source off, Parlé asks what to do with the index it has already built from it:
+
+- **Stop sending new content (keep the existing index)** is the default. Switching the source back on makes it quotable again straight away.
+- **Also delete the index built from this source** deletes Parlé's index of it. Your documents themselves are kept, so nothing has to be uploaded again.
+
+You can also delete the index of a source that is already off: switch it off again and choose to delete the index.
+
+<Warning>
+	Deleting the index removes it from Parlé. It does not recall text that was
+	already sent to Parlé's embedding provider for indexing before you switched the
+	source off.
+</Warning>
+
+### Switching it back on
+
+Switching a source back on catches it up:
+
+- **A connected library is checked again straight away.** Files added, changed or deleted at source while it was off are picked up by that check, so a file you deleted while the source was off stops being quotable.
+- **Uploaded files and text are indexed again** if their index was deleted, or if they were still waiting when you switched the source off.
+
+Indexing again counts against your organization's daily indexing allowance, so a large source can take until the allowance renews to become fully searchable.
+
+This works the same way for a project's own knowledge sources (in the project's settings) and for a client's knowledge and contracts (on the client's page, where switching off is called **Archive**).
+
+## Part 5 — Where it applies
 
 ### The organization default
 
-The **Available in conversations** switch at the top of the Knowledge page sets the default for your whole organization. When it is on, the agent can quote these documents in every project and personal conversation.
+The **Organization knowledge in conversations** switch at the top of the Knowledge page sets the default for your whole organization. When it is on, the agent can quote these documents in every project and personal conversation.
 
 <Info>
-	**One subtlety worth knowing:** turning it off withdraws it everywhere
-	**except projects that opted in for themselves**. If you need it off
-	everywhere, check for projects with their own override.
+	**This switch controls where knowledge is available, not whether it is
+	indexed.** Turning it off withdraws it everywhere **except projects that opted
+	in for themselves**, but it does not stop documents being sent for indexing. To
+	stop a source's content being sent for indexing, switch that source off (Part 4).
 </Info>
 
 ### Per-project override
@@ -185,7 +222,7 @@ A **Project Admin** can opt their own project out — or in — from the project
 
 A project that has opted out gets nothing from the corpus: the assistant is not offered the documents and cannot reach them.
 
-## Part 5 — What people see in a conversation
+## Part 6 — What people see in a conversation
 
 Nobody needs to switch anything on or know the documents exist. They just ask:
 
@@ -210,7 +247,9 @@ See [Asking About Your Organization](/knowledge/asking-about-your-org) for what 
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A document sits on **Indexing…**                       | Indexing runs in the background and is not instant. Give a large PDF a few minutes.                                                                                                                     |
 | **Can't be indexed**                                   | The file has no text layer — almost certainly a scan. OCR it and publish again.                                                                                                                         |
-| The assistant does not use a document you published    | Check its state is **Searchable**, that **Available in conversations** is on, and that the project has not opted out in **Tools & knowledge**.                                                          |
+| The assistant does not use a document you published    | Check its state is **Searchable**, that its source is switched on, that **Organization knowledge in conversations** is on, and that the project has not opted out in **Tools & knowledge**.            |
+| A document says **Not indexed while this source is off** | Its source is switched off, so nothing in it is sent for indexing. Switch the source on and it is indexed again.                                                                                    |
+| You can't add files to a source                        | The source is switched off. Switch it on to add or change its content.                                                                                                                                  |
 | The assistant quotes an old policy                     | Check the new version actually published (same name creates a new version and retires the old). If the corpus is source-connected, check the **last checked** time and whether the library is readable. |
 | **This library can't be read right now**               | Parlé has lost access to the connected location. Check the folder still exists and the permissions are intact. Answers continue from the last good index meanwhile.                                     |
 | The **Connected library** card says it cannot be bound | The provider is not switched on for your organization under file storage yet.                                                                                                                           |
