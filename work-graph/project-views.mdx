@@ -1,0 +1,400 @@
+---
+title: "Project views: dashboard, work, timeline and review"
+sidebarTitle: "Project views"
+description: "Everything you see in a project's Overview, Work and Review tabs: the dashboard, tasks, decisions, deliverables, contract dates and documents, the timeline, suggestions waiting for review, disputed items and the Work Graph explorer."
+---
+
+The Work Graph brings work from outside Parlé, such as meetings, decisions, action items and files, into a graph that belongs to one project. This page is the tour of what that looks like **inside a project**: where each view lives, what is in it, and who can change it.
+
+<Note>
+	**Who sees what:** every view lists only the records **you** can open. A task
+	raised at a meeting you cannot see, or a decision whose source is closed to
+	you, is simply absent for you. Parlé never shows a count or ranking of people.
+	Changing things (adding, editing, confirming) needs a **role on the project**,
+	meaning you are on its member list. An Org Admin or Business Admin who is not on the project can
+	read what any org member can read, but is not a Project Admin by default.
+</Note>
+
+## Where to find each view
+
+<CardGroup cols={2}>
+  <Card title="Overview" icon="gauge">
+    The project dashboard. The first tab, and the default, when your plan includes the Work Graph and your organization has it switched on.
+  </Card>
+
+<Card title="Work" icon="briefcase">
+	One row of views: **Meetings**, **Tasks**, **Decisions**,
+	**Deliverables**, **Timeline**, **Contract** and **Contract documents**.
+</Card>
+
+<Card title="Review" icon="list-checks">
+	Suggestions waiting for a person to confirm or reject, plus anything
+	flagged as disputed. Shown to everyone on the project's member list.
+</Card>
+
+  <Card title="Project Setup › Work graph" icon="network">
+    What Parlé holds about the project, and how to forget it. For the project's Project Admin.
+  </Card>
+</CardGroup>
+
+The **Work** tab sits between **Automations** and **Files**. Switch between its views with the second row at the top of the tab, or link straight to one: the address carries `?tab=work&section=…`. Old links to the former **Meetings** tab still land on **Work › Meetings**.
+
+## The project dashboard (Overview)
+
+The **Overview** tab shows where the project stands against its contract on one screen. It is read only: nothing on it changes a record, and each card has a **View all** link that opens the view that owns the detail.
+
+<Note>
+	The Overview appears only when your plan includes the Work Graph **and** an Org Admin
+	has not switched the work graph off. On any other project the tab is not
+	offered and the project opens on **Conversations**. Opening the project
+	always starts on its default tab; Parlé does not remember the last tab you used.
+</Note>
+
+<Tabs>
+  <Tab title="Header and tiles">
+    The top of the page shows the project's name, its **client** (when the project has one), the contract window, and **days left** (or **Not started** or **Past its end date**).
+
+    Four tiles sit beneath it:
+
+    | Tile | What it shows |
+    | --- | --- |
+    | **Deliverables delivered** | Delivered out of the project's total |
+    | **Overdue or just missed** | Deliverables past their due day |
+    | **Spent this month** | This month's spend, and **of** the monthly cap if one is on, otherwise **No monthly cap** |
+    | **Open tasks** | Open tasks, with how many are overdue (a **+** means there are more than Parlé counted) |
+  </Tab>
+  <Tab title="Needs attention">
+    A **Needs attention** card appears only when something needs a look. Each line has an **Open** link to the place that handles it:
+
+    - **Suggestions waiting in Review** opens **Review**.
+    - **Deliverables overdue or just missed** opens **Work › Deliverables**.
+    - **A budget is at or over the warning level** opens **Project Setup › Budget**.
+    - **Shared sources that stopped syncing** opens **Project Setup › Integrations**.
+  </Tab>
+  <Tab title="Timeline and deliverables">
+    **Project timeline** draws the contract as one bar from its start to its end, with a **Today** marker, a diamond for each milestone and a dot for each deliverable's due date. A line above it reads like **Day 46 of 144 · 32% of the time gone · 29% of deliverables delivered**.
+
+    Without contract dates it says **No contract dates yet**, with a **Set contract dates** button that opens **Work › Contract**.
+
+    **Deliverables** lists each one with a mark that is always an icon and a word (**Delivered**, **Accepted**, **Rejected**, **Overdue 12 days**, **Missed 2 days ago**, **Due in 3 days**, **Planned**, **In progress**) and a **Work done** meter, such as **2 of 5 done** or **No work linked yet**.
+
+    <Note>
+      The dashboard marks a deliverable **Overdue** only when it is more than 7 days past its due day. Within 7 days it reads **Missed … days ago**. **Work › Deliverables** marks **Overdue** from the first day past due, so the two can differ for the same deliverable.
+    </Note>
+  </Tab>
+  <Tab title="Meetings, conversations, files">
+    - **Upcoming meetings** lists the next 14 days (a meeting in progress counts; canceled ones are skipped), with attendee counts and a **Brief** link when one is available. A line beneath summarizes the last 7 days: how many meetings, how many had notes, and how many decisions Parlé suggested.
+    - **Most active conversations** has a toggle: **Active** (most messages in the last 7 days), **Popular** (most people posting in the last 7 days) or **Recent** (latest activity first).
+    - **Recent files** lists files **written in Parlé** in the last 7 days: uploads, and files an agent wrote (marked **Agent**). Edits made directly in SharePoint, Google Drive or your own blob storage do not show here, and the card says so.
+  </Tab>
+  <Tab title="Budget, decisions, actions">
+    - **Budget burn** is the same chart as **Project Setup › Budget**. With no cap on, it says **No budget cap is on** and offers **Open budget**.
+    - **Recent decisions** shows the last few confirmed decisions with who decided and the meeting.
+    - **Action items due this week** shows each item's owner and a mark: **Overdue**, **Due today**, **Due tomorrow** or **Due this week**.
+  </Tab>
+</Tabs>
+
+<Accordion title="A card shows an error instead of content">
+  Cards load independently. If one fails (a timeout, a source Parlé could not reach, or no permission), only that card shows the problem, with its own **Retry** button. The others are unaffected.
+</Accordion>
+
+## Tasks
+
+**Work › Tasks** lists every piece of work on the project in one place:
+
+- **Parlé tasks**, kept in Parlé.
+- **Action items** from meetings that nobody has turned into a task. The row reads **Action item**.
+- **Tasks kept in Microsoft Planner or Jira**, when a Project Admin has connected that tool to the project.
+
+Each row shows a type badge, a status, the owner and due date when Parlé has them, and **where it came from**: **Typed in**, **Meeting**, **Document**, **Email**, **Teams** or **Chat**. A meeting source is a link to that meeting. A task that is part of a deliverable shows **Deliverable · name**.
+
+<Tabs>
+  <Tab title="Tasks in Planner or Jira">
+    Parlé keeps only a **link** and a **state** for these tasks, never their title, assignee or description. The row reads **Task in Planner**, or **Task in Jira · NW-142**, with its state and when Parlé last checked it (**Checked …**, **Not checked yet**), and an **Open in Planner** or **Open in Jira** link.
+
+    | State | What it means |
+    | --- | --- |
+    | **Open** / **Done** | The last state Parlé read from the tool |
+    | **Gone from Planner** / **Gone from Jira** | Parlé read the plan or project and the task was no longer there |
+    | **Couldn't check Planner** / **Couldn't check Jira** | Parlé could not reach the tool; the last known state is kept and re-checked later |
+
+    Because Parlé holds no owner or due date for these tasks, an owner or due-date filter leaves them out. When a project keeps its tasks in a tool, **Add task** is not offered and new tasks are created there.
+
+    <Note>
+      Connecting a task tool to a project, and turning an action item into a task or sending a task to Planner or Jira, are **not yet available in the Parlé screens**. Existing links show here.
+    </Note>
+  </Tab>
+  <Tab title="Filters and paging">
+    Use **Source**, **Owner**, **Status**, **Where** (**Parlé and tools**, **Parlé**, **Planner**, **Jira**), **Due** (overdue, next 7 days, next 30 days), **Deliverable** and **Sort** (by due date, or by status). The list shows 25 at a time; select **Show more tasks** for the rest. Statuses are **To do**, **In progress**, **Done** and **Canceled**.
+
+    Opening a finished task from the **Timeline** lands on its row here, highlighted.
+  </Tab>
+  <Tab title="Adding a task">
+    On a project that keeps tasks in Parlé, and on a plan that includes the Work Graph, anyone on the project's member list can select **Add task**. Give it a **Title**, and optionally a **Due date** and an **Owner**. Everyone who can see the project can see the task.
+  </Tab>
+</Tabs>
+
+### Action items and tasks
+
+Action items come from meetings: Parlé suggests them from a transcript, or a person adds them on the meeting's page. A suggestion waits in **Review** until someone confirms it. An action item that has been turned into a task is shown once, as the task, and reads **Tracked as a task** on the meeting page. While it is tracked, its status follows the task and cannot be changed on its own.
+
+If the person who owned an action item (or took a decision) was an outside contact whose record has since been removed from the graph, the item or decision reads **Removed person** instead of looking unassigned.
+
+See [Meetings](/work-graph/meetings) for adding and editing decisions and action items on a meeting's own page.
+
+## Decisions
+
+**Work › Decisions** is the project's **decision register**: decisions of record, newest first, 25 at a time.
+
+Each row shows the statement, when it was decided, who decided it, and where it was said: a link to the meeting, or **Project chat message**. A chip opens the transcript at the moment it was said, or reads **Source no longer retained** if that transcript has gone.
+
+- **Confirmed** decisions are the current ones. A **Replaced** decision stays readable and links to what replaced it, and the replacement links back.
+- **Suggested** decisions are never listed here, so nothing unconfirmed reads as settled. Confirm them from **Review** instead.
+- Filter by **Decided from** and **Decided to** dates, **Decided by**, **Meeting series** and **Status** (**Confirmed and replaced**, **Confirmed**, **Replaced**).
+
+<Steps>
+  <Step title="Open the decision">
+    In **Work › Decisions**, find the confirmed decision that has been overtaken.
+  </Step>
+  <Step title="Select Supersede">
+    Anyone on the project's member list can do this on a project that is not archived.
+  </Step>
+  <Step title="Choose Replaced by">
+    Pick the decision that replaces it from the ones listed, then select **Supersede**. If the new decision is not recorded yet, record it on its meeting's page first.
+  </Step>
+</Steps>
+
+There is no delete button in the register. To flag a decision as wrong, use [disputed flags](#disputed-items).
+
+## Deliverables
+
+**Work › Deliverables** is what the project **promised to hand over**, usually named in its statement of work (SOW): a report, a plan, a workshop. It sits beside **Tasks**, newest first, with a status filter (**All**, then each status).
+
+| Status | Meaning |
+| --- | --- |
+| **Planned** | Not started |
+| **In progress** | Work has begun |
+| **Delivered** | Handed over |
+| **Accepted** | The client accepted it; records who and on what day |
+| **Rejected** | The client rejected it; records who and on what day |
+| **Withdrawn** | A signed change request removed it. It stays visible, and you can restore it by choosing another status |
+
+Each row shows its due date (with **Overdue** once the day has passed and it is not handed over), when it was delivered, who accepted or rejected it, where it came from (a SOW section or a meeting, or **Added in Parlé**), and a **Work done** meter showing how much of the linked work is finished. The meter counts only the tasks **you** can see.
+
+Select a deliverable's name to open its details and its **Linked work**: the tasks, action items and Planner or Jira tasks that make it up, each in its current status.
+
+Anyone on the project's member list, on a project that is not archived, can:
+
+- **Add deliverable**, on a plan that includes the Work Graph. Give it a **Name**, an optional **Description** and an optional **Due date**.
+- **Edit**, **Change status** (**Accepted** and **Rejected** ask **who** decided and **on** which day) or **Delete**. Deleting only unlinks the work; the tasks stay.
+- **Add work** to a deliverable, or select **Deliverable** on a task's row in **Work › Tasks**. Each piece of work belongs to at most one deliverable.
+
+Every change to a deliverable is written to the [contract history](#contract-dates-and-milestones).
+
+## Contract dates and milestones
+
+**Work › Contract** holds the engagement's **Starts** and **Ends** dates and the **milestones** the contract names, such as a kick-off, a phase gate or a steering committee.
+
+- **Set dates** (or **Edit dates**) takes a start and an end. The end cannot be before the start. Leave a date empty to clear it.
+- **Add milestone** takes a **Name** and a **Date**. Milestones list in date order. Mark one **reached** (**Mark reached**, or **Mark planned** to undo), **Edit** it or **Withdraw** it. A withdrawn milestone stays on the list, struck through, with a **Restore** button.
+- A project can have at most 100 live milestones. Withdrawn ones do not count.
+- **History** opens a panel listing every change to the dates, the milestones **and** the deliverables, newest first, one line per changed field with who made it and when. Select **Show earlier changes** for older ones.
+
+Anyone on the project's member list can change these on a project that is not archived. Setting the dates for the first time and adding a milestone need a plan that includes the Work Graph; everything already there stays editable without it.
+
+## Contract documents
+
+**Work › Contract documents** holds the project's **statement of work** and its **signed change requests**.
+
+<Tabs>
+  <Tab title="Statement of work">
+    Select **Add statement of work** and either **Upload a file** (PDF or Word, up to 25 MB) or, on a SharePoint or Google Drive project, pick a file from the project's linked library. **Replace statement of work** swaps it after a confirmation; the old one stays listed under **Earlier versions**.
+
+    <Warning>
+      Picking from the linked library reads it with the **project's own connection**, so anyone who can add to the project can browse that whole library or folder. The dialog says so.
+    </Warning>
+  </Tab>
+  <Tab title="Change requests">
+    Select **Add change request** to add a signed one. It asks for **Signed on**, an optional **Reference** (such as CR-03), and a tick confirming it is signed by everyone who needs to sign it. Parlé does not check for a signature itself. Change requests list in the order they were signed, and their changes apply in that order. Prices and other commercial terms are not read.
+  </Tab>
+  <Tab title="Download and remove">
+    Every document has **Download** and **Remove**. Removing asks for confirmation: Parlé deletes its copy, anything already confirmed from it stays (its source reads **no longer retained**), and suggestions from it that nobody confirmed are withdrawn from **Review**.
+  </Tab>
+</Tabs>
+
+Each document shows its size, who added it and when, and where Parlé's reading of it stands:
+
+| Status | What it means and what to do |
+| --- | --- |
+| **Waiting to be read**, **Being read** | Parlé will read it shortly. Any suggestions appear in **Review** |
+| **Read in part** | The document was long and Parlé read the first part |
+| **Nothing found** | Parlé found nothing to propose. Add items by hand under **Work** |
+| **Suggestions off** | Your organization has switched document suggestions off. An Org Admin can switch them on in **Organization settings › Work graph**, then you upload the document again |
+| **Work graph off** | The plan does not include the Work Graph, so Parlé stored the file and did not read it |
+| **Refused by budget** | A spending limit was reached. An admin can raise it; Parlé tries again later |
+| **No model can read it** | None of the models this project may use can read a document this size. A Project Admin can allow a larger model in **Project Setup** |
+| **Couldn't be read** | The file may be damaged, password-protected, or a scan with no text. Upload a version with text; if it keeps failing, contact support with the code shown |
+
+Adding, replacing, downloading and removing documents never needs the Work Graph plan; only the **reading** does. On an archived project you can still list, download and remove documents but not add new ones.
+
+<Info>
+  You can also add a statement of work when you create a project: the **New project** dialog has three steps (**Details**, **Files**, **Statement of work**). Only the first is required, and the project exists from **Create project** onward. Skipping the others never undoes it.
+</Info>
+
+## Suggestions from your documents
+
+Parlé reads a statement of work once, in the background, billed to the project, and proposes what it states. **Nothing changes until a person confirms it.** Suggestions wait in **Review** under **Suggested from the statement of work**:
+
+- **Deliverables**, each with a name, a description, a due date if the document gives one, and a confidence word.
+- **Contract dates**, the start and end dates, shown as a change from the date the project has now.
+- **Milestones**, named and dated.
+
+A date the SOW states only relatively ("six weeks after kick-off") is proposed with no day. The row asks you to **choose the date**, and **Confirm** stays off until you do.
+
+Signed change requests propose **amendments** under **Changes from signed change requests**, grouped by change request in signed-date order. An amendment can **Add**, **Change** or **Withdraw** a deliverable or milestone, or move the start or end date. Each shows before and after, and where in the change request it is stated.
+
+- Confirm one at a time, or select **Confirm all from this change request**. **Reject all** rejects the group.
+- A confirmed change is applied in place and written to the contract history, naming the change request. Deliverables and milestones then show **Amended by CR-03**.
+- An amendment can be blocked, and can then only be rejected or made by hand: **This was changed after the change request was read**, or **A change request signed later already changed this**.
+- **Confirm all** leaves out blocked amendments and ones that need a day.
+
+## The timeline
+
+**Work › Timeline** is how you catch up on a project you are joining or returning to. It lists, grouped by week with the newest first:
+
+- **Meetings**, each with how many decisions were recorded.
+- **Decisions** that were confirmed.
+- **Tasks done**, including a task finished in Planner or Jira.
+- **Documents** shared with the project.
+- **People** joining or leaving the project.
+- **Contract** events: the start, each milestone, the end, and a row each time one of them moved, with the old and new day.
+
+Choose a type with the filter (**Everything**, **Meetings**, **Decisions**, **Tasks done**, **Documents**, **People**, **Contract**) and select **Show earlier weeks** to go further back. Each event opens its source: the meeting, the decision in the register, the task row, the project's files, the **Members** view, or **Work › Contract**.
+
+<Note>
+  **"Since you were last here."** When you return to a project's timeline, a line marks where events you have not yet seen begin. A first visit has no line. The marker is **your own** setting, kept in your preferences for the 15 projects whose timelines you opened most recently. You do not manage it, and nobody else sees it.
+</Note>
+
+Things to know:
+
+- The timeline shows only what **you** can see. A decision or task whose source you cannot open is absent.
+- It never shows budget alerts.
+- Someone who joined and later left appears only as having left. An external Planner or Jira task is dated by when its state last changed, or when it was linked if Parlé has no change recorded.
+- An archived project still shows its history, with a read-only note.
+- The same answer comes from agents: asking "what has happened since I left?" in a conversation reads the same data. See [Agents and the Work Graph](/work-graph/agents).
+
+## Review
+
+The **Review** tab collects what Parlé **inferred** and needs a person to confirm. It is shown to everyone on the project's member list, with a count of what is waiting. Nothing in it counts as fact until someone confirms it.
+
+<Steps>
+  <Step title="Choose what to look at">
+    Use **Show** to pick **All**, **Decisions**, **Actions**, **From the SOW** or **From change requests**. Project Admins also see **People links**. Use **State** to switch between **Waiting** and **Rejected**.
+  </Step>
+  <Step title="Check the source">
+    Each suggestion shows a confidence word (**High**, **Medium** or **Low confidence**), the meeting, **Suggested by Parlé from the transcript**, and a chip that opens the transcript at the exact passage.
+  </Step>
+  <Step title="Confirm, edit or reject">
+    Select **Confirm**, **Edit then confirm** (change the wording first), or **Reject**. A rejected suggestion is remembered, so Parlé does not suggest it again when the meeting is reprocessed. In the **Rejected** list, select **Restore** to bring a decision or action back.
+  </Step>
+</Steps>
+
+You can select several and **Reject selected** or confirm them together, up to 50 at a time. A project's Project Admins can also confirm or reject **people links**, where Parlé thinks two entries are the same person.
+
+If your plan lapses, you can still read, reject and restore suggestions, and confirm or edit decisions and actions. Confirming new deliverables or milestones, and sharing a meeting, are switched off.
+
+### Disputed items
+
+Anyone who can see a meeting, document, decision or action item can **flag it as disputed**, choosing a reason: **It's wrong**, **It isn't mine**, **It's sensitive** or **Something else**. Use **Flag as disputed…** on the item.
+
+What disputed means:
+
+- While an item is flagged, **no agent sees it**. No Work Graph tool, brief, content search or Research Task returns or counts it, for anyone, including the person who flagged it. Parlé does not summarize or suggest from it.
+- People who could already see the item **still can**, marked **Disputed**, and a **Disputed** filter appears on the explorer pages.
+- You can **Withdraw my flag** on one you raised.
+
+At the bottom of **Review**, the **Disputed** list shows flagged items from this project for whoever may forget them (on a project's items, its Project Admin). For each, a reviewer chooses:
+
+- **Clear**, which puts the item back in front of agents at once.
+- **Forget…**, which removes Parlé's record of the item, after a preview and a typed confirmation.
+
+Reviewers and the person who flagged it are notified in the app. You can have at most 20 open flags at a time.
+
+## The Work Graph explorer
+
+**Project Setup › Work graph** is the project's **data-holdings** view. It answers "what does Parlé hold about this project?", and is where a Project Admin forgets what they are allowed to. The team's day-to-day view of the work remains the **Work** tab.
+
+It has three sections, with **Everything** and **Disputed** filters:
+
+- **Shared in**: the meetings and documents shared into the project, from which source, who shared them, whether the share is **Live** or **Dormant** (the person who shared it left or lost access, so nothing from it is shown until another member takes it over), and what Parlé also holds from each, as counts.
+- **Bindings**: the shared sources and the file store the project reads from.
+- **Members over time**: names, roles and the days people joined or left.
+
+Select **Forget this** on a row to remove Parlé's record of it. The button appears only where you have the authority; otherwise a note says whom to ask. Confirmed decisions and action items are the project's records, so they are not removed here.
+
+The view is for the project's **real Project Admin**. An Org Admin or Business Admin who is not a Project Admin sees an explanation and the audited **Add yourself as Project Admin** action. For the permission model, see [Work Graph permissions](/security/work-graph-permissions); for forgetting and retention across the organization, see [Work Graph data controls](/admin/work-graph-data-controls).
+
+## When the Work Graph is off
+
+The **plan** and the **organization switch** are separate. A plan that does not include the Work Graph, or an Org Admin switching it off, changes what you can do. **It never deletes data.**
+
+| View | Plan lacks the Work Graph | Org Admin switched it off |
+| --- | --- | --- |
+| **Overview** | Not offered; project opens on **Conversations** | Not offered |
+| **Timeline** | Explains that the work graph is not in the plan, with an upgrade prompt | Explains it is switched off |
+| **Tasks**, **Decisions**, **Deliverables**, **Contract**, **Meetings** | Everything already there stays readable and editable; **Add task**, **Add deliverable**, adding a first date or milestone, and adding meetings are hidden | Records stay readable |
+| **Contract documents** | Files are stored, listed, downloadable and removable, but not read | Same, with **Suggestions off** or **Work graph off** shown |
+| **Review** | Read, reject, restore, and confirm or edit decisions and actions still work | Same |
+| **Work graph** explorer | Still works, including forgetting | Says the graph is off; bindings and members still list |
+
+An **archived** project shows its views read-only: you can read and download, but not add or change.
+
+## Troubleshooting
+
+| Symptom | Likely cause | Fix |
+| --- | --- | --- |
+| No **Overview** tab | The plan does not include the Work Graph, or an Org Admin switched it off | Ask an Org Admin; see [Work Graph data controls](/admin/work-graph-data-controls) |
+| No **Review** tab | You are not on the project's member list | Ask a Project Admin to add you |
+| No **Add task** or **Add deliverable** button | You are not on the project's member list, the project is archived, the plan lacks the Work Graph, or (tasks only) the project keeps its tasks in Planner or Jira | Check each in turn |
+| A document says **Suggestions off** | Document suggestions are switched off for your organization | An Org Admin switches them on in **Organization settings › Work graph**, then upload the document again |
+| A task says **Gone from Jira** or **Gone from Planner** | Parlé read the plan or project and the task was not there | Check it in the tool; relink it if it was moved |
+| A task says **Couldn't check …** | Parlé could not reach the tool | It keeps the last known state and checks again later |
+| An amendment cannot be confirmed | It is blocked: edited after the change request was read, or already changed by a later change request | Reject it, or make the change by hand |
+| A statement of work produced no suggestions | See the status on its row in **Contract documents** | Follow that status's fix, above |
+| An item is missing from the Overview, Timeline or lists | You cannot open its source, or it is flagged as disputed for agents | Ask a Project Admin to check the source's access or the **Disputed** list |
+
+## Related
+
+<CardGroup cols={2}>
+  <Card title="Work Graph overview" icon="network" href="/work-graph/overview">
+    What the Work Graph is and how it fits together.
+  </Card>
+
+<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
+	Bring meetings, documents and channels into a project.
+</Card>
+
+<Card title="Meetings" icon="calendar" href="/work-graph/meetings">
+	Transcripts, decisions and action items on a meeting's own page.
+</Card>
+
+<Card title="Agents and the Work Graph" icon="bot" href="/work-graph/agents">
+	How agents read the graph, and what they never see.
+</Card>
+
+<Card title="Work Graph permissions" icon="shield" href="/security/work-graph-permissions">
+	Who can see and change what.
+</Card>
+
+<Card title="Work Graph data controls" icon="sliders" href="/admin/work-graph-data-controls">
+	Switching it off, retention and forgetting, for Org Admins.
+</Card>
+
+  <Card title="Your data in the Work Graph" icon="user" href="/work-graph/my-data">
+    What the graph holds about you, and how to forget it.
+  </Card>
+
+  <Card title="Projects overview" icon="folder-open" href="/projects/overview">
+    Creating and running a project.
+  </Card>
+</CardGroup>
