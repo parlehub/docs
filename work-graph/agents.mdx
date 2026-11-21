@@ -1,0 +1,185 @@
+---
+title: "How Agents Use the Work Graph"
+sidebarTitle: "Agents and the Work Graph"
+description: "What Parlé's agents can read from the Work Graph, how the Work graph skill is switched on, what unattended runs can and cannot see, and who pays for the background AI work."
+---
+
+Parlé's agents can answer questions from your project's meetings, decisions, action items and shared files, not only from what people typed into a conversation. They do it through the **Work graph** skill: a fixed set of read-only tools that look things up in the [Work Graph](/work-graph/overview) and cite what they found.
+
+<Info>
+	**Plan requirement.** The Work Graph is included on Business Elite and
+	Enterprise by default, and appears on the plans table as **Meetings**. On
+	other plans, Parlé can enable it for your organization by agreement. If your
+	plan loses it, agents stop using the Work graph tools, and nothing is deleted.
+	See [Plans & Billing](/plans-and-billing).
+</Info>
+
+## What an agent can do with it
+
+Ask in plain language. The agent chooses the tool.
+
+| You ask | The agent reads |
+| --- | --- |
+| "Who was on this project in March?" | People, projects and the dates they joined |
+| "Which meetings were about the Acme rollout?" | The project's meetings |
+| "What happened on this project last week?" | A project timeline |
+| "What did we decide about pricing?" and "What is still to do?" | The project's decisions and action items |
+| "Where did we talk about the migration cutover?" | Passages of meeting transcripts, meeting notes and shared documents |
+| "Quote exactly what was said about the deadline." | The exact passage of a transcript, notes or Microsoft 365 document |
+| "Prep me for my 2pm with Acme." | One meeting brief |
+| "What changed on this project since Monday?" | One project status |
+
+The tools behind this, for anyone reading a tool-call record:
+
+- **`graph_find_entity`, `graph_neighbors`, `graph_timeline`, `graph_meetings_about` and `graph_people_on`** find people, projects and meetings and how they connect.
+- **`graph_decisions`** returns the project's decision records and action items.
+- **`search_content`** finds passages by meaning and by exact wording.
+- **`graph_read_item`** reads a passage of a transcript, meeting notes or document so the agent can quote it.
+- **`graph_meeting_brief`, `graph_project_status` and `graph_person_evidence`** are the brief tools, described below.
+
+Every answer is capped (an answer lists at most 25 rows, and a content search at most 10 sources) and cites where each row came from. The tools show no scores or rankings, and nothing about how much any person did.
+
+### Decisions and action items
+
+`graph_decisions` answers "what did we decide?" and "what is still to do?" from the recorded decisions rather than a guess.
+
+- Each row shows its status, the date it was decided or is due, the people involved by name, and where it came from.
+- A decision that has been replaced is hidden unless the agent asks for it, and is then marked with the decision that replaced it, so a reversed decision is not quoted as current.
+- An action item shows where its task stands now. If the task is done in Parlé, Planner or Jira, the item is shown as done. If Parlé cannot reach the task tool, it shows **Unknown**.
+- If the source behind a record was deleted, the record still shows, marked "source no longer retained".
+
+### Searching and quoting meetings and documents
+
+`search_content` finds passages in meeting transcripts, meeting notes and shared documents for the project. It finds a paraphrase and an exact name or number. The agent then reads the whole passage with `graph_read_item`.
+
+- A document is read live from Microsoft 365, using the account of the person asking when that person has access, and otherwise through the share that brought the document into the project.
+- Search snippets and quoted passages are other people's words. They go to the model for that turn and are not written into the audit log or the tool-call record, which hold only identifiers.
+- When the Transcripts switch is off, agents do not read transcripts. See [Work Graph data controls](/admin/work-graph-data-controls).
+
+## Tools default to this project
+
+In a project conversation, you do not need to name the project. When you ask about "this project", the agent reads the project the conversation belongs to. Parlé takes that from its own record of the conversation, not from anything the model says.
+
+An agent can still look at another project if you name it, but only a project you can see. In a personal conversation there is no project, so the agent needs you to name one.
+
+## What the agent is allowed to see
+
+An agent answers only with what **everyone who can read the conversation** may see.
+
+- In a personal conversation, that is you.
+- In a project conversation, that is the whole project audience. If one member could not open a meeting at its source, the agent does not use it in the project's conversation.
+- A project the audience cannot read gets the same "not visible" answer as a project that does not exist.
+- Items someone flagged as disputed are hidden from every agent until a reviewer clears or forgets them. See [What Parlé knows about me](/work-graph/my-data).
+- Items you excluded or forgot are never returned. See [Work Graph data controls](/admin/work-graph-data-controls).
+- A conversation posted to a Teams channel gets no items from connected sources at all.
+
+## Brief tools
+
+Three tools build a ready-made pack in one call instead of a dozen lookups:
+
+- **`graph_meeting_brief`** gives a meeting's attendees (name, role and client only), the last few related meetings with their summaries, the confirmed decisions and where their action items stand, the open actions the attendees own, and up to five documents changed since the last related meeting.
+- **`graph_project_status`** gives what changed in a project since a date, plus its open actions.
+- **`graph_person_evidence`** lists one person's projects, documents they wrote or edited, and meetings they attended. It has lists only, with no numbers and no ordering of people.
+
+Each pack is built fresh for that conversation from what everyone in it can see, then cut to a fixed size. Each list says how many items it left out. Nothing is stored, so one person's brief never carries into another's.
+
+`graph_person_evidence` answers only when the person asks about themselves, or an Org Admin asks about someone. A Business Admin cannot. Every request about someone else is written to the [audit log](/security/audit-log).
+
+## Switch it on
+
+<Steps>
+	<Step title="Switch the skill on for your organization">
+		An Org Admin or Business Admin goes to **Org settings → Knowledge & skills**
+		and switches on the **Work graph** skill. It is off until you do.
+	</Step>
+	<Step title="Switch on data collection">
+		An Org Admin goes to **Org settings → Work graph** and switches on **Work
+		graph data collection**. See [Work Graph data
+		controls](/admin/work-graph-data-controls).
+	</Step>
+	<Step title="Grant the skill to an agent">
+		An agent author opens an agent in the agent editor and adds the **Work
+		graph** skill to it. Parlé's Project Assistant includes the skill, and uses
+		it when it is switched on for your organization and your plan includes it.
+	</Step>
+</Steps>
+
+An agent can use the skill only when all of these are true: the agent holds it, an admin switched it on, your plan includes it, and the work graph is switched on.
+
+### When a grant cannot be used
+
+If an agent holds the skill but cannot use it, the agent editor says why next to the skill. The grant is kept, and works again when the reason clears.
+
+- **Switched off for your organization.** An Org Admin or Business Admin switches it on under **Knowledge & skills**.
+- **Not in your plan.** The skill needs the Work Graph on your plan.
+- **Work graph switched off.** The editor says "Your organization has switched the work graph off, so the agent cannot use it. An Org Admin can switch it on in Organization settings → Work graph." Only the master switch counts here, not a single source switch.
+- **No longer offered by Parlé.** The skill was retired.
+
+### Brief tools setting
+
+An Org Admin or Business Admin can turn **Brief tools** off. It is on by default, in the **Work graph** card under **Org settings → Knowledge & skills**, beside **Suggest decisions and actions from meetings**.
+
+With Brief tools off, agents are not offered the three brief tools and answer from the other graph tools. It narrows what agents are offered. It never changes who can see what.
+
+## Agents running unattended
+
+An automation runs an agent with nobody watching each tool call. Whether an agent may do that is the **Allow unattended** switch under **Running in automations** in the agent editor.
+
+- It is on for existing and new agents. Turning it off stops that agent's automations at their next run, before any model is called, so nothing is spent.
+- An agent built on another follows it unless you choose **Set for this agent**. The editor warns you when an agent is on while the agent it is based on is off.
+- The switch is not the safety boundary. An unattended agent still reads only from approved integrations and never writes on its own.
+
+What unattended callers can and cannot see in the Work Graph:
+
+- **They use only what has been shared with the project.** An unattended agent reads items delegated to the project, such as a meeting an organizer shared or a shared channel or folder. It never reads through a person's own Microsoft 365 account, so it does not see a calendar event only some people can see.
+- **The Work graph tools are not available in automations today.** An agent in an automation does not get them.
+- **Live artifacts get no items from the Work Graph yet.**
+
+### Research tasks
+
+A Research Task in a project can collect the project's **meetings** and **conversations** as the items it works through, so a decision that was only ever said in a meeting or a chat reaches the deliverable.
+
+- Meetings are matched against titles and stored summaries by keyword, up to ten per question. Parlé reads a meeting's summary, or its transcript or notes when a closer look is needed.
+- Conversations are the project's own chats. They never include Research Task transcripts, automation runs, an artifact's authoring chat, archived conversations or Teams threads.
+- A Research Task reads only meetings an unattended caller may see: the project's own meetings and shared Teams transcripts. A meeting that was deleted, forgotten, expired, cancelled or hidden after it was collected is left out and is not read.
+- The deliverable cites each meeting or conversation by title and date, with a link that opens only for people who can see it.
+- A personal Research Task cannot collect meetings or conversations.
+- If your plan does not include the Work Graph, the meetings step is refused with a notice and the rest of the task runs.
+
+## Item summaries and who pays for them
+
+Parlé summarizes each meeting's stored transcript or notes, and each shared document, once, in the background. The summary is what agents read first, and what Research Tasks read before opening a whole transcript. It is deleted with its item.
+
+No person is waiting on this work, so it is billed differently from a message.
+
+- **Billed to the project.** The cost counts toward the project's monthly and lifetime budget, and its department and organization caps, like any other spend. Before each run Parlé checks those caps and your credit wallet. A summary that would exceed a cap is skipped and tried again later, and is never an error for anyone.
+- **Attributed to who brought it in.** The cost is attributed to whoever shared the document or attached the content, never to someone else. If that person has left the organization, the summary waits until a current member attaches the content again.
+- **Never on a personal budget.** Background work never counts toward a member's personal budget.
+- **You can see it.** The project's budget panel shows it as its own **Background: work graph** line, separate from conversations, and spend by kind of work shows it as its own entry.
+- **Model.** Parlé uses the summarizing model your project's model policy allows.
+- **Limits.** An item is summarized once. Content over about 24,000 tokens is not summarized, and agents read it directly instead. Slack, Google, and files reached only through a project's own storage binding are not summarized.
+
+See [Usage Analytics](/cost/usage-analytics) for the organization-wide view of spend.
+
+## Related
+
+<CardGroup cols={2}>
+	<Card title="Work Graph overview" icon="diagram-project" href="/work-graph/overview">
+		What the Work Graph is and who can see what.
+	</Card>
+	<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
+		Bring Microsoft 365 meetings and files into a project.
+	</Card>
+	<Card title="Meetings" icon="calendar" href="/work-graph/meetings">
+		Transcripts, notes, decisions and action items.
+	</Card>
+	<Card title="Project views" icon="table-columns" href="/work-graph/project-views">
+		The timeline, the briefs and the decision register.
+	</Card>
+	<Card title="Work Graph permissions" icon="shield" href="/security/work-graph-permissions">
+		Exactly what each person and agent can see.
+	</Card>
+	<Card title="Work Graph data controls" icon="sliders" href="/admin/work-graph-data-controls">
+		Switches, exclusions, retention and forgetting.
+	</Card>
+</CardGroup>

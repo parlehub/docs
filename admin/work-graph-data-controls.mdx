@@ -1,0 +1,249 @@
+---
+title: "Work Graph Data Controls"
+sidebarTitle: "Work Graph Data Controls"
+description: "Decide what Parlé's Work Graph collects from connected sources, how long it keeps it, what it must never hold, and how to delete or forget it, from Org settings → Work graph."
+---
+
+The Work Graph brings meetings, transcripts, decisions, action items and files from your connected sources into your projects. As an Org Admin you decide what it may collect, how long it keeps it, what it must never hold, and what is removed.
+
+<Info>
+	**Org Admin only.** Everything on **Org settings → Work graph** is managed by
+	Org Admins. A Business Admin cannot open it. Other roles that can forget or
+	review items are listed under [Who can do what](#who-can-do-what).
+</Info>
+
+<Note>
+	**Plan requirement.** The Work Graph is included on Business Elite and
+	Enterprise by default, and appears on the plans table as **Meetings**. On a
+	plan without it, you can still switch things off, change retention, add
+	exclusions, delete data and forget items. You cannot switch collection on.
+	Nothing is removed because of the plan.
+</Note>
+
+Everything starts **off**. A new organization collects nothing from any source until an Org Admin switches it on.
+
+## Switch collection on or off
+
+Go to **Org settings → Work graph**. The **Work graph data collection** card has a master switch, then the sources below it.
+
+| Switch | What it controls |
+| --- | --- |
+| **Work graph data collection** | The master switch. Off hides everything the Work Graph holds and stops every source syncing. |
+| **Microsoft 365** | Everything Parlé collects from your Microsoft 365 account. |
+| **Calendar and meetings** | Meetings and who is in them. |
+| **Transcripts** | What was said in meetings. Off by default. |
+| **Shared files** | Files people share with each other. |
+| **Channels** | Teams channels people can see. |
+
+A source or group works only while the switches above it are on. For example, transcripts are fetched only while the master switch, Microsoft 365 and Transcripts are all on.
+
+**Slack and Google are not available.** The card lists them as "Not available". Slack shows "Not available: Slack's terms don't allow it." Google shows "Not available yet." They cannot be switched on.
+
+### Every change shows its effect first
+
+When you change a switch, Parlé tells you what it will do before you confirm. For the master switch, the dialog reads, for example:
+
+> Turning work graph data collection off hides about 120 items and stops syncing. It also stops suggestions, the brief, the timeline and the assistant's work graph tools, and hides items imported from your connected sources, including meetings imported from them and their transcripts and notes, on the Meetings pages too. Meetings people added themselves, and the transcripts and notes they uploaded, stay available to the project. Nothing is deleted, and turning it back on shows what it hid again, including the imported meetings.
+
+- **Switching off hides and stops. It never deletes.** Syncing, summaries, search indexing, meeting suggestions and transcript fetches stop. Queued work waits instead of failing. Switching back on shows what was hidden, and nothing is lost.
+- **Meetings people added themselves stay.** A meeting someone created in Parlé, and the transcripts and notes they uploaded to it, are the project's own records, so the master switch does not hide them. Meetings imported from Microsoft 365 are hidden, with their transcripts and notes.
+- **Transcripts off** hides transcripts Parlé already holds from agents, hides summaries and unconfirmed suggestions made from them, and stops fetching new ones. Meetings and their transcripts, fetched or uploaded, stay on the Meetings pages. Decisions and action items a person confirmed are never hidden.
+- **Switching on needs the plan.** Switching off, retention, exclusions, deleting and forgetting never do.
+
+Changes are recorded in the [audit log](/security/audit-log).
+
+## Delete everything from a source
+
+Switching a source off only hides. To remove what the Work Graph holds from a source, use **Delete everything from a source** on the same page.
+
+<Steps>
+	<Step title="Choose the source">
+		Select **Delete everything from Microsoft 365…**. Parlé shows what would be
+		removed, by type: people, meetings, files and pages, channels, decisions and
+		action items, and more. The preview counts the imported meetings and the
+		items together, so it never says "nothing" while meetings are still going
+		to be deleted.
+	</Step>
+	<Step title="Type the source's name">
+		Type the name shown to confirm. This cannot be undone.
+	</Step>
+	<Step title="Delete">
+		Select **Delete everything from Microsoft 365**. Large deletions run in
+		batches. If some items remain, the dialog says how many and offers
+		**Continue**.
+	</Step>
+</Steps>
+
+What this removes and what it keeps:
+
+- It removes the items from that source, their links and their summaries, and the meetings imported from it with their copied transcripts and notes.
+- It leaves a record that the items were deleted, so the next sync does not bring them back. See [Forgotten items are not re-imported](#forgotten-items-are-not-re-imported).
+- It keeps **decisions and action items a person confirmed**. They stay on the project with their source link cut, marked "source no longer retained". Suggestions nobody confirmed are removed with the source.
+- It never touches your files in the place they came from.
+
+If the counts change between the preview and your confirmation, Parlé shows the new counts and asks you to confirm again.
+
+## Retention
+
+Retention expires old items automatically. Choose **Off**, **12 months**, **24 months**, **36 months** or **60 months** under **Retention**. It counts from each item's own date at its source.
+
+<Steps>
+	<Step title="Pick a period">
+		Choose a period, then select **Review the effect**. Parlé shows how many
+		items older than that would expire now, by type.
+	</Step>
+	<Step title="Confirm">
+		Type the phrase shown, then select **Set retention**.
+	</Step>
+	<Step title="Wait out the grace period">
+		Nothing is deleted for 24 hours. Until the first clean-up you can select
+		**Cancel retention**, and nothing is deleted.
+	</Step>
+</Steps>
+
+After that, a daily clean-up expires items org by org.
+
+- An expired item stays gone. If the item is later changed at its source, it comes back, on a fresh clock.
+- Hidden items still expire.
+- Imported meetings expire whole, by the meeting's end: the meeting, its attendees and its copied transcripts and notes.
+- Retention never touches a project's own file storage.
+
+Retention is off until you set it. While it is off, Parlé keeps Work Graph data until you delete it.
+
+## Exclusions
+
+Exclusions name what the Work Graph must never hold. Go to **Org settings → Work graph → Exclusions** and select **Add exclusion**.
+
+| Kind | What it excludes |
+| --- | --- |
+| **Teams channel** | A channel you choose from your own Microsoft 365. Everything in it is removed and kept out. |
+| **SharePoint library** | A whole library you choose. Every file in any folder of it is removed and kept out. A single folder cannot be excluded on its own. |
+| **Mail domain** | Everyone with an address at a domain, such as `example.com`. |
+| **Email address** | One person, such as `name@example.com`. |
+
+<Steps>
+	<Step title="Choose what to exclude">
+		Pick the kind. For a channel or library, select **Choose a channel…** or
+		**Choose a library…**, then browse. Parlé shows only what your work account
+		can open. For a domain or address, type it. Select **Review**.
+	</Step>
+	<Step title="Review what it removes">
+		Parlé shows the counts by kind: meetings, files and pages, channels,
+		outside people, and attendees who would be shown as excluded in other
+		meetings. If the rule matches your own members, a warning says so, and their
+		own Work Graph data it covers is removed too.
+	</Step>
+	<Step title="Exclude">
+		Select **Exclude and remove**. Parlé removes what already matches in the
+		background and keeps anything new out. The row shows its progress, with the
+		counts removed so far.
+	</Step>
+</Steps>
+
+- **What a rule does.** Removal is permanent. It also stops anything that matches from being brought in again, by a sync, an upload or a transcript fetch.
+- **Person rules match on fingerprints.** For a mail domain or email address, Parlé matches on a one-way fingerprint of it rather than the address itself.
+- **Excluded people in meetings.** In a meeting someone else organized, an excluded attendee shows as "An excluded attendee".
+- **Confirmed records stay.** Decisions and action items a person confirmed are kept, with their source link cut.
+- **Words are not rewritten.** Transcripts and notes that merely mention an excluded person are not edited.
+- **If removal stops.** A row can say it stopped before it finished. Parlé tries again by itself, and you can select **Retry** at any time.
+- **Taking a rule away.** Select the remove icon, then **Stop excluding**. The Work Graph may hold what the rule covered again from then on. Nothing already removed comes back by itself.
+- There is a limit on how many exclusions an organization can hold. At the limit, the page says so and you remove one before adding another.
+
+Exclusions are not limited by plan, because they only ever remove.
+
+## Forgetting, and what "forgotten" means
+
+To forget something is to remove Parlé's record of it from the Work Graph. It never touches the email, file or meeting at its source.
+
+You can forget:
+
+- **An item**: a meeting, document or channel, with its links, its search entries, its summary, and the suggestions made from it.
+- **Just a summary**, leaving the item.
+- **A decision or action item.**
+- **A person**: their entries, links, names and addresses held in the Work Graph.
+
+Every forget starts with a preview that shows counts only, then a typed confirmation. What is deleted is what the preview showed. Progress shows while it runs, and it resumes by itself if interrupted.
+
+### Where to forget
+
+- **A project's Work graph tab.** In the project's setup area, the **Work graph** tab lists what the Work Graph holds for the project, with **Forget this** on each row you may forget. An Org Admin or Business Admin who is not a Project Admin sees an explanation and **Add yourself as Project Admin**, which is recorded in the audit log and tells the project's admins.
+- **Clients and departments.** A Business Admin or Org Admin sees a **Work graph** tab on a client or department page.
+- **The Disputed list.** Reviewers clear a flag or forget the item from **Disputed**.
+- **What Parlé knows about me.** Each person can forget their own items. See [What Parlé knows about me](/work-graph/my-data).
+
+### Forgotten items are not re-imported
+
+Parlé records that an item was forgotten, deleted, excluded or expired **before** it removes anything. After that:
+
+- A sync, upload, re-index, summary or suggestion that matches the record is dropped.
+- The record holds only a fingerprint. It cannot be read back into the thing it blocks.
+- A decision or action item that was forgotten is not suggested again.
+- A person's forget also blocks their identifiers, so they cannot be attached to another person later.
+
+Lifting a block restores nothing. It only allows the item to be brought in again. **Lifting a block is not available in the Parlé app yet.**
+
+### Erasing a person
+
+A person can forget everything about themselves from **What Parlé knows about me**. Erasing a person who is not a member, such as a client contact, is an Org Admin action. It removes their entries and links, shows them as "Removed person" on decisions and action items, and rewrites their name and address in meeting attendee lists to "Removed person", keeping the row and the attendee count.
+
+An erasure does not reach:
+
+- Meeting transcripts and notes that mention the person.
+- Replies an agent already wrote.
+- An attendee row whose address was never held for that person as an email.
+
+<Note>
+	The Parlé app does not have a screen for an Org Admin to erase someone
+	else's Work Graph data yet.
+</Note>
+
+Forgetting or erasing a member does not delete their account or the records they own in projects.
+
+## Who can do what
+
+| Action | Who |
+| --- | --- |
+| Switch collection on or off, delete from a source, set retention, manage exclusions | Org Admin |
+| Run a subject access export | Org Admin |
+| Switch the **Work graph** skill on, and the **Brief tools** and **Suggest decisions and actions from meetings** settings | Org Admin or Business Admin |
+| Forget an item in a project | A Project Admin of that project |
+| Forget client- or department-level items | Business Admin or Org Admin |
+| Forget anything org-wide | Org Admin |
+| Forget their own items and everything about themselves | The person |
+| Review the **Disputed** list for the whole organization | Business Admin or Org Admin |
+| Ask an agent for another person's evidence | Org Admin only |
+
+A Business Admin or Org Admin acts inside a project only through a real project role. They are not Project Admins of every project.
+
+Each of these is audited, with identifiers and counts, never the content.
+
+## Export what the Work Graph holds
+
+Your organization's [data export](/admin/data-export) includes the decisions, action items, tasks, deliverables, summaries and settings the Work Graph produced. For one person's request to see their data, use **Subject access export** on the same Work graph page. It appears only once Parlé has enabled it for your organization.
+
+## What Parlé monitors for you
+
+Parlé watches the Work Graph's health. It is alerted when a Microsoft 365 sync falls behind, when removing material for an exclusion stalls for over an hour, and when an unusual number of items are flagged as disputed across the platform. These alerts go to Parlé, not to your admins. What you see in the app is an exclusion row that says removal stopped and offers **Retry**.
+
+## Related
+
+<CardGroup cols={2}>
+	<Card title="Work Graph overview" icon="diagram-project" href="/work-graph/overview">
+		What the Work Graph is and holds.
+	</Card>
+	<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
+		Connect Microsoft 365 for a project.
+	</Card>
+	<Card title="Work Graph permissions" icon="shield" href="/security/work-graph-permissions">
+		Who can see what.
+	</Card>
+	<Card title="What Parlé knows about me" icon="user" href="/work-graph/my-data">
+		The member's view of their own data.
+	</Card>
+	<Card title="Data export" icon="download" href="/admin/data-export">
+		Export your organization's data.
+	</Card>
+	<Card title="Audit log" icon="clipboard-list" href="/security/audit-log">
+		How changes are recorded.
+	</Card>
+</CardGroup>

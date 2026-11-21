@@ -24,6 +24,34 @@ Parlé uses role-based access at two distinct levels: the organization level and
 	project is confidential.
 </Note>
 
+## Work Graph Capabilities
+
+The [Work Graph](/security/work-graph-permissions) uses the same roles, with one rule that matters for each: **no role widens what a person can see of someone else's items from a connected source.** An Org Admin sees no one else's mirrored items, and neither org-level role is automatically a Project Admin.
+
+| Capability | Project Member | Project Admin | Business Admin | Org Admin |
+| --- | --- | --- | --- | --- |
+| Read a project's meetings, transcripts and shared items | Yes, in projects they can open | Yes, in projects they can open | Only as a member of the project (or a Public project) | Only as a member of the project (or a Public project) |
+| Add a meeting or attach a transcript (needs the Work Graph plan) | Yes | Yes | Only as a project member | Only as a project member |
+| Share a container (meeting, channel, folder) with a project, using their own Microsoft 365 account | Yes | Yes | Only as a project member | Only as a project member |
+| Take over a dormant share, or reactivate their own | Yes, if they pass the same checks as a new share | Yes, same checks | Only as a project member | Only as a project member |
+| See every share in the project, including removed ones, and remove any share | No (they see live and dormant shares) | Yes | Only as the project's Project Admin | Only as the project's Project Admin |
+| Be told when a share is created, paused, taken over or removed | No | Yes | Only as the project's Project Admin | Only as the project's Project Admin |
+| Forget items | Their own items | Items shared into their project | Client- and department-level items; inside a project only as its Project Admin | Anywhere in the organization, and the only role that can erase a person |
+| Review guessed same-person links | No | Links between two people who both appear on their project | Organization-wide | Organization-wide |
+| Switch the Work Graph agent skill on for the organization | No | No | Yes | Yes |
+| Switch the Work Graph, sources and resource groups on or off; delete from a source; set retention; add exclusions | No | No | No | Yes |
+| Ask the agent for another person's work evidence | No (anyone may ask about themselves) | No | No | Yes, audited by id |
+
+<Note>
+	**Inside a project, both admin roles act only through a real project role.**
+	They read a Public project like any organization member, and they do not see
+	Restricted projects they are not in, except through the audited outside path
+	that gives project metadata, the budget and the ability to add themselves as
+	Project Admin. Each of those actions is audited, and the self-add is also
+	reported to the project's admins. No Work Graph capability reaches into a
+	project's content on an admin's behalf.
+</Note>
+
 ## Assigning Roles
 
 <Steps>
@@ -58,7 +86,7 @@ Project visibility is strictly enforced on the server — it is not just a UI pr
 - A **Public** project can be opened by anyone in your organization.
 - A **Restricted** (private) project can be seen and opened only by the people who have been added to it as members. For everyone else it does not appear in the project list, and a direct link to it behaves as though the project does not exist. Restricted projects are available on the Business plan and above.
 
-**Org Admins are the exception.** An Org Admin sees every project in the organization in the project list and can open any of them, Restricted ones included, so that they can manage its members, budget and settings. If a matter must be kept from a particular person, that person should not hold the Org Admin role.
+**Admins reach a Restricted project only through an audited path.** An Org Admin or Business Admin who is not a member of a Restricted project does not see its conversations or files. They can list it, see its metadata and budget, set the budget, archive it, or add themselves as Project Admin. Each of those actions is audited, and adding yourself or archiving is also told to the project's admins. If a matter must be kept from a particular person, that person should not be added to the project, and an admin who adds themselves leaves a record.
 
 ## Budget Increase Requests
 

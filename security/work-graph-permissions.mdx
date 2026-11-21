@@ -1,0 +1,264 @@
+---
+title: "Work Graph Permissions and Data Protection"
+sidebarTitle: "Work Graph permissions"
+description: "Who can see meetings, transcripts and files that Parlé's Work Graph brings in from Microsoft 365: source permissions are mirrored by default, sharing is explicit and audited, and the content is deletable."
+---
+
+The Work Graph brings meetings, transcripts, decisions, action items and files from a connected source (Microsoft 365 today) into project records that people and agents read. Those items already have an owner and an access list at the source. Parlé's own rules about projects and roles say nothing about who Microsoft would show a given meeting or file to, so the Work Graph follows a separate, stricter rule: **an item is visible only to the people the source would show it to, unless a person deliberately shares a specific container with a project.**
+
+This page explains that model in the terms a security reviewer asks about. For what the feature does, see [Work Graph overview](/work-graph/overview).
+
+<Info>
+	**Plan and switch.** The Work Graph is included by default on the Business
+	Elite and Enterprise plans, and is off for an organization until an Org Admin
+	switches it on. See [Plan and entitlement](#plan-and-entitlement) for what
+	happens if the plan is lost.
+</Info>
+
+## The rules at a glance
+
+<CardGroup cols={2}>
+	<Card title="Mirror the source" icon="eye">
+		An item read with a person's own account is visible only to people the source
+		would show it to. No Parlé role widens it.
+	</Card>
+	<Card title="Share containers, never accounts" icon="folder-open">
+		A project can be given one meeting, channel or folder. A whole mailbox,
+		calendar or drive can never be shared.
+	</Card>
+	<Card title="Shares follow the sharer" icon="user-check">
+		A shared container is read with the sharer's credential and pauses if they
+		leave or lose access.
+	</Card>
+	<Card title="Admins set the ceiling" icon="sliders">
+		Org Admins switch the Work Graph, each source and each resource group on or
+		off, exclude places and people, and delete what is held.
+	</Card>
+</CardGroup>
+
+## Mirroring source permissions
+
+When Parlé reads an item with a person's own connected account, it is visible in Parlé only to the people the source would show it to. Parlé decides this from observed access: a person sees an item only if their own connected Microsoft 365 account has retrieved it recently. The access record is deleted at once when that person disconnects their account or is removed from the organization.
+
+- **No Parlé role widens an item.** Project membership, Project Admin and Org Admin do not make someone else's mirrored items visible. An Org Admin does not see another person's mirrored mail or meetings.
+- **A hidden item looks like a missing one.** Filtering happens in the database query, before ranking, counting and paging, so a hidden item cannot change an order, a count or a "more results" flag. Asking for one by id gives the same answer as asking for an id that never existed.
+- **Parlé's own records follow Parlé's own rules.** A meeting added in Parlé to a Restricted project is hidden from anyone outside that project.
+- **A link is visible only if you can see both ends.** A suggested decision or action item that was drawn from an item is visible only to people who can open that item.
+
+<Warning>
+	**Parlé does not perform live permission checks on stored metadata.** The body
+	of an item you see only through your own account is read live with your own
+	token when it is opened, so a revoked permission stops that immediately. But
+	what Parlé stores about an item (its existence, its title, summaries and
+	suggestions derived from it) follows observed access, which can lag for up to
+	7 days after a person loses access at the source, or until their account next
+	fails to retrieve the item. Anything already said in a conversation stays in
+	that conversation, like a forwarded email.
+</Warning>
+
+## Sharing a container with a project
+
+A project member can share one **container** with a project: a Teams channel, a OneDrive or SharePoint folder, a mail folder, or a meeting. A whole mailbox, calendar, drive or workspace is refused by type.
+
+- **Both halves are checked on the server.** The sharer must hold a live role on the project (a real project role, not just an org role), and their own Microsoft 365 account must be able to open that container at that moment. Neither the project nor the container comes from anything a model supplies.
+- **The sharer's credential is used for that container only.** It is never a fallback when someone else has no credential, and it never reaches outside the container.
+- **One live share per container per project.**
+- **Everything a share brings in is visible to everyone who reads that project's conversations**, whether or not they could open it at the source. That is what sharing means, and it is why the sharer chooses it.
+- **A share applies to one project.** An item shared with one project is not visible by sharing in another project or in a personal conversation.
+- **Project Admins are told.** A new share, a paused share, a takeover and a removal each notify the project's admins, and any project member can see which shares exist.
+
+### Meetings and the organizer
+
+Only a meeting's **organizer** can bring it into a project by inviting the project's Parlé address, and only an organizer or co-organizer can have Parlé fetch its Teams transcript. This is Parlé's own rule, chosen because the organizer runs the meeting and is the person who decides to share it.
+
+- Parlé checks that the invite's sender is authenticated and is the invite's named organizer and a member of that project. It then asks the organizer's own Microsoft 365 account to confirm they organize the meeting before it stores anything. The meeting's title, attendees and join link are read from Microsoft 365, not taken from the invite text.
+- A forwarded invite, a different member, a forged invite and an outside organizer are all refused, and nothing beyond an audit entry of ids and a reason is stored.
+- A cancellation from the same sender marks the meeting canceled and ends its share. Ending the share removes a transcript fetched through it.
+- A transcript is read only if the meeting is the organizer's or co-organizer's to share. Attendees, presenters and producers are refused for a fetch.
+
+## When the sharer leaves
+
+A share is tied to the person who made it. When that person is removed from the project or the organization, disconnects their account, or loses access at the source, the share goes **dormant**:
+
+- Nothing new is fetched under it, and the items it brought in stop being visible through it.
+- Project admins are told, with the way forward: another member **takes the share over**, or the original sharer **reactivates** it if they regain access.
+- **Taking over is that member's own action**, and they must pass the same checks as for a new share (including the organizer check for a meeting). An admin can never reassign a share to someone else, because that would use another person's credential without their action.
+- A share never revives by itself when a credential reappears.
+- **Removal by a project admin and revocation by the sharer are final.** The share can only be made again as a new share.
+- A meeting's transcript share that stays dormant for 14 days with no takeover is ended by the system, and the transcript fetched through it is removed.
+
+## What admins control
+
+An Org Admin sets the ceiling in **Organization settings → Work graph**:
+
+- A master switch, a Microsoft 365 switch, and switches for each resource group: Calendar and meetings, Transcripts, Shared files and Channels. A new organization has everything off.
+- Microsoft 365 is the only source that can be switched on today. Google and Slack are shown as not available.
+- **Switching off hides at once and deletes nothing.** Existing shares stop serving immediately, new syncing, summaries, indexing and transcript fetches stop, and switching back on shows the items again. Switching Transcripts off also hides transcript content and the suggestions made from it from agents.
+- **Delete everything from a source** is a separate, confirmed action that needs the source's typed name and a preview, and runs in resumable batches.
+- **Retention** (12, 24, 36 or 60 months, counted from each item's own date at the source) waits 24 hours before its first sweep so it can be turned off in that window.
+- **Exclusions** keep named places and people out of the Work Graph. See [below](#exclusions-forgetting-and-retention).
+
+All of these are Org Admin controls and are described in [Work Graph data controls](/admin/work-graph-data-controls).
+
+## Agents and unattended work
+
+Agents read the Work Graph through a small set of fixed tools, and every call is filtered by the same visibility rule.
+
+- **An unattended run uses only shared access, never a person's own credential.** An unattended caller (an automation, a research task, or any call with no person present) can read a container shared with its project. It cannot use a member's own credential to read what that member could see. This is decided by the shape of the call, and when in doubt the call is treated as unattended.
+- **The Work Graph tools are not offered to automations today.** The agent setting that allows unattended runs is not the safety boundary: switching it on does not widen what an unattended call may read.
+- **Agent scope comes from the conversation, never from the model.** A tool that is handed a project, user or share id by the model refuses it unless it is the conversation's own.
+- **Nothing is cached across calls.** A member leaving, a share pausing or a credential being retired changes the next call's answer.
+- **No person is scored or ranked.** Parlé does not compute or store a score, rank or rating for any person from the Work Graph, and the agent tools return lists, not numbers about people.
+- **Documents and transcripts are treated as untrusted input** to the model, like any third-party tool result.
+
+## Where an item can appear: the fan-out rule
+
+A project conversation is read by everyone who can read the project, so an answer is broadcast, not private to the person who asked. For that reason a source item reaches a conversation only if **everyone who can read that conversation** may see it, or it is shared with that project.
+
+| Where the answer is shown | Who counts as the audience | What a source item needs |
+| --- | --- | --- |
+| A personal conversation | Its owner | Visible to the owner |
+| A conversation in a Restricted project | The project's current members | Visible to every member, or shared with the project |
+| A conversation in a Public project | Every active member of the organization | Visible to the whole organization, or shared with the project. In practice, only Parlé records and items shared with the project. |
+| An unattended run | Not applicable | Shared with the project only |
+| A conversation posted to a bound Teams channel | Cannot be enumerated by Parlé | No source items at all |
+| A live artifact | Not applicable | No source items at all |
+
+The audience is worked out on the server when the answer is made. A person who joins the project later can read what was already written in an earlier conversation, as with any conversation content.
+
+## Tenant isolation
+
+Work Graph records live in the same database as the rest of Parlé, scoped to your organization with composite keys, so a row cannot point across organizations. People are matched by an organization-specific one-way fingerprint of their address, which cannot be compared with another organization's data. Parlé staff support tooling shows counts, states and kinds, not item content.
+
+## What Parlé stores
+
+- **Pointers, not copies.** A Work Graph record holds a reference to the item at the source plus a display label. It holds no document or message body.
+- **Content is read live where it can be.** The body of an item you see only through your own account is fetched with your own token when opened and is not copied into Parlé.
+- **Shared content may be kept while the share is live.** A shared meeting's transcript or notes is stored in Parlé's own storage, and a shared document's text is indexed for project search. If a share ends, whatever it alone brought in is deleted at once; if something else still brings the same item in, only the ended share's link is removed.
+- **Excerpts are short-lived.** A quoted excerpt expires after 30 days at most, or sooner under your organization's retention. A tool result in a conversation holds a pointer to the excerpt, not its text, so when the excerpt expires or is forgotten the pointer reads "no longer retained".
+- **Never written to the audit log, the usage ledger or the message record.** Parlé does not write third-party item content into those records. A model's reply may still quote what it read, and that reply is part of the conversation.
+
+## Exclusions, forgetting and retention
+
+**Exclusions (Org Admin).** An Org Admin can name a Teams channel, a SharePoint library, a mail domain or an email address that the Work Graph must never hold. Adding one shows what it would remove (counts only), removes what already matches in the background, and keeps new material out on every path that writes to the Work Graph. A domain or address is stored only as a one-way, organization-specific fingerprint plus the label the admin typed. An excluded person in a meeting someone else organized shows as "An excluded attendee". An exclusion does not rewrite transcript or notes text that mentions the person, and removing an exclusion brings nothing back by itself.
+
+**Forget.** A person can forget their own items. A Project Admin can forget items shared into their project. A Business Admin can forget client- and department-level items, and within a project only as its real Project Admin. An Org Admin can do so organization-wide and is the only role that can erase a person. A forget shows a preview of counts only, is bound to exactly what was shown, writes its record before it deletes anything, and runs as a resumable job.
+
+**Tombstones.** Forgotten and deleted items leave a content-free marker (the source, a hashed id and the kind) that every writer checks before every insert, so a later sync, upload or re-index cannot bring the item back. A lift needs a reason code, restores nothing by itself, and a marker a person wrote for their own data can be lifted only by that person or an Org Admin.
+
+**What a forget does not reach.** It does not reach into past model replies, or into another meeting's transcript that mentions the person.
+
+**Confirmed records.** Decisions and action items that a person confirmed are your firm's own records. They are kept when their source expires or is deleted, with the link to the source cut and shown as "no longer retained".
+
+## What goes to AI providers
+
+When the Work Graph is on, two background features send text to a model:
+
+- **Item summaries** write a short summary of a meeting's transcript or notes, a file uploaded to a project, or a shared document. There is no separate switch for summaries: they run when the master switch (and, for a connected source, that source's switch and resource group) is on.
+- **Suggested decisions and action items** read a meeting's stored transcript or notes. These stay off until an Org Admin switches on the "suggest from meetings" setting, in addition to the Work Graph master switch.
+
+For both:
+
+- **Only the item's extracted text is sent**, cut to a fixed length (96,000 characters), and never its title, file name, attendees or any id. A larger item is skipped, not partly read.
+- **The recipient is the model your organization's own routing selects, subject to your model policy.** With your own API key, that is your own provider. With a Parlé-managed model, that is Microsoft Azure AI Foundry on Parlé's Azure account. On Hybrid, it is your own provider where you hold a key that serves the model.
+- **A shared document is read with the sharer's credential**, for that container only.
+- **The cost is billed to the project**, attributed to the person who brought the item in, and checked against the project's budget before the call.
+- **Content already summarized is not recalled from the provider.**
+- Items covered by an exclusion, forgotten items and disputed items are skipped.
+
+When an agent reads an item through a Work Graph tool, the passage is given to the model for that turn as conversation content, so it follows the same model path as any other conversation.
+## What is audited
+
+Work Graph actions are recorded in the audit log as **ids and kinds, never content**: no meeting title, attendee, channel name, folder name, transcript text, subject line or participant list is written. Entries cover container shares, pauses, takeovers, reactivations and removals; meeting adds, edits and deletes; transcripts attached, removed and read; forgets, lifts and disputed flags; data-control, retention and exclusion changes; and each agent read of the Work Graph. See [Audit log](/security/audit-log) for the exact list.
+
+The audit log is DML-immutable: ordinary writes that would edit or delete an entry are rejected, and altering the record takes a deliberate privileged schema change. Reading and exporting the log in the product is available to Org Admins on the Business plan and above. There is no audit API, SIEM feed or webhook.
+
+## Plan and entitlement
+
+The Work Graph is an entitlement. Business Elite and Enterprise include it by default, and Parlé can enable it for an individual organization. Losing it stops **new** use but never strands or deletes what you already hold:
+
+- **Stops:** adding or editing meetings and attendees, attaching content, creating, taking over or reactivating a share, new transcript fetches, recording new observed access, and switching Work Graph controls on.
+- **Keeps working:** listing meetings, opening them and their content, removing content or deleting a meeting, unsharing and removing shares, switching controls off, exclusions, retention, forgetting, and delete everything from a source.
+- Everything already held is kept and remains manageable.
+
+## Answering the security questionnaire
+
+<Accordion title="Can an admin read a transcript they weren't in?">
+	Not because they are an admin. A transcript stored in a project can be read by anyone who can read that project: every member of the organization if it is Public, or its members if it is Restricted. Org Admin and Business Admin are not implicit Project Admins, and neither can open a Restricted project they are not a member of, except through an audited outside path that gives project metadata and budget access, not content. A transcript that has not been shared with a project and exists only at the source is not visible to an admin: no Parlé role widens a person's own mirrored items.
+</Accordion>
+
+<Accordion title="Who can see a meeting that was shared with a project?">
+	Anyone who can read the project's conversations. In a Public project that is every active member of your organization. In a Restricted project it is the project's members. This is the effect of the sharer's choice to share it, and Project Admins are notified when it happens.
+</Accordion>
+
+<Accordion title="What happens when someone leaves?">
+	Their observed access to mirrored items is deleted at once when they disconnect or are removed. Any container they shared goes dormant: nothing new is fetched under it and the items it brought in stop being visible through it. Project admins are told, and another eligible member can take it over. It is never reassigned by an admin. A meeting transcript share dormant for 14 days is ended and its transcript removed. Anything already said in a conversation stays.
+</Accordion>
+
+<Accordion title="If someone loses access at the source, does Parlé stop showing it immediately?">
+	For content read live with their own token, yes. For what Parlé stores about an item (its existence, labels, summaries and suggestions), no: it follows observed access and can lag for up to 7 days. Parlé does not perform live permission checks on stored metadata, and we do not claim it does. Items shared with a project follow the sharer, and pause once Parlé detects the sharer has lost access.
+</Accordion>
+
+<Accordion title="Can the Work Graph read a person's whole mailbox, calendar or drive?">
+	No. Only containers (one meeting, channel, folder or mail folder) can be shared, and a whole mailbox, calendar, drive or workspace is refused by type. A person's own items are visible only to that person.
+</Accordion>
+
+<Accordion title="Can an unattended agent or automation read my personal items?">
+	No. An unattended caller can read only containers shared with its project and never uses a member's own credential. The Work Graph tools are not offered to automations today, and the unattended switch on an agent does not widen this.
+</Accordion>
+
+<Accordion title="Can I stop a particular channel, library or person from being kept?">
+	Yes. An Org Admin can exclude a Teams channel, a SharePoint library, a mail domain or an email address. What already matches is removed after a preview, and new material is kept out. See [Exclusions](#exclusions-forgetting-and-retention).
+</Accordion>
+
+<Accordion title="Can we delete what the Work Graph holds?">
+	Yes. An Org Admin can delete everything held from a source, set retention, and add exclusions. People can forget their own items, and Project Admins and Business Admins can forget items within their authority. A later sync cannot bring a forgotten or deleted item back unless an authorized person lifts its marker. A person's confirmed decisions and action items are kept with their source link cut, unless a forget or erasure reaches the personal data in them.
+</Accordion>
+
+<Accordion title="Is our content sent to an AI provider, and which one?">
+	Only for summaries and (if switched on) suggested decisions and action items, and only the item's text. It goes to the model your organization's routing selects: your own provider with your own key, or Microsoft Azure AI Foundry on Parlé's account for a Parlé-managed model. Titles, file names, attendees and ids are never sent. Agent reads send the passage to the model in the conversation, like any conversation content.
+</Accordion>
+
+<Accordion title="Is Work Graph content written to the audit log?">
+	No. The audit log records that an action happened, with ids and kinds, and never an item's title, name, text or participant list.
+</Accordion>
+
+<Accordion title="Does the Work Graph score or rank our people?">
+	No. Parlé does not compute or store a score, rank or rating for any person from Work Graph data, and the agent tools return lists, not numbers about people.
+</Accordion>
+
+<Accordion title="What happens if we lose the Work Graph plan?">
+	New use stops, but nothing is deleted and nothing you hold is locked: you can still read, remove, unshare, forget, exclude and delete.
+</Accordion>
+
+## Related
+
+<CardGroup cols={2}>
+	<Card title="Work Graph overview" icon="diagram-project" href="/work-graph/overview">
+		What the Work Graph is and where it appears in Parlé.
+	</Card>
+	<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
+		Connect Microsoft 365 and choose what to share.
+	</Card>
+	<Card title="Meetings" icon="calendar" href="/work-graph/meetings">
+		Bring meetings and transcripts into a project.
+	</Card>
+	<Card title="Project views" icon="table-columns" href="/work-graph/project-views">
+		The Work tab and its views.
+	</Card>
+	<Card title="Agents and the Work Graph" icon="robot" href="/work-graph/agents">
+		How agents read the Work Graph.
+	</Card>
+	<Card title="Work Graph data controls" icon="sliders" href="/admin/work-graph-data-controls">
+		Switches, exclusions, retention and deletion.
+	</Card>
+	<Card title="My Work Graph data" icon="user-shield" href="/work-graph/my-data">
+		See and forget your own items.
+	</Card>
+	<Card title="Audit log" icon="scroll" href="/security/audit-log">
+		The record of Work Graph actions.
+	</Card>
+	<Card title="Roles and permissions" icon="shield-halved" href="/security/roles-and-permissions">
+		What each role can do.
+	</Card>
+</CardGroup>

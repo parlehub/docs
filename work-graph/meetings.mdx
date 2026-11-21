@@ -1,0 +1,97 @@
+---
+title: "Meetings: transcripts, notes, decisions and actions"
+sidebarTitle: "Meetings"
+description: "Meetings are project records. Read transcripts, record decisions and actions, get a one-page brief, and talk to the agent about a meeting."
+---
+
+A **meeting** is a record in a project: when it happened, who was in it, and its transcript or notes. Everyone on the project can see its meetings. Find them on the project's **Work** tab under **Meetings**, newest first, with badges showing whether each has a **Transcript**, **Notes** or **Summary**.
+
+<Note>
+	**You'll need:** a plan that includes the Work Graph (Business Elite or Enterprise by default) to add or change meetings. Without it, you can still open meetings, read and download their content, remove content and delete meetings.
+</Note>
+
+## Add a meeting by hand
+
+<Steps>
+  <Step title="Choose Add meeting">
+    In the **Meetings** view, choose **Add meeting**.
+  </Step>
+  <Step title="Fill in the details">
+    Enter a **Title**, a **Start** and an **End** in the project's time zone. Add **Attendees** by choosing a project member or entering an email address and optional name for someone outside the project. Optionally choose a **Series**, or create a **New series name**.
+  </Step>
+  <Step title="Save">
+    The meeting opens with room for transcripts and notes.
+  </Step>
+</Steps>
+
+Meetings can also arrive from Microsoft 365 or an upload. See [Connecting sources](/work-graph/connecting-sources).
+
+The person who added a meeting, or the project's admin, can **Edit** it, change its attendees, and **Delete** it. Deleting is permanent and removes the attendee list and attached content with it. A meeting that came in by invite and was later canceled shows a **Canceled** badge and stays in the list. In an archived project you can read and delete meetings but not change them.
+
+## Series and recurring meetings
+
+A series groups the occurrences of a recurring meeting, and each meeting page shows its series. A recurring invite brings in the next 12 occurrences as one series.
+
+## Transcripts and notes
+
+Under **Transcripts and notes**, each item has **Read** and **Download**. Anyone on the project can add content with **Add transcript or notes**, by upload or paste. See [Connecting sources](/work-graph/connecting-sources).
+
+### The transcript reader
+
+**Read** opens a reader beside the page. A transcript shows as timed lines such as `00:01:10  Sam: …`, and notes show as plain text, loaded in pages with **Load more**.
+
+- **Find** — a find box shows "n of m" and moves between matches.
+- **Mark a stretch** — click a line to mark where a stretch starts, then Shift-click (or Shift+Arrow) to mark where it ends. Notes have no times, so you can't mark a stretch in them.
+- **Download only** — a file that isn't text, or is over 5 MB, can be downloaded but not read in the page.
+
+### Remove content
+
+The remove control on a transcript or notes item asks you to confirm first. Removing a file permanently deletes it from Parlé along with the summary made from it. Decisions and actions already taken from it stay. For a pointer to a project file, the file itself stays in the project's files. The person who added the content, the meeting's creator or a project admin can remove it.
+
+## Decisions and actions
+
+The **Decisions and actions** panel on the meeting page lists the decisions made and actions agreed in that meeting. Each one can point at the stretch of transcript it was said in. Choose the stretch in the reader, and an anchor button later opens the reader with it marked.
+
+- **Decisions** — **Add decision**, **Edit**, **Delete**, and **Confirm** on a proposed decision.
+- **Actions** — **Add action**, **Mark done**, **Cancel action**, **Reopen**, **Edit** and **Delete**.
+
+Owners and deciders can be members of the project. An action can show **Tracked as a task** when it is linked to a task.
+
+### Suggested decisions and actions
+
+An Org Admin or Business Admin can have Parlé read each meeting's stored transcript or notes once and **suggest** decisions and action items. It is off by default, and it is managed in **Organization settings → Skills**. See [Work Graph data controls](/admin/work-graph-data-controls).
+
+- Suggestions are marked **Proposed** until a person acts. Confirm one in the meeting's panel, or in the project's **Review** tab, where you can choose **Confirm**, **Edit then confirm**, or **Reject**.
+- Each suggestion links to the passage it came from. Parlé names an owner only when it can match them to a project member or an attendee. Otherwise the action is left unassigned.
+- A rejected suggestion is hidden and is not suggested again, and you can restore it from the Review tab's Rejected filter.
+- Parlé reads only transcripts and notes it holds. Turning the setting on affects content that arrives afterward.
+
+## Get the brief
+
+Choose **Brief** on a meeting page, or on an upcoming meeting in **Work → Meetings**, to walk in prepared. The brief page shows who is coming, what happened last time with its confirmed decisions and the status of their actions, the open actions of the people coming, and files that changed since the last meeting. From the brief you can start a conversation about the meeting or add notes. It shows only what you can see, and it needs the Work Graph switched on.
+
+## Meeting-ended reminders
+
+When Parlé can't get a meeting's transcript itself, it asks the attendees who are project members to add it. The reasons include Teams transcription being off, Teams policy blocking apps, speaker names being off, nothing available after the retries, or nobody asking Parlé to fetch it. Each person gets one in-app notification per meeting, and an email on their own notification schedule, that opens the meeting with **Add transcript or notes** ready.
+
+Nobody is reminded while a fetch is still retrying, once content is on the meeting, or about a canceled meeting. Only meetings from the last 7 days are covered, and Parlé stops asking someone about a series after three unanswered occurrences.
+
+## Talk to the agent about a meeting
+
+- **Mention it.** In the composer, type `@` and choose from the **Meetings** group. In a project conversation, the list has only that project's meetings. In a personal conversation it lists meetings from every project you can open. You can mention up to five meetings in a message.
+- **Start from the meeting.** Choose **Chat about this meeting** on the meeting page. It opens a new project conversation with the meeting already in the draft. Nothing is sent or spent until you send your own question.
+
+The agent can read the meeting's transcript, notes, decisions and actions and cite the meeting as a link. This needs the Work Graph in your plan and switched on. See [Agents and the Work Graph](/work-graph/agents).
+
+## When the Work Graph is switched off
+
+If an Org Admin or Business Admin turns the Work Graph off, or switches off a source such as Microsoft 365, imported meetings and their copied transcripts or notes are hidden from the **Meetings** pages. They read as not found. Nothing is deleted, and switching it back on shows them again. Meetings people added by hand, and their uploads, stay visible. See [Work Graph data controls](/admin/work-graph-data-controls).
+
+## Related
+
+- [Work Graph overview](/work-graph/overview)
+- [Connecting sources](/work-graph/connecting-sources)
+- [Project views](/work-graph/project-views)
+- [Agents and the Work Graph](/work-graph/agents)
+- [Work Graph permissions](/security/work-graph-permissions)
+- [Work Graph data controls](/admin/work-graph-data-controls)

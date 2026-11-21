@@ -28,8 +28,18 @@ If your firm signs client security questionnaires, you already know the question
 		href="/security/roles-and-permissions"
 	>
 		Four roles span org-level and project-level control. A Restricted project is
-		visible only to its members and to your Org Admins; everyone else cannot see
-		that it exists.
+		visible only to its members; everyone else cannot see its conversations or
+		files, and admins reach it only through an audited path.
+	</Card>
+	<Card
+		title="Work Graph Permissions"
+		icon="diagram-project"
+		href="/security/work-graph-permissions"
+	>
+		Meetings, transcripts and files brought in from Microsoft 365 are visible
+		only to the people the source would show them to, unless a person shares a
+		specific container with a project. Shares are audited, Org Admins can
+		exclude places and people, and what is held can be deleted.
 	</Card>
 </CardGroup>
 
@@ -64,8 +74,10 @@ Use the answers below when completing client or internal security questionnaires
 
 <Accordion title="Who can access our AI conversations?">
 	It depends on the project's visibility. A conversation in a **Restricted**
-	project can be opened only by that project's members and by your Org Admins,
-	who can open every project in the organization. A conversation in a **Public**
+	project can be opened only by that project's members. Org Admins and Business
+	Admins who are not members do not see inside it; they can reach it only
+	through an audited path that shows project metadata and the budget, or by
+	adding themselves as Project Admin, and each of those actions is recorded. A conversation in a **Public**
 	project can be opened by anyone in your organization. A personal conversation
 	is visible only to the person who owns it. SSO-offboarded users have their
 	session invalidated and access removed immediately when their account is
@@ -76,6 +88,26 @@ Use the answers below when completing client or internal security questionnaires
 	No. There is no view in Parlé that allows cross-organization access to your
 	conversations. On all plans, conversations are scoped to your organization and
 	are not accessible to Parlé staff in the normal course of operations.
+</Accordion>
+
+<Accordion title="How does the Work Graph decide who can see a meeting, transcript or file from Microsoft 365?">
+	By default, an item brought in from a connected source is visible only to the
+	people the source would show it to, judged from their own connected account.
+	No Parlé role, including Org Admin, widens that. A project sees an item only
+	when a project member deliberately shares a specific container (one meeting,
+	channel or folder, never a whole mailbox or drive) with it, using their own
+	access, and every share is audited. Stored metadata can lag a revoked
+	permission by up to 7 days, because Parlé does not perform live permission
+	checks on it. See [Work Graph permissions](/security/work-graph-permissions).
+</Accordion>
+
+<Accordion title="Can we remove Work Graph data, or keep certain places and people out of it?">
+	Yes. The Work Graph is off until an Org Admin switches it on, and an Org Admin
+	can switch off any source or resource group, exclude Teams channels, SharePoint
+	libraries, mail domains or addresses, set a retention period, and delete
+	everything held from a source. People can also forget their own items. Content
+	is stored so that it can be deleted, and item text is never written to the
+	audit log. See [Work Graph permissions](/security/work-graph-permissions).
 </Accordion>
 
 For the complete security and compliance details, visit [parlehub.com/security](https://www.parlehub.com/security/).

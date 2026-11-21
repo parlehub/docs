@@ -1,0 +1,142 @@
+---
+title: "Connect sources to bring meetings and content into a project"
+sidebarTitle: "Connecting sources"
+description: "Connect a Microsoft 365 work account, fetch Teams transcripts, invite the project's Parlé address to a meeting, share folders, forward emails, or upload a transcript."
+---
+
+There are several ways to get work into a project. They all end in the same place: a meeting or item that belongs to that project and that everyone on it can open.
+
+<Note>
+	**You'll need:** a plan that includes the Work Graph (Business Elite or Enterprise by default) and to be on the project. Microsoft 365 sources also need an Org Admin to set up Microsoft 365 first. See [Connect Parlé to Microsoft 365](/admin/microsoft-365).
+</Note>
+
+## Connect your Microsoft 365 work account
+
+Parlé reads Microsoft 365 with **your own** work account, so it can only reach what you can already open yourself.
+
+<Steps>
+  <Step title="An Org Admin adds the work account integration">
+    In **Organization settings → Integrations**, an Org Admin adds the **Microsoft 365 work account** and approves Parlé for the Microsoft tenant. This is also the switch that allows members to connect.
+  </Step>
+  <Step title="Connect your own account">
+    Open **My Integrations** and connect your Microsoft 365 work account. Before you confirm, Parlé lists in plain words every permission you grant, including calendar, meetings, transcripts, OneDrive and SharePoint files. It also tells you that mail and Teams chats are not read.
+  </Step>
+</Steps>
+
+<Warning>
+	The account must belong to your organization's own Microsoft tenant. An account from any other tenant is refused and nothing is stored.
+</Warning>
+
+Disconnecting deletes Parlé's copy of your connection. Microsoft keeps its record of the consent until you or your administrator remove it in Microsoft.
+
+## Ways meetings get in
+
+| Way in | Who can do it | What you need |
+|---|---|---|
+| Fetch a Teams transcript | The meeting's organizer or a co-organizer | Your connected work account |
+| Invite the project's Parlé address | The meeting's organizer | Your connected work account |
+| Share a meeting Parlé suggests | The meeting's organizer | Your connected work account |
+| Upload or paste a transcript or notes | Anyone on the project | Nothing |
+| Add a meeting by hand | Anyone on the project | Nothing |
+
+### Fetch a Teams transcript
+
+On a meeting's page, the **Transcript from Teams** section lets the organizer or a co-organizer bring the transcript in without downloading and uploading it.
+
+<Steps>
+  <Step title="Open the meeting">
+    Go to the project's **Work** tab, then **Meetings**, and open the meeting.
+  </Step>
+  <Step title="Choose Fetch transcript from Teams">
+    Paste the meeting's **Join link** from Teams or the Outlook invitation into **Teams meeting link**, then choose **Fetch transcript**. If the meeting is already linked to a Teams meeting, Parlé uses that and doesn't ask for a link.
+  </Step>
+  <Step title="Wait for Teams">
+    Parlé fetches the transcript about ten minutes after the meeting ends, and tries again later if Teams hasn't published it yet. The section shows the status, such as **Waiting for Teams**.
+  </Step>
+</Steps>
+
+The transcript appears with the meeting's other content as plain text with speakers and times.
+
+- **Only organizers and co-organizers.** Parlé's policy is that only they bring a transcript in. If anyone else tries, they are told to ask the organizer. Nobody else's account is tried.
+- **It must be the same meeting.** If the link names a Teams meeting at a different time, Parlé refuses it and nothing is shared.
+- **Recurring meetings.** A link for a later occurrence of a recurring meeting is refused today because the link names the series' times. Upload those transcripts instead.
+
+If a fetch can't finish, the section says why in one sentence, with the next step. Typical reasons are that Teams admin policy blocks apps from reading transcripts, transcription was off for the meeting, speaker names were off, or your work account needs reconnecting in **My Integrations**. In every case you can download the transcript from Teams and add it yourself.
+
+### Invite the project's Parlé address
+
+Every project has its own Parlé email address. Find it in **Project Setup → Project Details → Email address**. Any project member can copy it, and the project's admin can change it. If it changes, the old address stops working at once.
+
+An organizer can add that address to a Teams or Outlook meeting as a guest. The meeting is brought into the project straight away, with nothing to confirm in Parlé.
+
+- **The organizer must send the invite.** Parlé checks that the sender is the invite's organizer, and checks with their own Microsoft 365 account that they organize the meeting. An attendee forwarding the invite doesn't count, and neither does sending *on behalf of* the organizer. Sending *as* the organizer works.
+- **The organizer needs a connected work account.** This is the most common reason an invite is refused.
+- **Parlé confirms.** The organizer gets a confirmation email that explains what sharing means and that recording consent stays with them. Parlé also tries to accept the meeting in their calendar so everyone invited can see it is there.
+- **Details come from Microsoft 365.** The title, attendees and join link come from Microsoft 365, not from the invite text.
+- **Updates and cancellations apply.** A changed invite updates the meeting. A cancellation marks it **Canceled**, keeps it in the list and stops any transcript fetch. A newer invite brings it back.
+- **Recurring meetings.** A recurring invite brings in the next 12 occurrences as one series. Transcripts for a recurring series aren't fetched automatically yet, so use the transcript upload for those.
+
+If an invite is refused, the sender gets a plain reply saying why, such as "Parlé didn't add this meeting, because you aren't its organizer," or that their work account isn't connected. A meeting someone deleted by hand in Parlé isn't brought back by a later invite. Add it by hand to restore it.
+
+### Share a meeting Parlé suggests
+
+If you organize a Teams meeting, Parlé may privately suggest sharing it with the project most of its other attendees belong to. Only you can see the suggestion. It appears under **Suggestions for you**, from the account menu, in **Meetings you could share**.
+
+- Choose **Share with the project** to bring it in. Parlé fetches the transcript with your account and it appears on the project's meeting page.
+- Choose **No thanks** to decline. Parlé doesn't suggest that meeting for that project again.
+
+Nothing is shared unless you choose it. If the meeting is already in the project, Parlé says so and doesn't add a second copy.
+
+### Upload or paste a transcript or notes
+
+Use this for calls Parlé can't fetch, such as one hosted by a client, or for notes you wrote yourself. Anyone on the project can do it.
+
+- On a meeting's page, choose **Add transcript or notes**.
+- To start a meeting from a file, go to the **Meetings** view and choose **New meeting from upload**.
+
+Choose **Upload a file** (`.vtt`, `.txt` or `.md`) or **Paste text**, say whether it is **A transcript** or **Notes**, then choose **Add to meeting**. Parlé keeps the text, not the original file, so an uploaded `.vtt` reads like a fetched Teams transcript. Everyone on the project can read what you add, and each item is limited to 10 MB. Word documents aren't accepted yet.
+
+## Other content sources
+
+### Forwarded emails
+
+A project member can forward an email, with its attachments, to the project's Parlé address. The project's agent can then answer from it.
+
+- Mail is accepted only from an active member of that project, and only when the sender's domain authenticated it. Anyone else is told it wasn't stored because they aren't matched to a member of the project. Unauthenticated mail is dropped without a reply.
+- The member gets a confirmation that says everyone who can see the project can now read the email, and lists what became of each attachment.
+- Readable attachments such as PDF, Word, PowerPoint, Excel and text are searchable. Other attachments are kept with the email and marked **Not searchable**.
+- Open **Project Setup → Integrations → Tools & knowledge** to list the project's emails. The member who forwarded an email, or a Project Admin, can remove it. A Project Admin can switch the source off, which turns new mail away while keeping the existing emails.
+
+An email is stored whole or not at all, with up to 20 stored attachments, and a message over 25 MB is refused.
+
+### Shared Teams channels and folders
+
+A project member can share one Teams channel, one OneDrive or SharePoint folder, or one mail folder with the project. Open **Project Setup → Integrations → Shared sources** and choose **Share with project**. You can browse your own Microsoft 365 or paste a link, and Parlé shows what will be shared and who will see it before you confirm.
+
+You share one channel or folder at a time. Parlé never shares a whole team, drive, mailbox or a single file. Sharing a mail folder means every project member can read its emails.
+
+## Who can do what, and what happens when access ends
+
+Parlé reads shared content with the **sharer's own access**. A share follows the person who made it. What a person shares is a container, such as one folder or one meeting, never their whole account.
+
+- If the sharer leaves the project, disconnects their account, or loses access to the meeting or folder, the share goes **dormant** and fetching stops. The panel says why.
+- Another member, or for a meeting another organizer or co-organizer, can **Take over** a dormant share with their own access. The sharer can **Reactivate** it once they can open it again.
+- A fetched transcript is re-checked against Teams weekly. If Teams no longer has it, or Parlé can't verify it for 30 days, Parlé deletes its copy. A meeting share left dormant for 14 days with nobody taking it over ends, and a transcript fetched through it is deleted.
+- The sharer can **Unshare** at any time, and a project admin can **Remove** any share.
+
+### One meeting per project
+
+A meeting appears once in a project even if it arrives two ways, for example through an invite and through a suggestion you accepted. Whichever arrives first creates it and the other joins it. One source meeting shared with two projects is a separate meeting in each.
+
+<Warning>
+	A meeting you accepted from a suggestion before this rule was added may appear twice if its organizer later invites the project address. You can delete the extra copy.
+</Warning>
+
+## Related
+
+- [Work Graph overview](/work-graph/overview)
+- [Meetings](/work-graph/meetings)
+- [Work Graph permissions](/security/work-graph-permissions)
+- [Work Graph data controls](/admin/work-graph-data-controls)
+- [Connect Parlé to Microsoft 365](/admin/microsoft-365)
+- [Integrations](/tools/integrations)
