@@ -19,7 +19,7 @@ The **AI Value** screen estimates how much time Parlé's help saved, what that t
 - **The organization's AI Value screen.** Select **AI Value** in the main sidebar, under Organization and just after **Usage**. Org Admins and Business Admins can open it.
 - **A project's AI Value tab.** Every member of a project sees an **AI Value** tab on that project, between **Review** and **Project Setup**. It covers that project's work only.
 
-Both views show a period you pick, by week or by month. Weeks and months follow the time zone shown on the screen: the project's own time zone, otherwise the organization's, otherwise UTC.
+Both views show a period you pick, by week or by month. Weeks and months follow the time zone shown on the screen. On the organization's screen that is the organization's time zone, otherwise UTC. On a project's tab it is the project's own time zone, otherwise the organization's, otherwise UTC. Weeks start on Monday.
 
 ## What the screen shows
 
@@ -43,7 +43,7 @@ Parlé counts **tasks**, not messages. A task is one piece of work in a conversa
 - **The period.** A task counts in the week or month it began.
 - **Personal conversations.** Personal work counts toward the organization's totals, with one protection: when fewer than three people had personal conversations in a period, that period's personal time saved or personal AI spend is left out, and the screen says so, so that no one's own work can be worked out from the totals. Personal work never appears on a project's tab.
 
-A money figure that cannot be worked out is shown with a reason ("Not set", "Not available" or "No work this period"), never as a silent zero.
+A figure that cannot be worked out is shown with a reason, never as a silent zero: **Not set** (no rate), **Not available** (a rate that could not be converted, or spend that could not be priced), **No work this period**, **Left out** (personal work held back, see above) or, on the Return tile, **No spend yet** (return needs AI spend in the period).
 
 ## How time is measured
 
@@ -56,7 +56,7 @@ The task's saving is the first number less the second, **never below zero**. A t
 
 ### Where the baseline comes from
 
-The baseline minutes are **Parlé's own estimates**. They are referenced to the task statements in the O\*NET database and to US Bureau of Labor Statistics wage data, which is for reference only. They are not a published dataset of how long tasks take, and they never set your rates. The baseline is versioned: a new version applies to work from then on and never rewrites a figure already worked out. The screen names the baseline version used in the period you are looking at.
+The baseline minutes are **Parlé's own estimates**. They are referenced to the task statements in the O\*NET® database and to US Bureau of Labor Statistics wage data, which is for reference only. They are not a published dataset of how long tasks take, and they never set your rates. The baseline is versioned: a new version applies to work from then on and never rewrites a figure already worked out. The screen names the baseline version used in the period you are looking at.
 
 ## Set your own rates and minutes
 
@@ -70,7 +70,7 @@ The baseline is a starting point. Your firm knows better how long its own work t
     Enter an hourly **cost rate** and **bill rate**. Rates are in the organization's reporting currency, or the project's, which you set under [Currencies](/cost/currencies#reporting-currency). A rate must be above zero, up to 10,000,000, with at most two decimals. A rate that is not set stays unset: Parlé never fills it in from wage data, and the money figures say **Not set** with a link back here.
   </Step>
   <Step title="Set your own minutes">
-    For any type of work you can enter your own manual minutes for Small, Medium and Large tasks, from 0 to 2,400 whole minutes. Parlé's baseline shows beside each field as what applies if you leave it alone.
+    For any type of work you can enter your own manual minutes for Small, Medium and Large tasks, from 0 to 2,400 whole minutes. Each field shows, greyed, the figure that applies if you leave it empty: the organization's minutes where it has set its own (on a project's card), otherwise Parlé's baseline.
   </Step>
   <Step title="Save">
     Save the card. Changes apply to **work started after you save**.
@@ -88,7 +88,7 @@ Setting a value back to what it would inherit removes your override, so the defa
 
 ### Changes are forward-only
 
-A change applies to tasks begun after you save it. Tasks begun earlier keep the minutes and rates they were valued at, even if you later edit a figure or a follow-up grows the task. Raising a bill rate today therefore does not rewrite last quarter's client value. Because of this, a figure you change can take a period or two to show a real difference.
+A change applies to tasks begun after you save it. Tasks begun earlier keep the rates and minutes in force when they began. A follow-up can still move a task to a larger size, which raises its minutes. Raising a bill rate today therefore does not rewrite last quarter's client value. Because of this, a figure you change can take a period or two to show a real difference.
 
 ### Who can change them
 
@@ -100,7 +100,7 @@ A change applies to tasks begun after you save it. Tasks begun earlier keep the 
 
 ## Plans
 
-AI Value is available on the **Team plan and above**; the Free plan does not include it. The Team plan shows the headline for the current period: **hours saved** and **FTE capacity**. The money figures, earlier periods and the breakdowns by type of work and by project are on the **Business plan and above**. See [Plans and billing](/plans-and-billing).
+AI Value is available on the **Team plan and above**; the Free plan does not include it. The Team plan shows the headline for the current period: **hours saved** (with the number of tasks) and **FTE capacity**. The money figures, earlier periods and the breakdowns by type of work and by project are on the **Business plan and above**. See [Plans and billing](/plans-and-billing).
 
 If an organization leaves a plan that includes AI Value, no new credits are worked out, but the ones already stored are kept. You can still change or clear the rates and minutes you already set; adding new ones needs the plan.
 
@@ -109,7 +109,7 @@ If an organization leaves a plan that includes AI Value, no new credits are work
 - **Not a measurement.** Nobody's time is tracked. The saving is an estimate against a baseline.
 - **Not billing.** Nothing here sets what you are charged, and Parlé does not send client value to anyone. It is not an invoice.
 - **Not a per-person figure.** The screen shows organization and project totals. It does not show, rank or export what any one person saved.
-- **Not an export.** The screen is for reading in Parlé. There is no export of AI Value, and no API or feed for it.
+- **Not an export.** The screen is for reading in Parlé. There is no export of AI Value, and no public API or data feed for it.
 - **Not Parlé's wages for your people.** Your rates are yours. The wage data in the baseline is reference only.
 
 ## Questions
@@ -125,7 +125,7 @@ If an organization leaves a plan that includes AI Value, no new credits are work
     Personal conversations are left out of a period when fewer than three people had them. This protects individuals; it is not an error.
   </Accordion>
   <Accordion title="Why are the figures lower than I expect?">
-    Only completed tasks with a kind of work are counted, and time spent beyond the manual estimate counts as no saving. A task takes a short while to appear after a conversation. If you still see nothing after an hour, contact support.
+    A task counts from its first reply, while it is still going, and its figures grow with it. Work Parlé could not classify is counted with no time saved, and time spent beyond the manual estimate counts as no saving. A task takes a short while to appear after a conversation. If you still see nothing after an hour, contact support.
   </Accordion>
 </AccordionGroup>
 
