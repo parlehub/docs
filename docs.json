@@ -57,7 +57,8 @@
               "cost/budgets",
               "cost/currencies",
               "cost/expense-codes",
-              "cost/usage-analytics"
+              "cost/usage-analytics",
+              "cost/ai-value"
             ]
           },
           {
