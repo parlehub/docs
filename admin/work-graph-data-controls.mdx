@@ -1,19 +1,19 @@
 ---
-title: "Work Graph Data Controls"
-sidebarTitle: "Work Graph Data Controls"
-description: "Decide what Parlé's Work Graph collects from connected sources, how long it keeps it, what it must never hold, and how to delete or forget it, from Org settings → Work graph."
+title: "Project IQ Data Controls"
+sidebarTitle: "Project IQ Data Controls"
+description: "Decide what Parlé's Project IQ collects from connected sources, how long it keeps it, what it must never hold, and how to delete or forget it, from Org settings → Project IQ."
 ---
 
-The Work Graph brings meetings, transcripts, decisions, action items and files from your connected sources into your projects. As an Org Admin you decide what it may collect, how long it keeps it, what it must never hold, and what is removed.
+Project IQ brings meetings, transcripts, decisions, action items and files from your connected sources into your projects. As an Org Admin you decide what it may collect, how long it keeps it, what it must never hold, and what is removed.
 
 <Info>
-	**Org Admin only.** Everything on **Org settings → Work graph** is managed by
+	**Org Admin only.** Everything on **Org settings → Project IQ** is managed by
 	Org Admins. A Business Admin cannot open it. Other roles that can forget or
 	review items are listed under [Who can do what](#who-can-do-what).
 </Info>
 
 <Note>
-	**Plan requirement.** The Work Graph is included on Business Elite and
+	**Plan requirement.** Project IQ is included on Business Elite and
 	Enterprise by default, and appears on the plans table as **Meetings**. On a
 	plan without it, you can still switch things off, change retention, add
 	exclusions, delete data and forget items. You cannot switch collection on.
@@ -24,11 +24,11 @@ Everything starts **off**. A new organization collects nothing from any source u
 
 ## Switch collection on or off
 
-Go to **Org settings → Work graph**. The **Work graph data collection** card has a master switch, then the sources below it.
+Go to **Org settings → Project IQ**. The **Project IQ data collection** card has a master switch, then the sources below it.
 
 | Switch | What it controls |
 | --- | --- |
-| **Work graph data collection** | The master switch. Off hides everything the Work Graph holds and stops every source syncing. |
+| **Project IQ data collection** | The master switch. Off hides everything Project IQ holds and stops every source syncing. |
 | **Microsoft 365** | Everything Parlé collects from your Microsoft 365 account. |
 | **Calendar and meetings** | Meetings and who is in them. |
 | **Transcripts** | What was said in meetings. Off by default. |
@@ -43,7 +43,7 @@ A source or group works only while the switches above it are on. For example, tr
 
 When you change a switch, Parlé tells you what it will do before you confirm. For the master switch, the dialog reads, for example:
 
-> Turning work graph data collection off hides about 120 items and stops syncing. It also stops suggestions, the brief, the timeline and the assistant's work graph tools, and hides items imported from your connected sources, including meetings imported from them and their transcripts and notes, on the Meetings pages too. Meetings people added themselves, and the transcripts and notes they uploaded, stay available to the project. Nothing is deleted, and turning it back on shows what it hid again, including the imported meetings.
+> Turning Project IQ data collection off hides about 120 items and stops syncing. It also stops suggestions, the brief, the timeline and the assistant's Project IQ tools, and hides items imported from your connected sources, including meetings imported from them and their transcripts and notes, on the Meetings pages too. Meetings people added themselves, and the transcripts and notes they uploaded, stay available to the project. Nothing is deleted, and turning it back on shows what it hid again, including the imported meetings.
 
 - **Switching off hides and stops. It never deletes.** Syncing, summaries, search indexing, meeting suggestions and transcript fetches stop. Queued work waits instead of failing. Switching back on shows what was hidden, and nothing is lost.
 - **Meetings people added themselves stay.** A meeting someone created in Parlé, and the transcripts and notes they uploaded to it, are the project's own records, so the master switch does not hide them. Meetings imported from Microsoft 365 are hidden, with their transcripts and notes.
@@ -54,7 +54,7 @@ Changes are recorded in the [audit log](/security/audit-log).
 
 ## Delete everything from a source
 
-Switching a source off only hides. To remove what the Work Graph holds from a source, use **Delete everything from a source** on the same page.
+Switching a source off only hides. To remove what Project IQ holds from a source, use **Delete everything from a source** on the same page.
 
 <Steps>
 	<Step title="Choose the source">
@@ -108,11 +108,11 @@ After that, a daily clean-up expires items org by org.
 - Imported meetings expire whole, by the meeting's end: the meeting, its attendees and its copied transcripts and notes.
 - Retention never touches a project's own file storage.
 
-Retention is off until you set it. While it is off, Parlé keeps Work Graph data until you delete it.
+Retention is off until you set it. While it is off, Parlé keeps Project IQ data until you delete it.
 
 ## Exclusions
 
-Exclusions name what the Work Graph must never hold. Go to **Org settings → Work graph → Exclusions** and select **Add exclusion**.
+Exclusions name what Project IQ must never hold. Go to **Org settings → Project IQ → Exclusions** and select **Add exclusion**.
 
 | Kind | What it excludes |
 | --- | --- |
@@ -131,7 +131,7 @@ Exclusions name what the Work Graph must never hold. Go to **Org settings → Wo
 		Parlé shows the counts by kind: meetings, files and pages, channels,
 		outside people, and attendees who would be shown as excluded in other
 		meetings. If the rule matches your own members, a warning says so, and their
-		own Work Graph data it covers is removed too.
+		own Project IQ data it covers is removed too.
 	</Step>
 	<Step title="Exclude">
 		Select **Exclude and remove**. Parlé removes what already matches in the
@@ -146,28 +146,28 @@ Exclusions name what the Work Graph must never hold. Go to **Org settings → Wo
 - **Confirmed records stay.** Decisions and action items a person confirmed are kept, with their source link cut.
 - **Words are not rewritten.** Transcripts and notes that merely mention an excluded person are not edited.
 - **If removal stops.** A row can say it stopped before it finished. Parlé tries again by itself, and you can select **Retry** at any time.
-- **Taking a rule away.** Select the remove icon, then **Stop excluding**. The Work Graph may hold what the rule covered again from then on. Nothing already removed comes back by itself.
+- **Taking a rule away.** Select the remove icon, then **Stop excluding**. Project IQ may hold what the rule covered again from then on. Nothing already removed comes back by itself.
 - There is a limit on how many exclusions an organization can hold. At the limit, the page says so and you remove one before adding another.
 
 Exclusions are not limited by plan, because they only ever remove.
 
 ## Forgetting, and what "forgotten" means
 
-To forget something is to remove Parlé's record of it from the Work Graph. It never touches the email, file or meeting at its source.
+To forget something is to remove Parlé's record of it from Project IQ. It never touches the email, file or meeting at its source.
 
 You can forget:
 
 - **An item**: a meeting, document or channel, with its links, its search entries, its summary, and the suggestions made from it.
 - **Just a summary**, leaving the item.
 - **A decision or action item.**
-- **A person**: their entries, links, names and addresses held in the Work Graph.
+- **A person**: their entries, links, names and addresses held in Project IQ.
 
 Every forget starts with a preview that shows counts only, then a typed confirmation. What is deleted is what the preview showed. Progress shows while it runs, and it resumes by itself if interrupted.
 
 ### Where to forget
 
-- **A project's Work graph tab.** In the project's setup area, the **Work graph** tab lists what the Work Graph holds for the project, with **Forget this** on each row you may forget. An Org Admin or Business Admin who is not a Project Admin sees an explanation and **Add yourself as Project Admin**, which is recorded in the audit log and tells the project's admins.
-- **Clients and departments.** A Business Admin or Org Admin sees a **Work graph** tab on a client or department page.
+- **A project's Project IQ tab.** In the project's setup area, the **Project IQ** tab lists what Project IQ holds for the project, with **Forget this** on each row you may forget. An Org Admin or Business Admin who is not a Project Admin sees an explanation and **Add yourself as Project Admin**, which is recorded in the audit log and tells the project's admins.
+- **Clients and departments.** A Business Admin or Org Admin sees a **Project IQ** tab on a client or department page.
 - **The Disputed list.** Reviewers clear a flag or forget the item from **Disputed**.
 - **What Parlé knows about me.** Each person can forget their own items. See [What Parlé knows about me](/work-graph/my-data).
 
@@ -194,7 +194,7 @@ An erasure does not reach:
 
 <Note>
 	The Parlé app does not have a screen for an Org Admin to erase someone
-	else's Work Graph data yet.
+	else's Project IQ data yet.
 </Note>
 
 Forgetting or erasing a member does not delete their account or the records they own in projects.
@@ -205,7 +205,7 @@ Forgetting or erasing a member does not delete their account or the records they
 | --- | --- |
 | Switch collection on or off, delete from a source, set retention, manage exclusions | Org Admin |
 | Run a subject access export | Org Admin |
-| Switch the **Work graph** skill on, and the **Brief tools** and **Suggest decisions and actions from meetings** settings | Org Admin or Business Admin |
+| Switch the **Project IQ** skill on, and the **Brief tools** and **Suggest decisions and actions from meetings** settings | Org Admin or Business Admin |
 | Forget an item in a project | A Project Admin of that project |
 | Forget client- or department-level items | Business Admin or Org Admin |
 | Forget anything org-wide | Org Admin |
@@ -217,24 +217,24 @@ A Business Admin or Org Admin acts inside a project only through a real project 
 
 Each of these is audited, with identifiers and counts, never the content.
 
-## Export what the Work Graph holds
+## Export what Project IQ holds
 
-Your organization's [data export](/admin/data-export) includes the decisions, action items, tasks, deliverables, summaries and settings the Work Graph produced. For one person's request to see their data, use **Subject access export** on the same Work graph page. It appears only once Parlé has enabled it for your organization.
+Your organization's [data export](/admin/data-export) includes the decisions, action items, tasks, deliverables, summaries and settings Project IQ produced. For one person's request to see their data, use **Subject access export** on the same Project IQ page. It appears only once Parlé has enabled it for your organization.
 
 ## What Parlé monitors for you
 
-Parlé watches the Work Graph's health. It is alerted when a Microsoft 365 sync falls behind, when removing material for an exclusion stalls for over an hour, and when an unusual number of items are flagged as disputed across the platform. These alerts go to Parlé, not to your admins. What you see in the app is an exclusion row that says removal stopped and offers **Retry**.
+Parlé watches Project IQ's health. It is alerted when a Microsoft 365 sync falls behind, when removing material for an exclusion stalls for over an hour, and when an unusual number of items are flagged as disputed across the platform. These alerts go to Parlé, not to your admins. What you see in the app is an exclusion row that says removal stopped and offers **Retry**.
 
 ## Related
 
 <CardGroup cols={2}>
-	<Card title="Work Graph overview" icon="diagram-project" href="/work-graph/overview">
-		What the Work Graph is and holds.
+	<Card title="Project IQ overview" icon="diagram-project" href="/work-graph/overview">
+		What Project IQ is and holds.
 	</Card>
 	<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
 		Connect Microsoft 365 for a project.
 	</Card>
-	<Card title="Work Graph permissions" icon="shield" href="/security/work-graph-permissions">
+	<Card title="Project IQ permissions" icon="shield" href="/security/work-graph-permissions">
 		Who can see what.
 	</Card>
 	<Card title="What Parlé knows about me" icon="user" href="/work-graph/my-data">

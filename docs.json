@@ -95,7 +95,7 @@
             ]
           },
           {
-            "group": "Work Graph",
+            "group": "Project IQ",
             "icon": "diagram-project",
             "pages": [
               "work-graph/overview",
