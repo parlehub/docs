@@ -1,15 +1,15 @@
 ---
-title: "Work Graph Permissions and Data Protection"
-sidebarTitle: "Work Graph permissions"
-description: "Who can see meetings, transcripts and files that Parlé's Work Graph brings in from Microsoft 365: source permissions are mirrored by default, sharing is explicit and audited, and the content is deletable."
+title: "Project IQ Permissions and Data Protection"
+sidebarTitle: "Project IQ permissions"
+description: "Who can see meetings, transcripts and files that Parlé's Project IQ brings in from Microsoft 365: source permissions are mirrored by default, sharing is explicit and audited, and the content is deletable."
 ---
 
-The Work Graph brings meetings, transcripts, decisions, action items and files from a connected source (Microsoft 365 today) into project records that people and agents read. Those items already have an owner and an access list at the source. Parlé's own rules about projects and roles say nothing about who Microsoft would show a given meeting or file to, so the Work Graph follows a separate, stricter rule: **an item is visible only to the people the source would show it to, unless a person deliberately shares a specific container with a project.**
+Project IQ brings meetings, transcripts, decisions, action items and files from a connected source (Microsoft 365 today) into project records that people and agents read. Those items already have an owner and an access list at the source. Parlé's own rules about projects and roles say nothing about who Microsoft would show a given meeting or file to, so Project IQ follows a separate, stricter rule: **an item is visible only to the people the source would show it to, unless a person deliberately shares a specific container with a project.**
 
-This page explains that model in the terms a security reviewer asks about. For what the feature does, see [Work Graph overview](/work-graph/overview).
+This page explains that model in the terms a security reviewer asks about. For what the feature does, see [Project IQ overview](/work-graph/overview).
 
 <Info>
-	**Plan and switch.** The Work Graph is included by default on the Business
+	**Plan and switch.** Project IQ is included by default on the Business
 	Elite and Enterprise plans, and is off for an organization until an Org Admin
 	switches it on. See [Plan and entitlement](#plan-and-entitlement) for what
 	happens if the plan is lost.
@@ -31,7 +31,7 @@ This page explains that model in the terms a security reviewer asks about. For w
 		leave or lose access.
 	</Card>
 	<Card title="Admins set the ceiling" icon="sliders">
-		Org Admins switch the Work Graph, each source and each resource group on or
+		Org Admins switch Project IQ, each source and each resource group on or
 		off, exclude places and people, and delete what is held.
 	</Card>
 </CardGroup>
@@ -89,26 +89,26 @@ A share is tied to the person who made it. When that person is removed from the 
 
 ## What admins control
 
-An Org Admin sets the ceiling in **Organization settings → Work graph**:
+An Org Admin sets the ceiling in **Organization settings → Project IQ**:
 
 - A master switch, a Microsoft 365 switch, and switches for each resource group: Calendar and meetings, Transcripts, Shared files and Channels. A new organization has everything off.
 - Microsoft 365 is the only source that can be switched on today. Google and Slack are shown as not available.
 - **Switching off hides at once and deletes nothing.** Existing shares stop serving immediately, new syncing, summaries, indexing and transcript fetches stop, and switching back on shows the items again. Switching Transcripts off also hides transcript content and the suggestions made from it from agents.
 - **Delete everything from a source** is a separate, confirmed action that needs the source's typed name and a preview, and runs in resumable batches.
 - **Retention** (12, 24, 36 or 60 months, counted from each item's own date at the source) waits 24 hours before its first sweep so it can be turned off in that window.
-- **Exclusions** keep named places and people out of the Work Graph. See [below](#exclusions-forgetting-and-retention).
+- **Exclusions** keep named places and people out of Project IQ. See [below](#exclusions-forgetting-and-retention).
 
-All of these are Org Admin controls and are described in [Work Graph data controls](/admin/work-graph-data-controls).
+All of these are Org Admin controls and are described in [Project IQ data controls](/admin/work-graph-data-controls).
 
 ## Agents and unattended work
 
-Agents read the Work Graph through a small set of fixed tools, and every call is filtered by the same visibility rule.
+Agents read Project IQ through a small set of fixed tools, and every call is filtered by the same visibility rule.
 
 - **An unattended run uses only shared access, never a person's own credential.** An unattended caller (an automation, a research task, or any call with no person present) can read a container shared with its project. It cannot use a member's own credential to read what that member could see. This is decided by the shape of the call, and when in doubt the call is treated as unattended.
-- **The Work Graph tools are not offered to automations today.** The agent setting that allows unattended runs is not the safety boundary: switching it on does not widen what an unattended call may read.
+- **Project IQ tools are not offered to automations today.** The agent setting that allows unattended runs is not the safety boundary: switching it on does not widen what an unattended call may read.
 - **Agent scope comes from the conversation, never from the model.** A tool that is handed a project, user or share id by the model refuses it unless it is the conversation's own.
 - **Nothing is cached across calls.** A member leaving, a share pausing or a credential being retired changes the next call's answer.
-- **No person is scored or ranked.** Parlé does not compute or store a score, rank or rating for any person from the Work Graph, and the agent tools return lists, not numbers about people.
+- **No person is scored or ranked.** Parlé does not compute or store a score, rank or rating for any person from Project IQ, and the agent tools return lists, not numbers about people.
 - **Documents and transcripts are treated as untrusted input** to the model, like any third-party tool result.
 
 ## Where an item can appear: the fan-out rule
@@ -128,11 +128,11 @@ The audience is worked out on the server when the answer is made. A person who j
 
 ## Tenant isolation
 
-Work Graph records live in the same database as the rest of Parlé, scoped to your organization with composite keys, so a row cannot point across organizations. People are matched by an organization-specific one-way fingerprint of their address, which cannot be compared with another organization's data. Parlé staff support tooling shows counts, states and kinds, not item content.
+Project IQ records live in the same database as the rest of Parlé, scoped to your organization with composite keys, so a row cannot point across organizations. People are matched by an organization-specific one-way fingerprint of their address, which cannot be compared with another organization's data. Parlé staff support tooling shows counts, states and kinds, not item content.
 
 ## What Parlé stores
 
-- **Pointers, not copies.** A Work Graph record holds a reference to the item at the source plus a display label. It holds no document or message body.
+- **Pointers, not copies.** A Project IQ record holds a reference to the item at the source plus a display label. It holds no document or message body.
 - **Content is read live where it can be.** The body of an item you see only through your own account is fetched with your own token when opened and is not copied into Parlé.
 - **Shared content may be kept while the share is live.** A shared meeting's transcript or notes is stored in Parlé's own storage, and a shared document's text is indexed for project search. If a share ends, whatever it alone brought in is deleted at once; if something else still brings the same item in, only the ended share's link is removed.
 - **Excerpts are short-lived.** A quoted excerpt expires after 30 days at most, or sooner under your organization's retention. A tool result in a conversation holds a pointer to the excerpt, not its text, so when the excerpt expires or is forgotten the pointer reads "no longer retained".
@@ -140,7 +140,7 @@ Work Graph records live in the same database as the rest of Parlé, scoped to yo
 
 ## Exclusions, forgetting and retention
 
-**Exclusions (Org Admin).** An Org Admin can name a Teams channel, a SharePoint library, a mail domain or an email address that the Work Graph must never hold. Adding one shows what it would remove (counts only), removes what already matches in the background, and keeps new material out on every path that writes to the Work Graph. A domain or address is stored only as a one-way, organization-specific fingerprint plus the label the admin typed. An excluded person in a meeting someone else organized shows as "An excluded attendee". An exclusion does not rewrite transcript or notes text that mentions the person, and removing an exclusion brings nothing back by itself.
+**Exclusions (Org Admin).** An Org Admin can name a Teams channel, a SharePoint library, a mail domain or an email address that Project IQ must never hold. Adding one shows what it would remove (counts only), removes what already matches in the background, and keeps new material out on every path that writes to Project IQ. A domain or address is stored only as a one-way, organization-specific fingerprint plus the label the admin typed. An excluded person in a meeting someone else organized shows as "An excluded attendee". An exclusion does not rewrite transcript or notes text that mentions the person, and removing an exclusion brings nothing back by itself.
 
 **Forget.** A person can forget their own items. A Project Admin can forget items shared into their project. A Business Admin can forget client- and department-level items, and within a project only as its real Project Admin. An Org Admin can do so organization-wide and is the only role that can erase a person. A forget shows a preview of counts only, is bound to exactly what was shown, writes its record before it deletes anything, and runs as a resumable job.
 
@@ -152,10 +152,10 @@ Work Graph records live in the same database as the rest of Parlé, scoped to yo
 
 ## What goes to AI providers
 
-When the Work Graph is on, two background features send text to a model:
+When Project IQ is on, two background features send text to a model:
 
 - **Item summaries** write a short summary of a meeting's transcript or notes, a file uploaded to a project, or a shared document. There is no separate switch for summaries: they run when the master switch (and, for a connected source, that source's switch and resource group) is on.
-- **Suggested decisions and action items** read a meeting's stored transcript or notes. These stay off until an Org Admin switches on the "suggest from meetings" setting, in addition to the Work Graph master switch.
+- **Suggested decisions and action items** read a meeting's stored transcript or notes. These stay off until an Org Admin switches on the "suggest from meetings" setting, in addition to Project IQ master switch.
 
 For both:
 
@@ -166,18 +166,18 @@ For both:
 - **Content already summarized is not recalled from the provider.**
 - Items covered by an exclusion, forgotten items and disputed items are skipped.
 
-When an agent reads an item through a Work Graph tool, the passage is given to the model for that turn as conversation content, so it follows the same model path as any other conversation.
+When an agent reads an item through a Project IQ tool, the passage is given to the model for that turn as conversation content, so it follows the same model path as any other conversation.
 ## What is audited
 
-Work Graph actions are recorded in the audit log as **ids and kinds, never content**: no meeting title, attendee, channel name, folder name, transcript text, subject line or participant list is written. Entries cover container shares, pauses, takeovers, reactivations and removals; meeting adds, edits and deletes; transcripts attached, removed and read; forgets, lifts and disputed flags; data-control, retention and exclusion changes; and each agent read of the Work Graph. See [Audit log](/security/audit-log) for the exact list.
+Project IQ actions are recorded in the audit log as **ids and kinds, never content**: no meeting title, attendee, channel name, folder name, transcript text, subject line or participant list is written. Entries cover container shares, pauses, takeovers, reactivations and removals; meeting adds, edits and deletes; transcripts attached, removed and read; forgets, lifts and disputed flags; data-control, retention and exclusion changes; and each agent read of Project IQ. See [Audit log](/security/audit-log) for the exact list.
 
 The audit log is DML-immutable: ordinary writes that would edit or delete an entry are rejected, and altering the record takes a deliberate privileged schema change. Reading and exporting the log in the product is available to Org Admins on the Business plan and above. There is no audit API, SIEM feed or webhook.
 
 ## Plan and entitlement
 
-The Work Graph is an entitlement. Business Elite and Enterprise include it by default, and Parlé can enable it for an individual organization. Losing it stops **new** use but never strands or deletes what you already hold:
+Project IQ is an entitlement. Business Elite and Enterprise include it by default, and Parlé can enable it for an individual organization. Losing it stops **new** use but never strands or deletes what you already hold:
 
-- **Stops:** adding or editing meetings and attendees, attaching content, creating, taking over or reactivating a share, new transcript fetches, recording new observed access, and switching Work Graph controls on.
+- **Stops:** adding or editing meetings and attendees, attaching content, creating, taking over or reactivating a share, new transcript fetches, recording new observed access, and switching Project IQ controls on.
 - **Keeps working:** listing meetings, opening them and their content, removing content or deleting a meeting, unsharing and removing shares, switching controls off, exclusions, retention, forgetting, and delete everything from a source.
 - Everything already held is kept and remains manageable.
 
@@ -199,19 +199,19 @@ The Work Graph is an entitlement. Business Elite and Enterprise include it by de
 	For content read live with their own token, yes. For what Parlé stores about an item (its existence, labels, summaries and suggestions), no: it follows observed access and can lag for up to 7 days. Parlé does not perform live permission checks on stored metadata, and we do not claim it does. Items shared with a project follow the sharer, and pause once Parlé detects the sharer has lost access.
 </Accordion>
 
-<Accordion title="Can the Work Graph read a person's whole mailbox, calendar or drive?">
+<Accordion title="Can Project IQ read a person's whole mailbox, calendar or drive?">
 	No. Only containers (one meeting, channel, folder or mail folder) can be shared, and a whole mailbox, calendar, drive or workspace is refused by type. A person's own items are visible only to that person.
 </Accordion>
 
 <Accordion title="Can an unattended agent or automation read my personal items?">
-	No. An unattended caller can read only containers shared with its project and never uses a member's own credential. The Work Graph tools are not offered to automations today, and the unattended switch on an agent does not widen this.
+	No. An unattended caller can read only containers shared with its project and never uses a member's own credential. Project IQ tools are not offered to automations today, and the unattended switch on an agent does not widen this.
 </Accordion>
 
 <Accordion title="Can I stop a particular channel, library or person from being kept?">
 	Yes. An Org Admin can exclude a Teams channel, a SharePoint library, a mail domain or an email address. What already matches is removed after a preview, and new material is kept out. See [Exclusions](#exclusions-forgetting-and-retention).
 </Accordion>
 
-<Accordion title="Can we delete what the Work Graph holds?">
+<Accordion title="Can we delete what Project IQ holds?">
 	Yes. An Org Admin can delete everything held from a source, set retention, and add exclusions. People can forget their own items, and Project Admins and Business Admins can forget items within their authority. A later sync cannot bring a forgotten or deleted item back unless an authorized person lifts its marker. A person's confirmed decisions and action items are kept with their source link cut, unless a forget or erasure reaches the personal data in them.
 </Accordion>
 
@@ -219,23 +219,23 @@ The Work Graph is an entitlement. Business Elite and Enterprise include it by de
 	Only for summaries and (if switched on) suggested decisions and action items, and only the item's text. It goes to the model your organization's routing selects: your own provider with your own key, or Microsoft Azure AI Foundry on Parlé's account for a Parlé-managed model. Titles, file names, attendees and ids are never sent. Agent reads send the passage to the model in the conversation, like any conversation content.
 </Accordion>
 
-<Accordion title="Is Work Graph content written to the audit log?">
+<Accordion title="Is Project IQ content written to the audit log?">
 	No. The audit log records that an action happened, with ids and kinds, and never an item's title, name, text or participant list.
 </Accordion>
 
-<Accordion title="Does the Work Graph score or rank our people?">
-	No. Parlé does not compute or store a score, rank or rating for any person from Work Graph data, and the agent tools return lists, not numbers about people.
+<Accordion title="Does Project IQ score or rank our people?">
+	No. Parlé does not compute or store a score, rank or rating for any person from Project IQ data, and the agent tools return lists, not numbers about people.
 </Accordion>
 
-<Accordion title="What happens if we lose the Work Graph plan?">
+<Accordion title="What happens if we lose Project IQ plan?">
 	New use stops, but nothing is deleted and nothing you hold is locked: you can still read, remove, unshare, forget, exclude and delete.
 </Accordion>
 
 ## Related
 
 <CardGroup cols={2}>
-	<Card title="Work Graph overview" icon="diagram-project" href="/work-graph/overview">
-		What the Work Graph is and where it appears in Parlé.
+	<Card title="Project IQ overview" icon="diagram-project" href="/work-graph/overview">
+		What Project IQ is and where it appears in Parlé.
 	</Card>
 	<Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
 		Connect Microsoft 365 and choose what to share.
@@ -244,19 +244,19 @@ The Work Graph is an entitlement. Business Elite and Enterprise include it by de
 		Bring meetings and transcripts into a project.
 	</Card>
 	<Card title="Project views" icon="table-columns" href="/work-graph/project-views">
-		The Work tab and its views.
+		The Project IQ tab and its views.
 	</Card>
-	<Card title="Agents and the Work Graph" icon="robot" href="/work-graph/agents">
-		How agents read the Work Graph.
+	<Card title="Agents and Project IQ" icon="robot" href="/work-graph/agents">
+		How agents read Project IQ.
 	</Card>
-	<Card title="Work Graph data controls" icon="sliders" href="/admin/work-graph-data-controls">
+	<Card title="Project IQ data controls" icon="sliders" href="/admin/work-graph-data-controls">
 		Switches, exclusions, retention and deletion.
 	</Card>
-	<Card title="My Work Graph data" icon="user-shield" href="/work-graph/my-data">
+	<Card title="My Project IQ data" icon="user-shield" href="/work-graph/my-data">
 		See and forget your own items.
 	</Card>
 	<Card title="Audit log" icon="scroll" href="/security/audit-log">
-		The record of Work Graph actions.
+		The record of Project IQ actions.
 	</Card>
 	<Card title="Roles and permissions" icon="shield-halved" href="/security/roles-and-permissions">
 		What each role can do.

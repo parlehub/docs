@@ -64,7 +64,7 @@ Every message (inbound and outbound), configuration change, member change, budge
 - **Tool events** — an integration connected, enabled on a project, or called in a conversation
 - **Conversation events** — messages sent and received
 - **Data export events** — an [organization data export](/admin/data-export) requested or downloaded
-- **Work Graph events** — a container shared with, paused on, or removed from a project; meetings and their transcripts or notes added, read or removed; items forgotten, flagged or brought back; data controls, retention and exclusions changed; an agent reading the Work Graph. See [Work Graph events](#work-graph-events).
+- **Project IQ events** — a container shared with, paused on, or removed from a project; meetings and their transcripts or notes added, read or removed; items forgotten, flagged or brought back; data controls, retention and exclusions changed; an agent reading Project IQ. See [Project IQ events](#work-graph-events).
 - **Admin actions** — org settings changed; storage provider connected or disconnected
 
 <Info>
@@ -77,9 +77,9 @@ Every message (inbound and outbound), configuration change, member change, budge
 	cannot reach.
 </Info>
 
-## Work Graph events
+## Project IQ events
 
-The [Work Graph](/security/work-graph-permissions) writes to the audit log with **ids and kinds only**. No sentence below names the meeting, channel, folder, document or person involved, because those names are third-party text that Parlé keeps out of every audit value; the entry's **Project** column says where it happened. Many of them appear under the **Meetings** and **Work graph** action types.
+The [Project IQ](/security/work-graph-permissions) writes to the audit log with **ids and kinds only**. No sentence below names the meeting, channel, folder, document or person involved, because those names are third-party text that Parlé keeps out of every audit value; the entry's **Project** column says where it happened. Many of them appear under the **Meetings** and **Project IQ** action types.
 
 | What the entry says | When it is recorded |
 | --- | --- |
@@ -98,25 +98,25 @@ The [Work Graph](/security/work-graph-permissions) writes to the audit log with 
 | accepted a suggestion to share their meeting with a project, turned down a suggestion to share their meeting with a project | The meeting's owner decides |
 | mentioned meetings in a message | A message names meetings with @ (a count only) |
 | suggested decisions or action items from a meeting's transcript or notes | A suggestion run writes results |
-| asked for items to be forgotten from the work graph, finished forgetting items from the work graph | A forget is requested and completed |
-| let a forgotten work graph item come back from its source | A forget marker is lifted |
-| flagged a work graph item as disputed, cleared a disputed flag, withdrew their disputed flag, answered a disputed flag by forgetting the item | A person disputes an item and the dispute is settled |
-| changed the work graph's data controls | An Org Admin changes a switch |
-| changed how long the work graph keeps items, expired work graph items past the retention period | Retention is set, and each sweep runs |
-| ran a delete of everything the work graph holds from one source | An Org Admin deletes a source's data (the entry's result shows if it ended partly done) |
-| excluded a channel, library, domain or address from the work graph, removed a work graph exclusion | An Org Admin adds or removes an exclusion; the entry holds the rule's id and kind, never what it names |
-| started removing what a work graph exclusion covers, finished removing what a work graph exclusion covers | The background removal of what an exclusion matches |
-| deleted an item from the work graph, expired work graph excerpts | Items or quoted excerpts are removed |
-| expired work graph observed access, removed work graph observed access with a retired credential | A person's access record lapses or is removed (counts only) |
-| uploaded a project file that the work graph now treats as theirs, stopped attributing a person's uploaded project files to them in the work graph | A project file upload is attributed, or the attribution is cleared |
-| restored deleted project files to the work graph, removed project files the project's storage no longer holds from the work graph | A project file restore or clean-up (ids and counts only) |
+| asked for items to be forgotten from Project IQ, finished forgetting items from Project IQ | A forget is requested and completed |
+| let a forgotten Project IQ item come back from its source | A forget marker is lifted |
+| flagged a Project IQ item as disputed, cleared a disputed flag, withdrew their disputed flag, answered a disputed flag by forgetting the item | A person disputes an item and the dispute is settled |
+| changed Project IQ's data controls | An Org Admin changes a switch |
+| changed how long Project IQ keeps items, expired Project IQ items past the retention period | Retention is set, and each sweep runs |
+| ran a delete of everything Project IQ holds from one source | An Org Admin deletes a source's data (the entry's result shows if it ended partly done) |
+| excluded a channel, library, domain or address from Project IQ, removed a Project IQ exclusion | An Org Admin adds or removes an exclusion; the entry holds the rule's id and kind, never what it names |
+| started removing what a Project IQ exclusion covers, finished removing what a Project IQ exclusion covers | The background removal of what an exclusion matches |
+| deleted an item from Project IQ, expired Project IQ excerpts | Items or quoted excerpts are removed |
+| expired Project IQ observed access, removed Project IQ observed access with a retired credential | A person's access record lapses or is removed (counts only) |
+| uploaded a project file that Project IQ now treats as theirs, stopped attributing a person's uploaded project files to them in Project IQ | A project file upload is attributed, or the attribution is cleared |
+| restored deleted project files to Project IQ, removed project files the project's storage no longer holds from Project IQ | A project file restore or clean-up (ids and counts only) |
 | asked the agent for a person's work evidence | An Org Admin asks the agent about another person |
-| had an agent read the work graph | An agent used a Work Graph tool (the tool, outcome and ids, never the result) |
+| had an agent read Project IQ | An agent used a Project IQ tool (the tool, outcome and ids, never the result) |
 
 Other entries for refused or accepted meeting invites record ids and a reason kind only.
 
 <Note>
-	A change to the Work Graph's data controls is recorded with its before and
+	A change to Project IQ's data controls is recorded with its before and
 	after values as on/off flags and numbers, never labels.
 </Note>
 

@@ -24,22 +24,22 @@ Parlé uses role-based access at two distinct levels: the organization level and
 	project is confidential.
 </Note>
 
-## Work Graph Capabilities
+## Project IQ Capabilities
 
-The [Work Graph](/security/work-graph-permissions) uses the same roles, with one rule that matters for each: **no role widens what a person can see of someone else's items from a connected source.** An Org Admin sees no one else's mirrored items, and neither org-level role is automatically a Project Admin.
+The [Project IQ](/security/work-graph-permissions) uses the same roles, with one rule that matters for each: **no role widens what a person can see of someone else's items from a connected source.** An Org Admin sees no one else's mirrored items, and neither org-level role is automatically a Project Admin.
 
 | Capability | Project Member | Project Admin | Business Admin | Org Admin |
 | --- | --- | --- | --- | --- |
 | Read a project's meetings, transcripts and shared items | Yes, in projects they can open | Yes, in projects they can open | Only as a member of the project (or a Public project) | Only as a member of the project (or a Public project) |
-| Add a meeting or attach a transcript (needs the Work Graph plan) | Yes | Yes | Only as a project member | Only as a project member |
+| Add a meeting or attach a transcript (needs Project IQ plan) | Yes | Yes | Only as a project member | Only as a project member |
 | Share a container (meeting, channel, folder) with a project, using their own Microsoft 365 account | Yes | Yes | Only as a project member | Only as a project member |
 | Take over a dormant share, or reactivate their own | Yes, if they pass the same checks as a new share | Yes, same checks | Only as a project member | Only as a project member |
 | See every share in the project, including removed ones, and remove any share | No (they see live and dormant shares) | Yes | Only as the project's Project Admin | Only as the project's Project Admin |
 | Be told when a share is created, paused, taken over or removed | No | Yes | Only as the project's Project Admin | Only as the project's Project Admin |
 | Forget items | Their own items | Items shared into their project | Client- and department-level items; inside a project only as its Project Admin | Anywhere in the organization, and the only role that can erase a person |
 | Review guessed same-person links | No | Links between two people who both appear on their project | Organization-wide | Organization-wide |
-| Switch the Work Graph agent skill on for the organization | No | No | Yes | Yes |
-| Switch the Work Graph, sources and resource groups on or off; delete from a source; set retention; add exclusions | No | No | No | Yes |
+| Switch Project IQ agent skill on for the organization | No | No | Yes | Yes |
+| Switch Project IQ, sources and resource groups on or off; delete from a source; set retention; add exclusions | No | No | No | Yes |
 | Ask the agent for another person's work evidence | No (anyone may ask about themselves) | No | No | Yes, audited by id |
 
 <Note>
@@ -48,7 +48,7 @@ The [Work Graph](/security/work-graph-permissions) uses the same roles, with one
 	Restricted projects they are not in, except through the audited outside path
 	that gives project metadata, the budget and the ability to add themselves as
 	Project Admin. Each of those actions is audited, and the self-add is also
-	reported to the project's admins. No Work Graph capability reaches into a
+	reported to the project's admins. No Project IQ capability reaches into a
 	project's content on an admin's behalf.
 </Note>
 

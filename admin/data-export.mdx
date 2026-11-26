@@ -1,7 +1,7 @@
 ---
 title: "Export Your Organization's Data"
 sidebarTitle: "Data Export"
-description: "Download a copy of your organization's projects, conversations, artifacts, memory, instructions, Work Graph records and Parlé-hosted files from Parlé as one zip, from Org settings → Data export."
+description: "Download a copy of your organization's projects, conversations, artifacts, memory, instructions, Project IQ records and Parlé-hosted files from Parlé as one zip, from Org settings → Data export."
 ---
 
 An Org Admin can download a copy of the organization's data in Parlé as a single zip file. Use it to keep your own copy of an engagement, hand a project's record to a client, or move work somewhere else.
@@ -44,7 +44,7 @@ Only one organization export can run at a time. You can start another once the c
 
 At the top level of the zip:
 
-- **`Organization-Settings.json`** — how your organization is set up: name, plan and seat count, time zone, default agent, single sign-on configurations (provider, protocol, tenant and domain), the names of your connected integrations and their authentication type, and which model providers have an active key. Also what identifies the export itself: when it was generated, its scope and the projects it covers. It also holds the Work Graph settings an Org Admin chose: the master and source switches (including Transcripts), the retention period and when it takes effect, and your exclusion rules by kind, label and progress. A domain or address exclusion is listed by its label, not the address itself.
+- **`Organization-Settings.json`** — how your organization is set up: name, plan and seat count, time zone, default agent, single sign-on configurations (provider, protocol, tenant and domain), the names of your connected integrations and their authentication type, and which model providers have an active key. Also what identifies the export itself: when it was generated, its scope and the projects it covers. It also holds Project IQ settings an Org Admin chose: the master and source switches (including Transcripts), the retention period and when it takes effect, and your exclusion rules by kind, label and progress. A domain or address exclusion is listed by its label, not the address itself.
 - **`Organization-Instructions.md`** — your organization instructions, if you have set any.
 - **`Agents/`** — the agents your organization created: name, description, instructions and the integrations, knowledge sources, skills and capability groups they are granted, by name. Only the current version of each agent is exported.
 - **`Research-Task-Templates/`** — the Research Task templates your organization created, current version only.
@@ -60,7 +60,7 @@ Inside each project folder:
 - **`Artifacts/`** — each published artifact as a standalone `.html` file, plus `Artifacts.json` listing what was written and what was skipped. An artifact that was never published has nothing to export and is listed as skipped.
 - **`Project-Memory.json`** — the project's memory facts in every status, with who proposed them (as a user id) and where they came from.
 - **`Research-Tasks/`** — the project's Research Tasks: goal, acceptance criteria, due date, spend limit, status and timestamps. Each task's transcript is in `Conversations/`.
-- **`Decisions.json`** and **`Action-Items.json`** — every decision (with its deciders) and every action item of the project, with who created, changed and confirmed each, how it was created, any decision that replaced it, and a pointer to its source. The source's own content is not written. A decider or owner who was removed from the Work Graph reads "Removed person". Each file is left out when the project has none.
+- **`Decisions.json`** and **`Action-Items.json`** — every decision (with its deciders) and every action item of the project, with who created, changed and confirmed each, how it was created, any decision that replaced it, and a pointer to its source. The source's own content is not written. A decider or owner who was removed from Project IQ reads "Removed person". Each file is left out when the project has none.
 - **`Tasks-and-Deliverables.json`** — every task in the order the task list shows, every deliverable, and the deliverable suggestions made from a contract review. A task sent to Planner or Jira is written as Parlé's read-only copy.
 - **`Task-Tool.json`** — the Planner or Jira connection the project is bound to, Parlé's link to each task (the vendor's id, the link and the state Parlé last read), and proposals still waiting. It never holds credentials or text from Planner or Jira. Left out when the project has no connection.
 - **`Meetings.json`** and **`Meeting-Notes/`** — meetings created in Parlé, with their attendees and series, and the notes people pasted into them, one `.txt` file each.
@@ -74,7 +74,7 @@ People are recorded by user id, not by name. The zip does not include a list of 
 
 - **Personal conversations.** An organization export contains project conversations only. A conversation that belongs to one person and no project is never included.
 - **Files that live in your own storage.** If a project's files are in your SharePoint site, your Google Drive, or your own Azure Blob container, they are not copied. `Files.json` lists the project with the reason, so you know where to find them.
-- **What Parlé only mirrors from your sources.** Meetings and files that came from Microsoft 365, uploaded or fetched transcripts, tasks that live in Planner or Jira, and the Work Graph's own map of people, meetings and files are not exported. You hold the originals. Tombstones, the records that keep forgotten items from coming back, are not exported, not even as counts. Disputed flags are not exported either.
+- **What Parlé only mirrors from your sources.** Meetings and files that came from Microsoft 365, uploaded or fetched transcripts, tasks that live in Planner or Jira, and Project IQ's own map of people, meetings and files are not exported. You hold the originals. Tombstones, the records that keep forgotten items from coming back, are not exported, not even as counts. Disputed flags are not exported either.
 - **Credentials and secrets.** API keys, vault references, tool server addresses and credentials, SSO metadata and storage connection details are never written.
 - **Billing and spend records.** Invoices, payment details and the usage ledger are not in the export. Use [Usage Analytics](/cost/usage-analytics) to export spend.
 - **The audit log.** The audit log is a separate record with its own export. See [Audit Log](/security/audit-log).
@@ -83,7 +83,7 @@ People are recorded by user id, not by name. The zip does not include a list of 
 
 ## Subject access export for one person
 
-A different export answers one person's request to see their Work Graph data. An Org Admin finds the person (a member, a former member, or an outside person such as a client contact) under **Org settings → Work graph → Subject access export**, sees what the export will hold by count, and selects **Start export**. It produces one zip, named like `parle-subject-access-export-20261024-1530.zip`, with:
+A different export answers one person's request to see their Project IQ data. An Org Admin finds the person (a member, a former member, or an outside person such as a client contact) under **Org settings → Project IQ → Subject access export**, sees what the export will hold by count, and selects **Start export**. It produces one zip, named like `parle-subject-access-export-20261024-1530.zip`, with:
 
 - Their own entries and confirmed links.
 - The meetings they attended and their own attendance.
@@ -95,7 +95,7 @@ A different export answers one person's request to see their Work Graph data. An
 
 Other attendees, deciders and speakers appear only as "another attendee", "other deciders" or as a count. Titles, record statements and generated summaries are included as they stand and may mention others. Possible same-person matches nobody confirmed are counted, not included. You hand the export to the person yourself.
 
-It is kept for 7 days, with a 15-minute download link, like an organization export. It does not depend on your plan, so it works if you lose the Work Graph. It can run at the same time as an organization export.
+It is kept for 7 days, with a 15-minute download link, like an organization export. It does not depend on your plan, so it works if you lose Project IQ. It can run at the same time as an organization export.
 
 <Note>
 	The subject access export appears only once Parlé has enabled it for your

@@ -1,10 +1,10 @@
 ---
 title: "Project views: dashboard, work, timeline and review"
 sidebarTitle: "Project views"
-description: "Everything you see in a project's Overview, Work and Review tabs: the dashboard, tasks, decisions, deliverables, contract dates and documents, the timeline, suggestions waiting for review, disputed items and the Work Graph explorer."
+description: "Everything you see in a project's IQ Overview, Project IQ and Review tabs: the dashboard, tasks, decisions, deliverables, contract dates and documents, the timeline, suggestions waiting for review, disputed items and Project IQ explorer."
 ---
 
-The Work Graph brings work from outside Parlé, such as meetings, decisions, action items and files, into a graph that belongs to one project. This page is the tour of what that looks like **inside a project**: where each view lives, what is in it, and who can change it.
+Project IQ brings work from outside Parlé, such as meetings, decisions, action items and files, into a graph that belongs to one project. This page is the tour of what that looks like **inside a project**: where each view lives, what is in it, and who can change it.
 
 <Note>
 	**Who sees what:** every view lists only the records **you** can open. A task
@@ -19,7 +19,7 @@ The Work Graph brings work from outside Parlé, such as meetings, decisions, act
 
 <CardGroup cols={2}>
   <Card title="Overview" icon="gauge">
-    The project dashboard. The first tab, and the default, when your plan includes the Work Graph and your organization has it switched on.
+    The project dashboard. The first tab, and the default, when your plan includes Project IQ and your organization has it switched on.
   </Card>
 
 <Card title="Work" icon="briefcase">
@@ -32,20 +32,20 @@ The Work Graph brings work from outside Parlé, such as meetings, decisions, act
 	flagged as disputed. Shown to everyone on the project's member list.
 </Card>
 
-  <Card title="Project Setup › Work graph" icon="network">
+  <Card title="Project Setup › Project IQ" icon="network">
     What Parlé holds about the project, and how to forget it. For the project's Project Admin.
   </Card>
 </CardGroup>
 
-The **Work** tab sits between **Automations** and **Files**. Switch between its views with the second row at the top of the tab, or link straight to one: the address carries `?tab=work&section=…`. Old links to the former **Meetings** tab still land on **Work › Meetings**.
+The **Project IQ** tab sits between **Automations** and **Files**. Switch between its views with the second row at the top of the tab, or link straight to one: the address carries `?tab=work&section=…`. Old links to the former **Meetings** tab still land on **Work › Meetings**.
 
 ## The project dashboard (Overview)
 
-The **Overview** tab shows where the project stands against its contract on one screen. It is read only: nothing on it changes a record, and each card has a **View all** link that opens the view that owns the detail.
+The **IQ Overview** tab shows where the project stands against its contract on one screen. It is read only: nothing on it changes a record, and each card has a **View all** link that opens the view that owns the detail.
 
 <Note>
-	The Overview appears only when your plan includes the Work Graph **and** an Org Admin
-	has not switched the work graph off. On any other project the tab is not
+	The Overview appears only when your plan includes Project IQ **and** an Org Admin
+	has not switched Project IQ off. On any other project the tab is not
 	offered and the project opens on **Conversations**. Opening the project
 	always starts on its default tab; Parlé does not remember the last tab you used.
 </Note>
@@ -130,7 +130,7 @@ Each row shows a type badge, a status, the owner and due date when Parlé has th
     Opening a finished task from the **Timeline** lands on its row here, highlighted.
   </Tab>
   <Tab title="Adding a task">
-    On a project that keeps tasks in Parlé, and on a plan that includes the Work Graph, anyone on the project's member list can select **Add task**. Give it a **Title**, and optionally a **Due date** and an **Owner**. Everyone who can see the project can see the task.
+    On a project that keeps tasks in Parlé, and on a plan that includes Project IQ, anyone on the project's member list can select **Add task**. Give it a **Title**, and optionally a **Due date** and an **Owner**. Everyone who can see the project can see the task.
   </Tab>
 </Tabs>
 
@@ -185,7 +185,7 @@ Select a deliverable's name to open its details and its **Linked work**: the tas
 
 Anyone on the project's member list, on a project that is not archived, can:
 
-- **Add deliverable**, on a plan that includes the Work Graph. Give it a **Name**, an optional **Description** and an optional **Due date**.
+- **Add deliverable**, on a plan that includes Project IQ. Give it a **Name**, an optional **Description** and an optional **Due date**.
 - **Edit**, **Change status** (**Accepted** and **Rejected** ask **who** decided and **on** which day) or **Delete**. Deleting only unlinks the work; the tasks stay.
 - **Add work** to a deliverable, or select **Deliverable** on a task's row in **Work › Tasks**. Each piece of work belongs to at most one deliverable.
 
@@ -200,7 +200,7 @@ Every change to a deliverable is written to the [contract history](#contract-dat
 - A project can have at most 100 live milestones. Withdrawn ones do not count.
 - **History** opens a panel listing every change to the dates, the milestones **and** the deliverables, newest first, one line per changed field with who made it and when. Select **Show earlier changes** for older ones.
 
-Anyone on the project's member list can change these on a project that is not archived. Setting the dates for the first time and adding a milestone need a plan that includes the Work Graph; everything already there stays editable without it.
+Anyone on the project's member list can change these on a project that is not archived. Setting the dates for the first time and adding a milestone need a plan that includes Project IQ; everything already there stays editable without it.
 
 ## Contract documents
 
@@ -228,14 +228,14 @@ Each document shows its size, who added it and when, and where Parlé's reading 
 | --- | --- |
 | **Waiting to be read**, **Being read** | Parlé will read it shortly. Any suggestions appear in **Review** |
 | **Read in part** | The document was long and Parlé read the first part |
-| **Nothing found** | Parlé found nothing to propose. Add items by hand under **Work** |
-| **Suggestions off** | Your organization has switched document suggestions off. An Org Admin can switch them on in **Organization settings › Work graph**, then you upload the document again |
-| **Work graph off** | The plan does not include the Work Graph, so Parlé stored the file and did not read it |
+| **Nothing found** | Parlé found nothing to propose. Add items by hand under **Project IQ** |
+| **Suggestions off** | Your organization has switched document suggestions off. An Org Admin can switch them on in **Organization settings › Project IQ**, then you upload the document again |
+| **Project IQ off** | The plan does not include Project IQ, so Parlé stored the file and did not read it |
 | **Refused by budget** | A spending limit was reached. An admin can raise it; Parlé tries again later |
 | **No model can read it** | None of the models this project may use can read a document this size. A Project Admin can allow a larger model in **Project Setup** |
 | **Couldn't be read** | The file may be damaged, password-protected, or a scan with no text. Upload a version with text; if it keeps failing, contact support with the code shown |
 
-Adding, replacing, downloading and removing documents never needs the Work Graph plan; only the **reading** does. On an archived project you can still list, download and remove documents but not add new ones.
+Adding, replacing, downloading and removing documents never needs Project IQ plan; only the **reading** does. On an archived project you can still list, download and remove documents but not add new ones.
 
 <Info>
   You can also add a statement of work when you create a project: the **New project** dialog has three steps (**Details**, **Files**, **Statement of work**). Only the first is required, and the project exists from **Create project** onward. Skipping the others never undoes it.
@@ -281,7 +281,7 @@ Things to know:
 - It never shows budget alerts.
 - Someone who joined and later left appears only as having left. An external Planner or Jira task is dated by when its state last changed, or when it was linked if Parlé has no change recorded.
 - An archived project still shows its history, with a read-only note.
-- The same answer comes from agents: asking "what has happened since I left?" in a conversation reads the same data. See [Agents and the Work Graph](/work-graph/agents).
+- The same answer comes from agents: asking "what has happened since I left?" in a conversation reads the same data. See [Agents and Project IQ](/work-graph/agents).
 
 ## Review
 
@@ -309,7 +309,7 @@ Anyone who can see a meeting, document, decision or action item can **flag it as
 
 What disputed means:
 
-- While an item is flagged, **no agent sees it**. No Work Graph tool, brief, content search or Research Task returns or counts it, for anyone, including the person who flagged it. Parlé does not summarize or suggest from it.
+- While an item is flagged, **no agent sees it**. No Project IQ tool, brief, content search or Research Task returns or counts it, for anyone, including the person who flagged it. Parlé does not summarize or suggest from it.
 - People who could already see the item **still can**, marked **Disputed**, and a **Disputed** filter appears on the explorer pages.
 - You can **Withdraw my flag** on one you raised.
 
@@ -320,9 +320,9 @@ At the bottom of **Review**, the **Disputed** list shows flagged items from this
 
 Reviewers and the person who flagged it are notified in the app. You can have at most 20 open flags at a time.
 
-## The Work Graph explorer
+## Project IQ explorer
 
-**Project Setup › Work graph** is the project's **data-holdings** view. It answers "what does Parlé hold about this project?", and is where a Project Admin forgets what they are allowed to. The team's day-to-day view of the work remains the **Work** tab.
+**Project Setup › Project IQ** is the project's **data-holdings** view. It answers "what does Parlé hold about this project?", and is where a Project Admin forgets what they are allowed to. The team's day-to-day view of the work remains the **Project IQ** tab.
 
 It has three sections, with **Everything** and **Disputed** filters:
 
@@ -332,20 +332,20 @@ It has three sections, with **Everything** and **Disputed** filters:
 
 Select **Forget this** on a row to remove Parlé's record of it. The button appears only where you have the authority; otherwise a note says whom to ask. Confirmed decisions and action items are the project's records, so they are not removed here.
 
-The view is for the project's **real Project Admin**. An Org Admin or Business Admin who is not a Project Admin sees an explanation and the audited **Add yourself as Project Admin** action. For the permission model, see [Work Graph permissions](/security/work-graph-permissions); for forgetting and retention across the organization, see [Work Graph data controls](/admin/work-graph-data-controls).
+The view is for the project's **real Project Admin**. An Org Admin or Business Admin who is not a Project Admin sees an explanation and the audited **Add yourself as Project Admin** action. For the permission model, see [Project IQ permissions](/security/work-graph-permissions); for forgetting and retention across the organization, see [Project IQ data controls](/admin/work-graph-data-controls).
 
-## When the Work Graph is off
+## When Project IQ is off
 
-The **plan** and the **organization switch** are separate. A plan that does not include the Work Graph, or an Org Admin switching it off, changes what you can do. **It never deletes data.**
+The **plan** and the **organization switch** are separate. A plan that does not include Project IQ, or an Org Admin switching it off, changes what you can do. **It never deletes data.**
 
-| View | Plan lacks the Work Graph | Org Admin switched it off |
+| View | Plan lacks Project IQ | Org Admin switched it off |
 | --- | --- | --- |
-| **Overview** | Not offered; project opens on **Conversations** | Not offered |
-| **Timeline** | Explains that the work graph is not in the plan, with an upgrade prompt | Explains it is switched off |
+| **IQ Overview** | Not offered; project opens on **Conversations** | Not offered |
+| **Timeline** | Explains that Project IQ is not in the plan, with an upgrade prompt | Explains it is switched off |
 | **Tasks**, **Decisions**, **Deliverables**, **Contract**, **Meetings** | Everything already there stays readable and editable; **Add task**, **Add deliverable**, adding a first date or milestone, and adding meetings are hidden | Records stay readable |
-| **Contract documents** | Files are stored, listed, downloadable and removable, but not read | Same, with **Suggestions off** or **Work graph off** shown |
+| **Contract documents** | Files are stored, listed, downloadable and removable, but not read | Same, with **Suggestions off** or **Project IQ off** shown |
 | **Review** | Read, reject, restore, and confirm or edit decisions and actions still work | Same |
-| **Work graph** explorer | Still works, including forgetting | Says the graph is off; bindings and members still list |
+| **Project IQ** explorer | Still works, including forgetting | Says the graph is off; bindings and members still list |
 
 An **archived** project shows its views read-only: you can read and download, but not add or change.
 
@@ -353,10 +353,10 @@ An **archived** project shows its views read-only: you can read and download, bu
 
 | Symptom | Likely cause | Fix |
 | --- | --- | --- |
-| No **Overview** tab | The plan does not include the Work Graph, or an Org Admin switched it off | Ask an Org Admin; see [Work Graph data controls](/admin/work-graph-data-controls) |
+| No **IQ Overview** tab | The plan does not include Project IQ, or an Org Admin switched it off | Ask an Org Admin; see [Project IQ data controls](/admin/work-graph-data-controls) |
 | No **Review** tab | You are not on the project's member list | Ask a Project Admin to add you |
-| No **Add task** or **Add deliverable** button | You are not on the project's member list, the project is archived, the plan lacks the Work Graph, or (tasks only) the project keeps its tasks in Planner or Jira | Check each in turn |
-| A document says **Suggestions off** | Document suggestions are switched off for your organization | An Org Admin switches them on in **Organization settings › Work graph**, then upload the document again |
+| No **Add task** or **Add deliverable** button | You are not on the project's member list, the project is archived, the plan lacks Project IQ, or (tasks only) the project keeps its tasks in Planner or Jira | Check each in turn |
+| A document says **Suggestions off** | Document suggestions are switched off for your organization | An Org Admin switches them on in **Organization settings › Project IQ**, then upload the document again |
 | A task says **Gone from Jira** or **Gone from Planner** | Parlé read the plan or project and the task was not there | Check it in the tool; relink it if it was moved |
 | A task says **Couldn't check …** | Parlé could not reach the tool | It keeps the last known state and checks again later |
 | An amendment cannot be confirmed | It is blocked: edited after the change request was read, or already changed by a later change request | Reject it, or make the change by hand |
@@ -366,8 +366,8 @@ An **archived** project shows its views read-only: you can read and download, bu
 ## Related
 
 <CardGroup cols={2}>
-  <Card title="Work Graph overview" icon="network" href="/work-graph/overview">
-    What the Work Graph is and how it fits together.
+  <Card title="Project IQ overview" icon="network" href="/work-graph/overview">
+    What Project IQ is and how it fits together.
   </Card>
 
 <Card title="Connecting sources" icon="plug" href="/work-graph/connecting-sources">
@@ -378,19 +378,19 @@ An **archived** project shows its views read-only: you can read and download, bu
 	Transcripts, decisions and action items on a meeting's own page.
 </Card>
 
-<Card title="Agents and the Work Graph" icon="bot" href="/work-graph/agents">
+<Card title="Agents and Project IQ" icon="bot" href="/work-graph/agents">
 	How agents read the graph, and what they never see.
 </Card>
 
-<Card title="Work Graph permissions" icon="shield" href="/security/work-graph-permissions">
+<Card title="Project IQ permissions" icon="shield" href="/security/work-graph-permissions">
 	Who can see and change what.
 </Card>
 
-<Card title="Work Graph data controls" icon="sliders" href="/admin/work-graph-data-controls">
+<Card title="Project IQ data controls" icon="sliders" href="/admin/work-graph-data-controls">
 	Switching it off, retention and forgetting, for Org Admins.
 </Card>
 
-  <Card title="Your data in the Work Graph" icon="user" href="/work-graph/my-data">
+  <Card title="Your data in Project IQ" icon="user" href="/work-graph/my-data">
     What the graph holds about you, and how to forget it.
   </Card>
 
